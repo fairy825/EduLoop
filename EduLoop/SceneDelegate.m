@@ -6,7 +6,10 @@
 //
 
 #import "SceneDelegate.h"
-
+#import "ELProfileModule/ELProfileModule.h"
+#import "ELHomeworkModule/ELHomeworkModule.h"
+#import "ELCommunityModule/ELCommunityModule.h"
+#import "TestViewController.h"
 @interface SceneDelegate ()
 
 @end
@@ -18,6 +21,32 @@
     // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
     // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+    
+    CommunityViewController *controller1 = [[CommunityViewController alloc]init];
+    controller1.tabBarItem.title = @"班级";
+    
+    HomeworkShowViewController *controller2 = [[HomeworkShowViewController alloc]init];
+    controller2.tabBarItem.title = @"通知";
+
+//    UIViewController *controller1 = [[UIViewController alloc] init];
+//    controller1.view.backgroundColor = [UIColor grayColor];
+//    controller1.tabBarItem.title = @"新闻";
+////    navigationController.tabBarItem.image =
+////    navigationController.tabBarItem.selectedImage =
+//    VideoViewController *controller2 = [[VideoViewController alloc] init];
+//    controller2.tabBarItem.title = @"视频";
+    
+    MineViewController *controller4 = [[MineViewController alloc] init];
+    controller4.tabBarItem.title = @"我的";
+    
+    UITabBarController *tabBarController = [[UITabBarController alloc]init];
+    [tabBarController setViewControllers:@[controller1,controller2,controller4]];
+    UINavigationController *navigationController = [[UINavigationController alloc]initWithRootViewController:tabBarController];//每个navigationController都需要rootNavigationController 代表栈底元素 即初始显示的controller
+    [navigationController setNavigationBarHidden:YES];
+    
+    self.window = [[UIWindow alloc] initWithWindowScene:(UIWindowScene*)scene];
+    self.window.rootViewController = navigationController;
+    [self.window makeKeyAndVisible];
 }
 
 
