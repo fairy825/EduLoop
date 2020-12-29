@@ -110,10 +110,10 @@
     [self setNavagationBar];
     [self setupSubviews];
 }
+
 - (void)setNavagationBar{
     [self setTitle:@"作业"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"下一步" style:UIBarButtonItemStyleDone target:self action:@selector(publishHomework)];
- 
 }
 
 - (void)setupSubviews{

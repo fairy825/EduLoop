@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CommunityViewController.h"
-
+#import "UgcDetailPageViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ELCommunityModule : NSObject

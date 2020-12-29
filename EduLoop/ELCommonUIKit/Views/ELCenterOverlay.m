@@ -11,14 +11,21 @@
 @implementation ELCenterOverlay
 - (instancetype)initWithFrame:(CGRect)frame Data:(ELCenterOverlayModel *)model
 {
-    self = [super initWithFrame:frame];
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    CGFloat screenHeight = screenRect.size.height;
+    self = [super initWithFrame:screenRect];
     if (self) {
+        self.coverWidth = screenWidth;
+        self.coverHeight = screenHeight;
         [self setUpSubviews];
         _model = model;
         [self loadData];
     }
     return self;
 }
+
+
 - (void)loadData{
     _titleLabel.text = _model.title;
     _subTitleLabel.text = _model.subTitle;
@@ -53,7 +60,7 @@
 #pragma mark - View
 - (UIView *)backgroundView{
     if(!_backgroundView){
-        self.backgroundView = [[UIView alloc]initWithFrame:self.bounds];
+        self.backgroundView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, _coverWidth, _coverHeight)];
         self.backgroundView.backgroundColor = [UIColor grayColor];
         self.backgroundView.alpha = 0.5;
     }

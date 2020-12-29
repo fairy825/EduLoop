@@ -9,19 +9,25 @@
 #import "AvatarCard.h"
 #import "UgcModel.h"
 NS_ASSUME_NONNULL_BEGIN
+@protocol UgcCardDelegate<NSObject>
+-(void)clickTrashButtonTableViewCell:(UITableViewCell *)tableViewCell;
+-(void)clickCommentButtonTableViewCell:(UITableViewCell *)tableViewCell;
+-(void)clickPhoto:(UIImage *)photo TableViewCell:(UITableViewCell *)tableViewCell;
+@end
 
-@interface UgcCard : UITableViewCell
+@interface UgcCard : UIView
 
 @property (nonatomic, strong, readwrite) UgcModel *data;
 @property(nonatomic,strong,readwrite) UIView *bgView;
 @property(nonatomic,strong,readwrite) UIView *seperateView;
-@property(nonatomic,strong,readwrite) UIButton *thumbButton;
-@property(nonatomic,strong,readwrite) UIButton *commentButton;
 @property(nonatomic,strong,readwrite) AvatarCard *avatarCard;
-@property(nonatomic,strong,readwrite) UILabel *detailLabel;
-//@property(nonatomic,weak,readwrite) id<HomeworkShowTableViewCellDelegate> delegate;
+@property(nonatomic,strong,readwrite) UIButton *trashButton;
+@property(nonatomic,readwrite) BOOL hasTrash;
+@property(nonatomic,weak,readwrite) id<UgcCardDelegate> delegate;
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier data:(UgcModel *)model;
+- (instancetype)initWithFrame:(CGRect)frame Data:(UgcModel *)model;
+- (void)hideBtns;
+- (void)reload;
 @end
 
 NS_ASSUME_NONNULL_END

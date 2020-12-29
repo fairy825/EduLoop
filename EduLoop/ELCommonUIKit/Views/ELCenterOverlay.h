@@ -18,6 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong,readwrite) UIButton *rightButton;
 @property(nonatomic,strong,readwrite) UIView *seperator;
 @property(nonatomic,strong,readwrite) UIView *alertView;
+
+@property(nonatomic,readwrite) CGFloat coverWidth;
+@property(nonatomic,readwrite) CGFloat coverHeight;
 @property(nonatomic,strong,readwrite) ELCenterOverlayModel *model;
 //@property(nonatomic,strong,readwrite) NSMutableArray<ELOverlayItem *> *choices;
 - (instancetype)initWithFrame:(CGRect)frame Data:(ELCenterOverlayModel *)data;

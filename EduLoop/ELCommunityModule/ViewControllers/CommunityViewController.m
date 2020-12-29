@@ -9,7 +9,14 @@
 #import "UgcCard.h"
 #import "UIColor+EHTheme.h"
 #import <Masonry/Masonry.h>
-@interface CommunityViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "ELCenterOverlayModel.h"
+#import "ELCenterOverlay.h"
+#import "UgcTextImgCard.h"
+#import "UgcVoteCard.h"
+#import "UgcCardTableViewCell.h"
+#import "UgcDetailPageViewController.h"
+#import "ELImageManager.h"
+@interface CommunityViewController ()<UITableViewDelegate,UITableViewDataSource,UgcCardTableViewCellDelegate>
 
 @end
 
@@ -17,7 +24,6 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-    
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [self.navigationController setNavigationBarHidden:NO animated:YES];
@@ -35,11 +41,14 @@
     
     [_models addObject:({
         UgcModel *model = [UgcModel new];
-        model.authorName = @"Mijika";
+        model.authorName = @"dd";
         model.detail =@"发了一条班级圈～";
         model.thumbNum = 4;
         model.commentNum = 5;
         model.dateStr = @"刚刚";
+        model.hasClickedThumb = NO;
+        model.isMine = YES;
+        model.imgs = @[@"sample-1",@"sample-2",@"sample-2"];
         model;
     })];
     [_models addObject:({
@@ -49,15 +58,40 @@
         model.thumbNum = 4;
         model.commentNum = 5;
         model.dateStr = @"刚刚";
+        model.hasClickedThumb = YES;
+        model;
+    })];
+    [_models addObject:({
+        UgcModel *model = [UgcModel new];
+        model.ugcType = UgcType_vote;
+        model.authorName = @"dd";
+        model.dateStr = @"刚刚";
+        model.isMine = YES;
+
+        model;
+    })];
+    [_models addObject:({
+        UgcModel *model = [UgcModel new];
+        model.ugcType = UgcType_vote;
+        model.authorName = @"Mijika";
+        model.dateStr = @"刚刚";
+        model.leftPercent = 23.2;
+        model.leftChoice = @"不该";
+        model.rightChoice = @"该";
+        model.detail = @"老师应该和学生一起上体育课吗？";
+        model.hasPicked = NO;
         model;
     })];
     
 }
+
 - (void)setupSubviews{
     self.tableView = [[UITableView alloc]init];
     self.tableView.backgroundColor = [UIColor eh_colorWithHexRGB:EHThemeColor_f6f6f6];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 244.0;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
         [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -90,12 +124,15 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *id =@"UgcCard";
-    UgcCard *cell = [tableView dequeueReusableCellWithIdentifier:id];
+    NSUInteger idx = [indexPath row];
+
+    UgcModel *data = [_models objectAtIndex:idx];
+    NSString *id =@"UgcCardTableViewCell";
+    UgcCardTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id];
     if (!cell) {
-        NSUInteger idx = [indexPath row];
-        cell = [[UgcCard alloc]                        initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id data:self.models[idx]];
-//        cell.delegate = self;
+        cell = [[UgcCardTableViewCell alloc]                        initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id data:data];
+        cell.ugcCard.delegate = self;
+        [cell layoutIfNeeded];
     }
     return cell;
 }
@@ -103,13 +140,56 @@
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 216;
+    return 356;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSUInteger idx = [indexPath row];
+
+    UgcModel *data = [_models objectAtIndex:idx];
+    [self pushToDetailPageWithData:data];
+
+}
+- (void)pushToDetailPageWithData:(UgcModel *)data{
+    
+    [self.navigationController pushViewController:[[UgcDetailPageViewController alloc]initWithModel:data] animated:YES];
+}
 #pragma mark - ELFloatingButtonDelegate
 - (void)clickFloatingButton{
 //    [self jumpToDetailPageWithData:nil];
 }
 
+#pragma mark - UgcCardDelegate
+-(void)clickCommentButtonTableViewCell:(UITableViewCell *)tableViewCell{
+    NSInteger idx = [[self.tableView indexPathForCell:tableViewCell]row];
+    UgcModel *data = [_models objectAtIndex:idx];
+    [self pushToDetailPageWithData:data];
+}
+
+- (void)clickTrashButtonTableViewCell:(UITableViewCell *)tableViewCell{
+        ELCenterOverlayModel *centerOverlayModel = [ELCenterOverlayModel new];
+        centerOverlayModel.title = @"确认删除此动态吗？";
+        centerOverlayModel.subTitle = @"删除后不可恢复";
+        centerOverlayModel.leftChoice = ({
+            ELOverlayItem *sureItem =[ELOverlayItem new];
+            sureItem.title = @"确认";
+            __weak typeof(self) wself = self;
+            sureItem.clickBlock = ^{
+                __strong typeof(self) sself = wself;
+                NSIndexPath *index = [sself.tableView indexPathForCell:tableViewCell];
+                [sself.models removeObjectAtIndex:[index row]];
+                [sself.tableView deleteRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationAutomatic];
+            };
+            sureItem;
+        });
+        ELCenterOverlay *deleteAlertView = [[ELCenterOverlay alloc]initWithFrame:self.view.bounds Data:centerOverlayModel
+        ];
+        
+        [deleteAlertView showHighlightView];
+}
+
+- (void)clickPhoto:(UIImage *)photo TableViewCell:(UITableViewCell *)tableViewCell{
+    [[ELImageManager sharedManager]showImageView:photo];
+}
 
 @end

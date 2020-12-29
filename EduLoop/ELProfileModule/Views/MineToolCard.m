@@ -15,6 +15,7 @@
     if (self) {
         NSArray *iconArr = @[@"profile_trends-1",@"profile_feed-1",@"profile_history-2",@"profile_favorites-1"];
         NSArray *titleArr = @[@"我的动态",@"作业反馈",@"观看记录",@"收藏夹"];
+        
         NSMutableArray<MineToolCardItem*> * views = [NSMutableArray array];
         for(int i=0;i<4;i++){
             MineToolCardItem *item = [[MineToolCardItem alloc]initWithTitle:titleArr[i] icon:iconArr[i] index:i];
@@ -53,4 +54,5 @@
     }];
     
 }
+
 @end

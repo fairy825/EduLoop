@@ -9,7 +9,7 @@
 #import "UIColor+EHGenerator.h"
 #import "UIColor+EHTheme.h"
 #import <Masonry/Masonry.h>
-
+#import "CommunityViewController.h"
 @implementation MineToolCardItem
 - (instancetype)initWithTitle:(NSString *)title icon:(NSString *)icon index:(int)index
 {
@@ -45,6 +45,9 @@
             make.edges.equalTo(self);
         }];
     }
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickMineToolCardItem)];
+    [self addGestureRecognizer:tapGesture];
     return self;
 }
 

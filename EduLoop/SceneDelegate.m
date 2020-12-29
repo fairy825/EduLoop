@@ -25,6 +25,17 @@
     CommunityViewController *controller1 = [[CommunityViewController alloc]init];
     controller1.tabBarItem.title = @"班级";
     
+//    UgcDetailPageViewController *controller1 = [[UgcDetailPageViewController alloc]initWithModel:({
+//        UgcModel *model = [UgcModel new];
+//        model.ugcType = UgcType_vote;
+//        model.authorName = @"dd";
+//        model.dateStr = @"刚刚";
+//        model.isMine = YES;
+//
+//        model;
+//    })];
+//    controller1.tabBarItem.title = @"班级";
+    
     HomeworkShowViewController *controller2 = [[HomeworkShowViewController alloc]init];
     controller2.tabBarItem.title = @"通知";
 

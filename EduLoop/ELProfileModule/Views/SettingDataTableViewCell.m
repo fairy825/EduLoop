@@ -212,6 +212,7 @@
     }
     return _detailTextfield;
 }
+
 -(UITextView *)detailTextView{
     if(!_detailTextView){
         _detailTextView = [[UITextView alloc]initWithFrame:CGRectMake(0, 0, 100, 20)];
