@@ -7,6 +7,7 @@
 
 #import "UgcVoteCard.h"
 #import <Masonry/Masonry.h>
+#import "UIColor+EHTheme.h"
 @implementation UgcVoteCard
 - (ELVoteCard *)voteView{
     if(!_voteView){
@@ -18,6 +19,7 @@
 - (void)loadData{
     self.avatarCard.nameLabel.text = self.data.authorName;
     self.avatarCard.publishTimeLabel.text = self.data.dateStr;
+    self.descriptionLabel.text = self.data.desc;
 }
 
 - (void)setupView{
@@ -42,10 +44,17 @@
         make.height.equalTo(@60);
         make.width.equalTo(self.bgView);
     }];
+
+    [self.bgView addSubview:self.descriptionLabel];
+    [self.descriptionLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.avatarCard.mas_bottom).offset(10);
+        make.left.equalTo(self.bgView);
+        make.width.equalTo(self.bgView);
+    }];
     
     [self.bgView addSubview:self.voteView];
     [self.voteView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.avatarCard.mas_bottom).offset(20);
+        make.top.equalTo(self.descriptionLabel.mas_bottom).offset(20);
         make.left.equalTo(self.bgView);
         make.width.equalTo(self.bgView);
         make.height.equalTo(@100);
@@ -64,5 +73,18 @@
 }
 - (void)hideBtns{
     [self.trashButton setHidden:YES];
+}
+
+- (UILabel *)descriptionLabel{
+    if(!_descriptionLabel){
+        _descriptionLabel = [[UILabel alloc]init];
+        _descriptionLabel.font = [UIFont fontWithName:@"PingFangSC" size:18];
+        _descriptionLabel.textColor = [UIColor eh_subtitleColor];
+        _descriptionLabel.textAlignment = NSTextAlignmentLeft;
+        _descriptionLabel.numberOfLines = 0;
+        [_descriptionLabel sizeToFit];
+    }
+    return _descriptionLabel;
+
 }
 @end

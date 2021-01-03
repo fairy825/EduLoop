@@ -17,6 +17,7 @@
     if ((self = [super init])) {
         _accessoryType = SettingTableViewCellType_Text;
         _showArrow = YES;
+        _maxLength = 50;
     }
     return self;
 }
@@ -55,6 +56,7 @@
     else
         _detailLabel.text= _data.detailText;
     _avatarView.image = _data.defaultAvatarImage;
+    _detailTextViewLengthLabel.text = [NSString stringWithFormat:@"%ld/%d", (unsigned long)_detailTextView.text.length, _data.maxLength];
 }
 
 - (void)setupView{
@@ -113,7 +115,7 @@
         else if(_data.accessoryType==SettingTableViewCellType_InlineTextField)
             view = self.detailTextfield;
         else if(_data.accessoryType==SettingTableViewCellType_BigTextField)
-            view = self.detailTextView;
+            view = [self getDetailTextViewWithLength];
         else if(_data.accessoryType==SettingTableViewCellType_Choices){
             view = [self getChoicesStack];
         }
@@ -140,6 +142,20 @@
 }
 
 #pragma mark - View
+- (UIView *)getDetailTextViewWithLength{
+    UIView *view = [[UIView alloc]init];
+    [view addSubview:self.detailTextView];
+    [self.detailTextView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(view).mas_offset(UIEdgeInsetsMake(0, 0, 20, 0));
+    }];
+    [view addSubview:self.detailTextViewLengthLabel];
+    [self.detailTextViewLengthLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.detailTextView.mas_bottom).offset(5);
+        make.right.equalTo(view);
+    }];
+    return view;
+}
+
 - (UIView *)getChoicesStack{
        UIView *aChoice = [[UIView alloc]init];
        UILabel *aLabel = [[UILabel alloc]init];
@@ -197,6 +213,20 @@
        }];
     return choicesStack;
 }
+
+- (UILabel *)detailTextViewLengthLabel{
+    if (!_detailTextViewLengthLabel) {
+        _detailTextViewLengthLabel = [UILabel new];
+        _detailTextViewLengthLabel.backgroundColor = [UIColor clearColor];
+        _detailTextViewLengthLabel.numberOfLines = 0;
+        _detailTextViewLengthLabel.textColor = [UIColor eh_subtitleColor];
+        _detailTextViewLengthLabel.font = [UIFont eh_regularWithSize:14];
+        _detailTextViewLengthLabel.textAlignment = NSTextAlignmentRight;
+        [_detailTextViewLengthLabel sizeToFit];
+    }
+    return _detailTextViewLengthLabel;
+}
+
 - (UISwitch *)aSwitch{
     if(!_aSwitch){
         _aSwitch = [[UISwitch alloc]initWithFrame:CGRectMake(0, 0, 50, 20)];
@@ -204,6 +234,7 @@
     }
     return _aSwitch;
 }
+
 - (UIImageView *)avatarView{
     if(!_avatarView){
         _avatarView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 70, 70)];
@@ -223,7 +254,7 @@
         _titleLabel.backgroundColor = [UIColor clearColor];
         _titleLabel.numberOfLines = 1;
         _titleLabel.textColor = [UIColor eh_titleColor];
-        _titleLabel.font = [UIFont eh_regularWithSize:16];
+        _titleLabel.font = [UIFont eh_regularWithSize:18];
         _titleLabel.textAlignment = NSTextAlignmentLeft;
         _titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         [_titleLabel sizeToFit];
@@ -258,6 +289,7 @@
     }
     return _detailLabel;
 }
+
 - (UITextField *)detailTextfield{
     if(!_detailTextfield){
         self.detailTextfield = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, 100, 20)];
@@ -266,7 +298,6 @@
             self.detailTextfield.textAlignment = NSTextAlignmentRight;
         self.detailTextfield.textColor = [UIColor eh_subtitleColor];
         self.detailTextfield.font = [UIFont eh_regularWithSize:16];
-//        self.detailTextfield.placeholder = @"未设置";
     }
     return _detailTextfield;
 }
@@ -334,4 +365,9 @@
     return _bTextField;
 }
 
+-(void)clickHomeworkMenu{
+//    if(self.delegate&&[self.delegate respondsToSelector:@selector(clickOtherButtonTableViewCell:)]){
+//        [self.delegate clickOtherButtonTableViewCell:self];
+//    }
+}
 @end

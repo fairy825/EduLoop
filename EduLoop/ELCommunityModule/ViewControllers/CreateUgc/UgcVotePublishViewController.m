@@ -10,7 +10,8 @@
 #import <Masonry/Masonry.h>
 #import "ELCenterOverlayModel.h"
 #import "ELCenterOverlay.h"
-@interface UgcVotePublishViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "SettingDataTableViewCell.h"
+@interface UgcVotePublishViewController ()<UITableViewDelegate,UITableViewDataSource,UITextViewDelegate,UITextFieldDelegate>
 
 @end
 
@@ -31,6 +32,7 @@
         model.showArrow = NO;
         model.title =@"讨论标题";
         model.detailDefaultText = @"请输入标题";
+        model.maxLength = 12;
         model;
     })];
     [_models addObject:({
@@ -39,6 +41,7 @@
         model.showArrow = NO;
         model.title =@"具体描述";
         model.detailDefaultText = @"请输入具体描述";
+        model.maxLength = 50;
         model;
     })];
     [_models addObject:({
@@ -56,7 +59,7 @@
     })];
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad{
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor eh_f6f6f6];
     [self setNavagationBar];
@@ -103,6 +106,10 @@
     if (!cell) {
         NSUInteger idx = [indexPath section]*3+[indexPath row];
         cell = [[SettingDataTableViewCell alloc]                        initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id data:self.models[idx]];
+        cell.detailTextView.tag = 3000+idx;
+        cell.detailTextfield.tag = 4000+idx;
+        cell.detailTextView.delegate = self;
+        cell.detailTextfield.delegate = self;
     }
     return cell;
 }
@@ -151,5 +158,53 @@
     ELCenterOverlay *deleteAlertView = [[ELCenterOverlay alloc]initWithFrame:self.view.bounds Data:centerOverlayModel
     ];
     [deleteAlertView showHighlightView];
+}
+
+//- (void)textViewDidChange:(UITextView *)textView {
+//    int len =10;
+//    if (textView.text.length > len) {
+//        textView.text = [textView.text substringWithRange:NSMakeRange(0, len)];
+//    }
+//}
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    int kLimitNumber = [self.models objectAtIndex:textField.tag-4000].maxLength;
+    NSString *str = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    
+    NSInteger res = kLimitNumber-[str length];
+    if(res >= 0){
+        return YES;
+    }
+    else{
+        NSRange rg = {0,[string length]+res};
+        if (rg.length>0) {
+            NSString *s = [string substringWithRange:rg];
+            [textField setText:[textField.text stringByReplacingCharactersInRange:range withString:s]];
+        }
+        return NO;
+    }
+}
+
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    int kLimitNumber = [self.models objectAtIndex:textView.tag-3000].maxLength;
+    long t = textView.tag-3000;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:t%3 inSection:t/3];
+    UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    SettingDataTableViewCell *scell = (SettingDataTableViewCell *)cell;
+    NSString *str = [textView.text stringByReplacingCharactersInRange:range withString:text];
+    
+    NSInteger res = kLimitNumber-[str length];
+    if(res >= 0){
+        scell.detailTextViewLengthLabel.text = [NSString stringWithFormat:@"%ld/%d", (unsigned long)str.length, kLimitNumber];
+        return YES;
+    }
+    else{
+        NSRange rg = {0,[text length]+res};
+        if (rg.length>0) {
+            NSString *s = [text substringWithRange:rg];
+            [textView setText:[textView.text stringByReplacingCharactersInRange:range withString:s]];
+        }
+        scell.detailTextViewLengthLabel.text = [NSString stringWithFormat:@"%ld/%d", (unsigned long)kLimitNumber, kLimitNumber];
+        return NO;
+    }
 }
 @end

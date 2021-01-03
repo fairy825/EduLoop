@@ -16,33 +16,33 @@
 @implementation TestViewController
 
 - (void)viewWillAppear:(BOOL)animated{
-    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 120, 414, 700)];
-    bgView.backgroundColor = [UIColor grayColor];
-    [self.view addSubview:bgView];
-
-    self.textView = [[UITextView alloc]init];
-    self.textView.delegate = self;
-    _textView.backgroundColor = [UIColor whiteColor];
-    _textView.textAlignment = NSTextAlignmentLeft;
-    
-    [bgView addSubview:self.textView];
-    self.textView.frame = CGRectMake(20, 20, 414-40, 600);
-    self.textView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
-    self.textView.contentSize = CGSizeMake(self.textView.frame.size.width,self.textView.frame.size.height+1);
+//    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 120, 414, 700)];
+//    bgView.backgroundColor = [UIColor grayColor];
+//    [self.view addSubview:bgView];
+//
+//    self.textView = [[UITextView alloc]init];
+//    self.textView.delegate = self;
+//    _textView.backgroundColor = [UIColor whiteColor];
+//    _textView.textAlignment = NSTextAlignmentLeft;
+//
+//    [bgView addSubview:self.textView];
+//    self.textView.frame = CGRectMake(20, 20, 414-40, 600);
+//    self.textView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
+//    self.textView.contentSize = CGSizeMake(self.textView.frame.size.width,self.textView.frame.size.height+1);
 
     
     // _placeholderLabel
-    UILabel *placeHolderLabel = [[UILabel alloc] init];
-    placeHolderLabel.text = @"请输入内容请输入内容请输入内容请输入内容...";
-    placeHolderLabel.numberOfLines = 0;
-    placeHolderLabel.textColor = [UIColor blackColor];
-    [placeHolderLabel sizeToFit];
-    [_textView addSubview:placeHolderLabel];
+//    UILabel *placeHolderLabel = [[UILabel alloc] init];
+//    placeHolderLabel.text = @"请输入内容请输入内容请输入内容请输入内容...";
+//    placeHolderLabel.numberOfLines = 0;
+//    placeHolderLabel.textColor = [UIColor blackColor];
+//    [placeHolderLabel sizeToFit];
+//    [_textView addSubview:placeHolderLabel];
 
     // same font
-    _textView.font = [UIFont systemFontOfSize:20];
-    placeHolderLabel.font = [UIFont systemFontOfSize:20.f];
-    [_textView setValue:placeHolderLabel forKey:@"_placeholderLabel"];
+//    _textView.font = [UIFont systemFontOfSize:20];
+//    placeHolderLabel.font = [UIFont systemFontOfSize:20.f];
+//    [_textView setValue:placeHolderLabel forKey:@"_placeholderLabel"];
     
     
     [self.navigationController setNavigationBarHidden:NO animated:YES];
@@ -92,41 +92,46 @@
 //        make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
 //        make.height.equalTo(@500);
 //    }];
-//    self.commentTableView = [[UITableView alloc]init];
-//    self.commentTableView.delegate = self;
-//    self.commentTableView.dataSource = self;
-//    self.commentTableView.estimatedRowHeight = 88.0;
-//    self.commentTableView.rowHeight = UITableViewAutomaticDimension;
-//    self.commentTableView.showsVerticalScrollIndicator = NO;
-//    self.commentTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//    [scrollView addSubview:self.commentTableView];
-//    [self.commentTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(view.mas_bottom);
-//        make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
-//        make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
-//        make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom).offset(-80);
-//    }];
+    self.commentTableView = [[UITableView alloc]init];
+    self.commentTableView.delegate = self;
+    self.commentTableView.dataSource = self;
+    self.commentTableView.estimatedRowHeight = 88.0;
+    self.commentTableView.rowHeight = UITableViewAutomaticDimension;
+    self.commentTableView.showsVerticalScrollIndicator = NO;
+    self.commentTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.view addSubview:self.commentTableView];
+    [self.commentTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
+        make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
+        make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
+        make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom).offset(-80);
+    }];
     
 }
-//
+
 //- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
 //    return 500;
 //}
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-//    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 500)];
-//    view.backgroundColor = [UIColor greenColor];
-//    return view;
-//}
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    NSLog(@"..");
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 500)];
+    view.backgroundColor = [UIColor greenColor];
+    return view;
 }
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    NSLog(@"scroll");
+    UITableViewCell *cell=[self.commentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    cell.detailTextLabel.text=@"bbbbbbbbbbbbbbbb";
+}
+
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 10;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    return 100;
-//}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 100;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSUInteger idx = [indexPath row];

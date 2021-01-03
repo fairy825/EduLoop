@@ -20,12 +20,18 @@ typedef NS_ENUM(NSInteger, SettingTableViewCellType)
     SettingTableViewCellType_Choices,
 };
 
+@protocol SettingDataTableViewCellDelegate<NSObject>
+-(void)settingDataTableViewCell:(UITableViewCell *)cell ;
+@end
+
 @interface SettingDataModel : NSObject
 @property (nonatomic, assign) SettingTableViewCellType accessoryType;
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic, copy) NSString *subtitle;
 @property (nonatomic, copy) NSString *detailText;
 @property (nonatomic, copy) NSString *detailDefaultText;
+@property (nonatomic,readwrite) int maxLength;
+
 @property (nonatomic, copy) NSString *aChoiceText;
 @property (nonatomic, copy) NSString *bChoiceText;
 
@@ -48,6 +54,7 @@ typedef NS_ENUM(NSInteger, SettingTableViewCellType)
 @property (nonatomic, strong, readwrite) UILabel *detailLabel;
 @property (nonatomic, strong, readwrite) UITextField *detailTextfield;
 @property (nonatomic, strong, readwrite) UITextView *detailTextView;
+@property (nonatomic, strong, readwrite) UILabel *detailTextViewLengthLabel;
 
 @property(nonatomic,strong,readwrite) UITextField *aTextField;
 @property(nonatomic,strong,readwrite) UITextField *bTextField;
@@ -56,6 +63,8 @@ typedef NS_ENUM(NSInteger, SettingTableViewCellType)
 @property (nonatomic, strong, readwrite) PGDatePicker *datePicker;
 @property (nonatomic, strong, readwrite) UIImageView *arrowImage;
 @property(nonatomic,strong,readwrite) UIImageView *avatarView;
+@property(nonatomic,weak,readwrite) id<SettingDataTableViewCellDelegate> delegate;
+
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier data:(SettingDataModel *)model;
 @end
 NS_ASSUME_NONNULL_END

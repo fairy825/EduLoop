@@ -66,21 +66,13 @@
     [_models addObject:({
         UgcModel *model = [UgcModel new];
         model.ugcType = UgcType_vote;
-        model.authorName = @"dd";
-        model.dateStr = @"刚刚";
-        model.isMine = YES;
-
-        model;
-    })];
-    [_models addObject:({
-        UgcModel *model = [UgcModel new];
-        model.ugcType = UgcType_vote;
         model.authorName = @"Mijika";
         model.dateStr = @"刚刚";
         model.leftPercent = 23.2;
         model.leftChoice = @"不该";
         model.rightChoice = @"该";
         model.detail = @"老师应该和学生一起上体育课吗？";
+        model.desc = @"欢迎大家各抒己见欢迎大家各抒己见欢迎大家各抒己见欢迎大家各抒己见欢迎大家各抒己见欢迎大家各抒己见";
         model.hasPicked = NO;
         model;
     })];

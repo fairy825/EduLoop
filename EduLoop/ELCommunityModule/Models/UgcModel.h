@@ -17,6 +17,7 @@ typedef NS_ENUM(NSInteger, UgcType)
 @property(nonatomic,readwrite) UgcType *ugcType;
 @property(nonatomic,strong,readwrite) NSString *authorName;
 @property(nonatomic,strong,readwrite) NSString *detail;
+@property(nonatomic,strong,readwrite) NSString *desc;
 @property(nonatomic,strong,readwrite) NSString *dateStr;
 @property(nonatomic,readwrite) NSArray<NSString *> *imgs;
 @property(nonatomic,readwrite) NSInteger commentNum;
