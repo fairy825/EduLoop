@@ -63,6 +63,10 @@
 		8470FD39259A36AF00B05974 /* ELCommentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FD38259A36AF00B05974 /* ELCommentManager.m */; };
 		8470FD3F259AEB0900B05974 /* UgcVoteModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FD3E259AEB0900B05974 /* UgcVoteModel.m */; };
 		8470FD45259B05EC00B05974 /* ELImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FD44259B05EC00B05974 /* ELImageManager.m */; };
+		8470FD4B259C506600B05974 /* UgcTextImgPublishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FD4A259C506600B05974 /* UgcTextImgPublishViewController.m */; };
+		8470FD51259CB0F200B05974 /* ELPublishImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FD50259CB0F200B05974 /* ELPublishImage.m */; };
+		8470FD57259CBB4000B05974 /* UgcPublishTextImgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FD56259CBB4000B05974 /* UgcPublishTextImgModel.m */; };
+		8470FD6125A1B5C500B05974 /* UgcVotePublishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FD6025A1B5C500B05974 /* UgcVotePublishViewController.m */; };
 		B56C4CB27218F46755ADDDB9 /* libPods-EduLoop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A30B8306BBFF24ECE415E9 /* libPods-EduLoop.a */; };
 /* End PBXBuildFile section */
 
@@ -199,6 +203,14 @@
 		8470FD3E259AEB0900B05974 /* UgcVoteModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UgcVoteModel.m; sourceTree = "<group>"; };
 		8470FD43259B05EC00B05974 /* ELImageManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELImageManager.h; sourceTree = "<group>"; };
 		8470FD44259B05EC00B05974 /* ELImageManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELImageManager.m; sourceTree = "<group>"; };
+		8470FD49259C506600B05974 /* UgcTextImgPublishViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UgcTextImgPublishViewController.h; sourceTree = "<group>"; };
+		8470FD4A259C506600B05974 /* UgcTextImgPublishViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UgcTextImgPublishViewController.m; sourceTree = "<group>"; };
+		8470FD4F259CB0F200B05974 /* ELPublishImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELPublishImage.h; sourceTree = "<group>"; };
+		8470FD50259CB0F200B05974 /* ELPublishImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELPublishImage.m; sourceTree = "<group>"; };
+		8470FD55259CBB4000B05974 /* UgcPublishTextImgModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UgcPublishTextImgModel.h; sourceTree = "<group>"; };
+		8470FD56259CBB4000B05974 /* UgcPublishTextImgModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UgcPublishTextImgModel.m; sourceTree = "<group>"; };
+		8470FD5F25A1B5C500B05974 /* UgcVotePublishViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UgcVotePublishViewController.h; sourceTree = "<group>"; };
+		8470FD6025A1B5C500B05974 /* UgcVotePublishViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UgcVotePublishViewController.m; sourceTree = "<group>"; };
 		F87AF0CFB6BB37AC984C83F1 /* Pods-EduLoop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EduLoop.debug.xcconfig"; path = "Target Support Files/Pods-EduLoop/Pods-EduLoop.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -495,6 +507,7 @@
 		8470FCB1258C75D900B05974 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				8470FD5B25A1B57400B05974 /* CreateUgc */,
 				8470FCB2258C761500B05974 /* CommunityViewController.h */,
 				8470FCB3258C761500B05974 /* CommunityViewController.m */,
 				8470FD0625907E9E00B05974 /* UgcDetailPageViewController.h */,
@@ -516,6 +529,8 @@
 				8470FD1625945D7300B05974 /* CommentModel.m */,
 				8470FD3D259AEB0900B05974 /* UgcVoteModel.h */,
 				8470FD3E259AEB0900B05974 /* UgcVoteModel.m */,
+				8470FD55259CBB4000B05974 /* UgcPublishTextImgModel.h */,
+				8470FD56259CBB4000B05974 /* UgcPublishTextImgModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -534,6 +549,8 @@
 				8470FCFE2590461100B05974 /* UgcTextImgCard.m */,
 				8470FD0C259438DD00B05974 /* UgcCardTableViewCell.h */,
 				8470FD0D259438DD00B05974 /* UgcCardTableViewCell.m */,
+				8470FD4F259CB0F200B05974 /* ELPublishImage.h */,
+				8470FD50259CB0F200B05974 /* ELPublishImage.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -547,6 +564,17 @@
 				8470FD2C2594867500B05974 /* CommentEditView.m */,
 			);
 			path = CommentViews;
+			sourceTree = "<group>";
+		};
+		8470FD5B25A1B57400B05974 /* CreateUgc */ = {
+			isa = PBXGroup;
+			children = (
+				8470FD49259C506600B05974 /* UgcTextImgPublishViewController.h */,
+				8470FD4A259C506600B05974 /* UgcTextImgPublishViewController.m */,
+				8470FD5F25A1B5C500B05974 /* UgcVotePublishViewController.h */,
+				8470FD6025A1B5C500B05974 /* UgcVotePublishViewController.m */,
+			);
+			path = CreateUgc;
 			sourceTree = "<group>";
 		};
 		A909C9DE12E7DE9264A4542E /* Pods */ = {
@@ -772,6 +800,7 @@
 				8470FB052577B9A300B05974 /* main.m in Sources */,
 				8470FCE8258C9AC700B05974 /* UgcVoteCard.m in Sources */,
 				8470FD33259A262A00B05974 /* ELSearchBar.m in Sources */,
+				8470FD57259CBB4000B05974 /* UgcPublishTextImgModel.m in Sources */,
 				8470FC9025885F1200B05974 /* ELCenterOverlayModel.m in Sources */,
 				8470FC672587067B00B05974 /* HomeworkShowViewController.m in Sources */,
 				8470FD45259B05EC00B05974 /* ELImageManager.m in Sources */,
@@ -787,6 +816,7 @@
 				8470FAF72577B9A200B05974 /* SceneDelegate.m in Sources */,
 				8470FC7A258727A700B05974 /* HomeworkModel.m in Sources */,
 				8470FD2725947DE800B05974 /* TestViewController.m in Sources */,
+				8470FD6125A1B5C500B05974 /* UgcVotePublishViewController.m in Sources */,
 				8470FC6D2587093800B05974 /* HomeworkShowTableViewCell.m in Sources */,
 				8470FD3F259AEB0900B05974 /* UgcVoteModel.m in Sources */,
 				8470FB602577EE0800B05974 /* UIColor+EHGenerator.m in Sources */,
@@ -798,6 +828,7 @@
 				8470FCC1258C771900B05974 /* UgcModel.m in Sources */,
 				8470FCB4258C761500B05974 /* CommunityViewController.m in Sources */,
 				8470FC9625889A5F00B05974 /* ELFloatingButton.m in Sources */,
+				8470FD51259CB0F200B05974 /* ELPublishImage.m in Sources */,
 				8470FCE2258C994B00B05974 /* UgcNormalContent.m in Sources */,
 				8470FB6D2577EE1500B05974 /* UIColor+EHTheme.m in Sources */,
 				8470FB6F2577EE1500B05974 /* UIColor+EHGenerator.m in Sources */,
@@ -806,6 +837,7 @@
 				8470FCC8258C77F100B05974 /* UgcCard.m in Sources */,
 				8470FCAC258B778600B05974 /* ELStackCardItem.m in Sources */,
 				8470FD2D2594867500B05974 /* CommentEditView.m in Sources */,
+				8470FD4B259C506600B05974 /* UgcTextImgPublishViewController.m in Sources */,
 				8470FD39259A36AF00B05974 /* ELCommentManager.m in Sources */,
 				8470FD0E259438DD00B05974 /* UgcCardTableViewCell.m in Sources */,
 				8470FB2F2577BEF700B05974 /* MineInfoCard.m in Sources */,

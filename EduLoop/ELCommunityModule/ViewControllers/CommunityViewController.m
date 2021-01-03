@@ -16,7 +16,9 @@
 #import "UgcCardTableViewCell.h"
 #import "UgcDetailPageViewController.h"
 #import "ELImageManager.h"
-@interface CommunityViewController ()<UITableViewDelegate,UITableViewDataSource,UgcCardTableViewCellDelegate>
+#import "UgcTextImgPublishViewController.h"
+#import "UgcVotePublishViewController.h"
+@interface CommunityViewController ()<UITableViewDelegate,UITableViewDataSource,UgcCardTableViewCellDelegate,ELFloatingButtonDelegate>
 
 @end
 
@@ -117,6 +119,27 @@
     }
     return _addBtn;
 }
+
+#pragma mark - ELFloatingButtonDelegate
+- (void)clickFloatingButton{
+    ELBottomOverlay *overlay = [[ELBottomOverlay alloc]initWithFrame:self.view.bounds Data:@[
+        ({
+        ELOverlayItem *item = [ELOverlayItem new];
+        item.title = @"发送图文";
+        item.clickBlock = ^{
+            [self.navigationController pushViewController:[[UgcTextImgPublishViewController alloc]init] animated:YES];
+        };
+        item;
+    }),({
+        ELOverlayItem *item = [ELOverlayItem new];
+        item.title = @"发起讨论";
+        item.clickBlock = ^{
+            [self.navigationController pushViewController:[[UgcVotePublishViewController alloc]init] animated:YES];
+        };
+        item;
+    })]];
+    [overlay showHighlightView];
+}
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -153,10 +176,6 @@
 - (void)pushToDetailPageWithData:(UgcModel *)data{
     
     [self.navigationController pushViewController:[[UgcDetailPageViewController alloc]initWithModel:data] animated:YES];
-}
-#pragma mark - ELFloatingButtonDelegate
-- (void)clickFloatingButton{
-//    [self jumpToDetailPageWithData:nil];
 }
 
 #pragma mark - UgcCardDelegate

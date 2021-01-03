@@ -19,6 +19,10 @@
         NSMutableArray<MineToolCardItem*> * views = [NSMutableArray array];
         for(int i=0;i<4;i++){
             MineToolCardItem *item = [[MineToolCardItem alloc]initWithTitle:titleArr[i] icon:iconArr[i] index:i];
+            item.tag = 2000+i;
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickToolCardItem:)];
+
+            [item addGestureRecognizer:tap];
             [views addObject:item];
         }
         _items = views;
@@ -55,4 +59,9 @@
     
 }
 
+- (void)clickToolCardItem:(UITapGestureRecognizer *)recognizer{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(jumpToNewPage:)]){
+        [self.delegate jumpToNewPage:recognizer.view.tag-2000];
+    }
+}
 @end

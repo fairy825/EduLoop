@@ -9,13 +9,42 @@
 #import <Masonry/Masonry.h>
 #import "ELSearchBar.h"
 #import "ELCommentManager.h"
-@interface TestViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
+@interface TestViewController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,UITextViewDelegate>
 
 @end
 
 @implementation TestViewController
 
 - (void)viewWillAppear:(BOOL)animated{
+    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 120, 414, 700)];
+    bgView.backgroundColor = [UIColor grayColor];
+    [self.view addSubview:bgView];
+
+    self.textView = [[UITextView alloc]init];
+    self.textView.delegate = self;
+    _textView.backgroundColor = [UIColor whiteColor];
+    _textView.textAlignment = NSTextAlignmentLeft;
+    
+    [bgView addSubview:self.textView];
+    self.textView.frame = CGRectMake(20, 20, 414-40, 600);
+    self.textView.keyboardDismissMode = UIScrollViewKeyboardDismissModeOnDrag;
+    self.textView.contentSize = CGSizeMake(self.textView.frame.size.width,self.textView.frame.size.height+1);
+
+    
+    // _placeholderLabel
+    UILabel *placeHolderLabel = [[UILabel alloc] init];
+    placeHolderLabel.text = @"请输入内容请输入内容请输入内容请输入内容...";
+    placeHolderLabel.numberOfLines = 0;
+    placeHolderLabel.textColor = [UIColor blackColor];
+    [placeHolderLabel sizeToFit];
+    [_textView addSubview:placeHolderLabel];
+
+    // same font
+    _textView.font = [UIFont systemFontOfSize:20];
+    placeHolderLabel.font = [UIFont systemFontOfSize:20.f];
+    [_textView setValue:placeHolderLabel forKey:@"_placeholderLabel"];
+    
+    
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.navigationController.navigationBar.barTintColor = [UIColor redColor];
     [self.tabBarController.navigationItem setTitleView:({

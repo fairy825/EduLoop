@@ -56,10 +56,6 @@
         _detailLabel.text= _data.detailText;
     _avatarView.image = _data.defaultAvatarImage;
 }
-//- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
-//    NSLog(@"");
-//    return nil;
-//}
 
 - (void)setupView{
     self.backgroundColor = [UIColor whiteColor];
@@ -67,9 +63,8 @@
     [self.contentView addSubview:self.titleLabel];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.contentView).offset(20);
-        if(_data.accessoryType!=SettingTableViewCellType_BigTextField)
+        if(_data.accessoryType!=SettingTableViewCellType_BigTextField&&_data.accessoryType!=SettingTableViewCellType_Choices)
             make.centerY.equalTo(self.contentView.mas_centerY);
-
         else
             make.top.equalTo(self.contentView).offset(20);
     }];
@@ -78,7 +73,8 @@
     [self.subtitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.titleLabel.mas_right).offset(20);
         make.top.equalTo(self.titleLabel);
-        make.size.mas_equalTo(CGSizeMake(50, 20));
+        make.width.lessThanOrEqualTo(@50);
+        make.height.equalTo(@20);
     }];
     
     if(_data.showArrow){
@@ -116,10 +112,14 @@
             view =self.detailLabel;
         else if(_data.accessoryType==SettingTableViewCellType_InlineTextField)
             view = self.detailTextfield;
-        else
+        else if(_data.accessoryType==SettingTableViewCellType_BigTextField)
             view = self.detailTextView;
+        else if(_data.accessoryType==SettingTableViewCellType_Choices){
+            view = [self getChoicesStack];
+        }
+        
         [self.contentView addSubview:view];
-        if(_data.accessoryType==SettingTableViewCellType_BigTextField){
+        if(_data.accessoryType==SettingTableViewCellType_BigTextField||_data.accessoryType==SettingTableViewCellType_Choices){
             [view mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(self.contentView).offset(20);
                 make.right.equalTo(self.contentView).offset(-20);
@@ -133,12 +133,70 @@
                 else
                     make.right.equalTo(self.contentView).offset(-20);
                 make.centerY.equalTo(self.contentView.mas_centerY);
+                make.left.equalTo(self.subtitleLabel.mas_right);
             }];
         }
     }
 }
 
 #pragma mark - View
+- (UIView *)getChoicesStack{
+       UIView *aChoice = [[UIView alloc]init];
+       UILabel *aLabel = [[UILabel alloc]init];
+       aLabel.text = @"A";
+       aLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:16.f];
+       [aLabel sizeToFit];
+       [aChoice addSubview:aLabel];
+       [aLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+           make.top.equalTo(aChoice).offset(10);
+           make.bottom.equalTo(aChoice).offset(-10);
+           make.left.equalTo(aChoice);
+       //        make.right.equalTo(aChoice).offset(-20);
+       }];
+       [aChoice addSubview:self.aTextField];
+       [self.aTextField mas_makeConstraints:^(MASConstraintMaker *make) {
+           make.top.equalTo(aLabel);
+           make.bottom.equalTo(aLabel);
+           make.left.equalTo(aLabel).offset(20);
+           make.right.equalTo(aChoice);
+       }];
+       
+       UIView *bChoice = [[UIView alloc]init];
+       UILabel *bLabel = [[UILabel alloc]init];
+       bLabel.text = @"B";
+       bLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:16.f];
+       [bLabel sizeToFit];
+       [bChoice addSubview:bLabel];
+       [bLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+           make.top.equalTo(bChoice).offset(10);
+           make.bottom.equalTo(bChoice).offset(-10);
+           make.left.equalTo(bChoice);
+       //        make.right.equalTo(aChoice).offset(-20);
+       }];
+       [bChoice addSubview:self.bTextField];
+       [self.bTextField mas_makeConstraints:^(MASConstraintMaker *make) {
+           make.top.equalTo(bLabel);
+           make.bottom.equalTo(bLabel);
+           make.left.equalTo(bLabel).offset(20);
+           make.right.equalTo(bChoice);
+       }];
+       UIView *choicesStack = [UIView new];
+       [choicesStack addSubview:aChoice];
+       [aChoice mas_makeConstraints:^(MASConstraintMaker *make) {
+           make.top.equalTo(choicesStack);
+           make.left.equalTo(choicesStack);
+           make.right.equalTo(choicesStack);
+           make.height.equalTo(@50);
+       }];
+       [choicesStack addSubview:bChoice];
+       [bChoice mas_makeConstraints:^(MASConstraintMaker *make) {
+           make.top.equalTo(aChoice.mas_bottom);
+           make.height.equalTo(@50);
+           make.left.equalTo(aChoice);
+           make.right.equalTo(aChoice);
+       }];
+    return choicesStack;
+}
 - (UISwitch *)aSwitch{
     if(!_aSwitch){
         _aSwitch = [[UISwitch alloc]initWithFrame:CGRectMake(0, 0, 50, 20)];
@@ -208,7 +266,7 @@
             self.detailTextfield.textAlignment = NSTextAlignmentRight;
         self.detailTextfield.textColor = [UIColor eh_subtitleColor];
         self.detailTextfield.font = [UIFont eh_regularWithSize:16];
-        self.detailTextfield.placeholder = @"未设置";
+//        self.detailTextfield.placeholder = @"未设置";
     }
     return _detailTextfield;
 }
@@ -221,6 +279,17 @@
         _detailTextView.textAlignment = NSTextAlignmentLeft;
         _detailTextView.textColor = [UIColor eh_subtitleColor];
         _detailTextView.font = [UIFont eh_regularWithSize:16];
+        // _placeholderLabel
+        UILabel *placeHolderLabel = [[UILabel alloc] init];
+        placeHolderLabel.text = _data.detailDefaultText;
+
+        placeHolderLabel.numberOfLines = 0;
+        placeHolderLabel.textColor = [UIColor eh_subtitleColor];
+        [placeHolderLabel sizeToFit];
+        [_detailTextView addSubview:placeHolderLabel];
+        // same font
+        placeHolderLabel.font = [UIFont eh_regularWithSize:16];
+        [_detailTextView setValue:placeHolderLabel forKey:@"_placeholderLabel"];
     }
     return _detailTextView;
 }
@@ -234,10 +303,35 @@
     return _arrowImage;
 }
 
-//- (PGDatePicker *)datePicker{
-//    if(!_datePicker){
-//
-//    }
-//    return _datePicker;
-//}
+- (UITextField *)aTextField{
+    if(!_aTextField){
+        _aTextField = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, 100, 20)];
+        _aTextField.font = [UIFont systemFontOfSize:18.f];
+        _aTextField.textColor = [UIColor eh_subtitleColor];
+//        _aTextField.layer.cornerRadius =15;
+//        _aTextField.backgroundColor = [UIColor eh_f6f6f6];
+      
+        _aTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+        _aTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        _aTextField.textAlignment = NSTextAlignmentLeft;
+        _aTextField.placeholder = @"输入选项内容";
+    }
+    return _aTextField;
+}
+
+- (UITextField *)bTextField{
+    if(!_bTextField){
+        _bTextField = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, 100, 20)];
+        _bTextField.font = [UIFont systemFontOfSize:18.f];
+        _bTextField.textColor = [UIColor eh_subtitleColor];
+//        _bTextField.layer.cornerRadius =15;
+//        _bTextField.backgroundColor = [UIColor eh_f6f6f6];
+        _bTextField.autocorrectionType = UITextAutocorrectionTypeNo;
+        _bTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        _aTextField.textAlignment = NSTextAlignmentLeft;
+        _bTextField.placeholder = @"输入选项内容";
+    }
+    return _bTextField;
+}
+
 @end

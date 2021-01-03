@@ -12,7 +12,8 @@
 #import "MineMiscCardTableViewCell.h"
 #import "ProfileViewController.h"
 #import "ChildProfileViewController.h"
-@interface MineViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "CommunityViewController.h"
+@interface MineViewController ()<UITableViewDelegate,UITableViewDataSource,MineToolCardDelegate>
 
 @end
 
@@ -61,6 +62,7 @@
     [self.container addSubview:self.header];
     
     self.toolCard = [[MineToolCard alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 110)];
+    self.toolCard.delegate = self;
     [self.container addSubview:self.toolCard];
     [self.toolCard mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view);
@@ -142,4 +144,16 @@
     }
 }
 
+#pragma mark - MineToolCardDelegate
+- (void)jumpToNewPage:(int)idx{
+    switch (idx) {
+        case 0:
+            [self.navigationController pushViewController:[[CommunityViewController alloc]init] animated:YES];
+
+            break;
+            
+        default:
+            break;
+    }
+}
 @end

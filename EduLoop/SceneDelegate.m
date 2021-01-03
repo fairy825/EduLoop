@@ -10,6 +10,7 @@
 #import "ELHomeworkModule/ELHomeworkModule.h"
 #import "ELCommunityModule/ELCommunityModule.h"
 #import "TestViewController.h"
+#import "UgcTextImgPublishViewController.h"
 @interface SceneDelegate ()
 
 @end

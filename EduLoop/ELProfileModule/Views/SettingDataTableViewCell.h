@@ -17,6 +17,7 @@ typedef NS_ENUM(NSInteger, SettingTableViewCellType)
     SettingTableViewCellType_Image,          // 文件+image
     SettingTableViewCellType_Switch,
     SettingTableViewCellType_Date,
+    SettingTableViewCellType_Choices,
 };
 
 @interface SettingDataModel : NSObject
@@ -25,6 +26,8 @@ typedef NS_ENUM(NSInteger, SettingTableViewCellType)
 @property (nonatomic, copy) NSString *subtitle;
 @property (nonatomic, copy) NSString *detailText;
 @property (nonatomic, copy) NSString *detailDefaultText;
+@property (nonatomic, copy) NSString *aChoiceText;
+@property (nonatomic, copy) NSString *bChoiceText;
 
 @property (nonatomic, copy) NSString *avatarImageUrl;
 @property (nonatomic, strong) UIImage *defaultAvatarImage;
@@ -45,6 +48,10 @@ typedef NS_ENUM(NSInteger, SettingTableViewCellType)
 @property (nonatomic, strong, readwrite) UILabel *detailLabel;
 @property (nonatomic, strong, readwrite) UITextField *detailTextfield;
 @property (nonatomic, strong, readwrite) UITextView *detailTextView;
+
+@property(nonatomic,strong,readwrite) UITextField *aTextField;
+@property(nonatomic,strong,readwrite) UITextField *bTextField;
+
 @property (nonatomic, strong, readwrite) UISwitch *aSwitch;
 @property (nonatomic, strong, readwrite) PGDatePicker *datePicker;
 @property (nonatomic, strong, readwrite) UIImageView *arrowImage;
