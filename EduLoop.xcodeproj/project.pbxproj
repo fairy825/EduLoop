@@ -67,6 +67,13 @@
 		8470FD51259CB0F200B05974 /* ELPublishImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FD50259CB0F200B05974 /* ELPublishImage.m */; };
 		8470FD57259CBB4000B05974 /* UgcPublishTextImgModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FD56259CBB4000B05974 /* UgcPublishTextImgModel.m */; };
 		8470FD6125A1B5C500B05974 /* UgcVotePublishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FD6025A1B5C500B05974 /* UgcVotePublishViewController.m */; };
+		8470FD6B25A2D7CB00B05974 /* ELChatModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FD6A25A2D7CB00B05974 /* ELChatModule.m */; };
+		8470FD7425A2DCC000B05974 /* ChatAllViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FD7325A2DCC000B05974 /* ChatAllViewController.m */; };
+		8470FD7A25A2DDBF00B05974 /* MessageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FD7925A2DDBF00B05974 /* MessageModel.m */; };
+		8470FD8025A2E00E00B05974 /* ChatAllModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FD7F25A2E00E00B05974 /* ChatAllModel.m */; };
+		8470FD8625A2E22100B05974 /* MessageSummaryCardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FD8525A2E22100B05974 /* MessageSummaryCardTableViewCell.m */; };
+		8470FD8C25A2E29900B05974 /* ChatDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FD8B25A2E29900B05974 /* ChatDetailViewController.m */; };
+		8470FD9325A2FF0200B05974 /* ELCustomLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FD9225A2FF0200B05974 /* ELCustomLabel.m */; };
 		B56C4CB27218F46755ADDDB9 /* libPods-EduLoop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A30B8306BBFF24ECE415E9 /* libPods-EduLoop.a */; };
 /* End PBXBuildFile section */
 
@@ -211,6 +218,20 @@
 		8470FD56259CBB4000B05974 /* UgcPublishTextImgModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UgcPublishTextImgModel.m; sourceTree = "<group>"; };
 		8470FD5F25A1B5C500B05974 /* UgcVotePublishViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UgcVotePublishViewController.h; sourceTree = "<group>"; };
 		8470FD6025A1B5C500B05974 /* UgcVotePublishViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UgcVotePublishViewController.m; sourceTree = "<group>"; };
+		8470FD6925A2D7CB00B05974 /* ELChatModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELChatModule.h; sourceTree = "<group>"; };
+		8470FD6A25A2D7CB00B05974 /* ELChatModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELChatModule.m; sourceTree = "<group>"; };
+		8470FD7225A2DCC000B05974 /* ChatAllViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatAllViewController.h; sourceTree = "<group>"; };
+		8470FD7325A2DCC000B05974 /* ChatAllViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatAllViewController.m; sourceTree = "<group>"; };
+		8470FD7825A2DDBF00B05974 /* MessageModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageModel.h; sourceTree = "<group>"; };
+		8470FD7925A2DDBF00B05974 /* MessageModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageModel.m; sourceTree = "<group>"; };
+		8470FD7E25A2E00E00B05974 /* ChatAllModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatAllModel.h; sourceTree = "<group>"; };
+		8470FD7F25A2E00E00B05974 /* ChatAllModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatAllModel.m; sourceTree = "<group>"; };
+		8470FD8425A2E22100B05974 /* MessageSummaryCardTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageSummaryCardTableViewCell.h; sourceTree = "<group>"; };
+		8470FD8525A2E22100B05974 /* MessageSummaryCardTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageSummaryCardTableViewCell.m; sourceTree = "<group>"; };
+		8470FD8A25A2E29900B05974 /* ChatDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatDetailViewController.h; sourceTree = "<group>"; };
+		8470FD8B25A2E29900B05974 /* ChatDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatDetailViewController.m; sourceTree = "<group>"; };
+		8470FD9125A2FF0200B05974 /* ELCustomLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELCustomLabel.h; sourceTree = "<group>"; };
+		8470FD9225A2FF0200B05974 /* ELCustomLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELCustomLabel.m; sourceTree = "<group>"; };
 		F87AF0CFB6BB37AC984C83F1 /* Pods-EduLoop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EduLoop.debug.xcconfig"; path = "Target Support Files/Pods-EduLoop/Pods-EduLoop.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -273,6 +294,7 @@
 		8470FAF12577B9A200B05974 /* EduLoop */ = {
 			isa = PBXGroup;
 			children = (
+				8470FD6525A2D79500B05974 /* ELChatModule */,
 				8470FCB0258C75C400B05974 /* ELCommunityModule */,
 				8470FC452580E12200B05974 /* ELHomeworkModule */,
 				8470FBF72580880600B05974 /* ELCommonUIKit */,
@@ -418,6 +440,8 @@
 				8470FD38259A36AF00B05974 /* ELCommentManager.m */,
 				8470FD43259B05EC00B05974 /* ELImageManager.h */,
 				8470FD44259B05EC00B05974 /* ELImageManager.m */,
+				8470FD9125A2FF0200B05974 /* ELCustomLabel.h */,
+				8470FD9225A2FF0200B05974 /* ELCustomLabel.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -575,6 +599,49 @@
 				8470FD6025A1B5C500B05974 /* UgcVotePublishViewController.m */,
 			);
 			path = CreateUgc;
+			sourceTree = "<group>";
+		};
+		8470FD6525A2D79500B05974 /* ELChatModule */ = {
+			isa = PBXGroup;
+			children = (
+				8470FD6825A2D7AE00B05974 /* ViewControllers */,
+				8470FD6725A2D7A800B05974 /* Models */,
+				8470FD6625A2D7A300B05974 /* Views */,
+				8470FD6925A2D7CB00B05974 /* ELChatModule.h */,
+				8470FD6A25A2D7CB00B05974 /* ELChatModule.m */,
+			);
+			path = ELChatModule;
+			sourceTree = "<group>";
+		};
+		8470FD6625A2D7A300B05974 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8470FD8425A2E22100B05974 /* MessageSummaryCardTableViewCell.h */,
+				8470FD8525A2E22100B05974 /* MessageSummaryCardTableViewCell.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8470FD6725A2D7A800B05974 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8470FD7825A2DDBF00B05974 /* MessageModel.h */,
+				8470FD7925A2DDBF00B05974 /* MessageModel.m */,
+				8470FD7E25A2E00E00B05974 /* ChatAllModel.h */,
+				8470FD7F25A2E00E00B05974 /* ChatAllModel.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8470FD6825A2D7AE00B05974 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				8470FD7225A2DCC000B05974 /* ChatAllViewController.h */,
+				8470FD7325A2DCC000B05974 /* ChatAllViewController.m */,
+				8470FD8A25A2E29900B05974 /* ChatDetailViewController.h */,
+				8470FD8B25A2E29900B05974 /* ChatDetailViewController.m */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		A909C9DE12E7DE9264A4542E /* Pods */ = {
@@ -791,6 +858,7 @@
 				8470FC812587534C00B05974 /* ELOverlayItem.m in Sources */,
 				8470FC1A2580AAAD00B05974 /* ChildProfileCard.m in Sources */,
 				8470FAFA2577B9A200B05974 /* MineViewController.m in Sources */,
+				8470FD8C25A2E29900B05974 /* ChatDetailViewController.m in Sources */,
 				8470FBB1257F3FCA00B05974 /* SettingDataTableViewCell.m in Sources */,
 				8470FAF42577B9A200B05974 /* AppDelegate.m in Sources */,
 				8470FC542580E4C800B05974 /* ELHomeworkModule.m in Sources */,
@@ -798,9 +866,12 @@
 				8470FCF9258C9BFB00B05974 /* ELVoteCard.m in Sources */,
 				8470FC0E25808B9D00B05974 /* ELOverlayTableViewCell.m in Sources */,
 				8470FB052577B9A300B05974 /* main.m in Sources */,
+				8470FD7425A2DCC000B05974 /* ChatAllViewController.m in Sources */,
 				8470FCE8258C9AC700B05974 /* UgcVoteCard.m in Sources */,
 				8470FD33259A262A00B05974 /* ELSearchBar.m in Sources */,
 				8470FD57259CBB4000B05974 /* UgcPublishTextImgModel.m in Sources */,
+				8470FD8625A2E22100B05974 /* MessageSummaryCardTableViewCell.m in Sources */,
+				8470FD7A25A2DDBF00B05974 /* MessageModel.m in Sources */,
 				8470FC9025885F1200B05974 /* ELCenterOverlayModel.m in Sources */,
 				8470FC672587067B00B05974 /* HomeworkShowViewController.m in Sources */,
 				8470FD45259B05EC00B05974 /* ELImageManager.m in Sources */,
@@ -815,6 +886,7 @@
 				8470FBAB257F3B5100B05974 /* ProfileViewController.m in Sources */,
 				8470FAF72577B9A200B05974 /* SceneDelegate.m in Sources */,
 				8470FC7A258727A700B05974 /* HomeworkModel.m in Sources */,
+				8470FD8025A2E00E00B05974 /* ChatAllModel.m in Sources */,
 				8470FD2725947DE800B05974 /* TestViewController.m in Sources */,
 				8470FD6125A1B5C500B05974 /* UgcVotePublishViewController.m in Sources */,
 				8470FC6D2587093800B05974 /* HomeworkShowTableViewCell.m in Sources */,
@@ -824,9 +896,11 @@
 				8470FC8A25885C8A00B05974 /* ELCenterOverlay.m in Sources */,
 				8470FBFB2580885800B05974 /* ELOverlay.m in Sources */,
 				8470FD1E25945E1A00B05974 /* CommentCard.m in Sources */,
+				8470FD6B25A2D7CB00B05974 /* ELChatModule.m in Sources */,
 				8470FB902579310E00B05974 /* MineMiscCardTableViewCell.m in Sources */,
 				8470FCC1258C771900B05974 /* UgcModel.m in Sources */,
 				8470FCB4258C761500B05974 /* CommunityViewController.m in Sources */,
+				8470FD9325A2FF0200B05974 /* ELCustomLabel.m in Sources */,
 				8470FC9625889A5F00B05974 /* ELFloatingButton.m in Sources */,
 				8470FD51259CB0F200B05974 /* ELPublishImage.m in Sources */,
 				8470FCE2258C994B00B05974 /* UgcNormalContent.m in Sources */,

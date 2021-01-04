@@ -9,8 +9,8 @@
 #import "ELProfileModule/ELProfileModule.h"
 #import "ELHomeworkModule/ELHomeworkModule.h"
 #import "ELCommunityModule/ELCommunityModule.h"
+#import "ELChatModule/ELChatModule.h"
 #import "TestViewController.h"
-#import "UgcTextImgPublishViewController.h"
 @interface SceneDelegate ()
 
 @end
@@ -22,6 +22,9 @@
     // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
     // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+    
+    ChatAllViewController *controller3 = [[ChatAllViewController alloc]init];
+    controller3.tabBarItem.title = @"消息";
     
     CommunityViewController *controller1 = [[CommunityViewController alloc]init];
     controller1.tabBarItem.title = @"班级";
@@ -52,7 +55,7 @@
     controller4.tabBarItem.title = @"我的";
     
     UITabBarController *tabBarController = [[UITabBarController alloc]init];
-    [tabBarController setViewControllers:@[controller1,controller2,controller4]];
+    [tabBarController setViewControllers:@[controller3,controller1,controller2,controller4]];
     UINavigationController *navigationController = [[UINavigationController alloc]initWithRootViewController:tabBarController];//每个navigationController都需要rootNavigationController 代表栈底元素 即初始显示的controller
     [navigationController setNavigationBarHidden:YES];
     

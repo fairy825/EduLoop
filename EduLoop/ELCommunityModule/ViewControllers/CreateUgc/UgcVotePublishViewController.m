@@ -69,6 +69,8 @@
 
 - (void)setNavagationBar{
     [self setTitle:@"发起讨论"];
+    NSLog(@"%@", self.navigationItem);
+
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"下一步" style:UIBarButtonItemStyleDone target:self action:@selector(publishUgc)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(clickCancel)];
 
