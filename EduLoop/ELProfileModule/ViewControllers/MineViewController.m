@@ -124,11 +124,12 @@
     MineMiscCardTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id];
     if (!cell) {
         cell = [[MineMiscCardTableViewCell alloc] initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id];
-        NSUInteger row = [indexPath row];
-        cell.index = row;
-        cell.title.text = [self.miscTitles objectAtIndex:row];
-        cell.detail.text = [self.miscDetails objectAtIndex:row];
     }
+    NSUInteger row = [indexPath row];
+    cell.index = row;
+    cell.title.text = [self.miscTitles objectAtIndex:row];
+    cell.detail.text = [self.miscDetails objectAtIndex:row];
+
     return cell;
 }
 

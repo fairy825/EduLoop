@@ -6,13 +6,12 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "ContactPersonModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ChatAllModel : NSObject
 
-@property(nonatomic,strong,readwrite) NSString *oppositeName;
-@property(nonatomic,strong,readwrite) NSString *avatar;
+@property(nonatomic,strong,readwrite) ContactPersonModel *personModel;
 @property(nonatomic,strong,readwrite) NSString *messageStr;
 @property(nonatomic,strong,readwrite) NSString *dateStr;
 @property(nonatomic,readwrite) NSString *unreadNum;

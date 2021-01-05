@@ -9,9 +9,6 @@
 #import "ChatAllModel.h"
 #import "ELCustomLabel.h"
 NS_ASSUME_NONNULL_BEGIN
-@protocol MessageSummaryCardTableViewCellDelegate<NSObject>
--(void)clickTrashButtonTableViewCell:(UITableViewCell *)tableViewCell;
-@end
 
 @interface MessageSummaryCardTableViewCell : UITableViewCell
 @property (nonatomic, strong, readwrite) ChatAllModel *data;
@@ -22,9 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong,readwrite) UILabel *oppositeNameLabel;
 @property(nonatomic,strong,readwrite) UILabel *messageLabel;
 @property(nonatomic,readwrite) ELCustomLabel *unreadTag;
-@property(nonatomic,weak,readwrite) id<MessageSummaryCardTableViewCellDelegate> delegate;
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier data:(ChatAllModel *)model;
+- (void)loadData;
 @end
 
 NS_ASSUME_NONNULL_END

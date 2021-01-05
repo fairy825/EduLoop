@@ -146,9 +146,11 @@
     UgcCardTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id];
     if (!cell) {
         cell = [[UgcCardTableViewCell alloc]                        initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id data:data];
-        cell.ugcCard.delegate = self;
-        [cell layoutIfNeeded];
+      
     }
+    
+    cell.ugcCard.delegate = self;
+    [cell layoutIfNeeded];
     return cell;
 }
 

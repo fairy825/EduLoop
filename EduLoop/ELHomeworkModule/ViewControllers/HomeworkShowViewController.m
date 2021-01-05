@@ -89,11 +89,15 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *id =@"HomeworkShowTableViewCell";
     HomeworkShowTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id];
+    NSUInteger idx = [indexPath row];
+    HomeworkModel *model = self.models[idx];
+    
     if (!cell) {
-        NSUInteger idx = [indexPath row];
-        cell = [[HomeworkShowTableViewCell alloc]                        initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id data:self.models[idx]];
-        cell.delegate = self;
+        cell = [[HomeworkShowTableViewCell alloc]                        initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id data:model];
     }
+    cell.data = model;
+    cell.delegate = self;
+    [cell loadData];
     return cell;
 }
 

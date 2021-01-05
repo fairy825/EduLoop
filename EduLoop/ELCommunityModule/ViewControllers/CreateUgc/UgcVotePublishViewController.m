@@ -105,14 +105,18 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *id =@"settingDataTableViewCell";
     SettingDataTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id];
+    NSUInteger idx = [indexPath section]*3+[indexPath row];
+    SettingDataModel *model = self.models[idx];
     if (!cell) {
-        NSUInteger idx = [indexPath section]*3+[indexPath row];
-        cell = [[SettingDataTableViewCell alloc]                        initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id data:self.models[idx]];
-        cell.detailTextView.tag = 3000+idx;
-        cell.detailTextfield.tag = 4000+idx;
-        cell.detailTextView.delegate = self;
-        cell.detailTextfield.delegate = self;
+        cell = [[SettingDataTableViewCell alloc]                        initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id data:model];
+      
     }
+    cell.data = model;
+    [cell loadData];
+    cell.detailTextView.tag = 3000+idx;
+    cell.detailTextfield.tag = 4000+idx;
+    cell.detailTextView.delegate = self;
+    cell.detailTextfield.delegate = self;
     return cell;
 }
 

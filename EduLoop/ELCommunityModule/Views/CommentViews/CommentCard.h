@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong,readwrite) UIView *seperateView;
 //@property(nonatomic,weak,readwrite) id<UgcCardDelegate> delegate;
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier data:(CommentModel *)model;
+- (void)loadData;
 @end
 
 NS_ASSUME_NONNULL_END

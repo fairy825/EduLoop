@@ -22,11 +22,11 @@
 }
 
 - (void)loadData{
-    self.oppositeNameLabel.text = self.data.oppositeName;
+    self.oppositeNameLabel.text = self.data.personModel.name;
     self.publishTimeLabel.text = self.data.dateStr;
     self.messageLabel.text = self.data.messageStr;
     self.unreadTag.text = self.data.unreadNum;
-    self.avatarImage.image = [UIImage imageNamed:self.data.avatar];
+    self.avatarImage.image = [UIImage imageNamed:self.data.personModel.avatar];
 //    self.avatarImage.backgroundColor = [UIColor blackColor];
 }
 

@@ -148,10 +148,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *id =@"settingDataTableViewCell";
     SettingDataTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id];
+    NSUInteger idx = [indexPath section]*2+[indexPath row];
+    SettingDataModel *model = self.models[idx];
     if (!cell) {
-        NSUInteger idx = [indexPath section]*2+[indexPath row];
-        cell = [[SettingDataTableViewCell alloc]                        initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id data:self.models[idx]];
+        cell = [[SettingDataTableViewCell alloc]                        initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id data:model];
     }
+    cell.data = model;
+    [cell loadData];
     return cell;
 }
 

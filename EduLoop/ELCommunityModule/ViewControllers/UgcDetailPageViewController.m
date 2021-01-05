@@ -178,6 +178,8 @@
     if (!cell) {
         cell = [[CommentCard alloc]                    initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id data:data];
     }
+    cell.data = data;
+    [cell loadData];
     return cell;
 }
 

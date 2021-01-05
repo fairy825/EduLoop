@@ -66,5 +66,6 @@ typedef NS_ENUM(NSInteger, SettingTableViewCellType)
 @property(nonatomic,weak,readwrite) id<SettingDataTableViewCellDelegate> delegate;
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier data:(SettingDataModel *)model;
+- (void)loadData;
 @end
 NS_ASSUME_NONNULL_END

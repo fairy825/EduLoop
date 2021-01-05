@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface ChildProfileCard : UITableViewCell
 @property(nonatomic,strong,readwrite) UITableView *tableView;
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier data:(ChildModel *)model;
+- (void)loadData:(ChildModel *)data;
 @end
 
 NS_ASSUME_NONNULL_END

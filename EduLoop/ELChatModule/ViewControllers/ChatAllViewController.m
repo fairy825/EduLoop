@@ -13,8 +13,9 @@
 #import "ELCenterOverlay.h"
 #import "MessageSummaryCardTableViewCell.h"
 #import "ChatDetailViewController.h"
+#import "AddressListViewController.h"
 
-@interface ChatAllViewController ()<UITableViewDelegate,UITableViewDataSource,MessageSummaryCardTableViewCellDelegate>
+@interface ChatAllViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
 
@@ -47,18 +48,22 @@
     
     [_models addObject:({
         ChatAllModel *model = [ChatAllModel new];
-        model.oppositeName = @"陈老师";
+        ContactPersonModel *personModel = [ContactPersonModel new];
+        personModel.name = @"陈老师";
+        personModel.avatar = @"avatar";
+        model.personModel = personModel;
         model.dateStr = @"刚刚";
-        model.avatar = @"avatar";
         model.unreadNum = @"2";
         model.messageStr = @"您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好";
         model;
     })];
     [_models addObject:({
         ChatAllModel *model = [ChatAllModel new];
-        model.oppositeName = @"陈老师";
+        ContactPersonModel *personModel = [ContactPersonModel new];
+        personModel.name = @"陈老师";
+        personModel.avatar = @"avatar";
+        model.personModel = personModel;
         model.dateStr = @"刚刚";
-        model.avatar = @"avatar";
         model.unreadNum = @"2";
         model.messageStr = @"您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好";
         model;
@@ -104,7 +109,7 @@
 }
 
 - (void)jumpToAddressList{
-    [self.navigationController pushViewController:[[ChatDetailViewController alloc]init] animated:YES];
+    [self.navigationController pushViewController:[[AddressListViewController alloc]init] animated:YES];
 }
 
 - (UIView *)defaultView{
@@ -149,8 +154,9 @@
     MessageSummaryCardTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id];
     if (!cell) {
         cell = [[MessageSummaryCardTableViewCell alloc]                        initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id data:data];
-        cell.delegate = self;
     }
+    cell.data = data;
+    [cell loadData];
     return cell;
 }
 
@@ -189,7 +195,7 @@
 }
 
 - (void)pushToDetailPageWithData:(ChatAllModel *)data{
-    [self.navigationController pushViewController:[[ChatDetailViewController alloc]initWithModel:data] animated:YES];
+    [self.navigationController pushViewController:[[ChatDetailViewController alloc]initWithModel:data.personModel] animated:YES];
 }
 
 #pragma mark - MessageSummaryCardTableViewCellDelegate

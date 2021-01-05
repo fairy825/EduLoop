@@ -73,10 +73,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSString *id =@"ChildProfileCard";
     ChildProfileCard *cell = [tableView dequeueReusableCellWithIdentifier:id];
+    NSUInteger row = [indexPath row];
+    ChildModel *model = self.models[row];
     if (!cell) {
-        NSUInteger row = [indexPath row];
-        cell = [[ChildProfileCard alloc]                        initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id data:self.models[row]];
+        cell = [[ChildProfileCard alloc]                        initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id data:model];
     }
+    [cell loadData:model];
     return cell;
 }
 
