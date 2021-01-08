@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong,readwrite) ContactPersonModel *personModel;
 @property(nonatomic,strong,readwrite) NSString *messageStr;
 @property(nonatomic,strong,readwrite) NSString *dateStr;
-@property(nonatomic,readwrite) NSString *unreadNum;
+@property(nonatomic,readwrite) int unreadNum;
 @end
 
 NS_ASSUME_NONNULL_END

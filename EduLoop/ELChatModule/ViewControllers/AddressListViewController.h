@@ -7,7 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ContactPersonModel.h"
-
+#import "ELSearchBar.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface AddressListViewController : UIViewController
@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong,readwrite) UITableView *tableView;
 @property(nonatomic,strong,readwrite) NSMutableArray<NSString *> *titleArray;
 @property(nonatomic,strong,readwrite) UIView *defaultView;
+@property(nonatomic,strong,readwrite) ELSearchBar *searchBar;
 
 @end
 

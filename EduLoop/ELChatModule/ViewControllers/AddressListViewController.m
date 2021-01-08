@@ -98,7 +98,8 @@
         model.identity = @"家长";
         model.avatar = @"avatar";
         model;
-    }),nil];
+    }),
+nil];
     
     NSMutableArray *modelArray = [NSMutableArray array];
     for (int i = 0; i< arr.count; i++) {
@@ -147,7 +148,7 @@
             make.size.mas_equalTo(CGSizeMake(200, 230));
         }];
         [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
+            make.top.equalTo(self.searchBar.mas_bottom).offset(10);
             make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
             make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
            make.height.equalTo(@0);
@@ -157,6 +158,14 @@
 }
 
 - (void)setupSubviews{
+    [self.view addSubview:self.searchBar];
+    [self.searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop).offset(10);
+        make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft).offset(10);
+        make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight).offset(-10);
+        make.height.equalTo(@60);
+    }];
+    
     self.tableView = [[UITableView alloc]init];
     self.tableView.backgroundColor = [UIColor eh_colorWithHexRGB:EHThemeColor_f6f6f6];
     self.tableView.delegate = self;
@@ -166,9 +175,8 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.sectionIndexColor = [UIColor eh_subtitleColor];
     [self.view addSubview:self.tableView];
-        
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
+        make.top.equalTo(self.searchBar.mas_bottom).offset(10);
         make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
         make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
         make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
@@ -207,6 +215,14 @@
         }];
     }
     return _defaultView;
+}
+
+- (ELSearchBar *)searchBar{
+    if(!_searchBar){
+        _searchBar = [[ELSearchBar alloc]initWithFrame:CGRectMake(10, 10, self.view.bounds.size.width-10*2,60)];
+        _searchBar.textField.returnKeyType = UIReturnKeySearch;
+    }
+    return _searchBar;
 }
 
 #pragma mark - UITableViewDataSource

@@ -17,6 +17,7 @@
     if (self) {
         [self addSubview:({
             _textField = [[UITextField alloc]initWithFrame:CGRectMake(10, 5, frame.size.width-10*2, frame.size.height-5*2)];
+            _textField.borderStyle = UITextBorderStyleRoundedRect;
             _textField.backgroundColor = [UIColor whiteColor];
             _textField.delegate = self;
             _textField.leftView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"icon_search-1"]];
@@ -45,6 +46,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [_textField resignFirstResponder];
+    NSLog(@"%@", [NSString stringWithFormat:@"%@", _textField.text]);
     return YES;
 }
 @end

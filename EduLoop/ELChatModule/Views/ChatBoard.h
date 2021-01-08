@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong,readwrite) UIButton *finishBtn;
 @property(nonatomic,weak,readwrite) id<ChatBoardDelegate> delegate;
 +(ChatBoard *)sharedManager;
+-(void)resize;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -31,6 +31,15 @@
     self.finishBtn.frame = CGRectMake( self.textView.frame.origin.x+self.textView.frame.size.width+10, 0,60, self.bgView.frame.size.height);
 }
 
+-(void)resize{
+    CGFloat textHeight = self.frame.size.height-20;
+    if(self.textView.frame.size.height==textHeight)
+        return;
+    self.bgView.frame = CGRectMake(20, 10, self.frame.size.width-40, textHeight);
+    self.textView.frame = CGRectMake(0, 0, self.bgView.frame.size.width-70, self.bgView.frame.size.height);
+    self.finishBtn.frame = CGRectMake( self.textView.frame.origin.x+self.textView.frame.size.width+10, 0,60, self.bgView.frame.size.height);
+}
+
 #pragma mark - Views
 - (UIView *)bgView{
     if(!_bgView){
@@ -78,4 +87,5 @@
         [self.delegate textView:self finalText:self.textView.text];
     }
 }
+
 @end

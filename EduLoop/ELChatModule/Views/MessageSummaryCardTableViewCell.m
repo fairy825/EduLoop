@@ -25,7 +25,7 @@
     self.oppositeNameLabel.text = self.data.personModel.name;
     self.publishTimeLabel.text = self.data.dateStr;
     self.messageLabel.text = self.data.messageStr;
-    self.unreadTag.text = self.data.unreadNum;
+    self.unreadTag.text = self.data.unreadNum>0?[NSString stringWithFormat:@"%d", self.data.unreadNum]:@"";
     self.avatarImage.image = [UIImage imageNamed:self.data.personModel.avatar];
 //    self.avatarImage.backgroundColor = [UIColor blackColor];
 }

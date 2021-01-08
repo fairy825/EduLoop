@@ -119,7 +119,6 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    NSLog(@"scroll");
     UITableViewCell *cell=[self.commentTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     cell.detailTextLabel.text=@"bbbbbbbbbbbbbbbb";
 }

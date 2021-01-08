@@ -23,6 +23,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self loadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -53,7 +54,7 @@
         personModel.avatar = @"avatar";
         model.personModel = personModel;
         model.dateStr = @"刚刚";
-        model.unreadNum = @"2";
+        model.unreadNum = 2;
         model.messageStr = @"您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好";
         model;
     })];
@@ -64,7 +65,7 @@
         personModel.avatar = @"avatar";
         model.personModel = personModel;
         model.dateStr = @"刚刚";
-        model.unreadNum = @"2";
+        model.unreadNum = 0;
         model.messageStr = @"您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好";
         model;
     })];
@@ -191,6 +192,7 @@
     NSUInteger idx = [indexPath row];
 
     ChatAllModel *data = [_models objectAtIndex:idx];
+    data.unreadNum = 0;
     [self pushToDetailPageWithData:data];
 }
 

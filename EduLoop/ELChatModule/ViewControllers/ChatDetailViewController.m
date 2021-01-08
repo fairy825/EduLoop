@@ -7,9 +7,8 @@
 
 #import "ChatDetailViewController.h"
 #import "UIColor+EHTheme.h"
-#import <Masonry/Masonry.h>
 
-@interface ChatDetailViewController ()<ChatBoardDelegate>
+@interface ChatDetailViewController ()<ChatBoardDelegate,UITextViewDelegate>
 
 @end
 
@@ -37,6 +36,15 @@
     [self setNavagationBar];
     [self loadData];
     [self setupSubviews];
+    //键盘弹出监听
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil ];
+    //键盘收回监听
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHidden:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)setNavagationBar{
@@ -107,4 +115,88 @@
     NSLog(@"%@", [NSString stringWithFormat:@"%@", text]);
 }
 
+#pragma mark - Keyboard
+//键盘弹出时会调用
+-(void)keyboardWillShow:(NSNotification *)notification
+{
+    //获取键盘的基本信息
+    NSDictionary *userInfo = [notification userInfo];
+    CGRect rect = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGFloat keyboardHeight = rect.size.height;
+    CGFloat duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    CGFloat height = self.chatBoard.frame.size.height;
+    CGFloat offset = keyboardHeight+height;
+
+    [UIView animateWithDuration:duration animations:^{
+        self.chatBoard.frame = CGRectMake(0.0f, self.view.bounds.size.height-offset, self.chatBoard.frame.size.width, height);
+//        self.bgView.frame = CGRectMake(0, 88, self.view.bounds.size.width, self.view.bounds.size.height-88-offset);
+//
+//        self.textView.frame = [self.view convertRect:CGRectInset(self.bgView.frame, 20, 20) toView:self.bgView];
+
+    } completion:nil];
+}
+
+ 
+//键盘收回时会调用
+-(void)keyboardWillHidden:(NSNotification *)notification
+{
+    NSDictionary *userInfo = [notification userInfo];
+
+    CGFloat duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    CGFloat height = self.chatBoard.frame.size.height;
+    [UIView animateWithDuration:duration animations:^{
+        self.chatBoard.frame = CGRectMake(0.0f, self.view.bounds.size.height-34-height, self.chatBoard.frame.size.width, height);
+//        CGFloat imgWidth = (self.view.bounds.size.width-40-15*2)/3;
+//        CGFloat bgHeight = self.view.bounds.size.height-88-34-height;
+//        CGFloat offset = bgHeight;
+//        if([self.data.imgs count]>0){
+//            offset=bgHeight-(imgWidth+10);
+//        }
+//
+//        self.bgView.frame = CGRectMake(0, 88, self.view.bounds.size.width,bgHeight);
+//        self.textView.frame = [self.view convertRect:CGRectInset(CGRectMake(0, 88, self.view.bounds.size.width, offset), 20, 20) toView:self.bgView];
+    } completion:nil];
+}
+
+-(void)dismissKeyboard{
+    [self.view endEditing:YES];
+//    [self.textView resignFirstResponder];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self dismissKeyboard];
+}
+
+#pragma mark - UITextViewDelegate
+- (void)textViewDidChange:(UITextView *)textView{
+    CGRect frame = _chatBoard.textView.frame;
+    CGFloat curHeight = _chatBoard.textView.contentSize.height;
+    CGRect boardFrame = _chatBoard.frame;
+    if(curHeight<=136&&curHeight!=frame.size.height){
+        boardFrame.origin.y-=(curHeight-frame.size.height);
+        boardFrame.size.height = curHeight+20;
+        _chatBoard.frame = boardFrame;
+        [_chatBoard resize];
+    }
+}
+- (void)textViewDidBeginEditing:(UITextView *)textView{
+    
+}
+- (void)textViewDidEndEditing:(UITextView *)textView{
+    
+}
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    if ([text isEqualToString:@"\n"]){ //判断输入的字是否是回车，即按下return
+        //在这里做你响应return键的代码
+        [self dismissKeyboard];
+        return NO;
+        //这里返回NO，就代表return键值失效，即页面上按下return，不会出现换行，如果为yes，则输入页面会换行
+    }
+    return YES;
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self dismissKeyboard];
+}
 @end
