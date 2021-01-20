@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong,readwrite) NSMutableArray<MessageModel *>* models;
 @property(nonatomic,strong,readwrite) ContactPersonModel * personModel;
 @property(nonatomic,strong,readwrite) ChatBoard *chatBoard;
+@property(nonatomic,strong,readwrite) UITableView *tableView;
 
 - (instancetype)initWithModel:(ContactPersonModel *)personModel;
 

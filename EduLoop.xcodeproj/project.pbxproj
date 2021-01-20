@@ -78,6 +78,9 @@
 		8470FD9F25A4276400B05974 /* AddressListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FD9E25A4276400B05974 /* AddressListViewController.m */; };
 		8470FDA525A42CA900B05974 /* AddressListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FDA425A42CA900B05974 /* AddressListTableViewCell.m */; };
 		8470FDAE25A4560D00B05974 /* ChatBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FDAD25A4560D00B05974 /* ChatBoard.m */; };
+		8470FDB425AEC50600B05974 /* MessageBubble.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FDB325AEC50600B05974 /* MessageBubble.m */; };
+		8470FDBA25AEC99700B05974 /* MessageRecordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FDB925AEC99700B05974 /* MessageRecordTableViewCell.m */; };
+		8470FDC025B6D62F00B05974 /* ELScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FDBF25B6D62E00B05974 /* ELScreen.m */; };
 		B56C4CB27218F46755ADDDB9 /* libPods-EduLoop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A30B8306BBFF24ECE415E9 /* libPods-EduLoop.a */; };
 /* End PBXBuildFile section */
 
@@ -244,6 +247,12 @@
 		8470FDA425A42CA900B05974 /* AddressListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddressListTableViewCell.m; sourceTree = "<group>"; };
 		8470FDAC25A4560D00B05974 /* ChatBoard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatBoard.h; sourceTree = "<group>"; };
 		8470FDAD25A4560D00B05974 /* ChatBoard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatBoard.m; sourceTree = "<group>"; };
+		8470FDB225AEC50600B05974 /* MessageBubble.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageBubble.h; sourceTree = "<group>"; };
+		8470FDB325AEC50600B05974 /* MessageBubble.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageBubble.m; sourceTree = "<group>"; };
+		8470FDB825AEC99700B05974 /* MessageRecordTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageRecordTableViewCell.h; sourceTree = "<group>"; };
+		8470FDB925AEC99700B05974 /* MessageRecordTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageRecordTableViewCell.m; sourceTree = "<group>"; };
+		8470FDBE25B6D62E00B05974 /* ELScreen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELScreen.h; sourceTree = "<group>"; };
+		8470FDBF25B6D62E00B05974 /* ELScreen.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELScreen.m; sourceTree = "<group>"; };
 		F87AF0CFB6BB37AC984C83F1 /* Pods-EduLoop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EduLoop.debug.xcconfig"; path = "Target Support Files/Pods-EduLoop/Pods-EduLoop.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -454,6 +463,8 @@
 				8470FD44259B05EC00B05974 /* ELImageManager.m */,
 				8470FD9125A2FF0200B05974 /* ELCustomLabel.h */,
 				8470FD9225A2FF0200B05974 /* ELCustomLabel.m */,
+				8470FDBE25B6D62E00B05974 /* ELScreen.h */,
+				8470FDBF25B6D62E00B05974 /* ELScreen.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -634,6 +645,10 @@
 				8470FDA425A42CA900B05974 /* AddressListTableViewCell.m */,
 				8470FDAC25A4560D00B05974 /* ChatBoard.h */,
 				8470FDAD25A4560D00B05974 /* ChatBoard.m */,
+				8470FDB225AEC50600B05974 /* MessageBubble.h */,
+				8470FDB325AEC50600B05974 /* MessageBubble.m */,
+				8470FDB825AEC99700B05974 /* MessageRecordTableViewCell.h */,
+				8470FDB925AEC99700B05974 /* MessageRecordTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -879,14 +894,17 @@
 				8470FC1A2580AAAD00B05974 /* ChildProfileCard.m in Sources */,
 				8470FAFA2577B9A200B05974 /* MineViewController.m in Sources */,
 				8470FD8C25A2E29900B05974 /* ChatDetailViewController.m in Sources */,
+				8470FDBA25AEC99700B05974 /* MessageRecordTableViewCell.m in Sources */,
 				8470FBB1257F3FCA00B05974 /* SettingDataTableViewCell.m in Sources */,
 				8470FAF42577B9A200B05974 /* AppDelegate.m in Sources */,
 				8470FC542580E4C800B05974 /* ELHomeworkModule.m in Sources */,
+				8470FDB425AEC50600B05974 /* MessageBubble.m in Sources */,
 				8470FC7325870A5100B05974 /* AvatarCard.m in Sources */,
 				8470FDAE25A4560D00B05974 /* ChatBoard.m in Sources */,
 				8470FCF9258C9BFB00B05974 /* ELVoteCard.m in Sources */,
 				8470FC0E25808B9D00B05974 /* ELOverlayTableViewCell.m in Sources */,
 				8470FB052577B9A300B05974 /* main.m in Sources */,
+				8470FDC025B6D62F00B05974 /* ELScreen.m in Sources */,
 				8470FD7425A2DCC000B05974 /* ChatAllViewController.m in Sources */,
 				8470FCE8258C9AC700B05974 /* UgcVoteCard.m in Sources */,
 				8470FD33259A262A00B05974 /* ELSearchBar.m in Sources */,

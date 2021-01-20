@@ -12,7 +12,7 @@
 #import "ELImageManager.h"
 #import "ELCenterOverlayModel.h"
 #import "ELCenterOverlay.h"
-
+#import "ELScreen.h"
 @interface UgcTextImgPublishViewController ()<UITextViewDelegate,ELPublishImageDelegate>
 
 @end
@@ -56,8 +56,7 @@
 - (void)setupSubviews{
     [self.view addSubview:self.bgView];
     CGFloat imgWidth = (self.view.bounds.size.width-40-15*2)/3;
-
-    self.bgView.frame = CGRectMake(0, 88, self.view.bounds.size.width, self.view.bounds.size.height-88-34-50-2);
+    self.bgView.frame = CGRectMake(0,(STATUS_BAR_HEIGHT+NAVIGATION_HEIGHT), self.view.bounds.size.width, self.view.bounds.size.height-(STATUS_BAR_HEIGHT+NAVIGATION_HEIGHT)-HOME_BUTTON_HEIGHT-50-2);
     [self.bgView addSubview:self.textView];
     self.textView.frame = [self.view convertRect:CGRectInset(self.bgView.frame, 20, 20) toView:self.bgView];
     self.textView.delegate = self;
@@ -104,7 +103,7 @@
 
 - (UIView *)btnView{
     if(!_btnView){
-        _btnView = [[UIView alloc]initWithFrame:CGRectMake(0,self.view.bounds.size.height-34-50-2,self.view.bounds.size.width, 50+2)];
+        _btnView = [[UIView alloc]initWithFrame:CGRectMake(0,self.view.bounds.size.height-HOME_BUTTON_HEIGHT-50-2,self.view.bounds.size.width, 50+2)];
         _btnView.backgroundColor = [UIColor whiteColor];
 
 
@@ -225,7 +224,7 @@
     [_imgStackView addArrangedSubview:[ELPublishImage emptyItem:photo.frame]];
     if([self.data.imgs count]==0){
         [UIView animateWithDuration:0.25 animations:^{
-            self.bgView.frame = CGRectMake(0, 88, self.view.bounds.size.width, self.view.bounds.size.height-88-34-50-2);
+            self.bgView.frame = CGRectMake(0, (STATUS_BAR_HEIGHT+NAVIGATION_HEIGHT), self.view.bounds.size.width, self.view.bounds.size.height-(STATUS_BAR_HEIGHT+NAVIGATION_HEIGHT)-HOME_BUTTON_HEIGHT-50-2);
             self.textView.frame = [self.view convertRect:CGRectInset(self.bgView.frame, 20, 20) toView:self.bgView];
             [self.imgStackView setHidden:YES];
 
@@ -248,7 +247,7 @@
 
     [UIView animateWithDuration:duration animations:^{
         self.btnView.frame = CGRectMake(0.0f, self.view.bounds.size.height-offset, self.view.frame.size.width, height);
-        self.bgView.frame = CGRectMake(0, 88, self.view.bounds.size.width, self.view.bounds.size.height-88-offset);
+        self.bgView.frame = CGRectMake(0, (STATUS_BAR_HEIGHT+NAVIGATION_HEIGHT), self.view.bounds.size.width, self.view.bounds.size.height-(STATUS_BAR_HEIGHT+NAVIGATION_HEIGHT)-offset);
 
         self.textView.frame = [self.view convertRect:CGRectInset(self.bgView.frame, 20, 20) toView:self.bgView];
 
@@ -264,16 +263,16 @@
     CGFloat duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     CGFloat height = 50+2;
     [UIView animateWithDuration:duration animations:^{
-        self.btnView.frame = CGRectMake(0.0f, self.view.bounds.size.height-34-height, self.view.frame.size.width, height);
+        self.btnView.frame = CGRectMake(0.0f, self.view.bounds.size.height-HOME_BUTTON_HEIGHT-height, self.view.frame.size.width, height);
         CGFloat imgWidth = (self.view.bounds.size.width-40-15*2)/3;
-        CGFloat bgHeight = self.view.bounds.size.height-88-34-height;
+        CGFloat bgHeight = self.btnView.frame.origin.y-(STATUS_BAR_HEIGHT+NAVIGATION_HEIGHT);
         CGFloat offset = bgHeight;
         if([self.data.imgs count]>0){
             offset=bgHeight-(imgWidth+10);
         }
         
-        self.bgView.frame = CGRectMake(0, 88, self.view.bounds.size.width,bgHeight);
-        self.textView.frame = [self.view convertRect:CGRectInset(CGRectMake(0, 88, self.view.bounds.size.width, offset), 20, 20) toView:self.bgView];
+        self.bgView.frame = CGRectMake(0, STATUS_BAR_HEIGHT+NAVIGATION_HEIGHT, self.view.bounds.size.width,bgHeight);
+        self.textView.frame = [self.view convertRect:CGRectInset(CGRectMake(0, STATUS_BAR_HEIGHT+NAVIGATION_HEIGHT, self.view.bounds.size.width, offset), 20, 20) toView:self.bgView];
     } completion:nil];
 }
 

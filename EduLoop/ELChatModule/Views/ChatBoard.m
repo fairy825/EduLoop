@@ -7,6 +7,8 @@
 
 #import "ChatBoard.h"
 #import "UIColor+EHTheme.h"
+#import "ELScreen.h"
+
 @implementation ChatBoard
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -77,14 +79,14 @@
     static ChatBoard* manager;
     static dispatch_once_t token;
     dispatch_once(&token, ^{
-        manager = [[ChatBoard alloc]initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen]bounds].size.width, 60)];
+        manager = [[ChatBoard alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60)];
     });
     return manager;
 }
 
 - (void)editFinish{
     if(self.delegate&&[self.delegate respondsToSelector:@selector(textView:finalText:)]){
-        [self.delegate textView:self finalText:self.textView.text];
+        [self.delegate textView:self.textView finalText:self.textView.text];
     }
 }
 

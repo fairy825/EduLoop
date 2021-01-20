@@ -6,6 +6,7 @@
 //
 
 #import "ELCommentManager.h"
+#import "ELScreen.h"
 @interface ELCommentManager()<UITextViewDelegate>
 @end
 @implementation ELCommentManager
@@ -28,7 +29,7 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(_tapBg)];
     [_backgroundView addGestureRecognizer:tap];
     [_backgroundView addSubview:({
-        _textView = [[UITextView alloc]initWithFrame:CGRectMake(0, _backgroundView.bounds.size.height, [[UIScreen mainScreen] bounds].size.width, 100)];
+        _textView = [[UITextView alloc]initWithFrame:CGRectMake(0, _backgroundView.bounds.size.height, SCREEN_WIDTH, 100)];
         _textView.backgroundColor = [UIColor whiteColor];
         _textView.layer.borderColor = [[UIColor lightGrayColor] CGColor];
         _textView.layer.borderWidth = 5;
@@ -49,14 +50,14 @@
     if(keyboardFrame.origin.y >= 896){
         //收回
         [UIView animateWithDuration:duration animations:^{
-                    self.textView.frame = CGRectMake(0, _backgroundView.bounds.size.height, [[UIScreen mainScreen] bounds].size.width, 100);
+                    self.textView.frame = CGRectMake(0, _backgroundView.bounds.size.height, SCREEN_WIDTH, 100);
         }];
     }else{
         //展开
-        self.textView.frame = CGRectMake(0, _backgroundView.bounds.size.height, [[UIScreen mainScreen] bounds].size.width, 100);
+        self.textView.frame = CGRectMake(0, _backgroundView.bounds.size.height, SCREEN_WIDTH, 100);
 
         [UIView animateWithDuration:duration animations:^{
-                    self.textView.frame = CGRectMake(0, _backgroundView.bounds.size.height-keyboardFrame.size.height-100, [[UIScreen mainScreen] bounds].size.width, 100);
+                    self.textView.frame = CGRectMake(0, _backgroundView.bounds.size.height-keyboardFrame.size.height-100, SCREEN_WIDTH, 100);
         }];
     }
 }

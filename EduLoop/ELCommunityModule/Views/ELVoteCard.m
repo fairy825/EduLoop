@@ -8,6 +8,7 @@
 #import "ELVoteCard.h"
 #import "UIColor+EHTheme.h"
 #import <Masonry/Masonry.h>
+#import "ELScreen.h"
 @implementation ELVoteCard
 
 - (instancetype)initWithFrame:(CGRect)frame Data:(UgcModel *)model
@@ -77,7 +78,7 @@
         make.right.equalTo(self.mas_centerX);
         make.height.equalTo(@20);
     }];
-    CGFloat leftWidth = (float)self.model.leftPercent/100*([[UIScreen mainScreen]bounds].size.width-80);
+    CGFloat leftWidth = (float)self.model.leftPercent/100*(SCREEN_WIDTH-80);
     [self.bgView addSubview:self.leftProgress];
     [self.leftProgress mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.leftLabel.mas_bottom).offset(5);

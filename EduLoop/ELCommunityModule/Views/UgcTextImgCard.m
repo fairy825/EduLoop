@@ -9,6 +9,7 @@
 #import "UIColor+EHTheme.h"
 #import <Masonry/Masonry.h>
 #import "ELImageManager.h"
+#import "ELScreen.h"
 @implementation UgcTextImgCard
 
 - (void)loadData{
@@ -130,7 +131,7 @@
             UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(_tapPhoto:)];
             [photo addGestureRecognizer:tapGesture];
             [_imgStackView addArrangedSubview:photo];
-            CGFloat imgWidth = ([[UIScreen mainScreen]bounds].size.width-40-15*2)/3;
+            CGFloat imgWidth = (SCREEN_WIDTH-40-15*2)/3;
             [photo mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.size.mas_equalTo(CGSizeMake(imgWidth,imgWidth*4/3));
             }];

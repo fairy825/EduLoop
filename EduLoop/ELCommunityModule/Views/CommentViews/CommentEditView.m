@@ -9,13 +9,13 @@
 #import "UIColor+EHTheme.h"
 #import "UIFont+EHTheme.h"
 #import <Masonry/Masonry.h>
-
+#import "ELScreen.h"
 @implementation CommentEditView
 +(CommentEditView *)sharedManager{
     static CommentEditView* manager;
     static dispatch_once_t token;
     dispatch_once(&token, ^{
-        manager = [[CommentEditView alloc]initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen]bounds].size.width, 60)];
+        manager = [[CommentEditView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60)];
     });
     return manager;
 }
