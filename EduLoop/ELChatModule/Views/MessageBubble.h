@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong,readwrite) UIView *bgView;
 @property(nonatomic,strong,readwrite) UILabel *messageLabel;
 @property(nonatomic,readwrite) BOOL isLeft;
+@property(nonatomic,readwrite) NSString *messageStr;
+- (instancetype)initWithFrame:(CGRect)frame message:(NSString *)str isLeft:(BOOL)isLeft;
 @end
 
 NS_ASSUME_NONNULL_END

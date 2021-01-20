@@ -81,8 +81,8 @@ UITableViewDataSource>
 
 - (void)setupSubviews{
     [self.view addSubview:self.chatBoard];
-    self.chatBoard.frame = CGRectMake(0, self.view.bounds.size.height-HOME_BUTTON_HEIGHT-60, self.view.bounds.size.width, 60);
-    
+//    self.chatBoard.frame = CGRectMake(0, self.view.bounds.size.height-HOME_BUTTON_HEIGHT-60, self.view.bounds.size.width, 60);
+//    self.chatBoard.textView.text=@"";
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width,self.chatBoard.frame.origin.y) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -96,7 +96,7 @@ UITableViewDataSource>
 
 - (ChatBoard *)chatBoard{
     if(!_chatBoard){
-        _chatBoard = [ChatBoard sharedManager];
+        _chatBoard = [ChatBoard sharedManager:CGRectMake(0, self.view.bounds.size.height-HOME_BUTTON_HEIGHT-60, self.view.bounds.size.width, 60)];
         _chatBoard.textView.delegate = self;
         _chatBoard.delegate = self;
     }
@@ -194,7 +194,10 @@ UITableViewDataSource>
     CGRect frame = _chatBoard.textView.frame;
     CGFloat curHeight = _chatBoard.textView.contentSize.height;
     CGRect boardFrame = _chatBoard.frame;
-    if(curHeight<=136&&curHeight!=frame.size.height){
+    if(curHeight>136){
+        curHeight=136;
+    }
+    if(curHeight!=frame.size.height){
         boardFrame.origin.y-=(curHeight-frame.size.height);
         boardFrame.size.height = curHeight+20;
         _chatBoard.frame = boardFrame;
@@ -248,7 +251,6 @@ UITableViewDataSource>
     
     cell.messageModel = messageModel;
     [cell loadData];
-    return cell;
     return cell;
 }
 

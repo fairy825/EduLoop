@@ -19,6 +19,8 @@
     return self;
 }
 - (void)setupView{
+//    self.chatBoard.frame = CGRectMake(0, self.view.bounds.size.height-HOME_BUTTON_HEIGHT-60, self.view.bounds.size.width, 60);
+
     self.backgroundColor = [UIColor whiteColor];
     self.layer.borderColor = [UIColor eh_f6f6f6].CGColor;
     self.layer.borderWidth = 5;
@@ -75,11 +77,11 @@
     return _textView;
 }
 
-+(ChatBoard *)sharedManager{
++(ChatBoard *)sharedManager:(CGRect) frame{
     static ChatBoard* manager;
     static dispatch_once_t token;
     dispatch_once(&token, ^{
-        manager = [[ChatBoard alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 60)];
+        manager = [[ChatBoard alloc]initWithFrame:frame];
     });
     return manager;
 }
