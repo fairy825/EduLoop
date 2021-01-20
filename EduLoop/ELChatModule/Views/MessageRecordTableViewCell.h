@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,readwrite) BOOL isFrom;
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier frame:(CGRect)rect data:(MessageModel *)model;
 - (void)loadData;
+- (void)setMessageModel:(MessageModel *)model;
 @end
 
 NS_ASSUME_NONNULL_END

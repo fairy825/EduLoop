@@ -63,7 +63,7 @@ UITableViewDataSource>
         model.avatar = @"avatar";
         model.isRead=YES;
         model.dateStr = @"刚刚";
-        model.messageStr = @"您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好";
+        model.messageStr = @"您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好";
         model;
     })];
     [_models addObject:({
@@ -81,8 +81,6 @@ UITableViewDataSource>
 
 - (void)setupSubviews{
     [self.view addSubview:self.chatBoard];
-//    self.chatBoard.frame = CGRectMake(0, self.view.bounds.size.height-HOME_BUTTON_HEIGHT-60, self.view.bounds.size.width, 60);
-//    self.chatBoard.textView.text=@"";
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width,self.chatBoard.frame.origin.y) style:UITableViewStylePlain];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -90,8 +88,9 @@ UITableViewDataSource>
     self.tableView.separatorStyle = UITableViewCellAccessoryNone;
     self.tableView.showsVerticalScrollIndicator = NO;
        [self.view addSubview:self.tableView];
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 60.0;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+
 }
 
 - (ChatBoard *)chatBoard{
@@ -227,11 +226,11 @@ UITableViewDataSource>
 }
 
 //设置单元格高度
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    //将NSNumber型的height转换为CGFloat型
-//    CGFloat height = [_rowHeightArr[indexPath.row] floatValue];
-    return 100;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    //将NSNumber型的height转换为CGFloat型
+////    CGFloat height = [_rowHeightArr[indexPath.row] floatValue];
+//    return 100;
+//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     MessageModel *messageModel = [_models objectAtIndex:indexPath.row];
@@ -240,15 +239,11 @@ UITableViewDataSource>
     MessageRecordTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id];
     if(!cell){
         cell = [[MessageRecordTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:id frame:self.view.bounds data:messageModel];
+    }else{
+        while ([cell.contentView.subviews lastObject] != nil) {
+            [[cell.contentView.subviews lastObject] performSelector:@selector(removeFromSuperview)];
+        }
     }
-//    else {
-//        //tableView的复用，如果不删除，会出现bug
-//        //删除cell所有的子视图
-//        while ([cell.contentView.subviews lastObject] != nil) {
-//            [(UIView *)[cell.contentView.subviews lastObject] removeFromSuperview];
-//        }
-//    }
-    
     cell.messageModel = messageModel;
     [cell loadData];
     return cell;
