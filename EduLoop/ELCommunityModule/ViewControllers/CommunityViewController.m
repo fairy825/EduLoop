@@ -18,7 +18,8 @@
 #import "ELImageManager.h"
 #import "UgcTextImgPublishViewController.h"
 #import "UgcVotePublishViewController.h"
-@interface CommunityViewController ()<UITableViewDelegate,UITableViewDataSource,UgcCardTableViewCellDelegate,ELFloatingButtonDelegate>
+
+@interface CommunityViewController ()<UITableViewDelegate,UITableViewDataSource,ELFloatingButtonDelegate,UgcCardDelegate>
 
 @end
 
@@ -32,7 +33,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor eh_f6f6f6];
+    self.view.backgroundColor = [UIColor f6f6f6];
     [self loadData];
     [self setupSubviews];
 }
@@ -43,14 +44,17 @@
     
     [_models addObject:({
         UgcModel *model = [UgcModel new];
+        model.ugcType = UgcType_vote;
         model.authorName = @"dd";
-        model.detail =@"发了一条班级圈～";
-        model.thumbNum = 4;
-        model.commentNum = 5;
         model.dateStr = @"刚刚";
-        model.hasClickedThumb = NO;
+        model.leftPercent = 23.2;
+        model.leftChoice = @"不该";
+        model.rightChoice = @"该";
+        model.detail = @"老师应该和学生一起上体育课吗？";
+        model.desc = @"欢迎大家各抒己见欢迎大家各抒己见欢迎大家各抒己见欢迎大家各抒己见欢迎大家各抒己见欢迎大家各抒己见";
+        model.hasPicked = NO;
         model.isMine = YES;
-        model.imgs = @[@"sample-1",@"sample-2",@"sample-2"];
+
         model;
     })];
     [_models addObject:({
@@ -65,23 +69,23 @@
     })];
     [_models addObject:({
         UgcModel *model = [UgcModel new];
-        model.ugcType = UgcType_vote;
-        model.authorName = @"Mijika";
+        model.authorName = @"dd";
+        model.detail =@"发了一条班级圈～";
+        model.thumbNum = 4;
+        model.commentNum = 5;
         model.dateStr = @"刚刚";
-        model.leftPercent = 23.2;
-        model.leftChoice = @"不该";
-        model.rightChoice = @"该";
-        model.detail = @"老师应该和学生一起上体育课吗？";
-        model.desc = @"欢迎大家各抒己见欢迎大家各抒己见欢迎大家各抒己见欢迎大家各抒己见欢迎大家各抒己见欢迎大家各抒己见";
-        model.hasPicked = NO;
+        model.hasClickedThumb = NO;
+        model.isMine = YES;
+        model.imgs = @[@"sample-1",@"sample-2",@"sample-2"];
         model;
     })];
+    
     
 }
 
 - (void)setupSubviews{
     self.tableView = [[UITableView alloc]init];
-    self.tableView.backgroundColor = [UIColor eh_colorWithHexRGB:EHThemeColor_f6f6f6];
+    self.tableView.backgroundColor = [UIColor f6f6f6];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -146,7 +150,6 @@
     UgcCardTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id];
     if (!cell) {
         cell = [[UgcCardTableViewCell alloc]                        initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id data:data];
-      
     }
     
     cell.ugcCard.delegate = self;
@@ -156,9 +159,9 @@
 
 #pragma mark - UITableViewDelegate
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 356;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    return 356;
+//}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSUInteger idx = [indexPath row];
@@ -173,6 +176,10 @@
 }
 
 #pragma mark - UgcCardDelegate
+-(void)clickThumbButtonTableViewCell:(UITableViewCell *)tableViewCell{
+    NSLog(@"thumb");
+}
+
 -(void)clickCommentButtonTableViewCell:(UITableViewCell *)tableViewCell{
     NSInteger idx = [[self.tableView indexPathForCell:tableViewCell]row];
     UgcModel *data = [_models objectAtIndex:idx];

@@ -7,14 +7,14 @@
 
 #import <UIKit/UIKit.h>
 #import "SettingDataTableViewCell.h"
-#import "HomeworkModel.h"
+#import "TaskModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BroadcastViewController : UIViewController
 
 @property(nonatomic,strong,readwrite) UITableView *tableView;
 @property(nonatomic,strong,readwrite) NSMutableArray<SettingDataModel*>* models;
-- (instancetype)initWithHomeworkData:(HomeworkModel *)data;
+- (instancetype)initWithHomeworkData:(TaskModel *)data;
 @end
 
 NS_ASSUME_NONNULL_END

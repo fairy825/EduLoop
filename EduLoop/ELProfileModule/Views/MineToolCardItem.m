@@ -25,7 +25,7 @@
         self.title.numberOfLines = 1;
         self.title.lineBreakMode = NSLineBreakByTruncatingTail;
         self.title.text = title;
-        self.title.textColor = [UIColor eh_colorWithHexRGB:EHThemeColor_555555];
+        self.title.textColor = [UIColor color555555];
         self.title.font = [UIFont fontWithName:@"PingFangSC-Regular" size:13];
 
         UIStackView * stack = [UIStackView new];

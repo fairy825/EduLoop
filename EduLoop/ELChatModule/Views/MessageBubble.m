@@ -86,7 +86,7 @@
     if(!_messageLabel){
         _messageLabel = [[UILabel alloc]init];
         _messageLabel.font = [UIFont systemFontOfSize:18.f];
-        _messageLabel.textColor = [UIColor eh_333333];
+        _messageLabel.textColor = [UIColor color333333];
         _messageLabel.textAlignment = NSTextAlignmentLeft;
         _messageLabel.numberOfLines = 0;
         _messageLabel.text = self.messageStr;

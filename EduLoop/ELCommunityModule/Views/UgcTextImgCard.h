@@ -15,7 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong,readwrite) UIButton *commentButton;
 @property(nonatomic,strong,readwrite) UILabel *detailLabel;
 @property(nonatomic,strong,readwrite) UIStackView *imgStackView;
-
 @end
 
 NS_ASSUME_NONNULL_END

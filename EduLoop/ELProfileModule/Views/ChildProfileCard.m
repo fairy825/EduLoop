@@ -97,7 +97,7 @@
 }
 - (void)setupView{
 
-    self.backgroundColor = [UIColor eh_f6f6f6];
+    self.backgroundColor = [UIColor f6f6f6];
     [self.contentView addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self).mas_offset(UIEdgeInsetsMake(20, 20, 20, 20));;

@@ -30,36 +30,39 @@
         make.edges.equalTo(self).mas_offset(UIEdgeInsetsMake(30, 20, 20, 20));
     }];
     
-//    [self addSubview:self.seperateView];
-//    [self.seperateView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.bottom.equalTo(self.mas_bottom);
-//        make.height.equalTo(@2);
-//        make.left.equalTo(self.bgView);
-//        make.width.equalTo(self.bgView);
-//    }];
-    
-//    self.bgView.backgroundColor = [UIColor yellowColor];
+    [self addSubview:self.seperateView];
+    [self.seperateView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.mas_bottom);
+        make.height.equalTo(@2);
+        make.left.equalTo(self.bgView);
+        make.width.equalTo(self.bgView);
+    }];
+
     [self.bgView addSubview:self.avatarCard];
     [self.avatarCard mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.bgView);
         make.height.equalTo(@60);
         make.width.equalTo(self.bgView);
     }];
-    
+
     [self.bgView addSubview:self.detailLabel];
     [self.detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.avatarCard.mas_bottom).offset(20);
         make.left.equalTo(self.bgView);
         make.width.equalTo(self.bgView);
-        make.height.lessThanOrEqualTo(@70);
+        make.height.lessThanOrEqualTo(@70);//todo
     }];
-    
+
     [self.bgView addSubview:self.imgStackView];
+    CGFloat offset=0;
+    if(self.data.imgs.count!=0){
+        offset = 10;
+    }
     [self.imgStackView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.bgView);
-        make.top.equalTo(self.detailLabel.mas_bottom).offset(10);
+        make.top.equalTo(self.detailLabel.mas_bottom).offset(offset);
     }];
-    
+
     NSMutableArray<UIButton *>* btns = @[self.thumbButton,self.commentButton].mutableCopy;
     if(self.data.isMine&&self.hasTrash)
        [btns addObject:self.trashButton];
@@ -86,31 +89,14 @@
         preBtn = btn;
         i++;
     }
-//    btnsView.backgroundColor = [UIColor redColor];
+    self.btnsView = btnsView;
     [self.bgView addSubview:btnsView];
     [btnsView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.bgView.mas_right);
-        make.top.equalTo(self.imgStackView.mas_bottom).offset(20);
+        make.top.equalTo(self.imgStackView.mas_bottom).offset(30);
+        make.bottom.equalTo(self.bgView);
         make.size.mas_equalTo(CGSizeMake(totalWidth, 20));
     }];
-//    [self.bgView addSubview:self.commentButton];
-//    [self.commentButton mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.bottom.equalTo(self.bgView);
-//        CGFloat offset = 0;
-//        if(self.data.isMine)
-//            offset = -10;
-//
-//        make.right.equalTo(self.trashButton.mas_left).offset(offset);
-//        make.size.mas_equalTo(CGSizeMake(40, 20));
-//    }];
-//
-//    [self.bgView addSubview:self.thumbButton];
-//    [self.thumbButton mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.bottom.equalTo(self.bgView);
-//        make.right.equalTo(self.commentButton.mas_left).offset(-10);
-//        make.size.mas_equalTo(CGSizeMake(40, 20));
-//    }];
-    
 }
 
 - (UIStackView *)imgStackView{
@@ -145,7 +131,7 @@
     if(!_commentButton){
         _commentButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 20)];
         _commentButton.backgroundColor = [UIColor clearColor];
-        [_commentButton setTitleColor:[UIColor eh_999999] forState:UIControlStateNormal];
+        [_commentButton setTitleColor:[UIColor color999999] forState:UIControlStateNormal];
         [_commentButton.titleLabel setFont:[UIFont fontWithName:@"PingFangSC" size:20]];
         [_commentButton setImage:[UIImage imageNamed:@"icon_comment-2"] forState:UIControlStateNormal];
         [_commentButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 20)];
@@ -160,7 +146,7 @@
     if(!_thumbButton){
         _thumbButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 20)];
         _thumbButton.backgroundColor = [UIColor clearColor];
-        [_thumbButton setTitleColor:[UIColor eh_999999] forState:UIControlStateNormal];
+        [_thumbButton setTitleColor:[UIColor color999999] forState:UIControlStateNormal];
         [_thumbButton.titleLabel setFont:[UIFont fontWithName:@"PingFangSC" size:20]];
         [_thumbButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 20)];
         [_thumbButton addTarget:self action:@selector(toggleThumb) forControlEvents:UIControlEventTouchUpInside];
@@ -172,7 +158,7 @@
     if(!_detailLabel){
         _detailLabel = [[UILabel alloc]initWithFrame:self.bounds];
         _detailLabel.font = [UIFont systemFontOfSize:18.f];
-        _detailLabel.textColor = [UIColor eh_333333];
+        _detailLabel.textColor = [UIColor color333333];
         _detailLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         _detailLabel.textAlignment = NSTextAlignmentLeft;
         _detailLabel.numberOfLines = 0;
@@ -192,23 +178,25 @@
     self.data.hasClickedThumb = !self.data.hasClickedThumb;
     [_thumbButton setImage:[UIImage imageNamed:imgStr] forState:UIControlStateNormal];
     [_thumbButton setTitle:[NSString stringWithFormat:@"%ld", (long)self.data.thumbNum] forState:UIControlStateNormal];
+    [self clickThumb];
+}
+
+- (void)clickThumb{
+    if(self.delegate&&[self.delegate respondsToSelector:@selector(clickThumbButtonTableViewCell:)]){
+        [self.delegate clickThumbButtonTableViewCell:self.superview.superview];
+    }
 }
 
 - (void)jumpToDetailPage{
     if(self.delegate&&[self.delegate respondsToSelector:@selector(clickCommentButtonTableViewCell:)]){
-        [self.delegate clickCommentButtonTableViewCell:self];
+        [self.delegate clickCommentButtonTableViewCell:self.superview.superview];
     }
 }
 
 - (void)_tapPhoto:(UITapGestureRecognizer *)tapGesture{
     if(self.delegate&&[self.delegate respondsToSelector:@selector(clickPhoto:TableViewCell:)]){
-        [self.delegate clickPhoto:[UIImage imageNamed:[self.data.imgs objectAtIndex:tapGesture.view.tag-1000]] TableViewCell:self];
+        [self.delegate clickPhoto:[UIImage imageNamed:[self.data.imgs objectAtIndex:tapGesture.view.tag-1000]] TableViewCell:self.superview.superview];
     }
 }
 
-- (void)hideBtns{
-    [self.trashButton setHidden:YES];
-    [self.thumbButton setHidden:YES];
-    [self.commentButton setHidden:YES];
-}
 @end

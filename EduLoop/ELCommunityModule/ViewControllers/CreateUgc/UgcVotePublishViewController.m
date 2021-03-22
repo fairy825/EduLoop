@@ -61,7 +61,7 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor eh_f6f6f6];
+    self.view.backgroundColor = [UIColor f6f6f6];
     [self setNavagationBar];
     [self setupSubviews];
     [self loadData];
@@ -77,16 +77,18 @@
 
 - (void)setupSubviews{
     self.tableView = [[UITableView alloc]init];
-    self.tableView.backgroundColor = [UIColor eh_colorWithHexRGB:EHThemeColor_f6f6f6];
+    self.tableView.backgroundColor = [UIColor f6f6f6];
     self.tableView.showsVerticalScrollIndicator=NO;
+    self.tableView.scrollEnabled = NO;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
         make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
         make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
-        make.height.equalTo(@516);
+        make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
     }];
     
 }
@@ -123,7 +125,7 @@
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
         UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 20)];
-        view.backgroundColor = [UIColor eh_f6f6f6];
+        view.backgroundColor = [UIColor f6f6f6];
         return view;
 }
 

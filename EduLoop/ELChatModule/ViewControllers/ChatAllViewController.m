@@ -32,7 +32,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor eh_f6f6f6];
+    self.view.backgroundColor = [UIColor f6f6f6];
     [self setNavagationBar];
     [self loadData];
     [self setupSubviews];
@@ -91,12 +91,9 @@
 
 - (void)setupSubviews{
     self.tableView = [[UITableView alloc]init];
-    self.tableView.backgroundColor = [UIColor eh_colorWithHexRGB:EHThemeColor_f6f6f6];
+    self.tableView.backgroundColor = [UIColor f6f6f6];
     self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 60.0;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.dataSource = self;    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
         
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -185,7 +182,7 @@
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 100;
+    return 70;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

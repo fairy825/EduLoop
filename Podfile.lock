@@ -1,28 +1,58 @@
 PODS:
+  - AFNetworking (4.0.1):
+    - AFNetworking/NSURLSession (= 4.0.1)
+    - AFNetworking/Reachability (= 4.0.1)
+    - AFNetworking/Security (= 4.0.1)
+    - AFNetworking/Serialization (= 4.0.1)
+    - AFNetworking/UIKit (= 4.0.1)
+  - AFNetworking/NSURLSession (4.0.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (4.0.1)
+  - AFNetworking/Security (4.0.1)
+  - AFNetworking/Serialization (4.0.1)
+  - AFNetworking/UIKit (4.0.1):
+    - AFNetworking/NSURLSession
+  - JSONModel (1.8.0)
   - LookinServer (1.0.0)
   - Masonry (1.1.0)
+  - MBProgressHUD (1.2.0)
+  - MJRefresh (3.5.0)
   - PGDatePicker (2.6.9):
     - PGPickerView
   - PGPickerView (1.3.8)
 
 DEPENDENCIES:
+  - AFNetworking
+  - JSONModel
   - LookinServer
   - Masonry
+  - MBProgressHUD (~> 1.2.0)
+  - MJRefresh
   - PGDatePicker
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - AFNetworking
+    - JSONModel
     - LookinServer
     - Masonry
+    - MBProgressHUD
+    - MJRefresh
     - PGDatePicker
     - PGPickerView
 
 SPEC CHECKSUMS:
+  AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  JSONModel: 02ab723958366a3fd27da57ea2af2113658762e9
   LookinServer: 0002891cd3cec5e082a910e897dfe71b4f06b89e
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
   PGDatePicker: 88960f3760edac96219c10320f25536ad31d0f44
   PGPickerView: 037acfb132a4c8054fb43aaa59a5ff50c7f747f5
 
-PODFILE CHECKSUM: 066949b75e33a340b0f254c426465567d1469f5c
+PODFILE CHECKSUM: 52565961c80a225d7c9e3f6aa727c15e27fac258
 
 COCOAPODS: 1.6.2

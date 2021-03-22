@@ -21,7 +21,7 @@
     return self;
 }
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier data:(HomeworkModel *)model{
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier data:(TaskModel *)model{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if(self){
         _data = model;
@@ -38,6 +38,50 @@
 - (void)loadData{
     _titleLabel.text = _data.title;
     _detailLabel.text = _data.detail;
+    _avatarCard.nameLabel.text=_data.creatorName;
+    _avatarCard.publishTimeLabel.text=_data.timeDesc;
+    NSString *isFinish = _data.finish;
+    NSString *rightButtonTitle;
+    UIColor *rightButtonColor;
+    NSString *hintStr;
+    UIColor *hintStrColor;
+    if([isFinish isEqual:@"FINISHED_AND_REVIEWED"]
+        ||[isFinish isEqual:@"FINISHED_NOT_REVIEWED"]){
+        if([isFinish isEqual:@"FINISHED_AND_REVIEWED"])
+            rightButtonTitle=@"已批改";
+        else if([isFinish isEqual:@"FINISHED_NOT_REVIEWED"])
+                rightButtonTitle=@"已完成未批改";
+        rightButtonColor = [UIColor elColorWithHexRGB:Color_finished];
+        hintStr = @"点击查看作业详情";
+        hintStrColor = [UIColor color999999];
+    }else{
+        hintStr = [NSString stringWithFormat:@"%@%@",@"作业提交截止时间为",_data.endTime];
+        hintStrColor = [UIColor elColorWithHexRGB:Color_Red];
+        _arrowImage.alpha=0;
+        if([isFinish isEqual:@"NOT_FINISH"]){
+            rightButtonTitle=@"未完成";
+            rightButtonColor = [UIColor elColorWithHexRGB:Color_not_finished];
+        }
+        else if([isFinish isEqual:@"DELAY_CAN_FINISH"]){
+            rightButtonTitle=@"超时可提交";
+            rightButtonColor = [UIColor elColorWithHexRGB:Color_delay_can_finish];
+        }
+        else if([isFinish isEqual:@"DELAY_CANNOT_FINISH"]){
+            rightButtonTitle=@"超时不可提交";
+            rightButtonColor = [UIColor elColorWithHexRGB:Color_delay_cannot_finish];
+        }
+        if(_data.delayAllowed){
+            hintStr = [NSString stringWithFormat:@"%@%@",hintStr,@",允许延迟提交"];
+        }
+    }
+    _otherButton.text = rightButtonTitle;
+    _otherButton.backgroundColor = rightButtonColor;
+    _otherButton.textColor = [UIColor whiteColor];
+    NSArray *targets = [_otherButton gestureRecognizers];
+    for (UIGestureRecognizer *recognizer in targets)
+        [_otherButton removeGestureRecognizer: recognizer];
+    _hintLabel.text=hintStr;
+    _hintLabel.textColor =hintStrColor;
 }
 
 - (void)setupView{
@@ -81,6 +125,15 @@
         make.width.equalTo(self.bgView);
         make.height.lessThanOrEqualTo(@70);
     }];
+    
+    [self.bgView addSubview:self.hintView];
+    [self.hintView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.detailLabel.mas_bottom).offset(5);
+        make.bottom.equalTo(self.bgView.mas_bottom);
+        make.left.equalTo(self.detailLabel);
+        make.width.equalTo(self.bgView);
+//        make.height.lessThanOrEqualTo(@50);
+    }];
 }
 
 #pragma mark - View
@@ -91,12 +144,56 @@
     }
     return _bgView;
 }
+
+- (UIView *)hintView{
+    if(!_hintView){
+        _hintView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 200)];
+        _hintView.backgroundColor = [UIColor whiteColor];
+        [self.hintView addSubview:self.hintLabel];
+        [self.hintLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.hintView);
+            make.bottom.equalTo(self.hintView);
+            make.left.equalTo(self.hintView);
+            make.width.equalTo(self.hintView);
+
+        }];
+        [self.hintView addSubview:self.arrowImage];
+        [self.arrowImage mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.hintView.mas_centerY);
+            make.right.equalTo(self.hintView);
+            make.size.mas_equalTo(CGSizeMake(20, 20));
+        }];
+    }
+    return _hintView;
+}
+
 - (UIView *)seperateView{
     if(!_seperateView){
         _seperateView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 10)];
-        _seperateView.backgroundColor = [UIColor eh_f6f6f6];
+        _seperateView.backgroundColor = [UIColor f6f6f6];
     }
     return _seperateView;
+}
+
+- (UILabel *)hintLabel{
+    if(!_hintLabel){
+        _hintLabel = [[UILabel alloc]initWithFrame:CGRectMake(0,0,100,20)];
+        _hintLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:16.f];
+        _hintLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+        _hintLabel.textAlignment = NSTextAlignmentLeft;
+        _hintLabel.numberOfLines = 0;
+        [_hintLabel sizeToFit];
+    }
+    return _hintLabel;
+}
+
+- (UIImageView *)arrowImage{
+    if(!_arrowImage){
+        _arrowImage = [[UIImageView alloc]init];
+        _arrowImage.image = [UIImage imageNamed:@"right_arrow_gray"];
+        _arrowImage.contentMode = UIViewContentModeScaleToFill;
+    }
+    return _arrowImage;
 }
 
 - (AvatarCard *)avatarCard{
@@ -106,14 +203,22 @@
     return _avatarCard;
 }
 
-- (UIButton *)otherButton{
+- (ELCustomLabel *)otherButton{
     if(!_otherButton){
-        _otherButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 20)];
+        _otherButton =  [[ELCustomLabel alloc]init];
         _otherButton.backgroundColor = [UIColor clearColor];
-        [_otherButton setTitle:@"..." forState:UIControlStateNormal];
-        [_otherButton setTitleColor:[UIColor eh_999999] forState:UIControlStateNormal];
-        [_otherButton.titleLabel setFont:[UIFont fontWithName:@"PingFangSC-Bold" size:20]];
-        [_otherButton addTarget:self action:@selector(clickHomeworkMenu) forControlEvents:UIControlEventTouchUpInside];
+        _otherButton.font = [UIFont systemFontOfSize:16.f];
+        _otherButton.layer.cornerRadius = 10;
+        _otherButton.layer.masksToBounds = YES;
+        _otherButton.layer.borderWidth = 2;
+        _otherButton.layer.borderColor = [UIColor whiteColor].CGColor;
+        _otherButton.textAlignment = NSTextAlignmentCenter;
+        [_otherButton setTextInsets:UIEdgeInsetsMake(3, 10, 3, 10)];
+        [_otherButton sizeToFit];
+        _otherButton.text =@"...";
+        _otherButton.textColor = [UIColor color999999];
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickHomeworkMenu)];
+        [_otherButton addGestureRecognizer:tapGesture];
     }
     return _otherButton;
 }

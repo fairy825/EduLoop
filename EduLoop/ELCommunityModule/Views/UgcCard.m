@@ -14,7 +14,7 @@
 
 - (instancetype)initWithFrame:(CGRect)frame Data:(UgcModel *)model
 {
-    self = [super init];
+    self = [super initWithFrame:frame];
     if (self) {
         _data = model;
         [self setupView];
@@ -26,6 +26,7 @@
 - (void)reload{
     [self loadData];
     [self setupView];
+    
 }
 //- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier data:(UgcModel *)model{
 //    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -112,6 +113,10 @@
     
 }
 
+- (void)hideBtns{
+    [self.btnsView removeFromSuperview];
+}
+
 #pragma mark - View
 - (UIView *)bgView{
     if(!_bgView){
@@ -124,7 +129,7 @@
 - (UIView *)seperateView{
     if(!_seperateView){
         _seperateView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 3)];
-        _seperateView.backgroundColor = [UIColor eh_f6f6f6];
+        _seperateView.backgroundColor = [UIColor f6f6f6];
     }
     return _seperateView;
 }
@@ -149,7 +154,7 @@
 
 - (void)pushDeleteAlertView{
     if(self.delegate&&[self.delegate respondsToSelector:@selector(clickTrashButtonTableViewCell:)]){
-        [self.delegate clickTrashButtonTableViewCell:self];
+        [self.delegate clickTrashButtonTableViewCell:self.superview.superview];
     }
 }
 

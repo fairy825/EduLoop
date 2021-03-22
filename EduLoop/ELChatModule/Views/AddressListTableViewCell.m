@@ -38,6 +38,7 @@
     [self.bgView addSubview:self.avatarImage];
     [self.avatarImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.bgView);
+        make.bottom.equalTo(self.bgView);
         make.height.equalTo(@50);
         make.width.equalTo(@50);
         make.left.equalTo(self.bgView);
@@ -94,7 +95,7 @@
     if(!_identityLabel){
         _identityLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0,50,20)];
         _identityLabel.font = [UIFont systemFontOfSize:16.f];
-        _identityLabel.textColor = [UIColor eh_subtitleColor];
+        _identityLabel.textColor = [UIColor color999999];
         _identityLabel.numberOfLines = 1;
         _identityLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         _identityLabel.textAlignment = NSTextAlignmentLeft;
@@ -114,7 +115,7 @@
 - (UIView *)seperateView{
     if(!_seperateView){
         _seperateView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 3)];
-        _seperateView.backgroundColor = [UIColor eh_f6f6f6];
+        _seperateView.backgroundColor = [UIColor f6f6f6];
     }
     return _seperateView;
 }

@@ -18,12 +18,12 @@
     [super viewDidLoad];
     [self loadData];
     [self setTitle:@"孩子档案"];
-    self.view.backgroundColor = [UIColor eh_f6f6f6];
+    self.view.backgroundColor = [UIColor f6f6f6];
     self.profileTableView = [[UITableView alloc]initWithFrame:self.view.bounds];
     self.profileTableView.delegate = self;
     self.profileTableView.dataSource = self;
     self.profileTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.profileTableView.backgroundColor = [UIColor eh_f6f6f6];
+    self.profileTableView.backgroundColor = [UIColor f6f6f6];
 
     [self.view addSubview:self.profileTableView];
     [self.profileTableView mas_makeConstraints:^(MASConstraintMaker *make) {

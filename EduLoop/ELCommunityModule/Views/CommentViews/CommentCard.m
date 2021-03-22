@@ -25,7 +25,7 @@
     self.publishTimeLabel.text = self.data.dateStr;
     self.nameLabel.text = self.data.authorName;
     
-    UIColor *bgColor = [UIColor eh_colorWithHexRGB:self.data.chooseFirst?EHThemeColor_Red:EHThemeColor_Blue];
+    UIColor *bgColor = [UIColor elColorWithHexRGB:self.data.chooseFirst?Color_Red:Color_Blue];
     self.choiceTag.backgroundColor = bgColor;
     self.choiceTag.layer.borderColor = bgColor.CGColor;
     
@@ -73,6 +73,7 @@
     
     [self.bgView addSubview:self.publishTimeLabel];
     [self.publishTimeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.detailLabel.mas_bottom).offset(20);
         make.bottom.equalTo(self.bgView);
         make.left.equalTo(self.nameLabel);
     }];
@@ -102,7 +103,7 @@
     [self.bgView addSubview:btnsView];
     [btnsView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self.bgView);
-        make.bottom.equalTo(self.bgView);
+        make.bottom.equalTo(self.publishTimeLabel);
         make.size.mas_equalTo(CGSizeMake(80, 20));
     }];
 }
@@ -119,7 +120,7 @@
 - (UIView *)seperateView{
     if(!_seperateView){
         _seperateView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 3)];
-        _seperateView.backgroundColor = [UIColor eh_f6f6f6];
+        _seperateView.backgroundColor = [UIColor f6f6f6];
     }
     return _seperateView;
 }
@@ -188,7 +189,7 @@
     if(!_thumbButton){
         _thumbButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 20)];
         _thumbButton.backgroundColor = [UIColor clearColor];
-        [_thumbButton setTitleColor:[UIColor eh_999999] forState:UIControlStateNormal];
+        [_thumbButton setTitleColor:[UIColor color999999] forState:UIControlStateNormal];
         [_thumbButton.titleLabel setFont:[UIFont fontWithName:@"PingFangSC" size:20]];
         [_thumbButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 20)];
         [_thumbButton addTarget:self action:@selector(toggleThumb) forControlEvents:UIControlEventTouchUpInside];
@@ -200,7 +201,7 @@
     if(!_detailLabel){
         _detailLabel = [[UILabel alloc]initWithFrame:self.bounds];
         _detailLabel.font = [UIFont systemFontOfSize:18.f];
-        _detailLabel.textColor = [UIColor eh_333333];
+        _detailLabel.textColor = [UIColor color333333];
         _detailLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         _detailLabel.textAlignment = NSTextAlignmentLeft;
         _detailLabel.numberOfLines = 0;

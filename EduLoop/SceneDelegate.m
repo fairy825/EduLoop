@@ -55,7 +55,7 @@
     controller4.tabBarItem.title = @"我的";
     
     UITabBarController *tabBarController = [[UITabBarController alloc]init];
-    [tabBarController setViewControllers:@[controller3,controller1,controller2,controller4]];
+    [tabBarController setViewControllers:@[controller2,controller3,controller1,controller4]];
     UINavigationController *navigationController = [[UINavigationController alloc]initWithRootViewController:tabBarController];//每个navigationController都需要rootNavigationController 代表栈底元素 即初始显示的controller
     [navigationController setNavigationBarHidden:YES];
     

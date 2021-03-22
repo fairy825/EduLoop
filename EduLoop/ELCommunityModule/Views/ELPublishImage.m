@@ -50,7 +50,7 @@
 - (UIImageView *)closeIcon{
     if(!_closeIcon){
         _closeIcon = [[UIImageView alloc]init];
-        _closeIcon.backgroundColor = [UIColor eh_e1e1e1];
+        _closeIcon.backgroundColor = [UIColor e1e1e1];
         _closeIcon.image = [UIImage imageNamed:@"icon_close"];
         _closeIcon.contentMode = UIViewContentModeScaleToFill;
         _closeIcon.userInteractionEnabled = YES;

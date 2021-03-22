@@ -22,7 +22,7 @@
 - (void)setupView{
     self.backgroundColor = [UIColor clearColor];
    
-    self.avatarView.backgroundColor = [UIColor eh_colorWithHexRGB:EHThemeColor_e1e1e1];
+    self.avatarView.backgroundColor = [UIColor e1e1e1];
     [self addSubview:self.avatarView];
     [self.avatarView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(20);
@@ -128,12 +128,12 @@
         UILabel *identityLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0,50,20)];
         identityLabel.text = @"家长";
         identityLabel.font = [UIFont systemFontOfSize:12.f];
-        identityLabel.textColor = [UIColor eh_5bb2ff];
+        identityLabel.textColor = [UIColor color5bb2ff];
         [identityLabel sizeToFit];
         _identityTag = [[UIView alloc]initWithFrame:CGRectMake(0, 0,70,20)];
         _identityTag.layer.cornerRadius = 5;
         _identityTag.layer.borderWidth = 2;
-        _identityTag.layer.borderColor = [UIColor eh_5bb2ff].CGColor;
+        _identityTag.layer.borderColor = [UIColor color5bb2ff].CGColor;
         [_identityTag addSubview:identityLabel];
            [identityLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                make.edges.equalTo(_identityTag).mas_offset(UIEdgeInsetsMake(3, 3, 3, 3));

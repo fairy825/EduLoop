@@ -19,7 +19,6 @@
 		8470FB2F2577BEF700B05974 /* MineInfoCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FB2E2577BEF700B05974 /* MineInfoCard.m */; };
 		8470FB602577EE0800B05974 /* UIColor+EHGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FB5F2577EE0800B05974 /* UIColor+EHGenerator.m */; };
 		8470FB6D2577EE1500B05974 /* UIColor+EHTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FB652577EE1500B05974 /* UIColor+EHTheme.m */; };
-		8470FB6E2577EE1500B05974 /* UIFont+EHTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FB692577EE1500B05974 /* UIFont+EHTheme.m */; };
 		8470FB6F2577EE1500B05974 /* UIColor+EHGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FB6C2577EE1500B05974 /* UIColor+EHGenerator.m */; };
 		8470FB752578CD9500B05974 /* MineToolCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FB742578CD9500B05974 /* MineToolCard.m */; };
 		8470FB7B2578D02B00B05974 /* MineToolCardItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FB7A2578D02B00B05974 /* MineToolCardItem.m */; };
@@ -38,7 +37,7 @@
 		8470FC672587067B00B05974 /* HomeworkShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FC662587067B00B05974 /* HomeworkShowViewController.m */; };
 		8470FC6D2587093800B05974 /* HomeworkShowTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FC6C2587093800B05974 /* HomeworkShowTableViewCell.m */; };
 		8470FC7325870A5100B05974 /* AvatarCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FC7225870A5100B05974 /* AvatarCard.m */; };
-		8470FC7A258727A700B05974 /* HomeworkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FC79258727A700B05974 /* HomeworkModel.m */; };
+		8470FC7A258727A700B05974 /* TaskModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FC79258727A700B05974 /* TaskModel.m */; };
 		8470FC812587534C00B05974 /* ELOverlayItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FC802587534C00B05974 /* ELOverlayItem.m */; };
 		8470FC8A25885C8A00B05974 /* ELCenterOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FC8925885C8A00B05974 /* ELCenterOverlay.m */; };
 		8470FC9025885F1200B05974 /* ELCenterOverlayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FC8F25885F1200B05974 /* ELCenterOverlayModel.m */; };
@@ -81,6 +80,9 @@
 		8470FDB425AEC50600B05974 /* MessageBubble.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FDB325AEC50600B05974 /* MessageBubble.m */; };
 		8470FDBA25AEC99700B05974 /* MessageRecordTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FDB925AEC99700B05974 /* MessageRecordTableViewCell.m */; };
 		8470FDC025B6D62F00B05974 /* ELScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FDBF25B6D62E00B05974 /* ELScreen.m */; };
+		8470FDCF26062E2800B05974 /* BasicInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FDCE26062E2800B05974 /* BasicInfo.m */; };
+		8470FDE226070A8D00B05974 /* ELResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FDE126070A8D00B05974 /* ELResponse.m */; };
+		8470FDF126070C4D00B05974 /* PagedResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FDF026070C4D00B05974 /* PagedResult.m */; };
 		B56C4CB27218F46755ADDDB9 /* libPods-EduLoop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A30B8306BBFF24ECE415E9 /* libPods-EduLoop.a */; };
 /* End PBXBuildFile section */
 
@@ -127,10 +129,7 @@
 		8470FB5E2577EE0800B05974 /* UIColor+EHGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+EHGenerator.h"; sourceTree = "<group>"; };
 		8470FB5F2577EE0800B05974 /* UIColor+EHGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+EHGenerator.m"; sourceTree = "<group>"; };
 		8470FB652577EE1500B05974 /* UIColor+EHTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+EHTheme.m"; sourceTree = "<group>"; };
-		8470FB662577EE1500B05974 /* UIFont+EHTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+EHTheme.h"; sourceTree = "<group>"; };
-		8470FB672577EE1500B05974 /* EHFontWeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EHFontWeight.h; sourceTree = "<group>"; };
 		8470FB682577EE1500B05974 /* UIColor+EHTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+EHTheme.h"; sourceTree = "<group>"; };
-		8470FB692577EE1500B05974 /* UIFont+EHTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+EHTheme.m"; sourceTree = "<group>"; };
 		8470FB6B2577EE1500B05974 /* UIColor+EHGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+EHGenerator.h"; sourceTree = "<group>"; };
 		8470FB6C2577EE1500B05974 /* UIColor+EHGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+EHGenerator.m"; sourceTree = "<group>"; };
 		8470FB732578CD9500B05974 /* MineToolCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineToolCard.h; sourceTree = "<group>"; };
@@ -167,8 +166,8 @@
 		8470FC6C2587093800B05974 /* HomeworkShowTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeworkShowTableViewCell.m; sourceTree = "<group>"; };
 		8470FC7125870A5100B05974 /* AvatarCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AvatarCard.h; sourceTree = "<group>"; };
 		8470FC7225870A5100B05974 /* AvatarCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AvatarCard.m; sourceTree = "<group>"; };
-		8470FC78258727A700B05974 /* HomeworkModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeworkModel.h; sourceTree = "<group>"; };
-		8470FC79258727A700B05974 /* HomeworkModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeworkModel.m; sourceTree = "<group>"; };
+		8470FC78258727A700B05974 /* TaskModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskModel.h; sourceTree = "<group>"; };
+		8470FC79258727A700B05974 /* TaskModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskModel.m; sourceTree = "<group>"; };
 		8470FC7F2587534C00B05974 /* ELOverlayItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELOverlayItem.h; sourceTree = "<group>"; };
 		8470FC802587534C00B05974 /* ELOverlayItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELOverlayItem.m; sourceTree = "<group>"; };
 		8470FC8825885C8A00B05974 /* ELCenterOverlay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELCenterOverlay.h; sourceTree = "<group>"; };
@@ -253,6 +252,12 @@
 		8470FDB925AEC99700B05974 /* MessageRecordTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageRecordTableViewCell.m; sourceTree = "<group>"; };
 		8470FDBE25B6D62E00B05974 /* ELScreen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELScreen.h; sourceTree = "<group>"; };
 		8470FDBF25B6D62E00B05974 /* ELScreen.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELScreen.m; sourceTree = "<group>"; };
+		8470FDCD26062E2800B05974 /* BasicInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasicInfo.h; sourceTree = "<group>"; };
+		8470FDCE26062E2800B05974 /* BasicInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BasicInfo.m; sourceTree = "<group>"; };
+		8470FDE026070A8D00B05974 /* ELResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELResponse.h; sourceTree = "<group>"; };
+		8470FDE126070A8D00B05974 /* ELResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELResponse.m; sourceTree = "<group>"; };
+		8470FDEF26070C4D00B05974 /* PagedResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PagedResult.h; sourceTree = "<group>"; };
+		8470FDF026070C4D00B05974 /* PagedResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PagedResult.m; sourceTree = "<group>"; };
 		F87AF0CFB6BB37AC984C83F1 /* Pods-EduLoop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EduLoop.debug.xcconfig"; path = "Target Support Files/Pods-EduLoop/Pods-EduLoop.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -366,11 +371,8 @@
 		8470FB642577EE1500B05974 /* MyUIFont */ = {
 			isa = PBXGroup;
 			children = (
-				8470FB652577EE1500B05974 /* UIColor+EHTheme.m */,
-				8470FB662577EE1500B05974 /* UIFont+EHTheme.h */,
-				8470FB672577EE1500B05974 /* EHFontWeight.h */,
 				8470FB682577EE1500B05974 /* UIColor+EHTheme.h */,
-				8470FB692577EE1500B05974 /* UIFont+EHTheme.m */,
+				8470FB652577EE1500B05974 /* UIColor+EHTheme.m */,
 			);
 			path = MyUIFont;
 			sourceTree = "<group>";
@@ -522,8 +524,12 @@
 		8470FC772587278700B05974 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				8470FC78258727A700B05974 /* HomeworkModel.h */,
-				8470FC79258727A700B05974 /* HomeworkModel.m */,
+				8470FC78258727A700B05974 /* TaskModel.h */,
+				8470FC79258727A700B05974 /* TaskModel.m */,
+				8470FDEF26070C4D00B05974 /* PagedResult.h */,
+				8470FDF026070C4D00B05974 /* PagedResult.m */,
+				8470FDE026070A8D00B05974 /* ELResponse.h */,
+				8470FDE126070A8D00B05974 /* ELResponse.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -535,6 +541,8 @@
 				8470FC802587534C00B05974 /* ELOverlayItem.m */,
 				8470FC8E25885F1200B05974 /* ELCenterOverlayModel.h */,
 				8470FC8F25885F1200B05974 /* ELCenterOverlayModel.m */,
+				8470FDCD26062E2800B05974 /* BasicInfo.h */,
+				8470FDCE26062E2800B05974 /* BasicInfo.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -848,12 +856,14 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-EduLoop/Pods-EduLoop-resources.sh",
+				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 				"${PODS_ROOT}/PGDatePicker/PGDatePicker/PGDatePicker.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/PGDatePicker.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -917,15 +927,15 @@
 				8470FCBA258C763900B05974 /* ELCommunityModule.m in Sources */,
 				8470FC4A2580E3F000B05974 /* BroadcastViewController.m in Sources */,
 				8470FD0825907E9E00B05974 /* UgcDetailPageViewController.m in Sources */,
-				8470FB6E2577EE1500B05974 /* UIFont+EHTheme.m in Sources */,
 				8470FD1725945D7300B05974 /* CommentModel.m in Sources */,
 				8470FC142580AA0B00B05974 /* ChildProfileViewController.m in Sources */,
 				8470FDA525A42CA900B05974 /* AddressListTableViewCell.m in Sources */,
 				8470FCA6258B4CBB00B05974 /* ELBottomStackOverlay.m in Sources */,
 				8470FC412580C4DA00B05974 /* ChildModel.m in Sources */,
+				8470FDE226070A8D00B05974 /* ELResponse.m in Sources */,
 				8470FBAB257F3B5100B05974 /* ProfileViewController.m in Sources */,
 				8470FAF72577B9A200B05974 /* SceneDelegate.m in Sources */,
-				8470FC7A258727A700B05974 /* HomeworkModel.m in Sources */,
+				8470FC7A258727A700B05974 /* TaskModel.m in Sources */,
 				8470FD8025A2E00E00B05974 /* ChatAllModel.m in Sources */,
 				8470FD2725947DE800B05974 /* TestViewController.m in Sources */,
 				8470FD9925A426D900B05974 /* ContactPersonModel.m in Sources */,
@@ -954,7 +964,9 @@
 				8470FCAC258B778600B05974 /* ELStackCardItem.m in Sources */,
 				8470FD2D2594867500B05974 /* CommentEditView.m in Sources */,
 				8470FD4B259C506600B05974 /* UgcTextImgPublishViewController.m in Sources */,
+				8470FDF126070C4D00B05974 /* PagedResult.m in Sources */,
 				8470FD39259A36AF00B05974 /* ELCommentManager.m in Sources */,
+				8470FDCF26062E2800B05974 /* BasicInfo.m in Sources */,
 				8470FD0E259438DD00B05974 /* UgcCardTableViewCell.m in Sources */,
 				8470FB2F2577BEF700B05974 /* MineInfoCard.m in Sources */,
 				8470FCFF2590461100B05974 /* UgcTextImgCard.m in Sources */,

@@ -10,7 +10,7 @@
 #import <Masonry/Masonry.h>
 @implementation AvatarCard
 
-- (instancetype)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame 
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -55,8 +55,6 @@
 - (UILabel *)nameLabel{
     if(!_nameLabel){
         _nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0,0,50,20)];
-        _nameLabel.text = [[NSString alloc] initWithFormat:@"%@%@",  @"Mijika", @"老师"];
-    
         _nameLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:20.f];
         [_nameLabel sizeToFit];
     }
@@ -66,7 +64,6 @@
 - (UILabel *)publishTimeLabel{
     if(!_publishTimeLabel){
         _publishTimeLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0,50,20)];
-        _publishTimeLabel.text = @"刚刚";
         _publishTimeLabel.font = [UIFont systemFontOfSize:14.f];
         _publishTimeLabel.textColor = [UIColor grayColor];
         [_publishTimeLabel sizeToFit];

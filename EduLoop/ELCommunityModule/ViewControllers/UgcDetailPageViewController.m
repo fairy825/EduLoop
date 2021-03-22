@@ -11,7 +11,7 @@
 #import "UgcVoteCard.h"
 #import "UgcTextImgCard.h"
 #import "CommentCard.h"
-
+#import "ELScreen.h"
 @interface UgcDetailPageViewController ()<UITableViewDelegate,UITableViewDataSource,CommentEditViewDelegate>
 
 @end
@@ -89,12 +89,32 @@
 //        make.height.equalTo(@250);
 //    }];
     self.commentTableView = [[UITableView alloc]init];
-//    self.commentTableView.backgroundColor = [UIColor eh_colorWithHexRGB:EHThemeColor_f6f6f6];
+//    self.commentTableView.backgroundColor = [UIColor f6f6f6];
     self.commentTableView.delegate = self;
     self.commentTableView.dataSource = self;
+    [self.commentTableView setTableHeaderView:
+        ({
+            UIView *header = [UIView new];
+            [header addSubview:self.summaryUgcCard];
+//        [self.summaryUgcCard.superview layoutIfNeeded];
+//        NSLog(@"%@",self.summaryUgcCard);
+        self.summaryUgcCard.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.summaryUgcCard.frame.size.height);
+        
+            UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(20, 0, 40, 40)];
+            label.font = [UIFont fontWithName:@"PingFangSC-Medium" size:20];
+            label.text = [NSString stringWithFormat:@"%@%@%ld%@", @"评论 ",@"(",(long)self.ugcModel.commentNum,@")" ];
+            label.textColor = [UIColor blackColor];
+            label.textAlignment = NSTextAlignmentLeft;
+            
+            [header addSubview:label];
+        label.frame = CGRectMake(20, self.summaryUgcCard.frame.origin.y+self.summaryUgcCard.frame.size.height+20, 100, 30);
+
+        header.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.summaryUgcCard.frame.size.height+50);
+            header;
+        })];
     self.commentTableView.rowHeight = UITableViewAutomaticDimension;
-//    self.commentTableView.estimatedRowHeight = 44.0;
-//    self.commentTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.commentTableView.estimatedRowHeight = 100.0;
+    self.commentTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.commentTableView];
     [self.commentTableView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
@@ -120,6 +140,7 @@
     }
     return _commentEditView;
 }
+
 - (UgcCard *)summaryUgcCard{
     if(!_summaryUgcCard){
         if(self.ugcModel.ugcType==UgcType_vote)
@@ -128,7 +149,7 @@
             _summaryUgcCard = [[UgcTextImgCard alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 250) Data:self.ugcModel];
     }
     [_summaryUgcCard hideBtns];
-    [_summaryUgcCard reload];
+    //确定size
     return _summaryUgcCard;
 }
 
@@ -138,36 +159,36 @@
     return _commentModels.count;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-//    UgcCard *summaryUgcCard = [[UgcVoteCard alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 250) Data:self.ugcModel];
-    UIView *header = [UIView new];
-    [header addSubview:self.summaryUgcCard];
-    [self.summaryUgcCard mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(header);
-        make.left.equalTo(header);
-        make.right.equalTo(header);
-        make.height.equalTo(@250);
-    }];
-    
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(20, 0, 40, 40)];
-    label.font = [UIFont fontWithName:@"PingFangSC-Medium" size:20];
-    label.text = [NSString stringWithFormat:@"%@%@%ld%@", @"评论 ",@"(",(long)self.ugcModel.commentNum,@")" ];
-    label.textColor = [UIColor blackColor];
-    label.textAlignment = NSTextAlignmentLeft;
-    
-    [header addSubview:label];
-    [label mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.summaryUgcCard.mas_bottom).offset(20);
-        make.left.equalTo(header).offset(20);
-        make.right.equalTo(header).offset(-20);
-        make.height.equalTo(@30);
-    }];
-    return header;
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+////    UgcCard *summaryUgcCard = [[UgcVoteCard alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 250) Data:self.ugcModel];
+//    UIView *header = [UIView new];
+//    [header addSubview:self.summaryUgcCard];
+//    [self.summaryUgcCard mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(header);
+//        make.left.equalTo(header);
+//        make.right.equalTo(header);
+//        make.height.equalTo(@250);
+//    }];
+//
+//    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(20, 0, 40, 40)];
+//    label.font = [UIFont fontWithName:@"PingFangSC-Medium" size:20];
+//    label.text = [NSString stringWithFormat:@"%@%@%ld%@", @"评论 ",@"(",(long)self.ugcModel.commentNum,@")" ];
+//    label.textColor = [UIColor blackColor];
+//    label.textAlignment = NSTextAlignmentLeft;
+//
+//    [header addSubview:label];
+//    [label mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.summaryUgcCard.mas_bottom).offset(20);
+//        make.left.equalTo(header).offset(20);
+//        make.right.equalTo(header).offset(-20);
+//        make.height.equalTo(@30);
+//    }];
+//    return header;
+//}
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 300;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+//    return 300;
+//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSUInteger idx = [indexPath row];
@@ -185,9 +206,9 @@
 
 #pragma mark - UITableViewDelegate
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 256;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    return 256;
+//}
 
 #pragma mark - CommentEditViewDelegate
 - (void)textView:(UITextView *)textView finalText:(NSString *)text{

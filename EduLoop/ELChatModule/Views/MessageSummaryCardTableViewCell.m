@@ -41,6 +41,7 @@
     [self.bgView addSubview:self.avatarImage];
     [self.avatarImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.bgView);
+        make.bottom.equalTo(self.bgView);
         make.height.equalTo(@50);
         make.width.equalTo(@50);
         make.left.equalTo(self.bgView);
@@ -61,7 +62,6 @@
     
     [self.bgView addSubview:self.messageLabel];
     [self.messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        
         make.bottom.equalTo(self.avatarImage);
         make.left.equalTo(self.oppositeNameLabel);
         make.right.equalTo(self.bgView);
@@ -126,7 +126,7 @@
     if(!_messageLabel){
         _messageLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0,50,20)];
         _messageLabel.font = [UIFont systemFontOfSize:16.f];
-        _messageLabel.textColor = [UIColor eh_subtitleColor];
+        _messageLabel.textColor = [UIColor color999999];
         _messageLabel.numberOfLines = 1;
         _messageLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         _messageLabel.textAlignment = NSTextAlignmentLeft;
@@ -145,7 +145,7 @@
 - (UIView *)seperateView{
     if(!_seperateView){
         _seperateView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 3)];
-        _seperateView.backgroundColor = [UIColor eh_f6f6f6];
+        _seperateView.backgroundColor = [UIColor f6f6f6];
     }
     return _seperateView;
 }

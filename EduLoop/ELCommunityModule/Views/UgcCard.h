@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol UgcCardDelegate<NSObject>
 -(void)clickTrashButtonTableViewCell:(UITableViewCell *)tableViewCell;
 -(void)clickCommentButtonTableViewCell:(UITableViewCell *)tableViewCell;
+-(void)clickThumbButtonTableViewCell:(UITableViewCell *)tableViewCell;
 -(void)clickPhoto:(UIImage *)photo TableViewCell:(UITableViewCell *)tableViewCell;
 @end
 
@@ -22,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong,readwrite) UIView *seperateView;
 @property(nonatomic,strong,readwrite) AvatarCard *avatarCard;
 @property(nonatomic,strong,readwrite) UIButton *trashButton;
+@property(nonatomic,strong,readwrite) UIView *btnsView;
 @property(nonatomic,readwrite) BOOL hasTrash;
 @property(nonatomic,weak,readwrite) id<UgcCardDelegate> delegate;
 

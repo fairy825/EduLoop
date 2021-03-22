@@ -27,7 +27,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor eh_f6f6f6];
+    self.view.backgroundColor = [UIColor f6f6f6];
     [self setNavagationBar];
     [self loadData];
     [self setupSubviews];
@@ -167,13 +167,11 @@ nil];
     }];
     
     self.tableView = [[UITableView alloc]init];
-    self.tableView.backgroundColor = [UIColor eh_colorWithHexRGB:EHThemeColor_f6f6f6];
+    self.tableView.backgroundColor = [UIColor f6f6f6];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = 60.0;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.sectionIndexColor = [UIColor eh_subtitleColor];
+    self.tableView.sectionIndexColor = [UIColor color999999];
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.searchBar.mas_bottom).offset(10);
@@ -257,7 +255,7 @@ nil];
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 100;
+    return 70;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{

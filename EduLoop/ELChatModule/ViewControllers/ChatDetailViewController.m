@@ -121,7 +121,6 @@ UITableViewDataSource>
     
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(_models.count - 1) inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
-    [self.tableView reloadData];
     //滚动界面（随着消息发送上移）
     [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     textView.text = @"";

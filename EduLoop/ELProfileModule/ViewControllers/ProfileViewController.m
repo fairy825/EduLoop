@@ -66,7 +66,7 @@
     [super viewDidLoad];
     [self loadData];
     [self setTitle:@"个人信息"];
-    self.view.backgroundColor = [UIColor eh_f6f6f6];
+    self.view.backgroundColor = [UIColor f6f6f6];
     [self.view addSubview:self.profileTableView];
             [self.profileTableView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
@@ -98,7 +98,7 @@
 - (UIButton *)saveBtn{
     if(!_saveBtn){
         _saveBtn = [[UIButton alloc]init];
-        _saveBtn.backgroundColor = [UIColor eh_colorWithHexRGB: EHThemeColor_5bb2ff];
+        _saveBtn.backgroundColor = [UIColor color5bb2ff];
         _saveBtn.layer.cornerRadius = 15;
         [_saveBtn setTitle:@"保存" forState:UIControlStateNormal];
         [_saveBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

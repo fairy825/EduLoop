@@ -35,13 +35,13 @@
 - (UIView *)shadow{
     if(!_shadow){
         _shadow = [UIView new];
-        _shadow.backgroundColor = [UIColor eh_5bb2ff];
+        _shadow.backgroundColor = [UIColor color5bb2ff];
         _shadow.layer.shadowOpacity = 1;
         _shadow.layer.cornerRadius = self.bounds.size.width/2;
         _shadow.layer.masksToBounds = YES;
         _shadow.layer.shadowOffset = CGSizeMake(50,50);
         _shadow.layer.shadowRadius = 50;
-        _shadow.layer.shadowColor = [UIColor eh_5bb2ff].CGColor;
+        _shadow.layer.shadowColor = [UIColor color5bb2ff].CGColor;
         [_shadow addGestureRecognizer: ({
             UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickFloatingBtn)];
             recognizer;
@@ -53,7 +53,7 @@
 - (UIButton *)aButton{
     if(!_aButton){
         _aButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
-        _aButton.backgroundColor = [UIColor eh_5bb2ff];
+        _aButton.backgroundColor = [UIColor color5bb2ff];
         [_aButton setImage:self.iconImage forState:UIControlStateNormal];
         _aButton.imageView.contentMode = UIViewContentModeScaleToFill;
         [_aButton addTarget:self action:@selector(clickFloatingBtn) forControlEvents:UIControlEventTouchUpInside];

@@ -9,7 +9,7 @@
 #import "UIColor+EHTheme.h"
 #import <Masonry/Masonry.h>
 #import <PGDatePicker/PGDatePickManager.h>
-#import "HomeworkModel.h"
+#import "TaskModel.h"
 #import "HomeworkShowViewController.h"
 #import "ELBottomStackOverlay.h"
 @interface BroadcastViewController ()<UITableViewDelegate,UITableViewDataSource,PGDatePickerDelegate>
@@ -18,7 +18,7 @@
 
 @implementation BroadcastViewController
 
-- (instancetype)initWithHomeworkData:(HomeworkModel *)data
+- (instancetype)initWithHomeworkData:(TaskModel *)data
 {
     self = [super init];
     if (self) {
@@ -27,7 +27,7 @@
     return self;
 }
 
-- (void)loadData:(HomeworkModel *)data{
+- (void)loadData:(TaskModel *)data{
     _models = @[].mutableCopy;
     [_models addObject:({
         SettingDataModel *model = [SettingDataModel new];
@@ -42,7 +42,7 @@
         model.showArrow = NO;
         model.accessoryType = SettingTableViewCellType_BigTextField;
         model.title =@"作业内容";
-        model.detailText = data?data.detail:@"";
+        model.detailText = data?data.description:@"";
         model.detailDefaultText = @"请输入内容";
         model;
     })];
@@ -51,7 +51,7 @@
         model.showArrow = NO;
         model.accessoryType = SettingTableViewCellType_Switch;
         model.title =@"在线提交";
-        model.switchOpen = data.submitOnline;
+//        model.switchOpen = data.submitOnline;
         model;
     })];
     [_models addObject:({
@@ -84,7 +84,7 @@
         model.showArrow = NO;
         model.accessoryType = SettingTableViewCellType_Switch;
         model.title =@"允许补交";
-        model.switchOpen = data.allowSubmitAfter;
+        model.switchOpen = data.delayAllowed;
         model;
     })];
 }
@@ -106,7 +106,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    [self loadData:nil];
-    self.view.backgroundColor = [UIColor eh_f6f6f6];
+    self.view.backgroundColor = [UIColor f6f6f6];
     [self setNavagationBar];
     [self setupSubviews];
 }
@@ -118,8 +118,10 @@
 
 - (void)setupSubviews{
     self.tableView = [[UITableView alloc]init];
-    self.tableView.backgroundColor = [UIColor eh_colorWithHexRGB:EHThemeColor_f6f6f6];
+    self.tableView.backgroundColor = [UIColor f6f6f6];
     self.tableView.showsVerticalScrollIndicator=NO;
+    self.tableView.scrollEnabled = NO;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
@@ -127,7 +129,8 @@
             make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
             make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
             make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
-            make.height.equalTo(@516);
+            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+//            make.height.equalTo(@516);
         }];
 }
 
@@ -162,7 +165,7 @@
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
         UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 20)];
-        view.backgroundColor = [UIColor eh_f6f6f6];
+        view.backgroundColor = [UIColor f6f6f6];
         return view;
 }
 

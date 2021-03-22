@@ -31,7 +31,7 @@
     self.miscDetails = @[@"",@"",@""];
     
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
-    scrollView.backgroundColor = [UIColor eh_colorWithHexRGB:EHThemeColor_f6f6f6];
+    scrollView.backgroundColor = [UIColor f6f6f6];
 //    scrollView.contentSize = CGSizeMake(self.view.bounds.size.width*5, self.view.bounds.size.height*3);
     scrollView.showsVerticalScrollIndicator=NO;
 //    scrollView.pagingEnabled=YES;
@@ -106,7 +106,7 @@
         self.logOutBtn.backgroundColor = [UIColor whiteColor];
         self.logOutBtn.layer.cornerRadius = 12;
         [self.logOutBtn setTitle:@"退出登录" forState:UIControlStateNormal];
-        [self.logOutBtn setTitleColor:[UIColor eh_colorWithHexRGB:EHThemeColor_999999] forState:UIControlStateNormal];
+        [self.logOutBtn setTitleColor:[UIColor color999999] forState:UIControlStateNormal];
         [self.logOutBtn.titleLabel setTextAlignment: NSTextAlignmentCenter];
         [self.logOutBtn.titleLabel setFont:[UIFont fontWithName:@"PingFangSC-Bold" size:16]];
     }

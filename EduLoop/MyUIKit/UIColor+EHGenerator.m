@@ -12,12 +12,12 @@ static CGFloat eh_colorComponentFrom(NSString *string, NSUInteger start, NSUInte
 
 @implementation UIColor (EHColorGenerator)
 
-+ (UIColor *)eh_colorWithHex:(UInt32)hex
++ (UIColor *)elColorWithHex:(UInt32)hex
 {
-    return [UIColor eh_colorWithHex:hex andAlpha:1];
+    return [UIColor elColorWithHex:hex andAlpha:1];
 }
 
-+ (UIColor *)eh_colorWithHex:(UInt32)hex andAlpha:(CGFloat)alpha
++ (UIColor *)elColorWithHex:(UInt32)hex andAlpha:(CGFloat)alpha
 {
     return [UIColor colorWithRed:((hex >> 16) & 0xFF)/255.0
                            green:((hex >> 8) & 0xFF)/255.0
@@ -25,12 +25,12 @@ static CGFloat eh_colorComponentFrom(NSString *string, NSUInteger start, NSUInte
                            alpha:alpha];
 }
 
-+ (UIColor *)eh_colorWithHexRGB:(UInt32)hexInt
++ (UIColor *)elColorWithHexRGB:(UInt32)hexInt
 {
-    return [UIColor eh_colorWithHex:hexInt andAlpha:1];
+    return [UIColor elColorWithHex:hexInt andAlpha:1];
 }
 
-+ (UIColor *)eh_colorWithHexRGBA:(UInt32)hexInt
++ (UIColor *)elColorWithHexRGBA:(UInt32)hexInt
 {
     return [UIColor colorWithRed:((hexInt >> 24) & 0xFF)/255.0
                            green:((hexInt >> 16) & 0xFF)/255.0
@@ -38,7 +38,7 @@ static CGFloat eh_colorComponentFrom(NSString *string, NSUInteger start, NSUInte
                            alpha:(hexInt & 0xFF)/255.0];
 }
 
-+ (UIColor *)eh_colorWithHexString:(NSString *)hexString
++ (UIColor *)elColorWithHexString:(NSString *)hexString
 {
     NSString *colorString = [[hexString stringByReplacingOccurrencesOfString:@"#" withString:@""] uppercaseString];
     if (colorString.length == 6 || colorString.length == 8) {
@@ -104,7 +104,7 @@ static CGFloat eh_colorComponentFrom(NSString *string, NSUInteger start, NSUInte
     return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
 }
 
-- (NSString *)eh_HEXString
+- (NSString *)elHEXString
 {
     UIColor *color = self;
     if (CGColorGetNumberOfComponents(color.CGColor) < 4) {
@@ -122,7 +122,7 @@ static CGFloat eh_colorComponentFrom(NSString *string, NSUInteger start, NSUInte
             (int)((CGColorGetComponents(color.CGColor))[2]*255.0)];
 }
 
-+ (UIColor *)eh_colorWithWholeRed:(CGFloat)red
++ (UIColor *)elColorWithWholeRed:(CGFloat)red
                             green:(CGFloat)green
                              blue:(CGFloat)blue
                             alpha:(CGFloat)alpha
@@ -133,11 +133,11 @@ static CGFloat eh_colorComponentFrom(NSString *string, NSUInteger start, NSUInte
                            alpha:alpha];
 }
 
-+ (UIColor *)eh_colorWithWholeRed:(CGFloat)red
++ (UIColor *)elColorWithWholeRed:(CGFloat)red
                             green:(CGFloat)green
                              blue:(CGFloat)blue
 {
-    return [self eh_colorWithWholeRed:red
+    return [self elColorWithWholeRed:red
                                 green:green
                                  blue:blue
                                 alpha:1.0];
