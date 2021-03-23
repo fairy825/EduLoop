@@ -7,7 +7,7 @@
 
 #import "UgcVoteCard.h"
 #import <Masonry/Masonry.h>
-#import "UIColor+EHTheme.h"
+#import "UIColor+MyTheme.h"
 @implementation UgcVoteCard
 - (ELVoteCard *)voteView{
     if(!_voteView){

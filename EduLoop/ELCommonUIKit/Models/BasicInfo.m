@@ -14,6 +14,21 @@
 + (NSString *)appendix{
     return @"http://localhost:8080";
 }
+
++ (NSString *)url:(NSString *)str{
+    NSMutableString *url = [NSMutableString string];
+    [url appendString:BasicInfo.appendix];
+    [url appendString:str];
+    return url;
+}
++ (NSString *)url:(NSString *)str path:(NSString *)path{
+    NSMutableString *url = [NSMutableString string];
+    [url appendString:BasicInfo.appendix];
+    [url appendString:str];
+    [url appendString:@"/"];
+    [url appendString:path];
+    return url;
+}
 +(NSString *)url:(NSString *)str Start:(int)start AndSize:(int)size{
     NSMutableString *url = [NSMutableString string];
     [url appendString:BasicInfo.appendix];
@@ -33,5 +48,13 @@
     hud.label.text = str;
     hud.bezelView.color = [UIColor colorWithWhite:0.f alpha:0.4f];
     [hud hideAnimated:YES afterDelay:1];
+}
++(PGDatePickManager *)sharedManager{
+    static PGDatePickManager* manager;
+    static dispatch_once_t token;
+    dispatch_once(&token, ^{
+        manager = [[PGDatePickManager alloc]init];
+    });
+    return manager;
 }
 @end

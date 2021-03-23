@@ -7,7 +7,7 @@
 
 #import "ChatAllViewController.h"
 
-#import "UIColor+EHTheme.h"
+#import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
 #import "ELCenterOverlayModel.h"
 #import "ELCenterOverlay.h"

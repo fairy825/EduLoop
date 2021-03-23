@@ -6,7 +6,7 @@
 //
 
 #import "ProfileViewController.h"
-#import "UIColor+EHTheme.h"
+#import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
 #import "SettingDataTableViewCell.h"
 #import "ELOverlay.h"

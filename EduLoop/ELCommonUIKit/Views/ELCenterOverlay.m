@@ -7,7 +7,7 @@
 
 #import "ELCenterOverlay.h"
 #import <Masonry/Masonry.h>
-#import "UIColor+EHTheme.h"
+#import "UIColor+MyTheme.h"
 @implementation ELCenterOverlay
 - (instancetype)initWithFrame:(CGRect)frame Data:(ELCenterOverlayModel *)model
 {

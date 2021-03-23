@@ -6,8 +6,7 @@
 //
 
 #import "SettingDataTableViewCell.h"
-#import "UIColor+EHGenerator.h"
-#import "UIColor+EHTheme.h"
+#import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
 @implementation SettingDataModel
 
@@ -22,6 +21,9 @@
 }
 @end
 
+@interface SettingDataTableViewCell ()<UITextViewDelegate,UITextFieldDelegate>
+
+@end
 @implementation SettingDataTableViewCell
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier data:(SettingDataModel *)model{
@@ -42,6 +44,37 @@
         _data.clickBlock();
     }
 }
+
+#pragma mark - UITextViewDelegate
+- (void)textViewDidChange:(UITextView *)textView{
+    _data.realContent = textView.text;
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    int kLimitNumber = _data.maxLength;
+    NSString *str = [textView.text stringByReplacingCharactersInRange:range withString:text];
+    
+    NSInteger res = kLimitNumber-[str length];
+    if(res >= 0){
+        _detailTextViewLengthLabel.text = [NSString stringWithFormat:@"%ld/%d", str.length, kLimitNumber];
+        return YES;
+    }
+    else{
+        NSRange rg = {0,[text length]+res};
+        if (rg.length>0) {
+            NSString *s = [text substringWithRange:rg];
+            [textView setText:[textView.text stringByReplacingCharactersInRange:range withString:s]];
+        }
+        _detailTextViewLengthLabel.text = [NSString stringWithFormat:@"%ld/%d", kLimitNumber, kLimitNumber];
+        return NO;
+    }
+}
+
+#pragma mark - UITextFieldDelegate
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    _data.realContent = textField.text;
+}
+
 - (void)loadData{
     _titleLabel.text= _data.title;
     _subtitleLabel.text= _data.subtitle;
@@ -56,6 +89,8 @@
         _detailLabel.text= _data.detailText;
     _avatarView.image = _data.defaultAvatarImage;
     _detailTextViewLengthLabel.text = [NSString stringWithFormat:@"%ld/%d", (unsigned long)_detailTextView.text.length, _data.maxLength];
+    _data.realContent = _data.detailText;
+
 }
 
 - (void)setupView{
@@ -295,6 +330,7 @@
             self.detailTextfield.autocorrectionType = UITextAutocorrectionTypeNo;
             self.detailTextfield.autocapitalizationType = UITextAutocapitalizationTypeNone;
             self.detailTextfield.textAlignment = NSTextAlignmentRight;
+        self.detailTextfield.delegate = self;
         self.detailTextfield.textColor = [UIColor color999999];
         self.detailTextfield.font = [UIFont systemFontOfSize:16];
     }
@@ -309,6 +345,7 @@
         _detailTextView.textAlignment = NSTextAlignmentLeft;
         _detailTextView.textColor = [UIColor color999999];
         _detailTextView.font = [UIFont systemFontOfSize:16];
+        _detailTextView.delegate = self;
         // _placeholderLabel
         UILabel *placeHolderLabel = [[UILabel alloc] init];
         placeHolderLabel.text = _data.detailDefaultText;

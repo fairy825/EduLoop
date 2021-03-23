@@ -44,6 +44,7 @@ typedef NS_ENUM(NSInteger, SettingTableViewCellType)
 // 是否switch开，默认为YES
 @property (nonatomic, assign) BOOL switchOpen;
 @property(nonatomic,copy,readwrite) dispatch_block_t clickBlock;
+@property (nonatomic, copy) NSString *realContent;
 
 @end
 

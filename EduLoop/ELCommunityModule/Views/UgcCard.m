@@ -6,7 +6,7 @@
 //
 
 #import "UgcCard.h"
-#import "UIColor+EHTheme.h"
+#import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
 #import "ELCenterOverlay.h"
 #import "UgcVoteModel.h"

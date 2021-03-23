@@ -6,7 +6,7 @@
 //
 
 #import "CommentEditView.h"
-#import "UIColor+EHTheme.h"
+#import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
 #import "ELScreen.h"
 @implementation CommentEditView

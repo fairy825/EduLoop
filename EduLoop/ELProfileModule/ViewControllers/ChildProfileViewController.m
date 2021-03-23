@@ -6,7 +6,7 @@
 //
 
 #import "ChildProfileViewController.h"
-#import "UIColor+EHTheme.h"
+#import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
 @interface ChildProfileViewController ()<UITableViewDelegate,UITableViewDataSource>
 

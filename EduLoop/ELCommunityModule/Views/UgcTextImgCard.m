@@ -6,7 +6,7 @@
 //
 
 #import "UgcTextImgCard.h"
-#import "UIColor+EHTheme.h"
+#import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
 #import "ELImageManager.h"
 #import "ELScreen.h"

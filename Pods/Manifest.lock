@@ -14,6 +14,7 @@ PODS:
   - AFNetworking/Serialization (4.0.1)
   - AFNetworking/UIKit (4.0.1):
     - AFNetworking/NSURLSession
+  - BEMCheckBox (1.4.1)
   - JSONModel (1.8.0)
   - LookinServer (1.0.0)
   - Masonry (1.1.0)
@@ -25,6 +26,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - BEMCheckBox
   - JSONModel
   - LookinServer
   - Masonry
@@ -35,6 +37,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
+    - BEMCheckBox
     - JSONModel
     - LookinServer
     - Masonry
@@ -45,6 +48,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
   JSONModel: 02ab723958366a3fd27da57ea2af2113658762e9
   LookinServer: 0002891cd3cec5e082a910e897dfe71b4f06b89e
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
@@ -53,6 +57,6 @@ SPEC CHECKSUMS:
   PGDatePicker: 88960f3760edac96219c10320f25536ad31d0f44
   PGPickerView: 037acfb132a4c8054fb43aaa59a5ff50c7f747f5
 
-PODFILE CHECKSUM: 52565961c80a225d7c9e3f6aa727c15e27fac258
+PODFILE CHECKSUM: 9f7e8d292b1edb99a9a7dd363bca62430e109413
 
 COCOAPODS: 1.6.2

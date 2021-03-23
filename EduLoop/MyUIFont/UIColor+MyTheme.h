@@ -1,5 +1,5 @@
 #import <UIKit/UIKit.h>
-#import "UIColor+EHGenerator.h"
+#import "UIColor+MyGenerator.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,7 +19,7 @@ enum {
 
 };
 
-@interface UIColor (EHTheme)
+@interface UIColor (MyTheme)
 
 + (UIColor *)eeeeee;
 + (UIColor *)e1e1e1;

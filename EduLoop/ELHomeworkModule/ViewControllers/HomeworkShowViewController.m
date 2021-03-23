@@ -6,7 +6,7 @@
 //
 
 #import "HomeworkShowViewController.h"
-#import "UIColor+EHTheme.h"
+#import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
 #import "HomeworkShowTableViewCell.h"
 #import "ELOverlay.h"
@@ -24,7 +24,8 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-    
+    [self loadDataIsRefresh:YES];
+
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [self.navigationController setNavigationBarHidden:NO animated:YES];
@@ -35,7 +36,6 @@
     _models = @[].mutableCopy;
     self.page=1;
     [self setupSubviews];
-    [self loadDataIsRefresh:YES];
 }
 
 - (void)endRefresh{
@@ -45,6 +45,25 @@
     [self.tableView.mj_footer endRefreshing];
 }
 
+#pragma mark - network
+-(void)deleteTaskNetworkWithTaskId:(NSString *)tid success:(nullable void (^)())success{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager DELETE:[BasicInfo url:@"/task" path:tid] parameters:nil headers:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@---%@",[responseObject class],responseObject);
+        int code = [[responseObject objectForKey:@"code"]intValue];
+        
+        if(code!=0){
+            NSString* msg = [responseObject objectForKey:@"msg"];
+            NSLog(@"error--%@",msg);
+            [BasicInfo showToastWithMsg:msg];
+        }else{
+            success();
+        }
+      } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+          NSLog(@"请求失败--%@",error);
+      }];
+}
+
 - (void)loadDataIsRefresh:(BOOL) isRefresh{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     int start = 1;
@@ -52,7 +71,10 @@
     if(isRefresh==NO){
         start=self.page+1;
     }
-    [manager GET: [BasicInfo url:@"/task/student/1" Start:start AndSize:size] parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//    [BasicInfo url:@"/task/student/1" Start:start AndSize:size]
+    NSDictionary *paramDict =  @{@"start":[NSString stringWithFormat:@"%d", start],@"size":[NSString stringWithFormat:@"%d", size]
+    };
+    [manager GET:@"http:localhost:8080/task/student/1"  parameters:paramDict headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if(isRefresh){
             self.page=1;
             [_models removeAllObjects];
@@ -213,6 +235,55 @@
 //    return sh_footerView;
 //}
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+
+- (NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        NSLog(@"点击了删除");
+        NSInteger index = [indexPath row];
+        TaskModel *task = [self->_models objectAtIndex:index];
+        [self deleteTaskNetworkWithTaskId:[NSString stringWithFormat:@"%ld",(long)task.id] success:^{
+            [self.models removeObjectAtIndex:index];
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        }];
+    }];
+    UITableViewRowAction *editAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"编辑" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
+        NSLog(@"点击了编辑");
+        NSInteger index = [indexPath row];
+        [self jumpToDetailPageWithData:[self->_models objectAtIndex:index]];
+    }];
+    editAction.backgroundColor = [UIColor color5bb2ff];
+    return @[deleteAction, editAction];
+}
+ 
+//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+//    editingStyle = UITableViewCellEditingStyleDelete;
+//}
+
+//- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    return  UITableViewCellEditingStyleDelete;
+//}
+
+//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+//    if (editingStyle == UITableViewCellEditingStyleDelete) {
+//        NSInteger index = [indexPath row];
+//        TaskModel *task = [_models objectAtIndex:index];
+//        [self deleteTaskNetworkWithTaskId:[NSString stringWithFormat:@"%d",task.id] success:^{
+//            [self.models removeObjectAtIndex:index];
+//            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//
+//        }];
+//    }
+//}
+
+// 修改编辑按钮文字
+//- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return @"删除";
+//}
 #pragma mark - ELFloatingButtonDelegate
 - (void)clickFloatingButton{
     [self jumpToDetailPageWithData:nil];

@@ -7,8 +7,7 @@
 
 #import "MineInfoCard.h"
 #import <Masonry/Masonry.h>
-#import "UIColor+EHGenerator.h"
-#import "UIColor+EHTheme.h"
+#import "UIColor+MyTheme.h"
 @implementation MineInfoCard
 - (instancetype)initWithFrame:(CGRect)frame
 {

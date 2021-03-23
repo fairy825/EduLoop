@@ -6,7 +6,7 @@
 //
 
 #import "MessageBubble.h"
-#import "UIColor+EHTheme.h"
+#import "UIColor+MyTheme.h"
 #import "ELScreen.h"
 #define triWidth 10.0
 #define rectRadius 10.0

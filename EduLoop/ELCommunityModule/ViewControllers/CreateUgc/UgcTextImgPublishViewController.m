@@ -6,7 +6,7 @@
 //
 
 #import "UgcTextImgPublishViewController.h"
-#import "UIColor+EHTheme.h"
+#import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
 #import "ELPublishImage.h"
 #import "ELImageManager.h"

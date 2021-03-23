@@ -6,7 +6,7 @@
 //
 
 #import "ELOverlayTableViewCell.h"
-#import "UIColor+EHTheme.h"
+#import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
 @implementation ELOverlayTableViewCell
 

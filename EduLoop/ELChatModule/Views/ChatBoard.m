@@ -6,7 +6,7 @@
 //
 
 #import "ChatBoard.h"
-#import "UIColor+EHTheme.h"
+#import "UIColor+MyTheme.h"
 #import "ELScreen.h"
 
 @implementation ChatBoard

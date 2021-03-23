@@ -6,7 +6,7 @@
 //
 
 #import "UgcDetailPageViewController.h"
-#import "UIColor+EHTheme.h"
+#import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
 #import "UgcVoteCard.h"
 #import "UgcTextImgCard.h"

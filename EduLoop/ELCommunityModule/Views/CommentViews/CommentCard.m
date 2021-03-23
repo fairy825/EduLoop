@@ -6,7 +6,7 @@
 //
 
 #import "CommentCard.h"
-#import "UIColor+EHTheme.h"
+#import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
 #import "CommentEditView.h"
 @implementation CommentCard
@@ -25,7 +25,7 @@
     self.publishTimeLabel.text = self.data.dateStr;
     self.nameLabel.text = self.data.authorName;
     
-    UIColor *bgColor = [UIColor elColorWithHexRGB:self.data.chooseFirst?Color_Red:Color_Blue];
+    UIColor *bgColor = [UIColor elColorWithHex:self.data.chooseFirst?Color_Red:Color_Blue];
     self.choiceTag.backgroundColor = bgColor;
     self.choiceTag.layer.borderColor = bgColor.CGColor;
     

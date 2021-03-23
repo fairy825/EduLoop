@@ -7,8 +7,7 @@
 
 #import "MineMiscCardTableViewCell.h"
 #import <Masonry/Masonry.h>
-#import "UIColor+EHGenerator.h"
-#import "UIColor+EHTheme.h"
+#import "UIColor+MyTheme.h"
 
 @implementation MineMiscCardTableViewCell
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{

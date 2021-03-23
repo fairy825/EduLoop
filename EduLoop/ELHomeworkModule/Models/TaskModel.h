@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TaskModel : JSONModel
 @property(nonatomic,readwrite) NSInteger id;
 @property(nonatomic,strong,readwrite) NSString<Optional> *title;
-@property(nonatomic,strong,readwrite) NSString<Optional> *detail;
+@property(nonatomic,strong,readwrite) NSString<Optional> *content;
 @property(nonatomic,readwrite) NSInteger creatorId;
 @property(nonatomic,strong,readwrite) NSString<Optional> *creatorName;
 

@@ -6,7 +6,7 @@
 //
 
 #import "HomeworkShowTableViewCell.h"
-#import "UIColor+EHTheme.h"
+#import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
 #import "ELOverlay.h"
 
@@ -37,7 +37,7 @@
 
 - (void)loadData{
     _titleLabel.text = _data.title;
-    _detailLabel.text = _data.detail;
+    _detailLabel.text = _data.content;
     _avatarCard.nameLabel.text=_data.creatorName;
     _avatarCard.publishTimeLabel.text=_data.timeDesc;
     NSString *isFinish = _data.finish;
@@ -51,24 +51,24 @@
             rightButtonTitle=@"已批改";
         else if([isFinish isEqual:@"FINISHED_NOT_REVIEWED"])
                 rightButtonTitle=@"已完成未批改";
-        rightButtonColor = [UIColor elColorWithHexRGB:Color_finished];
+        rightButtonColor = [UIColor elColorWithHex:Color_finished];
         hintStr = @"点击查看作业详情";
         hintStrColor = [UIColor color999999];
     }else{
         hintStr = [NSString stringWithFormat:@"%@%@",@"作业提交截止时间为",_data.endTime];
-        hintStrColor = [UIColor elColorWithHexRGB:Color_Red];
+        hintStrColor = [UIColor elColorWithHex:Color_Red];
         _arrowImage.alpha=0;
         if([isFinish isEqual:@"NOT_FINISH"]){
             rightButtonTitle=@"未完成";
-            rightButtonColor = [UIColor elColorWithHexRGB:Color_not_finished];
+            rightButtonColor = [UIColor elColorWithHex:Color_not_finished];
         }
         else if([isFinish isEqual:@"DELAY_CAN_FINISH"]){
             rightButtonTitle=@"超时可提交";
-            rightButtonColor = [UIColor elColorWithHexRGB:Color_delay_can_finish];
+            rightButtonColor = [UIColor elColorWithHex:Color_delay_can_finish];
         }
         else if([isFinish isEqual:@"DELAY_CANNOT_FINISH"]){
             rightButtonTitle=@"超时不可提交";
-            rightButtonColor = [UIColor elColorWithHexRGB:Color_delay_cannot_finish];
+            rightButtonColor = [UIColor elColorWithHex:Color_delay_cannot_finish];
         }
         if(_data.delayAllowed){
             hintStr = [NSString stringWithFormat:@"%@%@",hintStr,@",允许延迟提交"];

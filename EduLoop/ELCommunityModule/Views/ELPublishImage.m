@@ -6,7 +6,7 @@
 //
 
 #import "ELPublishImage.h"
-#import "UIColor+EHTheme.h"
+#import "UIColor+MyTheme.h"
 @implementation ELPublishImage
 
 - (instancetype)initWithFrame:(CGRect)frame Img:(UIImage *)img

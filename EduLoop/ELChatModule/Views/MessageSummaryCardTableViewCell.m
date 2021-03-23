@@ -6,7 +6,7 @@
 //
 
 #import "MessageSummaryCardTableViewCell.h"
-#import "UIColor+EHTheme.h"
+#import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
 
 @implementation MessageSummaryCardTableViewCell

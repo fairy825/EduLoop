@@ -6,8 +6,7 @@
 //
 
 #import "MineToolCardItem.h"
-#import "UIColor+EHGenerator.h"
-#import "UIColor+EHTheme.h"
+#import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
 #import "CommunityViewController.h"
 @implementation MineToolCardItem

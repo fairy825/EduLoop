@@ -6,8 +6,7 @@
 //
 
 #import "MineViewController.h"
-#import "UIColor+EHGenerator.h"
-#import "UIColor+EHTheme.h"
+#import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
 #import "MineMiscCardTableViewCell.h"
 #import "ProfileViewController.h"

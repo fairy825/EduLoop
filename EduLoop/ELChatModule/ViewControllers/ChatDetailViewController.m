@@ -5,7 +5,7 @@
 //  Created by mijika on 2021/1/4.
 //
 #import "ChatDetailViewController.h"
-#import "UIColor+EHTheme.h"
+#import "UIColor+MyTheme.h"
 #import "MessageBubble.h"
 #import "MessageRecordTableViewCell.h"
 #import "ELScreen.h"

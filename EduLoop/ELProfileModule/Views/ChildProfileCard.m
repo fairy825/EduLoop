@@ -9,7 +9,7 @@
 #import "SettingDataTableViewCell.h"
 #import "ChildModel.h"
 #import <Masonry/Masonry.h>
-#import "UIColor+EHTheme.h"
+#import "UIColor+MyTheme.h"
 #import "ELOverlay.h"
 @interface ChildProfileCard()<UITableViewDelegate,UITableViewDataSource,ELOverlayDelegate>
 @property(nonatomic,strong,readwrite) NSMutableArray<SettingDataModel*>* models;
