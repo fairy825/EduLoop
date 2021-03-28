@@ -17,6 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)url:(NSString *)str path:(NSString *)path;
 +(NSString *)url:(NSString *)str Start:(int)start AndSize:(int)size;
 +(NSString *)urlwithDefaultStartAndSize:(NSString *)str;
++(void)POST:(NSString *)URLString parameters:(nullable id)parameters success:(nullable void (^)())success;
++(void)PUT:(NSString *)URLString parameters:(nullable id)parameters success:(nullable void (^)())success;
++(void)DELETE:(NSString *)URLString success:(nullable void (^)())success;
 +(void)showToastWithMsg:(NSString *)str;
 +(PGDatePickManager *)sharedManager;
 

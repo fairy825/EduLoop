@@ -232,15 +232,6 @@
 }
 
 -(void)postTaskNetworkWithSuccess:(nullable void (^)())success{
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    // 设置请求头
-    //申明请求的数据是json类型
-    manager.requestSerializer=[AFJSONRequestSerializer serializer];
-    //添加多的请求格式
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/plain",@"text/json", @"text/javascript",@"text/html",nil];
-    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-
-    
     NSDictionary *paramDict =  @{
         @"title":[_models objectAtIndex:0].realContent,
         @"content":[_models objectAtIndex:1].realContent ,
@@ -248,21 +239,7 @@
         @"endTime":[self getUtcDate],
         @"teamIds":_chosedTeamIndexs
     };
-    [manager POST:[BasicInfo url:@"/task"] parameters:paramDict headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-
-        NSLog(@"%@---%@",[responseObject class],responseObject);
-        int code = [[responseObject objectForKey:@"code"]intValue];
-        
-        if(code!=0){
-            NSString* msg = [responseObject objectForKey:@"msg"];
-            NSLog(@"error--%@",msg);
-            [BasicInfo showToastWithMsg:msg];
-        }else{
-            success();
-        }
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"请求失败--%@",error);
-        }];
+    [BasicInfo POST:[BasicInfo url:@"/task"] parameters:paramDict success:success];
 }
 
 
@@ -284,21 +261,7 @@
         @"teamIds":_chosedTeamIndexs
     };
     int tid = _task.id;
-    [manager PUT:[BasicInfo url:@"/task" path:[NSString stringWithFormat:@"%d",tid]] parameters:paramDict headers:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-
-        NSLog(@"%@---%@",[responseObject class],responseObject);
-        int code = [[responseObject objectForKey:@"code"]intValue];
-        
-        if(code!=0){
-            NSString* msg = [responseObject objectForKey:@"msg"];
-            NSLog(@"error--%@",msg);
-            [BasicInfo showToastWithMsg:msg];
-        }else{
-            success();
-        }
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            NSLog(@"请求失败--%@",error);
-        }];
+    [BasicInfo PUT:[BasicInfo url:@"/task" path:[NSString stringWithFormat:@"%d",tid]] parameters:paramDict success:success];
 }
 
 #pragma mark - keyboard

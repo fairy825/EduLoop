@@ -7,6 +7,8 @@
 
 #import "BasicInfo.h"
 #import <MBProgressHUD.h>
+#import <AFNetworking.h>
+
 @implementation BasicInfo
 + (int)pageSize{
     return 10;
@@ -57,4 +59,70 @@
     });
     return manager;
 }
+
++(void)POST:(NSString *)URLString parameters:(nullable id)parameters success:(nullable void (^)())success{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    // 设置请求头
+    //申明请求的数据是json类型
+    manager.requestSerializer=[AFJSONRequestSerializer serializer];
+    //添加多的请求格式
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/plain",@"text/json", @"text/javascript",@"text/html",nil];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager POST:URLString parameters:parameters headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSLog(@"%@---%@",[responseObject class],responseObject);
+            int code = [[responseObject objectForKey:@"code"]intValue];
+            if(code!=0){
+                NSString* msg = [responseObject objectForKey:@"msg"];
+                NSLog(@"error--%@",msg);
+                [BasicInfo showToastWithMsg:msg];
+            }else{
+                success();
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"请求失败--%@",error);
+    }];
+}
+
++(void)PUT:(NSString *)URLString parameters:(nullable id)parameters success:(nullable void (^)())success{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    // 设置请求头
+    //申明请求的数据是json类型
+    manager.requestSerializer=[AFJSONRequestSerializer serializer];
+    //添加多的请求格式
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/plain",@"text/json", @"text/javascript",@"text/html",nil];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+
+    [manager PUT:URLString parameters:parameters headers:nil  success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSLog(@"%@---%@",[responseObject class],responseObject);
+            int code = [[responseObject objectForKey:@"code"]intValue];
+            if(code!=0){
+                NSString* msg = [responseObject objectForKey:@"msg"];
+                NSLog(@"error--%@",msg);
+                [BasicInfo showToastWithMsg:msg];
+            }else{
+                success();
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"请求失败--%@",error);
+    }];
+}
+
++(void)DELETE:(NSString *)URLString success:(nullable void (^)())success{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager DELETE:URLString parameters:nil headers:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@---%@",[responseObject class],responseObject);
+        int code = [[responseObject objectForKey:@"code"]intValue];
+        
+        if(code!=0){
+            NSString* msg = [responseObject objectForKey:@"msg"];
+            NSLog(@"error--%@",msg);
+            [BasicInfo showToastWithMsg:msg];
+        }else{
+            success();
+        }
+      } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+          NSLog(@"请求失败--%@",error);
+      }];
+}
+
 @end

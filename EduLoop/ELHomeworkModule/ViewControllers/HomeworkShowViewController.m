@@ -48,20 +48,7 @@
 #pragma mark - network
 -(void)deleteTaskNetworkWithTaskId:(NSString *)tid success:(nullable void (^)())success{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager DELETE:[BasicInfo url:@"/task" path:tid] parameters:nil headers:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        NSLog(@"%@---%@",[responseObject class],responseObject);
-        int code = [[responseObject objectForKey:@"code"]intValue];
-        
-        if(code!=0){
-            NSString* msg = [responseObject objectForKey:@"msg"];
-            NSLog(@"error--%@",msg);
-            [BasicInfo showToastWithMsg:msg];
-        }else{
-            success();
-        }
-      } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-          NSLog(@"请求失败--%@",error);
-      }];
+    [BasicInfo DELETE:[BasicInfo url:@"/task" path:tid] success:success];
 }
 
 - (void)loadDataIsRefresh:(BOOL) isRefresh{
@@ -71,7 +58,6 @@
     if(isRefresh==NO){
         start=self.page+1;
     }
-//    [BasicInfo url:@"/task/student/1" Start:start AndSize:size]
     NSDictionary *paramDict =  @{@"start":[NSString stringWithFormat:@"%d", start],@"size":[NSString stringWithFormat:@"%d", size]
     };
     [manager GET:[BasicInfo url:@"/task/student" path:@"1"] parameters:paramDict headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -94,10 +80,6 @@
                 [_models removeAllObjects];
             }
             [_models addObjectsFromArray: model.data.rows];
-//            NSDictionary *data = [responseObject objectForKey:@"data"];
-//            NSError *error;
-//            PagedResult *pg = [[PagedResult alloc] initWithDictionary:data error:&error];
-//            self->_models=pg.rows;
         }else{
             NSLog(@"error--%@",msg);
             [BasicInfo showToastWithMsg:msg];
@@ -107,20 +89,6 @@
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"请求失败--%@",error);
         }];
-//    [_models addObject:({
-//        TaskModel *model = [HomeworkModel new];
-//        model.title = @"12月14日作业";
-//        model.detail =@"test1";
-//        model.allowSubmitAfter = NO;
-//        model.submitOnline = YES;
-//        model;
-//    })];
-//    [_models addObject:({
-//        TaskModel *model = [HomeworkModel new];
-//        model.title = @"12月15日作业";
-//        model.detail =@"测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试";
-//        model;
-//    })];
 }
 
 - (void)setupSubviews{
