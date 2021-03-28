@@ -11,9 +11,10 @@
 #import <PGDatePicker/PGDatePickManager.h>
 #import "TaskModel.h"
 #import "HomeworkShowViewController.h"
-#import "ELBottomStackOverlay.h"
+#import "ELBottomSelectOverlay.h"
 #import <AFNetworking.h>
 #import "BasicInfo.h"
+#import "GetAllMyTeamResponse.h"
 @interface BroadcastViewController ()<UITableViewDelegate,UITableViewDataSource,PGDatePickerDelegate>
 
 @end
@@ -29,12 +30,14 @@
             _task = data;
             _editMode = YES;
         }
+        [self getAllMyTeamsNetwork];
         [self loadData:data];
     }
     return self;
 }
 
 - (void)loadData:(TaskModel *)data{
+    _chosedTeamIndexs = @[].mutableCopy;
     _models = @[].mutableCopy;
     [_models addObject:({
         SettingDataModel *model = [SettingDataModel new];
@@ -61,17 +64,6 @@
 ////        model.switchOpen = data.submitOnline;
 //        model;
 //    })];
-//    [_models addObject:({
-//        SettingDataModel *model = [SettingDataModel new];
-//        model.title =@"班级";
-//        model.clickBlock=^{
-//            NSDictionary *dic = @{ @"key1":@[@"one",@"1"], @"key2":@[@"two"]};
-//            NSArray *array = @[@"key1",@"key2"];
-//            ELBottomStackOverlay *overlay = [[ELBottomStackOverlay alloc]initWithFrame:self.view.bounds Data:dic SubTitles:array];
-//            [overlay showHighlightView];
-//        };
-//        model;
-//    })];
     [_models addObject:({
         SettingDataModel *model = [SettingDataModel new];
         model.title =@"截止时间";
@@ -94,6 +86,26 @@
         model.switchOpen = data.delayAllowed;
         model;
     })];
+    [_models addObject:({
+        SettingDataModel *model = [SettingDataModel new];
+        model.title =@"班级";
+        _overlay = [[ELBottomSelectOverlay alloc]initWithFrame:self.view.bounds Title:model.title];
+        _overlay.delegate = self;
+        model.clickBlock=^{
+            [_overlay showHighlightView];
+        };
+        model;
+    })];
+}
+
+-(void)updateChosedTeams:(int)idx Add:(BOOL)isAdd{
+    NSInteger teamId = [_teams objectAtIndex:idx].id;
+    NSNumber *number = [NSNumber numberWithInteger:teamId];
+    if(isAdd==YES){
+        [_chosedTeamIndexs addObject:number];
+    }else{
+        [_chosedTeamIndexs removeObject:number];
+    }
 }
 
 -(void)pushDatePicker{
@@ -149,7 +161,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if(section==0) return 2;
-    else return 2;
+    else return 3;
 }
 
 //- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -192,6 +204,33 @@
 }
 
 #pragma mark - network
+-(void) getAllMyTeamsNetwork{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager GET:[BasicInfo urlwithDefaultStartAndSize:@"/team"] parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+            NSLog(@"%@---%@",[responseObject class],responseObject);
+            int code = [[responseObject objectForKey:@"code"]intValue];
+            NSString* msg = [responseObject objectForKey:@"msg"];
+            if(code==0){
+                GetAllMyTeamResponse *response = [[GetAllMyTeamResponse alloc]initWithDictionary:responseObject error:nil];
+                NSArray<TeamModel> *teams = response.data;
+                if(teams==nil||teams.count==0){
+                    [BasicInfo showToastWithMsg:@"不管理任何班级"];
+                }else{
+                    _teams = teams;
+                    _overlay.subTitles = _teams;
+                    [_overlay reload];
+                }
+                
+            }else{
+                NSLog(@"error--%@",msg);
+                [BasicInfo showToastWithMsg:msg];
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"请求失败--%@",error);
+        }];
+}
+
 -(void)postTaskNetworkWithSuccess:(nullable void (^)())success{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     // 设置请求头
@@ -207,7 +246,7 @@
         @"content":[_models objectAtIndex:1].realContent ,
         @"delayAllowed":@([_models objectAtIndex:3].switchOpen),
         @"endTime":[self getUtcDate],
-        @"teamIds":@[@1,@2]
+        @"teamIds":_chosedTeamIndexs
     };
     [manager POST:[BasicInfo url:@"/task"] parameters:paramDict headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 
@@ -242,7 +281,7 @@
         @"content":[_models objectAtIndex:1].realContent ,
         @"delayAllowed":@([_models objectAtIndex:3].switchOpen),
         @"endTime":[self getUtcDate],
-        @"teamIds":@[@1,@2]
+        @"teamIds":_chosedTeamIndexs
     };
     int tid = _task.id;
     [manager PUT:[BasicInfo url:@"/task" path:[NSString stringWithFormat:@"%d",tid]] parameters:paramDict headers:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

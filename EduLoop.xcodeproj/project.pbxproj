@@ -83,6 +83,9 @@
 		8470FDE226070A8D00B05974 /* ELResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FDE126070A8D00B05974 /* ELResponse.m */; };
 		8470FDF126070C4D00B05974 /* PagedResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FDF026070C4D00B05974 /* PagedResult.m */; };
 		8470FE4D2609E60000B05974 /* ELBottomSelectOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FE4C2609E5FF00B05974 /* ELBottomSelectOverlay.m */; };
+		8470FE60260AEDF700B05974 /* TeamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FE5F260AEDF700B05974 /* TeamModel.m */; };
+		8470FE66260AEE7300B05974 /* GetAllMyTeamResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FE65260AEE7300B05974 /* GetAllMyTeamResponse.m */; };
+		8470FE6C26105D0200B05974 /* ELBottomSelectOverlayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FE6B26105D0200B05974 /* ELBottomSelectOverlayCell.m */; };
 		B56C4CB27218F46755ADDDB9 /* libPods-EduLoop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A30B8306BBFF24ECE415E9 /* libPods-EduLoop.a */; };
 /* End PBXBuildFile section */
 
@@ -258,6 +261,12 @@
 		8470FDF026070C4D00B05974 /* PagedResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PagedResult.m; sourceTree = "<group>"; };
 		8470FE4B2609E5FF00B05974 /* ELBottomSelectOverlay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELBottomSelectOverlay.h; sourceTree = "<group>"; };
 		8470FE4C2609E5FF00B05974 /* ELBottomSelectOverlay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELBottomSelectOverlay.m; sourceTree = "<group>"; };
+		8470FE5E260AEDF700B05974 /* TeamModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeamModel.h; sourceTree = "<group>"; };
+		8470FE5F260AEDF700B05974 /* TeamModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeamModel.m; sourceTree = "<group>"; };
+		8470FE64260AEE7300B05974 /* GetAllMyTeamResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetAllMyTeamResponse.h; sourceTree = "<group>"; };
+		8470FE65260AEE7300B05974 /* GetAllMyTeamResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetAllMyTeamResponse.m; sourceTree = "<group>"; };
+		8470FE6A26105D0200B05974 /* ELBottomSelectOverlayCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELBottomSelectOverlayCell.h; sourceTree = "<group>"; };
+		8470FE6B26105D0200B05974 /* ELBottomSelectOverlayCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELBottomSelectOverlayCell.m; sourceTree = "<group>"; };
 		F87AF0CFB6BB37AC984C83F1 /* Pods-EduLoop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EduLoop.debug.xcconfig"; path = "Target Support Files/Pods-EduLoop/Pods-EduLoop.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -445,6 +454,8 @@
 				8470FC9525889A5F00B05974 /* ELFloatingButton.m */,
 				8470FE4B2609E5FF00B05974 /* ELBottomSelectOverlay.h */,
 				8470FE4C2609E5FF00B05974 /* ELBottomSelectOverlay.m */,
+				8470FE6A26105D0200B05974 /* ELBottomSelectOverlayCell.h */,
+				8470FE6B26105D0200B05974 /* ELBottomSelectOverlayCell.m */,
 				8470FCA4258B4CBB00B05974 /* ELBottomStackOverlay.h */,
 				8470FCA5258B4CBB00B05974 /* ELBottomStackOverlay.m */,
 				8470FCAA258B778600B05974 /* ELStackCardItem.h */,
@@ -522,6 +533,10 @@
 				8470FDF026070C4D00B05974 /* PagedResult.m */,
 				8470FDE026070A8D00B05974 /* ELResponse.h */,
 				8470FDE126070A8D00B05974 /* ELResponse.m */,
+				8470FE5E260AEDF700B05974 /* TeamModel.h */,
+				8470FE5F260AEDF700B05974 /* TeamModel.m */,
+				8470FE64260AEE7300B05974 /* GetAllMyTeamResponse.h */,
+				8470FE65260AEE7300B05974 /* GetAllMyTeamResponse.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -912,6 +927,7 @@
 				8470FD33259A262A00B05974 /* ELSearchBar.m in Sources */,
 				8470FE4D2609E60000B05974 /* ELBottomSelectOverlay.m in Sources */,
 				8470FD57259CBB4000B05974 /* UgcPublishTextImgModel.m in Sources */,
+				8470FE6C26105D0200B05974 /* ELBottomSelectOverlayCell.m in Sources */,
 				8470FD8625A2E22100B05974 /* MessageSummaryCardTableViewCell.m in Sources */,
 				8470FD7A25A2DDBF00B05974 /* MessageModel.m in Sources */,
 				8470FC9025885F1200B05974 /* ELCenterOverlayModel.m in Sources */,
@@ -946,6 +962,7 @@
 				8470FCB4258C761500B05974 /* CommunityViewController.m in Sources */,
 				8470FD9325A2FF0200B05974 /* ELCustomLabel.m in Sources */,
 				8470FD9F25A4276400B05974 /* AddressListViewController.m in Sources */,
+				8470FE66260AEE7300B05974 /* GetAllMyTeamResponse.m in Sources */,
 				8470FC9625889A5F00B05974 /* ELFloatingButton.m in Sources */,
 				8470FD51259CB0F200B05974 /* ELPublishImage.m in Sources */,
 				8470FCE2258C994B00B05974 /* UgcNormalContent.m in Sources */,
@@ -953,6 +970,7 @@
 				8470FB752578CD9500B05974 /* MineToolCard.m in Sources */,
 				8470FB7B2578D02B00B05974 /* MineToolCardItem.m in Sources */,
 				8470FCC8258C77F100B05974 /* UgcCard.m in Sources */,
+				8470FE60260AEDF700B05974 /* TeamModel.m in Sources */,
 				8470FCAC258B778600B05974 /* ELStackCardItem.m in Sources */,
 				8470FD2D2594867500B05974 /* CommentEditView.m in Sources */,
 				8470FD4B259C506600B05974 /* UgcTextImgPublishViewController.m in Sources */,

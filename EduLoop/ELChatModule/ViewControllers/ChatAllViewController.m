@@ -93,7 +93,8 @@
     self.tableView = [[UITableView alloc]init];
     self.tableView.backgroundColor = [UIColor f6f6f6];
     self.tableView.delegate = self;
-    self.tableView.dataSource = self;    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.dataSource = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tableView];
         
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {

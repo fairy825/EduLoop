@@ -8,5 +8,4 @@ target 'EduLoop' do
     pod 'JSONModel'
     pod 'MJRefresh'
     pod 'MBProgressHUD', '~> 1.2.0'
-    pod 'BEMCheckBox'
 end

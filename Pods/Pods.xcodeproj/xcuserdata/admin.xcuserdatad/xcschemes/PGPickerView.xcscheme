@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "19236BE4E200C1BBE0130CBA402B87FF"
+               BlueprintIdentifier = "771DCA668C4CE27F333C314F5AD12DBB"
                BuildableName = "libPGPickerView.a"
                BlueprintName = "PGPickerView"
                ReferencedContainer = "container:Pods.xcodeproj">

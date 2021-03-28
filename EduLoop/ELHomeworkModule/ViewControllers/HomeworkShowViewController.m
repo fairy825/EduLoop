@@ -74,7 +74,7 @@
 //    [BasicInfo url:@"/task/student/1" Start:start AndSize:size]
     NSDictionary *paramDict =  @{@"start":[NSString stringWithFormat:@"%d", start],@"size":[NSString stringWithFormat:@"%d", size]
     };
-    [manager GET:@"http:localhost:8080/task/student/1"  parameters:paramDict headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager GET:[BasicInfo url:@"/task/student" path:@"1"] parameters:paramDict headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if(isRefresh){
             self.page=1;
             [_models removeAllObjects];
