@@ -66,12 +66,15 @@
     [super viewDidLoad];
     
     
-//    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
-//    scrollView.contentSize =  CGSizeMake(self.view.bounds.size.width*5, self.view.bounds.size.height*3);
-//
-//    scrollView.delegate = self;
-//    scrollView.showsVerticalScrollIndicator = YES;
-//    [self.view addSubview:scrollView];
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    scrollView.backgroundColor = [UIColor whiteColor];
+    scrollView.contentSize =  CGSizeMake(self.view.bounds.size.width*5, self.view.bounds.size.height*3);
+    scrollView.delegate = self;
+    scrollView.showsVerticalScrollIndicator = YES;
+    [self.view addSubview:scrollView];
+    UIView *sub = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width,100)];
+    sub.backgroundColor = [UIColor redColor];
+    [scrollView addSubview:sub];
 //
 //    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 500)];
 //    view.backgroundColor = [UIColor greenColor];
@@ -92,20 +95,20 @@
 //        make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
 //        make.height.equalTo(@500);
 //    }];
-    self.commentTableView = [[UITableView alloc]init];
-    self.commentTableView.delegate = self;
-    self.commentTableView.dataSource = self;
-    self.commentTableView.estimatedRowHeight = 88.0;
-    self.commentTableView.rowHeight = UITableViewAutomaticDimension;
-    self.commentTableView.showsVerticalScrollIndicator = NO;
-    self.commentTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.view addSubview:self.commentTableView];
-    [self.commentTableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
-        make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
-        make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
-        make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom).offset(-80);
-    }];
+//    self.commentTableView = [[UITableView alloc]init];
+//    self.commentTableView.delegate = self;
+//    self.commentTableView.dataSource = self;
+//    self.commentTableView.estimatedRowHeight = 88.0;
+//    self.commentTableView.rowHeight = UITableViewAutomaticDimension;
+//    self.commentTableView.showsVerticalScrollIndicator = NO;
+//    self.commentTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    [self.view addSubview:self.commentTableView];
+//    [self.commentTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
+//        make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
+//        make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
+//        make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom).offset(-80);
+//    }];
     
 }
 

@@ -16,6 +16,8 @@
 #import "BasicInfo.h"
 #import "ELResponse.h"
 #import <MJRefresh.h>
+#import "TeacherTaskSummaryViewController.h"
+#import "TeacherShowDetailTaskResponse.h"
 @interface HomeworkShowViewController ()<UITableViewDelegate,UITableViewDataSource,HomeworkShowTableViewCellDelegate>
 
 @end
@@ -24,7 +26,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-    [self loadDataIsRefresh:YES];
+    [self teacherLoadDataIsRefresh:YES];
 
 }
 - (void)viewWillDisappear:(BOOL)animated{
@@ -91,6 +93,69 @@
         }];
 }
 
+- (void)teacherLoadDataIsRefresh:(BOOL) isRefresh{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    int start = 1;
+    int size = BasicInfo.pageSize;
+    if(isRefresh==NO){
+        start=self.page+1;
+    }
+    NSDictionary *paramDict =  @{@"start":[NSString stringWithFormat:@"%d", start],@"size":[NSString stringWithFormat:@"%d", size]
+    };
+    [manager GET:[BasicInfo url:@"/task/teacher"] parameters:paramDict headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if(isRefresh){
+            self.page=1;
+            [_models removeAllObjects];
+        }
+        [self endRefresh];
+        NSLog(@"%@---%@",[responseObject class],responseObject);
+        int code = [[responseObject objectForKey:@"code"]intValue];
+        NSString* msg = [responseObject objectForKey:@"msg"];
+        if(code==0){
+            ELResponse *model =[[ELResponse alloc] initWithDictionary:responseObject error: nil];
+            if(start>model.data.total){
+                [self.tableView.mj_footer endRefreshingWithNoMoreData];
+            }else{
+                self.page=start;
+            }
+            if(isRefresh){
+                [_models removeAllObjects];
+            }
+            [_models addObjectsFromArray: model.data.rows];
+        }else{
+            NSLog(@"error--%@",msg);
+            [BasicInfo showToastWithMsg:msg];
+        }
+        [self.tableView reloadData];
+
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"请求失败--%@",error);
+        }];
+}
+
+-(void) teacherShowDetailTaskNetworkWithTaskId:(NSInteger)taskId{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    NSDictionary *paramDict =  @{@"start":[NSString stringWithFormat:@"%d", 1],@"size":[NSString stringWithFormat:@"%d", 10]
+    };
+    [manager GET:[BasicInfo url:@"/task/teacher" path:[NSString stringWithFormat:@"%ld",(long)taskId]] parameters:paramDict headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+            NSLog(@"%@---%@",[responseObject class],responseObject);
+            int code = [[responseObject objectForKey:@"code"]intValue];
+            NSString* msg = [responseObject objectForKey:@"msg"];
+            if(code==0){
+                TeacherShowDetailTaskResponse *response = [[TeacherShowDetailTaskResponse alloc]initWithDictionary:responseObject error:nil];
+                TeacherTaskModel *taskModel = response.data;
+                [self.navigationController pushViewController: [[TeacherTaskSummaryViewController alloc]initWithTeacherTaskModel:taskModel] animated:YES];
+
+            }else{
+                NSLog(@"error--%@",msg);
+                [BasicInfo showToastWithMsg:msg];
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"请求失败--%@",error);
+        }];
+}
+
 - (void)setupSubviews{
     self.tableView = [[UITableView alloc]init];
     self.tableView.backgroundColor = [UIColor f6f6f6];
@@ -100,7 +165,7 @@
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self loadDataIsRefresh:YES];
+        [self teacherLoadDataIsRefresh:YES];
     }];
     header.lastUpdatedTimeLabel.hidden = YES;
     //文字颜色
@@ -119,7 +184,7 @@
     header.automaticallyChangeAlpha = YES;
     
     MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        [self loadDataIsRefresh:NO];
+        [self teacherLoadDataIsRefresh:NO];
     }];
     footer.stateLabel.font = [UIFont systemFontOfSize:15];
     //正在刷新
@@ -258,8 +323,8 @@
 }
 
 #pragma mark - action
-- (void)jumpToDetailPageWithData:(TaskModel *)model{
-    [self.navigationController pushViewController:[[BroadcastViewController alloc]initWithHomeworkData:model] animated:YES];
+- (void)jumpToDetailPageWithData:(TeacherTaskModel *)model{
+    [self teacherShowDetailTaskNetworkWithTaskId:model.id];
 }
 
 #pragma mark - HomeworkShowTableViewCellDelegate

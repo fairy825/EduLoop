@@ -21,7 +21,7 @@
     return self;
 }
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier data:(TaskModel *)model{
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier data:(TeacherTaskModel *)model{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if(self){
         _data = model;
@@ -40,12 +40,12 @@
     _detailLabel.text = _data.content;
     _avatarCard.nameLabel.text=_data.creatorName;
     _avatarCard.publishTimeLabel.text=_data.timeDesc;
-    NSString *isFinish = _data.finish;
+    /**      NSString *isFinish = _data.finish;
     NSString *rightButtonTitle;
     UIColor *rightButtonColor;
     NSString *hintStr;
     UIColor *hintStrColor;
-    if([isFinish isEqual:@"FINISHED_AND_REVIEWED"]
+   if([isFinish isEqual:@"FINISHED_AND_REVIEWED"]
         ||[isFinish isEqual:@"FINISHED_NOT_REVIEWED"]){
         if([isFinish isEqual:@"FINISHED_AND_REVIEWED"])
             rightButtonTitle=@"已批改";
@@ -74,9 +74,10 @@
             hintStr = [NSString stringWithFormat:@"%@%@",hintStr,@",允许延迟提交"];
         }
     }
-    _otherButton.text = rightButtonTitle;
-    _otherButton.backgroundColor = rightButtonColor;
-    _otherButton.textColor = [UIColor whiteColor];
+     **/
+    NSString *hintStr=[NSString stringWithFormat:@"%@%d/%d",@"已提交",_data.realHomeworkNumber,_data.shouldHomeworkNumber];
+    UIColor *hintStrColor =[UIColor color555555];
+    _otherButton.alpha = 0;
     NSArray *targets = [_otherButton gestureRecognizers];
     for (UIGestureRecognizer *recognizer in targets)
         [_otherButton removeGestureRecognizer: recognizer];

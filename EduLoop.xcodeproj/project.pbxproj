@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8432759A2611BD0000641E60 /* HomeworkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 843275992611BD0000641E60 /* HomeworkModel.m */; };
+		843275A026121C0C00641E60 /* TeacherShowDetailTaskResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8432759F26121C0C00641E60 /* TeacherShowDetailTaskResponse.m */; };
+		843275A92612EF7700641E60 /* TaskDetailCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 843275A82612EF7700641E60 /* TaskDetailCard.m */; };
+		843275AF26131D0B00641E60 /* ReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843275AE26131D0B00641E60 /* ReviewViewController.m */; };
+		843275B526131EBC00641E60 /* HomeworkCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 843275B426131EBC00641E60 /* HomeworkCard.m */; };
+		843275BB261360EB00641E60 /* ReviewCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 843275BA261360EB00641E60 /* ReviewCard.m */; };
+		843275C12613633E00641E60 /* ReviewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 843275C02613633E00641E60 /* ReviewModel.m */; };
+		843275C726141BBC00641E60 /* ELBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 843275C626141BBC00641E60 /* ELBottomView.m */; };
+		843275D12615F83C00641E60 /* ELFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 843275D02615F83C00641E60 /* ELFormat.m */; };
+		843275DD2616008200641E60 /* GetOneHomeworkResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 843275DC2616008200641E60 /* GetOneHomeworkResponse.m */; };
 		8470FAF42577B9A200B05974 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FAF32577B9A200B05974 /* AppDelegate.m */; };
 		8470FAF72577B9A200B05974 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FAF62577B9A200B05974 /* SceneDelegate.m */; };
 		8470FAFA2577B9A200B05974 /* MineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FAF92577B9A200B05974 /* MineViewController.m */; };
@@ -86,6 +96,9 @@
 		8470FE60260AEDF700B05974 /* TeamModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FE5F260AEDF700B05974 /* TeamModel.m */; };
 		8470FE66260AEE7300B05974 /* GetAllMyTeamResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FE65260AEE7300B05974 /* GetAllMyTeamResponse.m */; };
 		8470FE6C26105D0200B05974 /* ELBottomSelectOverlayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FE6B26105D0200B05974 /* ELBottomSelectOverlayCell.m */; };
+		8470FE9026116ABE00B05974 /* TeacherTaskModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FE8F26116ABE00B05974 /* TeacherTaskModel.m */; };
+		8470FE9F2611755E00B05974 /* TeacherTaskSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FE9E2611755E00B05974 /* TeacherTaskSummaryViewController.m */; };
+		8470FEA82611B1B700B05974 /* TeacherTaskSummaryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FEA72611B1B700B05974 /* TeacherTaskSummaryTableViewCell.m */; };
 		B56C4CB27218F46755ADDDB9 /* libPods-EduLoop.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03A30B8306BBFF24ECE415E9 /* libPods-EduLoop.a */; };
 /* End PBXBuildFile section */
 
@@ -109,6 +122,26 @@
 /* Begin PBXFileReference section */
 		03A30B8306BBFF24ECE415E9 /* libPods-EduLoop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EduLoop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A9FEE5E2DF57E8D74A2552C /* Pods-EduLoop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EduLoop.release.xcconfig"; path = "Target Support Files/Pods-EduLoop/Pods-EduLoop.release.xcconfig"; sourceTree = "<group>"; };
+		843275982611BD0000641E60 /* HomeworkModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeworkModel.h; sourceTree = "<group>"; };
+		843275992611BD0000641E60 /* HomeworkModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeworkModel.m; sourceTree = "<group>"; };
+		8432759E26121C0C00641E60 /* TeacherShowDetailTaskResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeacherShowDetailTaskResponse.h; sourceTree = "<group>"; };
+		8432759F26121C0C00641E60 /* TeacherShowDetailTaskResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeacherShowDetailTaskResponse.m; sourceTree = "<group>"; };
+		843275A72612EF7700641E60 /* TaskDetailCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaskDetailCard.h; sourceTree = "<group>"; };
+		843275A82612EF7700641E60 /* TaskDetailCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaskDetailCard.m; sourceTree = "<group>"; };
+		843275AD26131D0B00641E60 /* ReviewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReviewViewController.h; sourceTree = "<group>"; };
+		843275AE26131D0B00641E60 /* ReviewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReviewViewController.m; sourceTree = "<group>"; };
+		843275B326131EBC00641E60 /* HomeworkCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeworkCard.h; sourceTree = "<group>"; };
+		843275B426131EBC00641E60 /* HomeworkCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeworkCard.m; sourceTree = "<group>"; };
+		843275B9261360EB00641E60 /* ReviewCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReviewCard.h; sourceTree = "<group>"; };
+		843275BA261360EB00641E60 /* ReviewCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReviewCard.m; sourceTree = "<group>"; };
+		843275BF2613633E00641E60 /* ReviewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReviewModel.h; sourceTree = "<group>"; };
+		843275C02613633E00641E60 /* ReviewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReviewModel.m; sourceTree = "<group>"; };
+		843275C526141BBC00641E60 /* ELBottomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELBottomView.h; sourceTree = "<group>"; };
+		843275C626141BBC00641E60 /* ELBottomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELBottomView.m; sourceTree = "<group>"; };
+		843275CF2615F83C00641E60 /* ELFormat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELFormat.h; sourceTree = "<group>"; };
+		843275D02615F83C00641E60 /* ELFormat.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELFormat.m; sourceTree = "<group>"; };
+		843275DB2616008200641E60 /* GetOneHomeworkResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetOneHomeworkResponse.h; sourceTree = "<group>"; };
+		843275DC2616008200641E60 /* GetOneHomeworkResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetOneHomeworkResponse.m; sourceTree = "<group>"; };
 		8470FAEF2577B9A200B05974 /* EduLoop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EduLoop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8470FAF22577B9A200B05974 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8470FAF32577B9A200B05974 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -267,6 +300,12 @@
 		8470FE65260AEE7300B05974 /* GetAllMyTeamResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetAllMyTeamResponse.m; sourceTree = "<group>"; };
 		8470FE6A26105D0200B05974 /* ELBottomSelectOverlayCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELBottomSelectOverlayCell.h; sourceTree = "<group>"; };
 		8470FE6B26105D0200B05974 /* ELBottomSelectOverlayCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELBottomSelectOverlayCell.m; sourceTree = "<group>"; };
+		8470FE8E26116ABE00B05974 /* TeacherTaskModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeacherTaskModel.h; sourceTree = "<group>"; };
+		8470FE8F26116ABE00B05974 /* TeacherTaskModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeacherTaskModel.m; sourceTree = "<group>"; };
+		8470FE9D2611755E00B05974 /* TeacherTaskSummaryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeacherTaskSummaryViewController.h; sourceTree = "<group>"; };
+		8470FE9E2611755E00B05974 /* TeacherTaskSummaryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeacherTaskSummaryViewController.m; sourceTree = "<group>"; };
+		8470FEA62611B1B700B05974 /* TeacherTaskSummaryTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeacherTaskSummaryTableViewCell.h; sourceTree = "<group>"; };
+		8470FEA72611B1B700B05974 /* TeacherTaskSummaryTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeacherTaskSummaryTableViewCell.m; sourceTree = "<group>"; };
 		F87AF0CFB6BB37AC984C83F1 /* Pods-EduLoop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EduLoop.debug.xcconfig"; path = "Target Support Files/Pods-EduLoop/Pods-EduLoop.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -304,6 +343,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		843275CE2615F80A00641E60 /* ELUtils */ = {
+			isa = PBXGroup;
+			children = (
+				843275CF2615F83C00641E60 /* ELFormat.h */,
+				843275D02615F83C00641E60 /* ELFormat.m */,
+				8470FDCD26062E2800B05974 /* BasicInfo.h */,
+				8470FDCE26062E2800B05974 /* BasicInfo.m */,
+			);
+			path = ELUtils;
+			sourceTree = "<group>";
+		};
 		8470FAE62577B9A200B05974 = {
 			isa = PBXGroup;
 			children = (
@@ -329,6 +379,7 @@
 		8470FAF12577B9A200B05974 /* EduLoop */ = {
 			isa = PBXGroup;
 			children = (
+				843275CE2615F80A00641E60 /* ELUtils */,
 				8470FD6525A2D79500B05974 /* ELChatModule */,
 				8470FCB0258C75C400B05974 /* ELCommunityModule */,
 				8470FC452580E12200B05974 /* ELHomeworkModule */,
@@ -452,6 +503,8 @@
 				8470FC8925885C8A00B05974 /* ELCenterOverlay.m */,
 				8470FC9425889A5F00B05974 /* ELFloatingButton.h */,
 				8470FC9525889A5F00B05974 /* ELFloatingButton.m */,
+				843275C526141BBC00641E60 /* ELBottomView.h */,
+				843275C626141BBC00641E60 /* ELBottomView.m */,
 				8470FE4B2609E5FF00B05974 /* ELBottomSelectOverlay.h */,
 				8470FE4C2609E5FF00B05974 /* ELBottomSelectOverlay.m */,
 				8470FE6A26105D0200B05974 /* ELBottomSelectOverlayCell.h */,
@@ -509,6 +562,14 @@
 				8470FC6C2587093800B05974 /* HomeworkShowTableViewCell.m */,
 				8470FC7125870A5100B05974 /* AvatarCard.h */,
 				8470FC7225870A5100B05974 /* AvatarCard.m */,
+				8470FEA62611B1B700B05974 /* TeacherTaskSummaryTableViewCell.h */,
+				8470FEA72611B1B700B05974 /* TeacherTaskSummaryTableViewCell.m */,
+				843275A72612EF7700641E60 /* TaskDetailCard.h */,
+				843275A82612EF7700641E60 /* TaskDetailCard.m */,
+				843275B326131EBC00641E60 /* HomeworkCard.h */,
+				843275B426131EBC00641E60 /* HomeworkCard.m */,
+				843275B9261360EB00641E60 /* ReviewCard.h */,
+				843275BA261360EB00641E60 /* ReviewCard.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -520,6 +581,10 @@
 				8470FC492580E3F000B05974 /* BroadcastViewController.m */,
 				8470FC652587067B00B05974 /* HomeworkShowViewController.h */,
 				8470FC662587067B00B05974 /* HomeworkShowViewController.m */,
+				8470FE9D2611755E00B05974 /* TeacherTaskSummaryViewController.h */,
+				8470FE9E2611755E00B05974 /* TeacherTaskSummaryViewController.m */,
+				843275AD26131D0B00641E60 /* ReviewViewController.h */,
+				843275AE26131D0B00641E60 /* ReviewViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -529,14 +594,24 @@
 			children = (
 				8470FC78258727A700B05974 /* TaskModel.h */,
 				8470FC79258727A700B05974 /* TaskModel.m */,
+				8470FE8E26116ABE00B05974 /* TeacherTaskModel.h */,
+				8470FE8F26116ABE00B05974 /* TeacherTaskModel.m */,
 				8470FDEF26070C4D00B05974 /* PagedResult.h */,
 				8470FDF026070C4D00B05974 /* PagedResult.m */,
 				8470FDE026070A8D00B05974 /* ELResponse.h */,
 				8470FDE126070A8D00B05974 /* ELResponse.m */,
+				8432759E26121C0C00641E60 /* TeacherShowDetailTaskResponse.h */,
+				8432759F26121C0C00641E60 /* TeacherShowDetailTaskResponse.m */,
 				8470FE5E260AEDF700B05974 /* TeamModel.h */,
 				8470FE5F260AEDF700B05974 /* TeamModel.m */,
 				8470FE64260AEE7300B05974 /* GetAllMyTeamResponse.h */,
 				8470FE65260AEE7300B05974 /* GetAllMyTeamResponse.m */,
+				843275DB2616008200641E60 /* GetOneHomeworkResponse.h */,
+				843275DC2616008200641E60 /* GetOneHomeworkResponse.m */,
+				843275982611BD0000641E60 /* HomeworkModel.h */,
+				843275992611BD0000641E60 /* HomeworkModel.m */,
+				843275BF2613633E00641E60 /* ReviewModel.h */,
+				843275C02613633E00641E60 /* ReviewModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -548,8 +623,6 @@
 				8470FC802587534C00B05974 /* ELOverlayItem.m */,
 				8470FC8E25885F1200B05974 /* ELCenterOverlayModel.h */,
 				8470FC8F25885F1200B05974 /* ELCenterOverlayModel.m */,
-				8470FDCD26062E2800B05974 /* BasicInfo.h */,
-				8470FDCE26062E2800B05974 /* BasicInfo.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -909,6 +982,8 @@
 			files = (
 				8470FC812587534C00B05974 /* ELOverlayItem.m in Sources */,
 				8470FC1A2580AAAD00B05974 /* ChildProfileCard.m in Sources */,
+				843275C726141BBC00641E60 /* ELBottomView.m in Sources */,
+				843275C12613633E00641E60 /* ReviewModel.m in Sources */,
 				8470FAFA2577B9A200B05974 /* MineViewController.m in Sources */,
 				8470FD8C25A2E29900B05974 /* ChatDetailViewController.m in Sources */,
 				8470FDBA25AEC99700B05974 /* MessageRecordTableViewCell.m in Sources */,
@@ -919,20 +994,25 @@
 				8470FC7325870A5100B05974 /* AvatarCard.m in Sources */,
 				8470FDAE25A4560D00B05974 /* ChatBoard.m in Sources */,
 				8470FCF9258C9BFB00B05974 /* ELVoteCard.m in Sources */,
+				8432759A2611BD0000641E60 /* HomeworkModel.m in Sources */,
 				8470FC0E25808B9D00B05974 /* ELOverlayTableViewCell.m in Sources */,
 				8470FB052577B9A300B05974 /* main.m in Sources */,
 				8470FDC025B6D62F00B05974 /* ELScreen.m in Sources */,
 				8470FD7425A2DCC000B05974 /* ChatAllViewController.m in Sources */,
 				8470FCE8258C9AC700B05974 /* UgcVoteCard.m in Sources */,
+				8470FE9F2611755E00B05974 /* TeacherTaskSummaryViewController.m in Sources */,
 				8470FD33259A262A00B05974 /* ELSearchBar.m in Sources */,
 				8470FE4D2609E60000B05974 /* ELBottomSelectOverlay.m in Sources */,
 				8470FD57259CBB4000B05974 /* UgcPublishTextImgModel.m in Sources */,
 				8470FE6C26105D0200B05974 /* ELBottomSelectOverlayCell.m in Sources */,
 				8470FD8625A2E22100B05974 /* MessageSummaryCardTableViewCell.m in Sources */,
 				8470FD7A25A2DDBF00B05974 /* MessageModel.m in Sources */,
+				843275BB261360EB00641E60 /* ReviewCard.m in Sources */,
 				8470FC9025885F1200B05974 /* ELCenterOverlayModel.m in Sources */,
 				8470FC672587067B00B05974 /* HomeworkShowViewController.m in Sources */,
 				8470FD45259B05EC00B05974 /* ELImageManager.m in Sources */,
+				843275A026121C0C00641E60 /* TeacherShowDetailTaskResponse.m in Sources */,
+				843275A92612EF7700641E60 /* TaskDetailCard.m in Sources */,
 				8470FCBA258C763900B05974 /* ELCommunityModule.m in Sources */,
 				8470FC4A2580E3F000B05974 /* BroadcastViewController.m in Sources */,
 				8470FD0825907E9E00B05974 /* UgcDetailPageViewController.m in Sources */,
@@ -942,6 +1022,7 @@
 				8470FCA6258B4CBB00B05974 /* ELBottomStackOverlay.m in Sources */,
 				8470FC412580C4DA00B05974 /* ChildModel.m in Sources */,
 				8470FDE226070A8D00B05974 /* ELResponse.m in Sources */,
+				8470FEA82611B1B700B05974 /* TeacherTaskSummaryTableViewCell.m in Sources */,
 				8470FBAB257F3B5100B05974 /* ProfileViewController.m in Sources */,
 				8470FAF72577B9A200B05974 /* SceneDelegate.m in Sources */,
 				8470FC7A258727A700B05974 /* TaskModel.m in Sources */,
@@ -951,13 +1032,17 @@
 				8470FD6125A1B5C500B05974 /* UgcVotePublishViewController.m in Sources */,
 				8470FC6D2587093800B05974 /* HomeworkShowTableViewCell.m in Sources */,
 				8470FD3F259AEB0900B05974 /* UgcVoteModel.m in Sources */,
+				843275B526131EBC00641E60 /* HomeworkCard.m in Sources */,
+				843275D12615F83C00641E60 /* ELFormat.m in Sources */,
 				8470FB602577EE0800B05974 /* UIColor+MyGenerator.m in Sources */,
+				843275AF26131D0B00641E60 /* ReviewViewController.m in Sources */,
 				8470FB9F2579443E00B05974 /* MineMiscCard.m in Sources */,
 				8470FC8A25885C8A00B05974 /* ELCenterOverlay.m in Sources */,
 				8470FBFB2580885800B05974 /* ELOverlay.m in Sources */,
 				8470FD1E25945E1A00B05974 /* CommentCard.m in Sources */,
 				8470FD6B25A2D7CB00B05974 /* ELChatModule.m in Sources */,
 				8470FB902579310E00B05974 /* MineMiscCardTableViewCell.m in Sources */,
+				843275DD2616008200641E60 /* GetOneHomeworkResponse.m in Sources */,
 				8470FCC1258C771900B05974 /* UgcModel.m in Sources */,
 				8470FCB4258C761500B05974 /* CommunityViewController.m in Sources */,
 				8470FD9325A2FF0200B05974 /* ELCustomLabel.m in Sources */,
@@ -968,6 +1053,7 @@
 				8470FCE2258C994B00B05974 /* UgcNormalContent.m in Sources */,
 				8470FB6D2577EE1500B05974 /* UIColor+MyTheme.m in Sources */,
 				8470FB752578CD9500B05974 /* MineToolCard.m in Sources */,
+				8470FE9026116ABE00B05974 /* TeacherTaskModel.m in Sources */,
 				8470FB7B2578D02B00B05974 /* MineToolCardItem.m in Sources */,
 				8470FCC8258C77F100B05974 /* UgcCard.m in Sources */,
 				8470FE60260AEDF700B05974 /* TeamModel.m in Sources */,
@@ -1152,6 +1238,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = EduLoop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1170,6 +1257,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = EduLoop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -75,7 +75,7 @@
                 NSString* msg = [responseObject objectForKey:@"msg"];
                 NSLog(@"error--%@",msg);
                 [BasicInfo showToastWithMsg:msg];
-            }else{
+            }else if(success!=nil){
                 success();
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

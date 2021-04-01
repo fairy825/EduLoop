@@ -7,13 +7,14 @@
 
 #import <UIKit/UIKit.h>
 #import "TaskModel.h"
+#import "TeacherTaskModel.h"
 #import "ELFloatingButton.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface HomeworkShowViewController : UIViewController
 @property(nonatomic,readwrite) int page;
 @property(nonatomic,strong,readwrite) UITableView *tableView;
-@property(nonatomic,strong,readwrite) NSMutableArray<TaskModel *>* models;
+@property(nonatomic,strong,readwrite) NSMutableArray<TeacherTaskModel *>* models;
 @property(nonatomic,strong,readwrite) ELFloatingButton *addBtn;
 - (void)jumpToDetailPageWithData:(TaskModel *)model;
 @end

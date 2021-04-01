@@ -8,6 +8,7 @@
 #import <UIKit/UIKit.h>
 #import "AvatarCard.h"
 #import "TaskModel.h"
+#import "TeacherTaskModel.h"
 #import "ELCustomLabel.h"
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface HomeworkShowTableViewCell : UITableViewCell
-@property (nonatomic, strong, readwrite) TaskModel *data;
+@property (nonatomic, strong, readwrite) TeacherTaskModel *data;
 @property(nonatomic,strong,readwrite) AvatarCard *avatarCard;
 @property(nonatomic,strong,readwrite) UIView *seperateView;
 @property(nonatomic,strong,readwrite) UIView *bgView;
@@ -28,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong,readwrite) UILabel *detailLabel;
 @property(nonatomic,weak,readwrite) id<HomeworkShowTableViewCellDelegate> delegate;
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier data:(TaskModel *)model;
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier data:(TeacherTaskModel *)model;
 - (void)loadData;
 @end
 

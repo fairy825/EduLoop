@@ -22,7 +22,8 @@
     // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
     // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-    
+    TestViewController *tc = [[TestViewController alloc]init];
+    tc.tabBarItem.title = @"tc";
     ChatAllViewController *controller3 = [[ChatAllViewController alloc]init];
     controller3.tabBarItem.title = @"消息";
     
