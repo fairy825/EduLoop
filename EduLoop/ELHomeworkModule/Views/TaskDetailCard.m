@@ -44,21 +44,20 @@
     }];
     
     [self.bgView addSubview:self.teacherLabel];
-    [self.teacherLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.titleLabel.mas_bottom).offset(10);
-        make.left.equalTo(self.titleLabel);
-    }];
-    
     [self.bgView addSubview:self.avatarImage];
     [self.avatarImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.teacherLabel);
+        make.top.equalTo(self.titleLabel.mas_bottom).offset(10);
         make.left.equalTo(self.teacherLabel.mas_right).offset(5);
-        make.size.mas_equalTo(CGSizeMake(20, 20));
+        make.size.mas_equalTo(CGSizeMake(40, 40));
+    }];
+    [self.teacherLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.equalTo(self.avatarImage);
+        make.left.equalTo(self.titleLabel);
     }];
     
     [self.bgView addSubview:self.seperateLine];
     [self.seperateLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.teacherLabel.mas_bottom).offset(10);
+        make.top.equalTo(self.avatarImage.mas_bottom).offset(10);
         make.height.equalTo(@5);
         make.left.equalTo(self.bgView);
         make.right.equalTo(self.bgView);
@@ -88,6 +87,7 @@
     _detailLabel.text = _data.content;
     _timeLabel.text = _data.publishTime;
     _teacherLabel.text = _data.creatorName;
+    _avatarImage.image = [UIImage imageNamed:@"avatar-4"];
 }
 
 #pragma mark - View
@@ -103,7 +103,7 @@
     if(!_avatarImage){
         _avatarImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 50, 50)];
         _avatarImage.contentMode = UIViewContentModeScaleToFill;
-        _avatarImage.layer.cornerRadius = 25;
+        _avatarImage.layer.cornerRadius = 20;
         _avatarImage.layer.masksToBounds = YES;
         
     }

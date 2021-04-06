@@ -9,9 +9,7 @@
 #import <JSONModel.h>
 
 NS_ASSUME_NONNULL_BEGIN
-@protocol TaskModel
 
-@end
 @protocol TeacherTaskModel
 
 @end

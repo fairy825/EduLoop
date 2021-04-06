@@ -12,6 +12,10 @@
 #import "HomeworkModel.h"
 #import "ELScreen.h"
 #import "ReviewViewController.h"
+#import <MJRefresh.h>
+#import <AFNetworking.h>
+#import "BasicInfo.h"
+#import "TeacherShowDetailTaskResponse.h"
 @interface TeacherTaskSummaryViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
@@ -30,6 +34,7 @@
 {
     self = [super init];
     if (self) {
+        self.page = 1;
         _data = data;
         _models = _data.homeworkLists;
 //        [self getAllMyTeamsNetwork];
@@ -40,17 +45,19 @@
 
 - (void)setNavagationBar{
     [self setTitle:@"任务详情"];
-    
-    UIView *nav = [[UIView alloc]initWithFrame: CGRectMake(50, 0, 200, 50)];
-    nav.backgroundColor = [UIColor color5bb2ff];
-    UILabel *label = [[UILabel alloc]init];
-    label.font = [UIFont fontWithName:@"PingFangSC" size:14.f];
-    label.textColor = [UIColor redColor];
-    label.text = [NSString stringWithFormat:@"%@%@",@"截止提交时间：",_data.endTime];
-    [label sizeToFit];
-    [nav addSubview:label];
-    
-    self.navigationItem.titleView = nav;
+    self.navigationController.navigationBar.barTintColor = [UIColor color5bb2ff];
+    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+//    self.navigationController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"icon_return"] style:UIBarButtonItemStylePlain target:self action:@selector(popout)];
+//    UIView *nav = [[UIView alloc]initWithFrame: CGRectMake(50, 0, 200, 50)];
+//    nav.backgroundColor = [UIColor color5bb2ff];
+//    UILabel *label = [[UILabel alloc]init];
+//    label.font = [UIFont fontWithName:@"PingFangSC" size:14.f];
+//    label.textColor = [UIColor redColor];
+//    label.text = [NSString stringWithFormat:@"%@%@",@"截止提交时间：",_data.endTime];
+//    [label sizeToFit];
+//    [nav addSubview:label];
+//
+//    self.navigationItem.titleView = nav;
 }
 
 - (void)setupSubviews{
@@ -62,15 +69,55 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView setTableHeaderView:
         ({
-            UIView *header = [UIView new];
-            [header addSubview:self.taskDetailCard];
-            [self.taskDetailCard loadData:_data];
-        [header setNeedsLayout];
+        UIView *header = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        
+        UIView *bgView = [[UIView alloc]init];
+        [header addSubview:bgView];
+        [bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(header);
+        }];
+        
+        [header addSubview:self.taskDetailCard];
+        [self.taskDetailCard mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(header).offset(20);
+            make.left.equalTo(header).offset(20);
+            make.right.equalTo(header).offset(-20);
+        }];
+        [self.taskDetailCard loadData:_data];
         [header layoutIfNeeded];
-        NSLog(@"%@", [NSString stringWithFormat:@"%f",self.taskDetailCard.bounds.size.height ]);
-        header.frame = CGRectMake(20, 20, SCREEN_WIDTH-40, 200);
+        CGFloat h=0;
+        for (UIView *view in [header subviews]) {
+            h+=view.bounds.size.height;
+        }
+        header.frame = CGRectMake(0,0, self.view.bounds.size.width, self.taskDetailCard.bounds.size.height+40);
+        
+        UIBezierPath *maskPath = [UIBezierPath bezierPath];
+        [maskPath moveToPoint:CGPointMake(header.frame.origin.x, header.frame.origin.y)];
+        [maskPath addLineToPoint:CGPointMake(header.frame.origin.x, header.frame.origin.y+header.frame.size.height/2)];
+        [maskPath addQuadCurveToPoint:CGPointMake(header.frame.origin.x+header.frame.size.width, header.frame.origin.y+header.frame.size.height/2) controlPoint:CGPointMake(header.frame.origin.x+header.frame.size.width/2, header.frame.origin.y+header.frame.size.height*2/3)];
+        [maskPath addLineToPoint:CGPointMake(header.frame.origin.x+header.frame.size.width, header.frame.origin.y+header.frame.size.height/2)];
+        [maskPath addLineToPoint:CGPointMake(header.frame.origin.x+header.frame.size.width, header.frame.origin.y)];
+        [maskPath closePath];
+
+        CAShapeLayer *maskLayer = [[CAShapeLayer alloc]init];
+        maskLayer.frame = header.bounds;
+        maskLayer.path = maskPath.CGPath;
+//        maskLayer.fillColor = [UIColor redColor].CGColor;
+        bgView.layer.mask = maskLayer;
+        bgView.backgroundColor = [UIColor color5bb2ff];
         header;
         })];
+    
+    MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [self teacherShowDetailTaskNetworkWithTaskId:self->_data.id];
+    }];
+    footer.stateLabel.font = [UIFont systemFontOfSize:15];
+    //正在刷新
+    [footer setTitle:@"" forState:MJRefreshStateIdle];
+    [footer setTitle:@"拼命加载中..." forState:MJRefreshStateRefreshing];
+    [footer setTitle:@"没有更多数据" forState:MJRefreshStateNoMoreData];
+    self.tableView.mj_footer = footer;
+    
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
@@ -84,6 +131,49 @@
 -(void)loadData{
 }
 
+
+- (void)endRefresh{
+    if (self.page == 1) {
+           [self.tableView.mj_header endRefreshing];
+    }
+    [self.tableView.mj_footer endRefreshing];
+}
+
+#pragma mark - network
+-(void) teacherShowDetailTaskNetworkWithTaskId:(NSInteger)taskId{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    int start = 1;
+    int size = BasicInfo.pageSize;
+    start=self.page+1;
+    
+    NSDictionary *paramDict =  @{@"start":[NSString stringWithFormat:@"%d", start],@"size":[NSString stringWithFormat:@"%d", size]
+    };
+    [manager GET:[BasicInfo url:@"/task/teacher" path:[NSString stringWithFormat:@"%ld",(long)taskId]] parameters:paramDict headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        [self endRefresh];
+        NSLog(@"%@---%@",[responseObject class],responseObject);
+        int code = [[responseObject objectForKey:@"code"]intValue];
+        NSString* msg = [responseObject objectForKey:@"msg"];
+        if(code==0){
+            TeacherShowDetailTaskResponse *response = [[TeacherShowDetailTaskResponse alloc]initWithDictionary:responseObject error:nil];
+            TeacherTaskModel *taskModel = response.data;
+            
+            if(start>taskModel.totalPages){
+                [self.tableView.mj_footer endRefreshingWithNoMoreData];
+            }else{
+                self.page=start;
+            }
+            
+            [self->_models addObjectsFromArray: taskModel.homeworkLists];
+        }else{
+            NSLog(@"error--%@",msg);
+            [BasicInfo showToastWithMsg:msg];
+        }
+        [self.tableView reloadData];
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"请求失败--%@",error);
+        }];
+}
 
 #pragma mark - UITableViewDataSource
 
@@ -121,9 +211,17 @@
 - (TaskDetailCard *)taskDetailCard{
     if(!_taskDetailCard){
         _taskDetailCard = [[TaskDetailCard alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 250)];
-        
+        _taskDetailCard.layer.masksToBounds = NO;
+        _taskDetailCard.layer.shadowColor = [UIColor grayColor].CGColor;
+        _taskDetailCard.layer.shadowOffset = CGSizeMake(0,10);
+        _taskDetailCard.layer.shadowOpacity = 0.7;
+        _taskDetailCard.layer.shadowRadius = 10;
     }
     return _taskDetailCard;
 }
 
+-(void)popout{
+    [self.navigationController popViewControllerAnimated:YES];
+
+}
 @end

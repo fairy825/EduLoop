@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,readwrite) NSInteger shouldHomeworkNumber;
 @property(nonatomic,readwrite) BOOL delayAllowed;
 @property (nonatomic, strong) NSArray<HomeworkModel,Optional> *homeworkLists;
+@property(nonatomic,readwrite) NSInteger totalPages;
 
 
 @end

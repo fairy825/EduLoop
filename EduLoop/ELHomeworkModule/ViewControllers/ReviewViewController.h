@@ -10,7 +10,7 @@
 #import "ReviewModel.h"
 #import "HomeworkCard.h"
 #import "ReviewCard.h"
-
+#import "ELBottomView.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ReviewViewController : UIViewController
@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong,readwrite) UIButton *reviewBtn;
 @property(nonatomic,strong,readwrite) UITextField *scoreField;
 @property(nonatomic,strong,readwrite) UITextView *detailTextView;
+@property(nonatomic,strong,readwrite) ELBottomView *editView;
+
 - (instancetype)initWithHomeworkModel:(HomeworkModel *)model;
 @end
 

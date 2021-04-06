@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setUpSubviews;
 - (void)showHighlightViewFromPoint:(CGPoint) point ToPoint:(CGPoint) point2 Animation:(BOOL)animated;
 - (void)showHighlightView;
-
+- (void)dismissOverlay;
 @end
 
 NS_ASSUME_NONNULL_END

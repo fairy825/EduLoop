@@ -34,7 +34,17 @@
     [self setNavagationBar];
     [self setupSubviews];
     [self loadData];
+    //键盘弹出监听
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil ];
+    //键盘收回监听
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHidden:) name:UIKeyboardWillHideNotification object:nil];
 }
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 
 -(void)setNavagationBar{
     [self setTitle:@"教师点评"];
@@ -89,13 +99,25 @@
         self.reviewCard.alpha=1;
         [self.reviewCard loadData:_review];
     }
+    CGFloat hi = 0;
+    for(UIView *sub in [_scrollView subviews]){
+        hi+=sub.frame.size.height;
+    }
     [self.scrollView layoutIfNeeded];
     CGFloat h = 0;
     for(UIView *sub in [_scrollView subviews]){
         h+=sub.frame.size.height;
     }
     self.scrollView.contentSize =  CGSizeMake(self.view.bounds.size.width,h);
-    
+//
+//    [self showReviewEditViewWithScore:[NSNumber numberWithInteger: reviewCard.data.score] Detail:reviewCard.data.detail];
+    if(_review){
+        NSLog(@"1");
+    }else{
+        NSLog(@"2");
+    }
+    self.scoreField.text = [ELFormat stringFromNSNumber:_review?[NSNumber numberWithInteger: _review.score]:nil];
+    self.detailTextView.text = [ELFormat safeString:_review?_review.detail:nil];
 }
 
 - (UIButton *)reviewBtn{
@@ -168,42 +190,89 @@
     return _detailTextView;
 }
 
+
+#pragma mark - Keyboard
+//键盘弹出时会调用
+-(void)keyboardWillShow:(NSNotification *)notification
+{
+    //获取键盘的基本信息
+    NSDictionary *userInfo = [notification userInfo];
+    CGRect rect = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    CGFloat keyboardHeight = rect.size.height;
+    CGFloat duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    CGFloat height = self.editView.frame.size.height;
+    CGFloat offset = keyboardHeight+height;
+
+    [UIView animateWithDuration:duration animations:^{
+        self.editView.frame = CGRectMake(0.0f, self.view.bounds.size.height-offset-HOME_BUTTON_HEIGHT, self.editView.frame.size.width, height);
+
+    } completion:nil];
+}
+
+ 
+//键盘收回时会调用
+-(void)keyboardWillHidden:(NSNotification *)notification
+{
+    NSDictionary *userInfo = [notification userInfo];
+
+    CGFloat duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    CGFloat height = self.editView.frame.size.height;
+    [UIView animateWithDuration:duration animations:^{
+        self.editView.frame = CGRectMake(0.0f, self.view.bounds.size.height-HOME_BUTTON_HEIGHT-height, self.editView.frame.size.width, height);
+    } completion:nil];
+}
+
 - (void)showReviewEditView{
-    [self showReviewEditViewWithScore:nil Detail:nil];
+    [self.editView showHighlightView];
+
+//    [self showReviewEditViewWithScore:nil Detail:nil];
+}
+
+- (ELBottomView *)editView{
+    if(!_editView){
+        _editView = [[ELBottomView alloc]init];
+        UIView *contentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width,SCREEN_HEIGHT/3)];
+        contentView.backgroundColor = [UIColor whiteColor];
+        
+        UILabel *scoreLabel = [[UILabel alloc]init];
+        scoreLabel.text = @"分数";
+        scoreLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:18.f];
+        scoreLabel.textColor = [UIColor color333333];
+        [scoreLabel sizeToFit];
+        scoreLabel.frame = CGRectMake(20, 20, 60, 20);
+        [contentView addSubview:scoreLabel];
+        [contentView addSubview:self.scoreField];
+        UILabel *contentLabel = [[UILabel alloc]init];
+        contentLabel.text = @"评语";
+        contentLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:18.f];
+        contentLabel.textColor = [UIColor color333333];
+        [contentLabel sizeToFit];
+        contentLabel.frame = CGRectMake(20, 60, 60, 20);
+        [contentView addSubview:contentLabel];
+        [contentView addSubview:self.detailTextView];
+        
+        [_editView.rightButton setTitle:@"发送" forState:UIControlStateNormal];
+        _editView.contentView = contentView;
+        _editView.delegate = self;
+        UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
+        [_editView addGestureRecognizer:recognizer];
+    }
+    return _editView;
+}
+
+-(void)dismissKeyboard{
+    [self.editView endEditing:YES];
 }
 
 - (void)showReviewEditViewWithScore:(NSNumber *)score Detail:(NSString *)content{
-    ELBottomView *editView = [[ELBottomView alloc]init];
-    UIView *contentView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width,SCREEN_HEIGHT/2)];
-    contentView.backgroundColor = [UIColor whiteColor];
-    
-    UILabel *scoreLabel = [[UILabel alloc]init];
-    scoreLabel.text = @"分数";
-    scoreLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:18.f];
-    scoreLabel.textColor = [UIColor color333333];
-    [scoreLabel sizeToFit];
-    scoreLabel.frame = CGRectMake(20, 20, 60, 20);
-    [contentView addSubview:scoreLabel];
-    [contentView addSubview:self.scoreField];
-    UILabel *contentLabel = [[UILabel alloc]init];
-    contentLabel.text = @"评语";
-    contentLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:18.f];
-    contentLabel.textColor = [UIColor color333333];
-    [contentLabel sizeToFit];
-    contentLabel.frame = CGRectMake(20, 60, 60, 20);
-    [contentView addSubview:contentLabel];
-    [contentView addSubview:self.detailTextView];
-    self.scoreField.text = [ELFormat stringFromNSNumber:score];
-    self.detailTextView.text = [ELFormat safeString:content];
-    [editView.rightButton setTitle:@"发送" forState:UIControlStateNormal];
-    editView.contentView = contentView;
-    editView.delegate = self;
-    [editView showHighlightView];
+    [self.editView showHighlightView];
 }
 
 #pragma mark ReviewCardDelegate
 - (void)clickUpdateBtn:(ReviewCard *)reviewCard{
-    [self showReviewEditViewWithScore:[NSNumber numberWithInteger: reviewCard.data.score] Detail:reviewCard.data.detail];
+    [self.editView showHighlightView];
+//
+//    [self showReviewEditViewWithScore:[NSNumber numberWithInteger: reviewCard.data.score] Detail:reviewCard.data.detail];
 }
 
 #pragma mark ELBottomViewDelegate
@@ -237,6 +306,8 @@
     }
 }
 
+
+#pragma mark - network
 - (void)reload{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     

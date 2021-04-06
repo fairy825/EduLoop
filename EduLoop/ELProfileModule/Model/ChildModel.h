@@ -11,7 +11,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ChildModel : NSObject
 @property(nonatomic,strong,readwrite) NSString *nickname;
-@property(nonatomic,strong,readwrite) NSString *school;
+@property(nonatomic,strong,readwrite) NSString *sno;
+@property(nonatomic,strong,readwrite) NSString *team;
+@property(nonatomic,strong,readwrite) NSString *relationship;
 @property(nonatomic,strong,readwrite) NSString *sex;
 @property(nonatomic,strong,readwrite) NSString *grade;
 @property(nonatomic,strong,readwrite) NSString *avatarUrl;

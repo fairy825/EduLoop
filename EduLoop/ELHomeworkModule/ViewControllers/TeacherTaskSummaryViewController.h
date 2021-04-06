@@ -12,6 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TeacherTaskSummaryViewController : UIViewController
+@property(nonatomic,readwrite) int page;
 @property(nonatomic,strong,readwrite) UITableView *tableView;
 @property(nonatomic,strong,readwrite) TaskDetailCard *taskDetailCard;
 @property(nonatomic,strong,readwrite) NSMutableArray<HomeworkModel *> *models;

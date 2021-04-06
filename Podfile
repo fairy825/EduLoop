@@ -8,4 +8,7 @@ target 'EduLoop' do
     pod 'JSONModel'
     pod 'MJRefresh'
     pod 'MBProgressHUD', '~> 1.2.0'
+    pod 'LMJDropdownMenu'
+    pod 'DLRadioButton', '~> 1.4'
+    pod 'QuickSecurityCode'
 end

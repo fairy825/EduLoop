@@ -10,7 +10,10 @@
 #import "ELHomeworkModule/ELHomeworkModule.h"
 #import "ELCommunityModule/ELCommunityModule.h"
 #import "ELChatModule/ELChatModule.h"
+#import "ELOauthModule/ELOauthModule.h"
+#import "ELTeamModule/ELTeamModule.h"
 #import "TestViewController.h"
+
 @interface SceneDelegate ()
 
 @end
@@ -22,6 +25,14 @@
     // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
     // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:@1 forKey:@"MY_ACCOUNT_ID"];
+    [userDefaults setObject:[NSNumber numberWithBool:YES] forKey:@"IS_PARENT"];
+    [userDefaults synchronize];
+    
+//    LoginViewController *loginVC = [[LoginViewController alloc]init];
+//    loginVC.tabBarItem.title = @"通知";
+    
     TestViewController *tc = [[TestViewController alloc]init];
     tc.tabBarItem.title = @"tc";
     ChatAllViewController *controller3 = [[ChatAllViewController alloc]init];
@@ -44,6 +55,9 @@
     HomeworkShowViewController *controller2 = [[HomeworkShowViewController alloc]init];
     controller2.tabBarItem.title = @"通知";
 
+    InputTeamCodeViewController *itcVC = [[InputTeamCodeViewController alloc]init];
+    itcVC.tabBarItem.title = @"通知";
+    
 //    UIViewController *controller1 = [[UIViewController alloc] init];
 //    controller1.view.backgroundColor = [UIColor grayColor];
 //    controller1.tabBarItem.title = @"新闻";

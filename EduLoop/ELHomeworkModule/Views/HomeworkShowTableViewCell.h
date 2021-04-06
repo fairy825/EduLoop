@@ -10,6 +10,7 @@
 #import "TaskModel.h"
 #import "TeacherTaskModel.h"
 #import "ELCustomLabel.h"
+#import <JSONModel.h>
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol HomeworkShowTableViewCellDelegate<NSObject>
@@ -17,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface HomeworkShowTableViewCell : UITableViewCell
-@property (nonatomic, strong, readwrite) TeacherTaskModel *data;
+@property (nonatomic, strong, readwrite) JSONModel *data;
 @property(nonatomic,strong,readwrite) AvatarCard *avatarCard;
 @property(nonatomic,strong,readwrite) UIView *seperateView;
 @property(nonatomic,strong,readwrite) UIView *bgView;
@@ -29,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong,readwrite) UILabel *detailLabel;
 @property(nonatomic,weak,readwrite) id<HomeworkShowTableViewCellDelegate> delegate;
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier data:(TeacherTaskModel *)model;
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier data:(JSONModel *)model;
 - (void)loadData;
 @end
 

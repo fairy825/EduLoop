@@ -11,6 +11,7 @@
 #import <Masonry/Masonry.h>
 #import "UIColor+MyTheme.h"
 #import "ELOverlay.h"
+#import "ELCenterOverlay.h"
 @interface ChildProfileCard()<UITableViewDelegate,UITableViewDataSource,ELOverlayDelegate>
 @property(nonatomic,strong,readwrite) NSMutableArray<SettingDataModel*>* models;
 @end
@@ -65,8 +66,37 @@
         SettingDataModel *model = [SettingDataModel new];
         model.accessoryType = SettingTableViewCellType_InlineTextField;
         model.showArrow = NO;
-        model.title =@"孩子学校";
-        model.detailText = data.school;
+        model.title =@"孩子学号";
+        model.detailText = data.sno;
+        model;
+    })];
+    [_models addObject:({
+        SettingDataModel *model = [SettingDataModel new];
+        model.accessoryType = SettingTableViewCellType_InlineTextField;
+        model.showArrow = YES;
+        model.title =@"所在班级";
+        model.detailText = data.team;
+        model.clickBlock = ^{
+            if(model.detailText == @"未加入"){
+               
+            }else{
+                ELCenterOverlayModel *centerOverlayModel = [ELCenterOverlayModel new];
+                centerOverlayModel.title = @"确认退出该班级吗？";
+                centerOverlayModel.leftChoice = ({
+                    ELOverlayItem *sureItem =[ELOverlayItem new];
+                    sureItem.title = @"确认";
+                    __weak typeof(self) wself = self;
+                    sureItem.clickBlock = ^{
+                        __strong typeof(self) sself = wself;
+                        sself.models[3].detailText = @"未加入";
+                        [sself.tableView reloadData];
+                    };
+                    sureItem;
+                });
+                ELCenterOverlay *alertView = [[ELCenterOverlay alloc]initWithFrame:self.bounds Data:centerOverlayModel];
+                [alertView showHighlightView];
+            }
+        };
         model;
     })];
     [_models addObject:({
@@ -92,6 +122,21 @@
             overlay.delegate = self;
             [overlay showHighlightView];
         };
+        model;
+    })];
+    [_models addObject:({
+        SettingDataModel *model = [SettingDataModel new];
+        model.accessoryType = SettingTableViewCellType_InlineTextField;
+        model.showArrow = NO;
+        model.title =@"关系";
+        model.detailText = data.relationship;
+        model;
+    })];
+    [_models addObject:({
+        SettingDataModel *model = [SettingDataModel new];
+        model.accessoryType = SettingTableViewCellType_Text;
+        model.showArrow = YES;
+        model.title =@"点击查看二维码";
         model;
     })];
 }
@@ -128,7 +173,7 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    return _models.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{

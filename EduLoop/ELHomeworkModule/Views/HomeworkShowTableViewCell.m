@@ -21,7 +21,7 @@
     return self;
 }
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier data:(TeacherTaskModel *)model{
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier data:(JSONModel *)model{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if(self){
         _data = model;
@@ -36,51 +36,60 @@
 }
 
 - (void)loadData{
-    _titleLabel.text = _data.title;
-    _detailLabel.text = _data.content;
-    _avatarCard.nameLabel.text=_data.creatorName;
-    _avatarCard.publishTimeLabel.text=_data.timeDesc;
-    /**      NSString *isFinish = _data.finish;
-    NSString *rightButtonTitle;
-    UIColor *rightButtonColor;
     NSString *hintStr;
     UIColor *hintStrColor;
-   if([isFinish isEqual:@"FINISHED_AND_REVIEWED"]
-        ||[isFinish isEqual:@"FINISHED_NOT_REVIEWED"]){
-        if([isFinish isEqual:@"FINISHED_AND_REVIEWED"])
-            rightButtonTitle=@"已批改";
-        else if([isFinish isEqual:@"FINISHED_NOT_REVIEWED"])
-                rightButtonTitle=@"已完成未批改";
-        rightButtonColor = [UIColor elColorWithHex:Color_finished];
-        hintStr = @"点击查看作业详情";
-        hintStrColor = [UIColor color999999];
-    }else{
-        hintStr = [NSString stringWithFormat:@"%@%@",@"作业提交截止时间为",_data.endTime];
-        hintStrColor = [UIColor elColorWithHex:Color_Red];
-        _arrowImage.alpha=0;
-        if([isFinish isEqual:@"NOT_FINISH"]){
-            rightButtonTitle=@"未完成";
-            rightButtonColor = [UIColor elColorWithHex:Color_not_finished];
+    if([_data isKindOfClass: TeacherTaskModel.class]){
+        TeacherTaskModel *data = (TeacherTaskModel *)_data;
+        _titleLabel.text = data.title;
+        _detailLabel.text = data.content;
+        _avatarCard.nameLabel.text=data.creatorName;
+        _avatarCard.publishTimeLabel.text=data.timeDesc;
+        hintStr=[NSString stringWithFormat:@"%@%ld/%ld",@"已提交",(long)data.realHomeworkNumber,(long)data.shouldHomeworkNumber];
+       hintStrColor =[UIColor color555555];
+       _otherButton.alpha = 0;
+    }else if([_data isKindOfClass: TaskModel.class]){
+        TaskModel *data = (TaskModel *)_data;
+        _titleLabel.text = data.title;
+        _detailLabel.text = data.content;
+        _avatarCard.nameLabel.text=data.creatorName;
+        _avatarCard.publishTimeLabel.text=data.timeDesc;
+         NSString *isFinish = data.finish;
+        NSString *rightButtonTitle;
+        UIColor *rightButtonColor;
+       if([isFinish isEqual:@"FINISHED_AND_REVIEWED"]
+            ||[isFinish isEqual:@"FINISHED_NOT_REVIEWED"]){
+            if([isFinish isEqual:@"FINISHED_AND_REVIEWED"])
+                rightButtonTitle=@"已批改";
+            else if([isFinish isEqual:@"FINISHED_NOT_REVIEWED"])
+                    rightButtonTitle=@"已完成未批改";
+            rightButtonColor = [UIColor elColorWithHex:Color_finished];
+            hintStr = @"点击查看作业详情";
+            hintStrColor = [UIColor color999999];
+           _arrowImage.alpha=1;
+        }else{
+            hintStr = [NSString stringWithFormat:@"%@%@",@"作业提交截止时间为",data.endTime];
+            hintStrColor = [UIColor elColorWithHex:Color_Red];
+            _arrowImage.alpha=0;
+            if([isFinish isEqual:@"NOT_FINISH"]){
+                rightButtonTitle=@"未完成";
+                rightButtonColor = [UIColor elColorWithHex:Color_not_finished];
+            }
+            else if([isFinish isEqual:@"DELAY_CAN_FINISH"]){
+                rightButtonTitle=@"超时可提交";
+                rightButtonColor = [UIColor elColorWithHex:Color_delay_can_finish];
+            }
+            else if([isFinish isEqual:@"DELAY_CANNOT_FINISH"]){
+                rightButtonTitle=@"超时不可提交";
+                rightButtonColor = [UIColor elColorWithHex:Color_delay_cannot_finish];
+            }
+            if(data.delayAllowed){
+                hintStr = [NSString stringWithFormat:@"%@%@",hintStr,@",允许延迟提交"];
+            }
         }
-        else if([isFinish isEqual:@"DELAY_CAN_FINISH"]){
-            rightButtonTitle=@"超时可提交";
-            rightButtonColor = [UIColor elColorWithHex:Color_delay_can_finish];
-        }
-        else if([isFinish isEqual:@"DELAY_CANNOT_FINISH"]){
-            rightButtonTitle=@"超时不可提交";
-            rightButtonColor = [UIColor elColorWithHex:Color_delay_cannot_finish];
-        }
-        if(_data.delayAllowed){
-            hintStr = [NSString stringWithFormat:@"%@%@",hintStr,@",允许延迟提交"];
-        }
+        _otherButton.alpha = 1;
+        _otherButton.text = rightButtonTitle;
+        _otherButton.backgroundColor = rightButtonColor;
     }
-     **/
-    NSString *hintStr=[NSString stringWithFormat:@"%@%d/%d",@"已提交",_data.realHomeworkNumber,_data.shouldHomeworkNumber];
-    UIColor *hintStrColor =[UIColor color555555];
-    _otherButton.alpha = 0;
-    NSArray *targets = [_otherButton gestureRecognizers];
-    for (UIGestureRecognizer *recognizer in targets)
-        [_otherButton removeGestureRecognizer: recognizer];
     _hintLabel.text=hintStr;
     _hintLabel.textColor =hintStrColor;
 }
@@ -216,8 +225,8 @@
         _otherButton.textAlignment = NSTextAlignmentCenter;
         [_otherButton setTextInsets:UIEdgeInsetsMake(3, 10, 3, 10)];
         [_otherButton sizeToFit];
-        _otherButton.text =@"...";
-        _otherButton.textColor = [UIColor color999999];
+//        _otherButton.text =@"...";
+        _otherButton.textColor = [UIColor whiteColor];
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickHomeworkMenu)];
         [_otherButton addGestureRecognizer:tapGesture];
     }

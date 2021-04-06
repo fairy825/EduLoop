@@ -49,17 +49,21 @@
     [_models addObject:({
         ChildModel *model = [ChildModel new];
         model.grade = @"五年级";
-        model.school =@"上海小学";
+        model.team =@"上海小学";
         model.nickname = @"dd";
         model.sex = @"女";
+        model.relationship = @"妈妈";
+        model.sno = @"11111";
         model;
     })];
     [_models addObject:({
         ChildModel *model = [ChildModel new];
         model.grade = @"六年级";
-        model.school =@"上海小学";
+        model.team =@"上海小学";
         model.nickname = @"cc";
         model.sex = @"女";
+        model.relationship = @"妈妈";
+        model.sno = @"11111";
         model;
     })];
 }
@@ -85,7 +89,7 @@
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 350;
+    return 90+56*7;
 }
 
 @end

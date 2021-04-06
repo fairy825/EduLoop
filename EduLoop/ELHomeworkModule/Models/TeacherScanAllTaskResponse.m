@@ -5,8 +5,8 @@
 //  Created by mijika on 2021/3/21.
 //
 
-#import "ELResponse.h"
+#import "TeacherScanAllTaskResponse.h"
 
-@implementation ELResponse
+@implementation TeacherScanAllTaskResponse
 
 @end

@@ -14,11 +14,16 @@
 #import "BroadcastViewController.h"
 #import <AFNetworking.h>
 #import "BasicInfo.h"
-#import "ELResponse.h"
+#import "TeacherScanAllTaskResponse.h"
 #import <MJRefresh.h>
 #import "TeacherTaskSummaryViewController.h"
 #import "TeacherShowDetailTaskResponse.h"
-@interface HomeworkShowViewController ()<UITableViewDelegate,UITableViewDataSource,HomeworkShowTableViewCellDelegate>
+#import "ELKeys.h"
+#import <LMJDropdownMenu.h>
+#import "GetMyStudentsResponse.h"
+#import "ParentScanAllTaskResponse.h"
+#import "InputTeamCodeViewController.h"
+@interface HomeworkShowViewController ()<UITableViewDelegate,UITableViewDataSource,HomeworkShowTableViewCellDelegate,LMJDropdownMenuDelegate,LMJDropdownMenuDataSource>
 
 @end
 
@@ -26,18 +31,38 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [self.navigationController setNavigationBarHidden:YES animated:YES];
-    [self teacherLoadDataIsRefresh:YES];
-
+    [self loadDataNetwork:YES];
+//    [self teacherLoadDataIsRefresh:YES];
 }
+
 - (void)viewWillDisappear:(BOOL)animated{
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor f6f6f6];
+    [self getIdentity];
     _models = @[].mutableCopy;
+    _students = @[].mutableCopy;
     self.page=1;
     [self setupSubviews];
+}
+
+- (void)getIdentity{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *isParent = (NSNumber *)[userDefaults objectForKey:ELKeys.IS_PARENT];
+    _isParent = isParent.boolValue;
+}
+
+- (void)loadDataNetwork:(BOOL) isRefresh{
+    if(_isParent){
+        [self getMyStuNetworkWithSuccess:^{
+            [self loadDataIsRefresh:isRefresh];
+        }];
+    }else{
+        [self teacherLoadDataIsRefresh:isRefresh];
+    }
 }
 
 - (void)endRefresh{
@@ -53,6 +78,31 @@
     [BasicInfo DELETE:[BasicInfo url:@"/task" path:tid] success:success];
 }
 
+- (void)getMyStuNetworkWithSuccess:(nullable void (^)())success{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager GET:[BasicInfo urlwithDefaultStartAndSize:@"/student/mine"] parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [_students removeAllObjects];
+        
+        NSLog(@"%@---%@",[responseObject class],responseObject);
+        int code = [[responseObject objectForKey:@"code"]intValue];
+        NSString* msg = [responseObject objectForKey:@"msg"];
+        if(code==0){
+            GetMyStudentsResponse *model =[[GetMyStudentsResponse alloc] initWithDictionary:responseObject error: nil];
+            
+            [_students addObjectsFromArray: model.data];
+//            self->_selectedStuIndex = 0;
+            [self.menu reloadOptionsData];
+            if(success) success();
+        }else{
+            NSLog(@"error--%@",msg);
+            [BasicInfo showToastWithMsg:msg];
+        }
+
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"请求失败--%@",error);
+        }];
+}
+
 - (void)loadDataIsRefresh:(BOOL) isRefresh{
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     int start = 1;
@@ -62,7 +112,7 @@
     }
     NSDictionary *paramDict =  @{@"start":[NSString stringWithFormat:@"%d", start],@"size":[NSString stringWithFormat:@"%d", size]
     };
-    [manager GET:[BasicInfo url:@"/task/student" path:@"1"] parameters:paramDict headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    [manager GET:[BasicInfo url:@"/task/student" path:[NSString stringWithFormat:@"%ld",_students[_selectedStuIndex].id]] parameters:paramDict headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if(isRefresh){
             self.page=1;
             [_models removeAllObjects];
@@ -72,7 +122,7 @@
         int code = [[responseObject objectForKey:@"code"]intValue];
         NSString* msg = [responseObject objectForKey:@"msg"];
         if(code==0){
-            ELResponse *model =[[ELResponse alloc] initWithDictionary:responseObject error: nil];
+            ParentScanAllTaskResponse *model =[[ParentScanAllTaskResponse alloc] initWithDictionary:responseObject error: nil];
             if(start>model.data.total){
                 [self.tableView.mj_footer endRefreshingWithNoMoreData];
             }else{
@@ -112,7 +162,7 @@
         int code = [[responseObject objectForKey:@"code"]intValue];
         NSString* msg = [responseObject objectForKey:@"msg"];
         if(code==0){
-            ELResponse *model =[[ELResponse alloc] initWithDictionary:responseObject error: nil];
+            TeacherScanAllTaskResponse *model =[[TeacherScanAllTaskResponse alloc] initWithDictionary:responseObject error: nil];
             if(start>model.data.total){
                 [self.tableView.mj_footer endRefreshingWithNoMoreData];
             }else{
@@ -164,8 +214,10 @@
     self.tableView.estimatedRowHeight = 150.0;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+   
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self teacherLoadDataIsRefresh:YES];
+        [self loadDataNetwork:YES];
+//        [self teacherLoadDataIsRefresh:YES];
     }];
     header.lastUpdatedTimeLabel.hidden = YES;
     //文字颜色
@@ -184,7 +236,8 @@
     header.automaticallyChangeAlpha = YES;
     
     MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        [self teacherLoadDataIsRefresh:NO];
+        [self loadDataNetwork:NO];
+//        [self teacherLoadDataIsRefresh:NO];
     }];
     footer.stateLabel.font = [UIFont systemFontOfSize:15];
     //正在刷新
@@ -200,13 +253,14 @@
             make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
             make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
         }];
-    
-    [self.view addSubview:self.addBtn];
+    if(_isParent==NO){
+        [self.view addSubview:self.addBtn];
         [self.addBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom).offset(-100);
-            make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight).offset(-10);
-            make.size.mas_equalTo(CGSizeMake(50, 50));
-        }];
+                make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom).offset(-100);
+                make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight).offset(-10);
+                make.size.mas_equalTo(CGSizeMake(50, 50));
+            }];
+    }
 }
 
 
@@ -216,6 +270,47 @@
         _addBtn.delegate = self;
     }
     return _addBtn;
+}
+
+- (LMJDropdownMenu *)menu{
+    if(!_menu){
+        _menu = [[LMJDropdownMenu alloc]initWithFrame:CGRectMake(0, 0, 200, 60)];
+        _menu.backgroundColor = [UIColor whiteColor];
+        _menu.dataSource = self;
+        _menu.delegate = self;
+        _menu.title = @"选择要查看的学生";
+        _menu.titleColor = [UIColor blackColor];
+        _menu.optionIconSize = CGSizeMake(50, 50);
+        _menu.rotateIconSize = CGSizeMake(20, 20);
+        _menu.rotateIcon = [UIImage imageNamed:@"icon_arrow_down"];
+    }
+    return _menu;
+}
+
+#pragma mark - LMJ
+- (void)dropdownMenu:(LMJDropdownMenu *)menu didSelectOptionAtIndex:(NSUInteger)index optionTitle:(NSString *)title{
+    if(index==_students.count){
+        [self.navigationController pushViewController:[[InputTeamCodeViewController alloc]init] animated:YES];
+    }else{
+        _selectedStuIndex = index;
+        [self loadDataIsRefresh:YES];
+    }
+}
+- (CGFloat)dropdownMenu:(LMJDropdownMenu *)menu heightForOptionAtIndex:(NSUInteger)index{
+    return 60;
+}
+- (UIImage *)dropdownMenu:(LMJDropdownMenu *)menu iconForOptionAtIndex:(NSUInteger)index{
+    if(index==_students.count)
+        return [UIImage imageNamed:@"icon_add_16"];
+    return [UIImage imageNamed:@"avatar-4"];
+}
+- (NSString *)dropdownMenu:(LMJDropdownMenu *)menu titleForOptionAtIndex:(NSUInteger)index{
+    if(index==_students.count)
+        return @"加入班级";
+    return _students[index].name;
+}
+- (NSUInteger)numberOfOptionsInDropdownMenu:(LMJDropdownMenu *)menu{
+    return _students.count+1;
 }
 #pragma mark - UITableViewDataSource
 
@@ -227,8 +322,11 @@
     NSString *id =@"HomeworkShowTableViewCell";
     HomeworkShowTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id];
     NSUInteger idx = [indexPath row];
-    TaskModel *model = self.models[idx];
-    
+    JSONModel *model = nil;
+    if(_isParent)
+        model = (TaskModel *)self.models[idx];
+    else
+        model = (TeacherTaskModel *)self.models[idx];
     if (!cell) {
         cell = [[HomeworkShowTableViewCell alloc]                        initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id data:model];
     }
@@ -237,7 +335,46 @@
     [cell loadData];
     return cell;
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if(_isParent)
+        return 80;
+    else return 0;
+}
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if(_isParent){
+        UIView *header = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width,80)];
+            
+        UIView *bgView = [[UIView alloc]init];
+        bgView.backgroundColor = [UIColor whiteColor];
+        bgView.layer.masksToBounds = NO;
+        bgView.layer.shadowColor = [UIColor grayColor].CGColor;
+        bgView.layer.shadowOffset = CGSizeMake(0,5);
+        bgView.layer.shadowOpacity = 0.7;
+        bgView.layer.shadowRadius = 10;
+        [header addSubview:bgView];
+        [bgView mas_makeConstraints:^(MASConstraintMaker *make){
+            make.edges.equalTo(header);
+        }];
+//        UIView *seperateLine = [[UIView alloc]init];
+//        [header addSubview:seperateLine];
+//        [bgView mas_makeConstraints:^(MASConstraintMaker *make){
+//            make.bottom.equalTo(bgView);
+//            make.left.equalTo(bgView);
+//            make.right.equalTo(bgView);
+//            make.height.equalTo(@2);
+//        }];
+        [header addSubview:self.menu];
+        [self.menu mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(header).offset(10);
+            make.left.equalTo(header).offset(20);
+            make.height.equalTo(@60);
+            make.width.equalTo(@200);
+        }];
+        [header layoutIfNeeded];
+        return header;
+    }else return nil;
+}
 #pragma mark - UITableViewDelegate
 
 //- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -249,26 +386,9 @@
     [self jumpToDetailPageWithData:_models[row]];
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-//    return 50;
-//}
-//
-//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-//    UIView* sh_footerView = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.view.bounds.size.width,50.0)];
-//
-//    UILabel* sh_label = [[UILabel alloc ]init];
-//    sh_label.text =@"----没有更多记录了----";
-//    sh_label.textColor = [UIColor lightGrayColor];
-//    sh_label.font = [UIFont systemFontOfSize:16];
-//    sh_label.textAlignment =NSTextAlignmentCenter;
-//    [sh_label sizeToFit];
-//    [sh_footerView addSubview:sh_label];
-//    sh_label.center =sh_footerView.center;
-//
-//    return sh_footerView;
-//}
-
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(_isParent)
+        return NO;
     return YES;
 }
 
@@ -293,30 +413,6 @@
     return @[deleteAction, editAction];
 }
  
-//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
-//    editingStyle = UITableViewCellEditingStyleDelete;
-//}
-
-//- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    return  UITableViewCellEditingStyleDelete;
-//}
-
-//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if (editingStyle == UITableViewCellEditingStyleDelete) {
-//        NSInteger index = [indexPath row];
-//        TaskModel *task = [_models objectAtIndex:index];
-//        [self deleteTaskNetworkWithTaskId:[NSString stringWithFormat:@"%d",task.id] success:^{
-//            [self.models removeObjectAtIndex:index];
-//            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-//
-//        }];
-//    }
-//}
-
-// 修改编辑按钮文字
-//- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    return @"删除";
-//}
 #pragma mark - ELFloatingButtonDelegate
 - (void)clickFloatingButton{
     [self jumpToDetailPageWithData:nil];
@@ -324,48 +420,51 @@
 
 #pragma mark - action
 - (void)jumpToDetailPageWithData:(TeacherTaskModel *)model{
-    [self teacherShowDetailTaskNetworkWithTaskId:model.id];
+    if(_isParent)
+        return;
+    else
+        [self teacherShowDetailTaskNetworkWithTaskId:model.id];
 }
 
 #pragma mark - HomeworkShowTableViewCellDelegate
-- (void)clickOtherButtonTableViewCell:(UITableViewCell *)tableViewCell {
-    HomeworkShowTableViewCell *cell = (HomeworkShowTableViewCell *)tableViewCell;
-    ELBottomOverlay *overlay = [[ELBottomOverlay alloc]initWithFrame:self.view.bounds Data:@[
-        ({
-        ELOverlayItem *item = [ELOverlayItem new];
-        item.title = @"编辑";
-        item.clickBlock = ^{
-            [self jumpToDetailPageWithData:cell.data];
-        };
-        item;
-    }),
-        ({
-        ELCenterOverlayModel *centerOverlayModel = [ELCenterOverlayModel new];
-        centerOverlayModel.title = @"确认删除此作业吗？";
-        centerOverlayModel.subTitle = @"删除后不可恢复";
-        centerOverlayModel.leftChoice = ({
-            ELOverlayItem *sureItem =[ELOverlayItem new];
-            sureItem.title = @"确认";
-            __weak typeof(self) wself = self;
-            sureItem.clickBlock = ^{
-                __strong typeof(self) sself = wself;
-                NSIndexPath *index = [sself.tableView indexPathForCell:tableViewCell];
-                [sself.models removeObjectAtIndex:[index row]];
-                [sself.tableView deleteRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationAutomatic];
-            };
-            sureItem;
-        });
-        ELOverlayItem *item = [ELOverlayItem new];
-        item.title = @"删除";
-        item.clickBlock = ^{
-            ELCenterOverlay *deleteAlertView = [[ELCenterOverlay alloc]initWithFrame:self.view.bounds Data:centerOverlayModel
-            ];
-            
-            [deleteAlertView showHighlightView];
-        };
-        item;
-        
-    })]];
-    [overlay showHighlightView];
-}
+//- (void)clickOtherButtonTableViewCell:(UITableViewCell *)tableViewCell {
+//    HomeworkShowTableViewCell *cell = (HomeworkShowTableViewCell *)tableViewCell;
+//    ELBottomOverlay *overlay = [[ELBottomOverlay alloc]initWithFrame:self.view.bounds Data:@[
+//        ({
+//        ELOverlayItem *item = [ELOverlayItem new];
+//        item.title = @"编辑";
+//        item.clickBlock = ^{
+//            [self jumpToDetailPageWithData:cell.data];
+//        };
+//        item;
+//    }),
+//        ({
+//        ELCenterOverlayModel *centerOverlayModel = [ELCenterOverlayModel new];
+//        centerOverlayModel.title = @"确认删除此作业吗？";
+//        centerOverlayModel.subTitle = @"删除后不可恢复";
+//        centerOverlayModel.leftChoice = ({
+//            ELOverlayItem *sureItem =[ELOverlayItem new];
+//            sureItem.title = @"确认";
+//            __weak typeof(self) wself = self;
+//            sureItem.clickBlock = ^{
+//                __strong typeof(self) sself = wself;
+//                NSIndexPath *index = [sself.tableView indexPathForCell:tableViewCell];
+//                [sself.models removeObjectAtIndex:[index row]];
+//                [sself.tableView deleteRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationAutomatic];
+//            };
+//            sureItem;
+//        });
+//        ELOverlayItem *item = [ELOverlayItem new];
+//        item.title = @"删除";
+//        item.clickBlock = ^{
+//            ELCenterOverlay *deleteAlertView = [[ELCenterOverlay alloc]initWithFrame:self.view.bounds Data:centerOverlayModel
+//            ];
+//            
+//            [deleteAlertView showHighlightView];
+//        };
+//        item;
+//        
+//    })]];
+//    [overlay showHighlightView];
+//}
 @end
