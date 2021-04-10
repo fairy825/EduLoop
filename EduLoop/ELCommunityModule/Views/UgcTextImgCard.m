@@ -13,6 +13,7 @@
 @implementation UgcTextImgCard
 
 - (void)loadData{
+    self.avatarCard.avatarImage.image = [UIImage imageNamed:self.data.avatar];
     self.avatarCard.nameLabel.text = self.data.authorName;
     self.avatarCard.publishTimeLabel.text = self.data.dateStr;
     self.detailLabel.text = self.data.detail;

@@ -52,18 +52,6 @@
         model;
     }),    ({
         ContactPersonModel *model = [[ContactPersonModel alloc] init];
-        model.name = @"王达2";
-        model.identity = @"老师";
-        model.avatar = @"avatar";
-        model;
-    }),    ({
-        ContactPersonModel *model = [[ContactPersonModel alloc] init];
-        model.name = @"王二";
-        model.identity = @"老师";
-        model.avatar = @"avatar";
-        model;
-    }),  ({
-        ContactPersonModel *model = [[ContactPersonModel alloc] init];
         model.name = @"王三";
         model.identity = @"老师";
         model.avatar = @"avatar";

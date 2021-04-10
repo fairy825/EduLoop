@@ -44,6 +44,10 @@
         _detailLabel.text = data.content;
         _avatarCard.nameLabel.text=data.creatorName;
         _avatarCard.publishTimeLabel.text=data.timeDesc;
+        if([data.creatorName isEqual:@"陈老师"])
+            _avatarCard.avatarImage.image=[UIImage imageNamed:@"icon_teacher"];
+        else
+            _avatarCard.avatarImage.image=[UIImage imageNamed:@"icon_teacher_2"];
         hintStr=[NSString stringWithFormat:@"%@%ld/%ld",@"已提交",(long)data.realHomeworkNumber,(long)data.shouldHomeworkNumber];
        hintStrColor =[UIColor color555555];
        _otherButton.alpha = 0;
@@ -53,6 +57,10 @@
         _detailLabel.text = data.content;
         _avatarCard.nameLabel.text=data.creatorName;
         _avatarCard.publishTimeLabel.text=data.timeDesc;
+        if([data.creatorName isEqual:@"陈老师"])
+            _avatarCard.avatarImage.image=[UIImage imageNamed:@"icon_teacher"];
+        else
+            _avatarCard.avatarImage.image=[UIImage imageNamed:@"icon_teacher_2"];
          NSString *isFinish = data.finish;
         NSString *rightButtonTitle;
         UIColor *rightButtonColor;

@@ -67,7 +67,7 @@
 - (UIImageView *)avatarView{
     if(!_avatarView){
         _avatarView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 70, 70)];
-        _avatarView.image = [UIImage imageNamed:@"avatar-4"];
+        _avatarView.image = [UIImage imageNamed:@"avatar_child_2"];
         _avatarView.contentMode = UIViewContentModeScaleToFill;
     }
     return _avatarView;
@@ -95,11 +95,11 @@
 - (UILabel *)schoolLabel{
     if(!_schoolLabel){
         _schoolLabel = [[UILabel alloc]initWithFrame:CGRectMake(100, 100,50,20)];
-        _schoolLabel.text = @"设置学校";
-        NSString *schoolStr = @"华东师范大学";
-        if(schoolStr.length!=0){
-            _schoolLabel.text = schoolStr;
-        }
+//        _schoolLabel.text = @"设置学校";
+//        NSString *schoolStr = @"华东师范大学";
+//        if(schoolStr.length!=0){
+//            _schoolLabel.text = schoolStr;
+//        }
         _schoolLabel.font = [UIFont systemFontOfSize:12.f];
         _schoolLabel.textColor = [UIColor grayColor];
         [_schoolLabel sizeToFit];
@@ -110,11 +110,11 @@
 - (UILabel *)gradeLabel{
     if(!_gradeLabel){
         _gradeLabel = [[UILabel alloc]initWithFrame:CGRectMake(100, 100,50,20)];
-        _gradeLabel.text = @"设置年级";
-        NSString *gradeStr = @"初三";
-        if(gradeStr.length!=0){
-            _gradeLabel.text = gradeStr;
-        }
+//        _gradeLabel.text = @"设置年级";
+//        NSString *gradeStr = @"初三";
+//        if(gradeStr.length!=0){
+//            _gradeLabel.text = gradeStr;
+//        }
         _gradeLabel.font = [UIFont systemFontOfSize:12.f];
         _gradeLabel.textColor = [UIColor grayColor];
         [_gradeLabel sizeToFit];

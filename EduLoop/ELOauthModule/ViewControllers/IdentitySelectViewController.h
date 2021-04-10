@@ -13,7 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong,readwrite) IdentityCard *parentCard;
 @property(nonatomic,strong,readwrite) IdentityCard *teacherCard;
 @property(nonatomic,readwrite) NSInteger type;
-
+@property(nonatomic,readwrite) NSString *name;
+@property(nonatomic,readwrite) NSString *password;
+- (instancetype)initWithName:(NSString *)name Pass:(NSString *)password;
 @end
 
 NS_ASSUME_NONNULL_END

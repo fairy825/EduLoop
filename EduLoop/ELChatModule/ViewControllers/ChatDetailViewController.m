@@ -60,20 +60,20 @@ UITableViewDataSource>
         MessageModel *model = [MessageModel new];
         model.fromName = @"陈老师";
         model.toName = @"dd";
-        model.avatar = @"avatar";
+        model.avatar = @"icon_teacher";
         model.isRead=YES;
         model.dateStr = @"刚刚";
-        model.messageStr = @"您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好";
+        model.messageStr = @"你好，孩子最近成绩下降了，方便聊一下吗？";
         model;
     })];
     [_models addObject:({
         MessageModel *model = [MessageModel new];
-        model.fromName = @"dd";
+        model.fromName = @"Mijika";
         model.toName = @"陈老师";
-        model.avatar = @"avatar";
+        model.avatar = @"avatar_child_2";
         model.isRead=YES;
         model.dateStr = @"刚刚";
-        model.messageStr = @"hi";
+        model.messageStr = @"好的";
         model;
     })];
     

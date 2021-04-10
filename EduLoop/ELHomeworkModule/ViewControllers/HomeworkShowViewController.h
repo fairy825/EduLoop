@@ -12,9 +12,10 @@
 #import "ProfileSummaryCard.h"
 #import <LMJDropdownMenu.h>
 #import "StudentModel.h"
+#import "ELTabViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HomeworkShowViewController : UIViewController
+@interface HomeworkShowViewController : ELTabViewController
 @property(nonatomic,readwrite) BOOL isParent;
 @property(nonatomic,readwrite) int page;
 @property(nonatomic,readwrite) NSInteger selectedStuIndex;

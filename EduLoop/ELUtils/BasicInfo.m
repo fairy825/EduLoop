@@ -8,6 +8,11 @@
 #import "BasicInfo.h"
 #import <MBProgressHUD.h>
 #import <AFNetworking.h>
+#import "ELUserInfo.h"
+#import "ChatAllViewController.h"
+#import "HomeworkShowViewController.h"
+#import "CommunityViewController.h"
+#import "MineViewController.h"
 
 @implementation BasicInfo
 + (int)pageSize{
@@ -60,7 +65,9 @@
     return manager;
 }
 
-+(void)POST:(NSString *)URLString parameters:(nullable id)parameters success:(nullable void (^)())success{
+
+
++(void)POST:(NSString *)URLString parameters:(nullable id)parameters success:(nullable void (^)())success {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     // 设置请求头
     //申明请求的数据是json类型
@@ -125,4 +132,33 @@
       }];
 }
 
++(UITabBarController *)initNavigationTab{
+    ChatAllViewController *controller3 = [[ChatAllViewController alloc]init];
+    controller3.tabBarItem.title = @"消息";
+    CommunityViewController *controller1 = [[CommunityViewController alloc]init];
+    controller1.tabBarItem.title = @"班级";
+    HomeworkShowViewController *controller2 = [[HomeworkShowViewController alloc]init];
+    controller2.tabBarItem.title = @"广播站";
+    MineViewController *controller4 = [[MineViewController alloc] init];
+    controller4.tabBarItem.title = @"我的";
+    
+    UITabBarController *tabBarController = [[UITabBarController alloc]init];
+    [tabBarController setViewControllers:@[controller3,controller2,controller1,controller4]];
+    return tabBarController;
+}
+
++(void)markUser{
+    ELUserInfo *info = [ELUserInfo sharedUser];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:@(info.id) forKey:@"MY_ACCOUNT_ID"];
+    [userDefaults setObject:[NSNumber numberWithBool:info.identity] forKey:@"IS_PARENT"];
+    [userDefaults synchronize];
+}
+
++(void)deleteUser{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults removeObjectForKey:@"MY_ACCOUNT_ID"];
+    [userDefaults removeObjectForKey:@"IS_PARENT"];
+    [userDefaults synchronize];
+}
 @end

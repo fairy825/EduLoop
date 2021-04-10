@@ -446,8 +446,8 @@
             filePath = "EduLoop/ELProfileModule/ViewControllers/ChildProfileViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -478,8 +478,8 @@
             filePath = "EduLoop/ELProfileModule/ViewControllers/ChildProfileViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "-loadData"
             landmarkType = "7">
          </BreakpointContent>
@@ -640,8 +640,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "166"
             endingLineNumber = "166"
-            landmarkName = "-loadData:"
-            landmarkType = "7">
+            landmarkName = "ChildProfileCard"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -656,8 +656,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "168"
             endingLineNumber = "168"
-            landmarkName = "-loadData:"
-            landmarkType = "7">
+            landmarkName = "ChildProfileCard"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -672,8 +672,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "167"
             endingLineNumber = "167"
-            landmarkName = "-loadData:"
-            landmarkType = "7">
+            landmarkName = "ChildProfileCard"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -734,10 +734,10 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "433"
-            endingLineNumber = "433"
-            landmarkName = "HomeworkShowViewController"
-            landmarkType = "3">
+            startingLineNumber = "437"
+            endingLineNumber = "437"
+            landmarkName = "-loadDataIsRefresh:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -814,10 +814,10 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "438"
-            endingLineNumber = "438"
-            landmarkName = "HomeworkShowViewController"
-            landmarkType = "3">
+            startingLineNumber = "442"
+            endingLineNumber = "442"
+            landmarkName = "-loadDataIsRefresh:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -846,10 +846,10 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "461"
-            endingLineNumber = "461"
-            landmarkName = "HomeworkShowViewController"
-            landmarkType = "3">
+            startingLineNumber = "465"
+            endingLineNumber = "465"
+            landmarkName = "-loadDataIsRefresh:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -862,10 +862,10 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "464"
-            endingLineNumber = "464"
-            landmarkName = "HomeworkShowViewController"
-            landmarkType = "3">
+            startingLineNumber = "468"
+            endingLineNumber = "468"
+            landmarkName = "-loadDataIsRefresh:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1006,10 +1006,10 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "462"
-            endingLineNumber = "462"
-            landmarkName = "HomeworkShowViewController"
-            landmarkType = "3">
+            startingLineNumber = "466"
+            endingLineNumber = "466"
+            landmarkName = "-loadDataIsRefresh:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1070,8 +1070,8 @@
             filePath = "EduLoop/ELProfileModule/ViewControllers/MineViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
             landmarkName = "-viewWillAppear:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1168,7 +1168,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "202"
             endingLineNumber = "202"
-            landmarkName = "-loadData:"
+            landmarkName = "-getChosenTitle:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1422,8 +1422,8 @@
             filePath = "EduLoop/ELCommunityModule/Views/UgcVoteCard.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
             landmarkName = "-setupView"
             landmarkType = "7">
          </BreakpointContent>
@@ -1438,8 +1438,8 @@
             filePath = "EduLoop/ELCommunityModule/Views/UgcVoteCard.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
             landmarkName = "-setupView"
             landmarkType = "7">
             <Locations>
@@ -1502,8 +1502,8 @@
             filePath = "EduLoop/ELCommunityModule/Views/UgcTextImgCard.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
             landmarkName = "-toggleThumb"
             landmarkType = "7">
          </BreakpointContent>
@@ -1518,8 +1518,8 @@
             filePath = "EduLoop/ELCommunityModule/Views/UgcTextImgCard.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
             landmarkName = "-setupView"
             landmarkType = "7">
          </BreakpointContent>
@@ -1678,8 +1678,8 @@
             filePath = "EduLoop/ELCommunityModule/ViewControllers/CommunityViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
             landmarkName = "CommunityViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -1694,8 +1694,8 @@
             filePath = "EduLoop/ELCommunityModule/ViewControllers/CommunityViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "146"
-            endingLineNumber = "146"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1806,8 +1806,8 @@
             filePath = "EduLoop/ELCommunityModule/ViewControllers/CommunityViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
+            startingLineNumber = "189"
+            endingLineNumber = "189"
             landmarkName = "-clickCommentButtonTableViewCell:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1822,8 +1822,8 @@
             filePath = "EduLoop/ELCommunityModule/Views/UgcTextImgCard.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "200"
-            endingLineNumber = "200"
+            startingLineNumber = "201"
+            endingLineNumber = "201"
             landmarkName = "-_tapPhoto:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1838,8 +1838,8 @@
             filePath = "EduLoop/ELCommunityModule/ViewControllers/CommunityViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "212"
-            endingLineNumber = "212"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
             landmarkName = "-clickPhoto:TableViewCell:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1854,8 +1854,8 @@
             filePath = "EduLoop/ELCommunityModule/Views/UgcTextImgCard.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
+            startingLineNumber = "199"
+            endingLineNumber = "199"
             landmarkName = "-_tapPhoto:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1902,8 +1902,8 @@
             filePath = "EduLoop/ELProfileModule/ViewControllers/MineViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
             landmarkName = "-jumpToNewPage:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2302,8 +2302,8 @@
             filePath = "EduLoop/ELChatModule/ViewControllers/ChatAllViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
             landmarkName = "-setupSubviews"
             landmarkType = "7">
          </BreakpointContent>
@@ -2318,9 +2318,9 @@
             filePath = "EduLoop/ELChatModule/ViewControllers/ChatAllViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
-            landmarkName = "-tableView:canEditRowAtIndexPath:"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2334,9 +2334,9 @@
             filePath = "EduLoop/ELChatModule/ViewControllers/ChatAllViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
-            landmarkName = "-tableView:commitEditingStyle:forRowAtIndexPath:"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
+            landmarkName = "-tableView:editingStyleForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2350,8 +2350,8 @@
             filePath = "EduLoop/ELChatModule/ViewControllers/ChatAllViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
             landmarkName = "-tableView:commitEditingStyle:forRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2366,8 +2366,8 @@
             filePath = "EduLoop/ELChatModule/ViewControllers/AddressListViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "-loadData"
             landmarkType = "7">
          </BreakpointContent>
@@ -2376,102 +2376,6 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "C2E93E19-C068-4560-A8E1-47CD004365A0"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EduLoop/ELChatModule/ViewControllers/AddressListViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "249"
-            endingLineNumber = "249"
-            landmarkName = "-sectionIndexTitlesForTableView:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "30A48E06-3CEC-429D-B288-3C536B29876F"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EduLoop/ELChatModule/ViewControllers/AddressListViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "270"
-            endingLineNumber = "270"
-            landmarkName = "-tableView:viewForHeaderInSection:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "0F6EE350-C812-444C-AC72-45A8FB74F8E2"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EduLoop/ELChatModule/ViewControllers/AddressListViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
-            landmarkName = "-loadData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "FEEAC182-559B-4A96-91BF-5EEC154D5CEB"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EduLoop/ELChatModule/ViewControllers/AddressListViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "-loadData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "3DBF2FA6-0719-46E2-9748-13AB98132B52"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EduLoop/ELChatModule/ViewControllers/AddressListViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
-            landmarkName = "-loadData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "17B48721-925E-424A-A206-4B04854A0F75"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EduLoop/ELChatModule/ViewControllers/AddressListViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
-            landmarkName = "-loadData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "4642F0C2-D724-4964-8348-A424B9844059"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -2487,6 +2391,102 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            uuid = "30A48E06-3CEC-429D-B288-3C536B29876F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EduLoop/ELChatModule/ViewControllers/AddressListViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "258"
+            endingLineNumber = "258"
+            landmarkName = "-tableView:heightForRowAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0F6EE350-C812-444C-AC72-45A8FB74F8E2"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EduLoop/ELChatModule/ViewControllers/AddressListViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "-loadData"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FEEAC182-559B-4A96-91BF-5EEC154D5CEB"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EduLoop/ELChatModule/ViewControllers/AddressListViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
+            landmarkName = "-loadData"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3DBF2FA6-0719-46E2-9748-13AB98132B52"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EduLoop/ELChatModule/ViewControllers/AddressListViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
+            landmarkName = "-loadData"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "17B48721-925E-424A-A206-4B04854A0F75"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EduLoop/ELChatModule/ViewControllers/AddressListViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
+            landmarkName = "-loadData"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4642F0C2-D724-4964-8348-A424B9844059"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EduLoop/ELChatModule/ViewControllers/AddressListViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
+            landmarkName = "AddressListViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
             uuid = "078D876A-4E08-453F-B38E-4D5EC118D2F8"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -2494,9 +2494,9 @@
             filePath = "EduLoop/ELChatModule/ViewControllers/ChatAllViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "-viewDidLoad"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "-viewWillDisappear:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2510,57 +2510,9 @@
             filePath = "EduLoop/ELChatModule/ViewControllers/ChatAllViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "-viewDidLoad"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F18D0CBD-EA81-4DA4-9DA2-50B8EC019C6A"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EduLoop/ELChatModule/ViewControllers/ChatAllViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "-viewWillAppear:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "4EB7EC5D-C3B5-44DD-8581-6936EB88341A"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EduLoop/ELChatModule/ViewControllers/ChatAllViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
             landmarkName = "-viewWillDisappear:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D04D7BE2-5263-4EF4-A7E9-B6B7CD4D4288"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EduLoop/ELChatModule/ViewControllers/ChatAllViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "-viewWillAppear:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3166,8 +3118,8 @@
             filePath = "EduLoop/ELCommunityModule/Views/UgcTextImgCard.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
             landmarkName = "-jumpToDetailPage"
             landmarkType = "7">
          </BreakpointContent>
@@ -3198,8 +3150,8 @@
             filePath = "EduLoop/ELCommunityModule/Views/UgcTextImgCard.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
             landmarkName = "-setupView"
             landmarkType = "7">
          </BreakpointContent>
@@ -3278,9 +3230,9 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "230"
-            endingLineNumber = "230"
-            landmarkName = "-setupSubviews"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
+            landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3310,8 +3262,8 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
             landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
@@ -3326,9 +3278,9 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "227"
-            endingLineNumber = "227"
-            landmarkName = "-setupSubviews"
+            startingLineNumber = "230"
+            endingLineNumber = "230"
+            landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3342,8 +3294,8 @@
             filePath = "EduLoop/ELHomeworkModule/Views/HomeworkShowTableViewCell.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
             landmarkName = "-loadData"
             landmarkType = "7">
          </BreakpointContent>
@@ -3358,9 +3310,9 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "231"
-            endingLineNumber = "231"
-            landmarkName = "-setupSubviews"
+            startingLineNumber = "234"
+            endingLineNumber = "234"
+            landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3374,9 +3326,9 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "241"
-            endingLineNumber = "241"
-            landmarkName = "-setupSubviews"
+            startingLineNumber = "244"
+            endingLineNumber = "244"
+            landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3390,8 +3342,8 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
             landmarkName = "-endRefresh"
             landmarkType = "7">
          </BreakpointContent>
@@ -3406,9 +3358,9 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "226"
-            endingLineNumber = "226"
-            landmarkName = "-setupSubviews"
+            startingLineNumber = "229"
+            endingLineNumber = "229"
+            landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3422,9 +3374,9 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "232"
-            endingLineNumber = "232"
-            landmarkName = "-setupSubviews"
+            startingLineNumber = "235"
+            endingLineNumber = "235"
+            landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3534,10 +3486,10 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "445"
-            endingLineNumber = "445"
-            landmarkName = "HomeworkShowViewController"
-            landmarkType = "3">
+            startingLineNumber = "449"
+            endingLineNumber = "449"
+            landmarkName = "-loadDataIsRefresh:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3662,9 +3614,9 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "419"
-            endingLineNumber = "419"
-            landmarkName = "-clickFloatingButton"
+            startingLineNumber = "423"
+            endingLineNumber = "423"
+            landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3854,8 +3806,8 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "115"
-            endingLineNumber = "115"
+            startingLineNumber = "117"
+            endingLineNumber = "117"
             landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
             <Locations>
@@ -3902,8 +3854,8 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
             landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
          </BreakpointContent>
@@ -3934,9 +3886,9 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "393"
-            endingLineNumber = "393"
-            landmarkName = "-tableView:canEditRowAtIndexPath:"
+            startingLineNumber = "396"
+            endingLineNumber = "396"
+            landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3950,8 +3902,8 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
             landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
          </BreakpointContent>
@@ -3966,9 +3918,9 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
-            landmarkName = "-teacherLoadDataIsRefresh:"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
+            landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3998,8 +3950,8 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/TeacherTaskSummaryViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
+            startingLineNumber = "195"
+            endingLineNumber = "195"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -4014,9 +3966,9 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "190"
-            endingLineNumber = "190"
-            landmarkName = "-teacherShowDetailTaskNetworkWithTaskId:"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
+            landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
             <Locations>
                <Location
@@ -4062,9 +4014,9 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "192"
-            endingLineNumber = "192"
-            landmarkName = "-teacherShowDetailTaskNetworkWithTaskId:"
+            startingLineNumber = "195"
+            endingLineNumber = "195"
+            landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4072,15 +4024,15 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "D1BB5EDA-85B5-402C-91D0-E758470C4192"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "147"
-            endingLineNumber = "147"
-            landmarkName = "-teacherLoadDataIsRefresh:"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
+            landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4094,9 +4046,9 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
-            landmarkName = "-teacherLoadDataIsRefresh:"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
+            landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4110,9 +4062,9 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
-            landmarkName = "-teacherLoadDataIsRefresh:"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
+            landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4126,8 +4078,8 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/TeacherTaskSummaryViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "181"
-            endingLineNumber = "181"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
             landmarkName = "-tableView:numberOfRowsInSection:"
             landmarkType = "7">
          </BreakpointContent>
@@ -4174,8 +4126,8 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/TeacherTaskSummaryViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -4206,8 +4158,8 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/TeacherTaskSummaryViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -4222,9 +4174,9 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
-            landmarkName = "-teacherShowDetailTaskNetworkWithTaskId:"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
+            landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4238,8 +4190,8 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/TeacherTaskSummaryViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
             landmarkName = "-setupSubviews"
             landmarkType = "7">
          </BreakpointContent>
@@ -4494,8 +4446,8 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/TeacherTaskSummaryViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
             landmarkName = "-setupSubviews"
             landmarkType = "7">
          </BreakpointContent>
@@ -4542,8 +4494,8 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/TeacherTaskSummaryViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "224"
-            endingLineNumber = "224"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
             landmarkName = "-popout"
             landmarkType = "7">
          </BreakpointContent>
@@ -4558,9 +4510,9 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "318"
-            endingLineNumber = "318"
-            landmarkName = "-tableView:numberOfRowsInSection:"
+            startingLineNumber = "321"
+            endingLineNumber = "321"
+            landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4574,9 +4526,9 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
-            landmarkName = "-teacherShowDetailTaskNetworkWithTaskId:"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
+            landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4590,9 +4542,9 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "319"
-            endingLineNumber = "319"
-            landmarkName = "-tableView:numberOfRowsInSection:"
+            startingLineNumber = "322"
+            endingLineNumber = "322"
+            landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4606,9 +4558,9 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
-            landmarkName = "-teacherLoadDataIsRefresh:"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
+            landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4622,8 +4574,8 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/TeacherTaskSummaryViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
             landmarkName = "-teacherShowDetailTaskNetworkWithTaskId:"
             landmarkType = "7">
          </BreakpointContent>
@@ -4638,8 +4590,8 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/TeacherTaskSummaryViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
             landmarkName = "-teacherShowDetailTaskNetworkWithTaskId:"
             landmarkType = "7">
          </BreakpointContent>
@@ -4654,8 +4606,8 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/TeacherTaskSummaryViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
             landmarkName = "-teacherShowDetailTaskNetworkWithTaskId:"
             landmarkType = "7">
          </BreakpointContent>
@@ -4792,14 +4744,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "C353DE19-655B-4DAE-93E8-526F1E8442F0"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "-loadDataNetwork:"
             landmarkType = "7">
          </BreakpointContent>
@@ -4814,9 +4766,9 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "326"
-            endingLineNumber = "326"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "329"
+            endingLineNumber = "329"
+            landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4830,9 +4782,9 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "390"
-            endingLineNumber = "390"
-            landmarkName = "-tableView:canEditRowAtIndexPath:"
+            startingLineNumber = "393"
+            endingLineNumber = "393"
+            landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4840,14 +4792,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "548EC67F-38A2-4460-BA52-693FD430F7F8"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "-getIdentity"
             landmarkType = "7">
          </BreakpointContent>
@@ -4862,8 +4814,8 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
             landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
          </BreakpointContent>
@@ -4878,8 +4830,8 @@
             filePath = "EduLoop/ELHomeworkModule/Views/HomeworkShowTableViewCell.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
             landmarkName = "-loadData"
             landmarkType = "7">
          </BreakpointContent>
@@ -4910,8 +4862,8 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "-deleteTaskNetworkWithTaskId:success:"
             landmarkType = "7">
          </BreakpointContent>
@@ -4926,8 +4878,8 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
             landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
          </BreakpointContent>
@@ -4942,9 +4894,9 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
-            landmarkName = "-teacherShowDetailTaskNetworkWithTaskId:"
+            startingLineNumber = "198"
+            endingLineNumber = "198"
+            landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4958,8 +4910,8 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "90"
-            endingLineNumber = "90"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
             landmarkName = "-getMyStuNetworkWithSuccess:"
             landmarkType = "7">
          </BreakpointContent>
@@ -4974,8 +4926,8 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "128"
-            endingLineNumber = "128"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
             landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
          </BreakpointContent>
@@ -4990,9 +4942,9 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "296"
-            endingLineNumber = "296"
-            landmarkName = "-dropdownMenu:didSelectOptionAtIndex:optionTitle:"
+            startingLineNumber = "299"
+            endingLineNumber = "299"
+            landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -5006,8 +4958,8 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
             landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
          </BreakpointContent>
@@ -5022,8 +4974,8 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "-getMyStuNetworkWithSuccess:"
             landmarkType = "7">
          </BreakpointContent>
@@ -5038,9 +4990,9 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
-            landmarkName = "-teacherLoadDataIsRefresh:"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
+            landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -5054,9 +5006,9 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
-            landmarkName = "-teacherLoadDataIsRefresh:"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
+            landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -5070,8 +5022,8 @@
             filePath = "EduLoop/ELHomeworkModule/ViewControllers/HomeworkShowViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
             landmarkName = "-loadDataIsRefresh:"
             landmarkType = "7">
          </BreakpointContent>
@@ -5086,8 +5038,8 @@
             filePath = "EduLoop/ELOauthModule/ViewControllers/IdentitySelectViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
             landmarkName = "-userRegisterNetwork"
             landmarkType = "7">
          </BreakpointContent>
@@ -5104,7 +5056,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "176"
             endingLineNumber = "176"
-            landmarkName = "-loadData:"
+            landmarkName = "-tableView:numberOfRowsInSection:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -5120,7 +5072,151 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "180"
             endingLineNumber = "180"
-            landmarkName = "-loadData:"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7ECF6BA5-5D8D-489E-8132-59A671A95272"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EduLoop/ELOauthModule/ViewControllers/LoginViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
+            landmarkName = "-registerAndLogin"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FAC58F32-0EE5-41A8-A438-712A5B8F1688"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EduLoop/ELOauthModule/ViewControllers/LoginViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "230"
+            endingLineNumber = "230"
+            landmarkName = "-userLoginNetwork"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2B4BDC49-F38A-44B4-9A33-83FF6C42F36B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EduLoop/ELOauthModule/ViewControllers/LoginViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "264"
+            endingLineNumber = "264"
+            landmarkName = "-userLoginNetwork"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CF95F07A-AEA4-4578-8075-B26B7ADB9D84"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EduLoop/ELOauthModule/ViewControllers/LoginViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "260"
+            endingLineNumber = "260"
+            landmarkName = "-userLoginNetwork"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D4B41783-7910-4B76-86A8-F87108C0E3CB"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EduLoop/ELOauthModule/ViewControllers/IdentitySelectViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
+            landmarkName = "-userRegisterNetwork"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "11C9D9E8-F07E-4F25-B98E-7353F7C5204F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EduLoop/ELProfileModule/ViewControllers/MineViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
+            landmarkName = "-userLogoutNetwork"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D1583004-4C97-42D6-87A2-C8F64CD7BC41"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EduLoop/ELUtils/ELUserInfo.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "+sharedUser"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E9E39104-7350-49A2-8091-A7727E62022E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EduLoop/ELUtils/ELUserInfo.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "+sharedUser"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "619A8BF5-8225-430E-8AF5-1EA9C6976536"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EduLoop/ELUtils/ELUserInfo.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "+dealloc"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

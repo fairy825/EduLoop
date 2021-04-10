@@ -8,13 +8,24 @@
 #import "IdentitySelectViewController.h"
 #import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
-
+#import "BasicInfo.h"
+#import <AFNetworking.h>
+#import "NSString+MD5.h"
+#import "UserLoginResponse.h"
 @interface IdentitySelectViewController ()<IdentityCardProtocol>
 
 @end
 
 @implementation IdentitySelectViewController
-
+- (instancetype)initWithName:(NSString *)name Pass:(NSString *)password
+{
+    self = [super init];
+    if (self) {
+        _name = name;
+        _password = password;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -55,7 +66,40 @@
 
 #pragma mark - action
 -(void)userRegisterNetwork{
+    NSString *salt = @"123456";
+    
     NSLog(@"%ld", self.type);
+    NSDictionary *paramDict =  @{
+        @"name":_name,
+        @"password": [NSString md5_32bitWithStr:_password Salt:salt],
+        @"salt":salt,
+        @"identity": @(_type==1)
+    };
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    // 设置请求头
+    //申明请求的数据是json类型
+    manager.requestSerializer=[AFJSONRequestSerializer serializer];
+    //添加多的请求格式
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/plain",@"text/json", @"text/javascript",@"text/html",nil];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager POST:[BasicInfo url:@"/oauth/register"] parameters:paramDict headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSLog(@"%@---%@",[responseObject class],responseObject);
+            int code = [[responseObject objectForKey:@"code"]intValue];
+            if(code!=0){
+                NSString* msg = [responseObject objectForKey:@"msg"];
+                NSLog(@"error--%@",msg);
+                [BasicInfo showToastWithMsg:msg];
+            }else{
+                UserLoginResponse *resp = [[UserLoginResponse alloc]initWithDictionary:responseObject error:nil];
+                [ELUserInfo setUserInfo:resp.data];
+                [BasicInfo markUser];
+                [self.navigationController pushViewController:[BasicInfo initNavigationTab] animated:YES];
+
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"请求失败--%@",error);
+    }];
 }
 
 #pragma mark - IdentityCardProtocol

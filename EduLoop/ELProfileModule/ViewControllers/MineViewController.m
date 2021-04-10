@@ -12,6 +12,9 @@
 #import "ProfileViewController.h"
 #import "ChildProfileViewController.h"
 #import "CommunityViewController.h"
+#import "LoginViewController.h"
+#import <AFNetworking.h>
+#import "BasicInfo.h"
 @interface MineViewController ()<UITableViewDelegate,UITableViewDataSource,MineToolCardDelegate>
 
 @end
@@ -22,6 +25,7 @@
     
 }
 - (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 - (void)viewDidLoad {
@@ -108,6 +112,7 @@
         [self.logOutBtn setTitleColor:[UIColor color999999] forState:UIControlStateNormal];
         [self.logOutBtn.titleLabel setTextAlignment: NSTextAlignmentCenter];
         [self.logOutBtn.titleLabel setFont:[UIFont fontWithName:@"PingFangSC-Bold" size:16]];
+        [self.logOutBtn addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
     }
     return _logOutBtn;
 }
@@ -156,4 +161,30 @@
             break;
     }
 }
+
+#pragma mark - action
+-(void)logout{
+    [self userLogoutNetwork];
+}
+
+-(void)userLogoutNetwork{
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    [manager GET:[BasicInfo url:@"/oauth/logout"] parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+            NSLog(@"%@---%@",[responseObject class],responseObject);
+            int code = [[responseObject objectForKey:@"code"]intValue];
+            NSString* msg = [responseObject objectForKey:@"msg"];
+            if(code==0){
+                [ELUserInfo dealloc];
+                [BasicInfo deleteUser];
+                [self.navigationController pushViewController:[[LoginViewController alloc]init] animated:YES];
+            }else{
+                NSLog(@"error--%@",msg);
+                [BasicInfo showToastWithMsg:msg];
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"请求失败--%@",error);
+        }];
+}
+
 @end

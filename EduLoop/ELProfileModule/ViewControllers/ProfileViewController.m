@@ -23,7 +23,7 @@
         SettingDataModel *model = [SettingDataModel new];
         model.accessoryType = SettingTableViewCellType_Image;
         model.title =@"头像";
-        model.defaultAvatarImage = [UIImage imageNamed:@"avatar-4"];
+        model.defaultAvatarImage = [UIImage imageNamed:@"avatar_child_2"];
         model;
     })];
     [_models addObject:({

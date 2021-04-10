@@ -9,6 +9,13 @@
 #import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
 #import "IdentitySelectViewController.h"
+#import "BasicInfo.h"
+#import <AFNetworking.h>
+#import "NSString+MD5.h"
+#import "ELUserInfo.h"
+#import "UserLoginResponse.h"
+#import "ProfileModel.h"
+
 @interface LoginViewController ()
 
 @end
@@ -216,10 +223,51 @@
 
 #pragma mark - action
 -(void)registerAndLogin{
-    [self jumpToIdentitySelectPage];
+    [self userLoginNetwork];
+}
+
+-(void)userLoginNetwork{
+    NSString *name = _userNameTextField.text;
+    NSString *password = _passwordTextField.text;
+    if(name.length==0)
+        [BasicInfo showToastWithMsg:@"手机号不能为空"];
+    else if(password.length==0)
+        [BasicInfo showToastWithMsg:@"密码不能为空"];
+    NSDictionary *paramDict =  @{
+        @"name":name,
+        @"password": [NSString md5_32bitWithStr:password Salt:@"123456"]
+    };
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    // 设置请求头
+    //申明请求的数据是json类型
+    manager.requestSerializer=[AFJSONRequestSerializer serializer];
+    //添加多的请求格式
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/plain",@"text/json", @"text/javascript",@"text/html",nil];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager POST:[BasicInfo url:@"/oauth/login"] parameters:paramDict headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSLog(@"%@---%@",[responseObject class],responseObject);
+            int code = [[responseObject objectForKey:@"code"]intValue];
+            if(code!=0){
+                NSString* msg = [responseObject objectForKey:@"msg"];
+                NSLog(@"error--%@",msg);
+                if(code==500214){//register
+                    [self jumpToIdentitySelectPage];
+                }else{
+                    [BasicInfo showToastWithMsg:msg];
+                }
+            }else{//login
+                UserLoginResponse *resp = [[UserLoginResponse alloc]initWithDictionary:responseObject error:nil];
+                [ELUserInfo setUserInfo:resp.data];
+                [BasicInfo markUser];
+                
+                [self.navigationController pushViewController:[BasicInfo initNavigationTab] animated:YES];
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"请求失败--%@",error);
+    }];
 }
 
 - (void)jumpToIdentitySelectPage{
-    [self.navigationController pushViewController:[[IdentitySelectViewController alloc]init] animated:YES];
+    [self.navigationController pushViewController:[[IdentitySelectViewController alloc]initWithName:_userNameTextField.text Pass:_passwordTextField.text] animated:YES];
 }
 @end

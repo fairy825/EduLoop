@@ -87,7 +87,7 @@
     }
     else
         _detailLabel.text= _data.detailText;
-    _avatarView.image = _data.defaultAvatarImage;
+    _avatarView.image = _data.avatarImageUrl?[UIImage imageNamed:_data.avatarImageUrl]: _data.defaultAvatarImage;
     _detailTextViewLengthLabel.text = [NSString stringWithFormat:@"%ld/%d", (unsigned long)_detailTextView.text.length, _data.maxLength];
     _data.realContent = _data.detailText;
 

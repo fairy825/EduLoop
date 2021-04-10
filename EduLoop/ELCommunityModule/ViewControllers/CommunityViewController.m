@@ -29,6 +29,7 @@
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 - (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 - (void)viewDidLoad {
@@ -42,41 +43,45 @@
 - (void)loadData{
     _models = @[].mutableCopy;
     
+//    [_models addObject:({
+//        UgcModel *model = [UgcModel new];
+//        model.ugcType = UgcType_vote;
+//        model.authorName = @"dd";
+//        model.dateStr = @"刚刚";
+//        model.leftPercent = 23.2;
+//        model.leftChoice = @"不该";
+//        model.rightChoice = @"该";
+//        model.detail = @"老师应该和学生一起上体育课吗？";
+//        model.desc = @"欢迎大家各抒己见欢迎大家各抒己见欢迎大家各抒己见欢迎大家各抒己见欢迎大家各抒己见欢迎大家各抒己见";
+//        model.hasPicked = NO;
+//        model.isMine = YES;
+//
+//        model;
+//    })];
     [_models addObject:({
         UgcModel *model = [UgcModel new];
-        model.ugcType = UgcType_vote;
-        model.authorName = @"dd";
-        model.dateStr = @"刚刚";
-        model.leftPercent = 23.2;
-        model.leftChoice = @"不该";
-        model.rightChoice = @"该";
-        model.detail = @"老师应该和学生一起上体育课吗？";
-        model.desc = @"欢迎大家各抒己见欢迎大家各抒己见欢迎大家各抒己见欢迎大家各抒己见欢迎大家各抒己见欢迎大家各抒己见";
-        model.hasPicked = NO;
-        model.isMine = YES;
-
-        model;
-    })];
-    [_models addObject:({
-        UgcModel *model = [UgcModel new];
-        model.authorName = @"Mijika";
-        model.detail =@"发了一条班级圈～";
+        model.authorName = @"李红妈妈";
+        model.detail =@"考得不错～";
         model.thumbNum = 4;
         model.commentNum = 5;
         model.dateStr = @"刚刚";
         model.hasClickedThumb = YES;
+        model.imgs = @[@"sample-3"];
+        model.avatar = @"avatar_child_3";
         model;
     })];
     [_models addObject:({
         UgcModel *model = [UgcModel new];
-        model.authorName = @"dd";
-        model.detail =@"发了一条班级圈～";
-        model.thumbNum = 4;
-        model.commentNum = 5;
-        model.dateStr = @"刚刚";
+        model.authorName = @"王二妈妈";
+        model.detail =@"周末亲子活动";
+        model.thumbNum = 1;
+        model.commentNum = 2;
+        model.dateStr = @"5分钟前";
         model.hasClickedThumb = NO;
         model.isMine = YES;
-        model.imgs = @[@"sample-1",@"sample-2",@"sample-2"];
+        model.imgs = @[@"sample-4",@"sample-5",@"sample-6"];
+        model.avatar = @"avatar_child_1";
+
         model;
     })];
     

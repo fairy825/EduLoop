@@ -8,9 +8,10 @@
 #import <UIKit/UIKit.h>
 #import "UgcModel.h"
 #import "ELFloatingButton.h"
+#import "ELTabViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface CommunityViewController : UIViewController
+@interface CommunityViewController : ELTabViewController
 
 @property(nonatomic,strong,readwrite) UITableView *tableView;
 @property(nonatomic,strong,readwrite) NSMutableArray<UgcModel *>* models;

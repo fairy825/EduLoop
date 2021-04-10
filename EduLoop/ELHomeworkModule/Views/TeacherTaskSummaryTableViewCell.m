@@ -66,6 +66,9 @@
 - (void)loadData{
     _parentLabel.text = [NSString stringWithFormat:@"%@%@",@"家长：",_data.authorName];
     _studentLabel.text = _data.studentName;
+    if([_data.studentName isEqual:@"王二"])
+        _avatarImage.image = [UIImage imageNamed:@"avatar_child_1"];
+    else _avatarImage.image = [UIImage imageNamed:@"avatar_child_4"];
     if(_data.hasViewed==YES){
         _hintLabel.text = @"已点评";
     }else{

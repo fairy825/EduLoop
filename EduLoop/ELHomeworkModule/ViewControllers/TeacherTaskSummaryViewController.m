@@ -84,6 +84,7 @@
             make.right.equalTo(header).offset(-20);
         }];
         [self.taskDetailCard loadData:_data];
+        self.taskDetailCard.avatarImage.image = [UIImage imageNamed:@"icon_teacher_2"];
         [header layoutIfNeeded];
         CGFloat h=0;
         for (UIView *view in [header subviews]) {

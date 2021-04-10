@@ -32,6 +32,12 @@
         make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
         make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
     }];
+    [self.view addSubview:self.addBtn];
+        [self.addBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom).offset(-100);
+            make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight).offset(-10);
+            make.size.mas_equalTo(CGSizeMake(50, 50));
+        }];
     
 //    self.childProfileCard = [[ChildProfileCard alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width-40, 314)];
 //    [self.view addSubview:self.childProfileCard];
@@ -48,22 +54,24 @@
     
     [_models addObject:({
         ChildModel *model = [ChildModel new];
-        model.grade = @"五年级";
-        model.team =@"上海小学";
-        model.nickname = @"dd";
+        model.grade = @"三年级";
+        model.team =@"三（4）班";
+        model.nickname = @"王二";
         model.sex = @"女";
         model.relationship = @"妈妈";
-        model.sno = @"11111";
+        model.sno = @"19";
+        model.avatarUrl = @"avatar_child_1";
         model;
     })];
     [_models addObject:({
         ChildModel *model = [ChildModel new];
         model.grade = @"六年级";
-        model.team =@"上海小学";
-        model.nickname = @"cc";
+        model.team =@"六（3）班";
+        model.nickname = @"李四";
         model.sex = @"女";
-        model.relationship = @"妈妈";
-        model.sno = @"11111";
+        model.relationship = @"其他";
+        model.sno = @"3";
+        model.avatarUrl = @"avatar_child_3";
         model;
     })];
 }
@@ -92,4 +100,11 @@
     return 90+56*7;
 }
 
+- (ELFloatingButton *)addBtn{
+    if(!_addBtn){
+        _addBtn = [[ELFloatingButton alloc]initWithFrame:CGRectMake(0, 0, 50, 50) Image: [UIImage imageNamed:@"icon_add"]];
+        _addBtn.delegate = self;
+    }
+    return _addBtn;
+}
 @end

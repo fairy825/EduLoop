@@ -15,6 +15,7 @@ typedef NS_ENUM(NSInteger, UgcType)
 };
 @interface UgcModel : NSObject
 @property(nonatomic,readwrite) UgcType *ugcType;
+@property(nonatomic,strong,readwrite) NSString *avatar;
 @property(nonatomic,strong,readwrite) NSString *authorName;
 @property(nonatomic,strong,readwrite) NSString *detail;
 @property(nonatomic,strong,readwrite) NSString *desc;

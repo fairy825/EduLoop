@@ -36,6 +36,7 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
@@ -112,6 +113,7 @@
     }
     NSDictionary *paramDict =  @{@"start":[NSString stringWithFormat:@"%d", start],@"size":[NSString stringWithFormat:@"%d", size]
     };
+    if(_students.count>0){
     [manager GET:[BasicInfo url:@"/task/student" path:[NSString stringWithFormat:@"%ld",_students[_selectedStuIndex].id]] parameters:paramDict headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if(isRefresh){
             self.page=1;
@@ -141,6 +143,7 @@
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
             NSLog(@"请求失败--%@",error);
         }];
+    }
 }
 
 - (void)teacherLoadDataIsRefresh:(BOOL) isRefresh{
@@ -415,7 +418,8 @@
  
 #pragma mark - ELFloatingButtonDelegate
 - (void)clickFloatingButton{
-    [self jumpToDetailPageWithData:nil];
+    [self.navigationController pushViewController:[[BroadcastViewController alloc]initWithHomeworkData:nil] animated:YES];
+//    [self jumpToDetailPageWithData:nil];
 }
 
 #pragma mark - action

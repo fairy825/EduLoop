@@ -9,8 +9,8 @@
 #import "MineInfoCard.h"
 #import "MineToolCard.h"
 #import "MineMiscCard.h"
-
-@interface MineViewController : UIViewController
+#import "ELTabViewController.h"
+@interface MineViewController : ELTabViewController
 @property(nonatomic,strong,readwrite) UIView *container;
 @property(nonatomic,strong,readwrite) MineInfoCard *header;
 @property(nonatomic,strong,readwrite) MineToolCard *toolCard;

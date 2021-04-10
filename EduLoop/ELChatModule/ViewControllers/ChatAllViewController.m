@@ -20,14 +20,24 @@
 @end
 
 @implementation ChatAllViewController
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    // 禁用返回手势
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+}
 
 - (void)viewWillAppear:(BOOL)animated{
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     [self loadData];
-}
-
-- (void)viewWillDisappear:(BOOL)animated{
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)viewDidLoad {
@@ -51,22 +61,22 @@
         ChatAllModel *model = [ChatAllModel new];
         ContactPersonModel *personModel = [ContactPersonModel new];
         personModel.name = @"陈老师";
-        personModel.avatar = @"avatar";
+        personModel.avatar = @"icon_teacher";
         model.personModel = personModel;
         model.dateStr = @"刚刚";
-        model.unreadNum = 2;
-        model.messageStr = @"您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好";
+        model.unreadNum = 1;
+        model.messageStr = @"你好，孩子最近成绩下降了，方便聊一下吗？";
         model;
     })];
     [_models addObject:({
         ChatAllModel *model = [ChatAllModel new];
         ContactPersonModel *personModel = [ContactPersonModel new];
-        personModel.name = @"陈老师";
-        personModel.avatar = @"avatar";
+        personModel.name = @"王老师";
+        personModel.avatar = @"avatar-4";
         model.personModel = personModel;
-        model.dateStr = @"刚刚";
+        model.dateStr = @"3天前";
         model.unreadNum = 0;
-        model.messageStr = @"您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好您好";
+        model.messageStr = @"孩子最近表现不错，家长可以适当表扬鼓励一下哦";
         model;
     })];
     
