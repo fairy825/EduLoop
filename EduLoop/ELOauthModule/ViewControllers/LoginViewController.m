@@ -257,8 +257,8 @@
                 }
             }else{//login
                 UserLoginResponse *resp = [[UserLoginResponse alloc]initWithDictionary:responseObject error:nil];
-                [ELUserInfo setUserInfo:resp.data];
-                [BasicInfo markUser];
+                ProfileModel *profile = resp.data;
+                [ELUserInfo setUserInfo:profile];                [BasicInfo markUser];
                 
                 [self.navigationController pushViewController:[BasicInfo initNavigationTab] animated:YES];
             }

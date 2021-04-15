@@ -16,9 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong,readwrite) NSString *name;
 @property(nonatomic,strong,readwrite) NSString *nickname;
 @property(nonatomic,readwrite) BOOL identity;//true=parent
-@property (nonatomic, assign) NSString<Optional> *faceImage;
-@property (nonatomic, assign) NSString<Optional> *faceImageBig;
-@property (nonatomic, assign) NSString<Optional> *latestLoginTime;
+@property (nonatomic, assign) NSString *faceImage;
+@property (nonatomic, assign) NSString *faceImageBig;
+@property (nonatomic, assign) NSString *latestLoginTime;
 +(ELUserInfo *)sharedUser;
 +(void)setUserInfo:(ProfileModel *)info;
 +(void)dealloc;

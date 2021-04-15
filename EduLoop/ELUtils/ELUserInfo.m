@@ -8,15 +8,15 @@
 #import "ELUserInfo.h"
 
 @implementation ELUserInfo
-static dispatch_once_t token;
-static ELUserInfo *_instance;
 
+static dispatch_once_t token;
+static ELUserInfo *instance;
 +(ELUserInfo *)sharedUser{
     dispatch_once(&token, ^{
-        if(_instance==nil)
-            _instance = [[ELUserInfo alloc]init];
+        if(instance==nil)
+            instance = [[ELUserInfo alloc]init];
     });
-    return _instance;
+    return instance;
 }
 
 +(void)setUserInfo:(ProfileModel *)info{
@@ -35,6 +35,6 @@ static ELUserInfo *_instance;
 +(void)dealloc{
     token = 0; // 只有置成0,GCD才会认为它从未执行过.它默认为0.这样才能保证下次再次调用shareInstance的时候,再次创建对象.
 //    [_instance release];
-    _instance = nil;
+    instance = nil;
  }
 @end
