@@ -26,6 +26,10 @@ static ELUserInfo *_instance;
     userInfo.userId = info.userId;
     userInfo.name = info.name;
     userInfo.nickname = info.nickname;
+    userInfo.phone = info.phone;
+    userInfo.faceImage = info.faceImage;
+    userInfo.faceImageBig = info.faceImageBig;
+    userInfo.latestLoginTime = info.latestLoginTime;
 }
 
 +(void)dealloc{
