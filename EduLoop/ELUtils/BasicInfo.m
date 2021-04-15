@@ -13,7 +13,7 @@
 #import "HomeworkShowViewController.h"
 #import "CommunityViewController.h"
 #import "MineViewController.h"
-
+#import "UserLoginResponse.h"
 @implementation BasicInfo
 + (int)pageSize{
     return 10;
@@ -65,7 +65,24 @@
     return manager;
 }
 
++(void)POST:(NSString *)URLString parameters:(nullable id)parameters wholesuccess:(nullable void (^)(NSURLSessionDataTask *task, id _Nullable responseObject))success {
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    // 设置请求头
+    //申明请求的数据是json类型
+    manager.requestSerializer=[AFJSONRequestSerializer serializer];
+    //添加多的请求格式
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json",@"text/plain",@"text/json", @"text/javascript",@"text/html",nil];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [manager POST:URLString parameters:parameters headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@---%@",[responseObject class],responseObject);
 
+        if (success) {
+            success(task, responseObject);
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"请求失败--%@",error);
+    }];
+}
 
 +(void)POST:(NSString *)URLString parameters:(nullable id)parameters success:(nullable void (^)())success {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -148,7 +165,8 @@
 }
 
 +(void)markUser{
-    ELUserInfo *info = [ELUserInfo sharedUser];
+    ProfileModel *info = [ELUserInfo sharedUser];
+    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:@(info.id) forKey:@"MY_ACCOUNT_ID"];
     [userDefaults setObject:[NSNumber numberWithBool:info.identity] forKey:@"IS_PARENT"];
@@ -160,5 +178,40 @@
     [userDefaults removeObjectForKey:@"MY_ACCOUNT_ID"];
     [userDefaults removeObjectForKey:@"IS_PARENT"];
     [userDefaults synchronize];
+}
+
++(void)initUserWithSema:(dispatch_semaphore_t) sema{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *myAccountId = [userDefaults objectForKey:@"MY_ACCOUNT_ID"];
+
+    if ( myAccountId != nil ) {
+      NSInteger profileId = [myAccountId integerValue];
+        if(profileId!=0){
+            AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+            [manager GET:[BasicInfo urlwithDefaultStartAndSize:@"/profile/myself"] parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                
+                    NSLog(@"%@---%@",[responseObject class],responseObject);
+                    int code = [[responseObject objectForKey:@"code"]intValue];
+                    NSString* msg = [responseObject objectForKey:@"msg"];
+                    if(code==0){
+                        UserLoginResponse *response = [[UserLoginResponse alloc]initWithDictionary:responseObject error:nil];
+                        ProfileModel *profile = response.data;
+                        [ELUserInfo setUserInfo: profile];
+
+                    }else{
+                        NSLog(@"error--%@",msg);
+                        [BasicInfo showToastWithMsg:msg];
+                    }
+                dispatch_semaphore_signal(sema);
+
+                } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                    NSLog(@"请求失败--%@",error);
+                    dispatch_semaphore_signal(sema);
+
+                }];
+        }else{
+            dispatch_semaphore_signal(sema);
+        }
+    }
 }
 @end

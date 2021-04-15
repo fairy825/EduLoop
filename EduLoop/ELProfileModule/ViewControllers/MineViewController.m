@@ -15,6 +15,7 @@
 #import "LoginViewController.h"
 #import <AFNetworking.h>
 #import "BasicInfo.h"
+#import "UserLoginResponse.h"
 @interface MineViewController ()<UITableViewDelegate,UITableViewDataSource,MineToolCardDelegate>
 
 @end
@@ -59,7 +60,7 @@
             make.edges.offset(0);
         }];
     }
-    self.header = [[MineInfoCard alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 110)];
+    self.header = [[MineInfoCard alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 110) Model:[ELUserInfo sharedUser]];
     UITapGestureRecognizer  *recognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(jumpToProfile)];
     [self.header addGestureRecognizer:recognizer];
     [self.container addSubview:self.header];

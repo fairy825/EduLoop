@@ -13,7 +13,7 @@
 #import "ELOauthModule/ELOauthModule.h"
 #import "ELTeamModule/ELTeamModule.h"
 #import "TestViewController.h"
-
+#import "BasicInfo.h"
 @interface SceneDelegate ()
 
 @end
@@ -25,21 +25,30 @@
     // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
     // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-    /**
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:@4 forKey:@"MY_ACCOUNT_ID"];
-    [userDefaults setObject:[NSNumber numberWithBool:NO] forKey:@"IS_PARENT"];
-    [userDefaults synchronize];
-     */
     
-    LoginViewController *loginVC = [[LoginViewController alloc]init];
-
-    UINavigationController *navigationController = [[UINavigationController alloc]initWithRootViewController:loginVC];//每个navigationController都需要rootNavigationController 代表栈底元素 即初始显示的controller
-    [navigationController setNavigationBarHidden:YES];
+    dispatch_group_t group = dispatch_group_create();
+        
+    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+        [BasicInfo initUserWithSema:(dispatch_semaphore_t) sema];
+            dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+    });
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        ProfileModel *userInfo = [ELUserInfo sharedUser];
+        UINavigationController *navigationController;
+        if(userInfo!=nil&&userInfo.id!=0){
+            navigationController = [[UINavigationController alloc]initWithRootViewController:[BasicInfo initNavigationTab]];//每个navigationController都需要rootNavigationController 代表栈底元素 即初始显示的controller
+        }else{
+            LoginViewController *loginVC = [[LoginViewController alloc]init];
+            navigationController = [[UINavigationController alloc]initWithRootViewController:loginVC];//每个navigationController都需要rootNavigationController 代表栈底元素 即初始显示的controller
+        }
+        [navigationController setNavigationBarHidden:YES];
+        self.window = [[UIWindow alloc] initWithWindowScene:(UIWindowScene*)scene];
+        self.window.rootViewController = navigationController;
+        [self.window makeKeyAndVisible];
+        
+    });
     
-    self.window = [[UIWindow alloc] initWithWindowScene:(UIWindowScene*)scene];
-    self.window.rootViewController = navigationController;
-    [self.window makeKeyAndVisible];
 }
 
 

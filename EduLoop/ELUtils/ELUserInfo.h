@@ -10,12 +10,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ELUserInfo : NSObject
-@property(nonatomic,readwrite) NSInteger id;
-@property(nonatomic,readwrite) NSInteger userId;
-@property(nonatomic,strong,readwrite) NSString *name;
-@property(nonatomic,strong,readwrite) NSString *nickname;
-@property(nonatomic,readwrite) BOOL identity;//true=parent
-+(ELUserInfo *)sharedUser;
++(ProfileModel *)sharedUser;
 +(void)setUserInfo:(ProfileModel *)info;
 +(void)dealloc;
 @end

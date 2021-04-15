@@ -10,6 +10,11 @@
 #import <Masonry/Masonry.h>
 #import "SettingDataTableViewCell.h"
 #import "ELOverlay.h"
+#import "ELCenterOverlay.h"
+#import "ELCenterOverlayModel.h"
+#import "BasicInfo.h"
+#import "ELUserInfo.h"
+#import "UserLoginResponse.h"
 @interface ProfileViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
@@ -17,6 +22,7 @@
 @implementation ProfileViewController
 
 - (void)loadData{
+    ProfileModel *profile = [ELUserInfo sharedUser];
     _models = @[].mutableCopy;
     
     [_models addObject:({
@@ -28,38 +34,81 @@
     })];
     [_models addObject:({
         SettingDataModel *model = [SettingDataModel new];
-        model.showArrow = NO;
+        model.showArrow = YES;
         model.accessoryType = SettingTableViewCellType_InlineTextField;
         model.title =@"昵称";
-        model.detailText = @"Mijika";
+        model.detailText = profile.nickname;
         model;
     })];
     [_models addObject:({
         SettingDataModel *model = [SettingDataModel new];
         model.showArrow = NO;
         model.title =@"账号";
-        model.detailText = @"123456";
+        model.detailText = profile.name;
         model;
     })];
     [_models addObject:({
         SettingDataModel *model = [SettingDataModel new];
-        model.title =@"身份";
-        model.detailText = @"家长";
+        model.showArrow = YES;
+        model.title =@"联系方式";
+        model.detailText = profile.phone;
+        model;
+    })];
+
+    /**[_models addObject:({
+        SettingDataModel *model = [SettingDataModel new];
+        model.showArrow = YES;
+        model.title =@"切换身份至老师";
+        __weak typeof(self) wself = self;
         model.clickBlock = ^{
-            ELBottomOverlay *overlay = [[ELBottomOverlay alloc]initWithFrame:self.view.bounds Data:@[
-                ({
-                ELOverlayItem *item = [ELOverlayItem new];
-                item.title = @"家长";
-                item;
-            }),({
-                ELOverlayItem *item = [ELOverlayItem new];
-                item.title = @"老师";
-                item;
-            })]];
-            [overlay showHighlightView];
+            __strong typeof(self) sself = wself;
+            ELCenterOverlayModel *centerOverlayModel = [ELCenterOverlayModel new];
+            centerOverlayModel.title = @"确认切换身份至老师？";
+            centerOverlayModel.leftChoice = ({
+                ELOverlayItem *sureItem =[ELOverlayItem new];
+                sureItem.title = @"确认";
+                __weak typeof(self) wwself = sself;
+                sureItem.clickBlock = ^{
+                    __strong typeof(self) ssself = wwself;
+                    [ssself.navigationController popViewControllerAnimated:YES];
+
+                };
+                sureItem;
+            });
+            ELCenterOverlay *identityView = [[ELCenterOverlay alloc]initWithFrame:self.view.bounds Data:centerOverlayModel
+            ];
+            
+            [identityView showHighlightView];
+        };
+        model;
+    })];*/
+    [_models addObject:({
+        SettingDataModel *model = [SettingDataModel new];
+        model.title =@"身份";
+        model.detailText = profile.identity==YES?@"家长":@"教师";
+        __weak typeof(self) wself = self;
+        model.clickBlock = ^{
+            __strong typeof(self) sself = wself;
+            ELCenterOverlayModel *centerOverlayModel = [ELCenterOverlayModel new];
+            centerOverlayModel.title = [NSString stringWithFormat:@"%@%@%@", @"确认切换身份至",profile.identity==YES?@"教师":@"家长",@"？" ];
+            centerOverlayModel.leftChoice = ({
+                ELOverlayItem *sureItem =[ELOverlayItem new];
+                sureItem.title = @"确认";
+                __weak typeof(self) wwself = sself;
+                sureItem.clickBlock = ^{
+                    __strong typeof(self) ssself = wwself;
+                    [ssself identityChangeNetworkWithIdentity:!profile.identity];
+                };
+                sureItem;
+            });
+            ELCenterOverlay *identityView = [[ELCenterOverlay alloc]initWithFrame:self.view.bounds Data:centerOverlayModel
+            ];
+            
+            [identityView showHighlightView];
         };
         model;
     })];
+    
 }
 
 - (void)viewDidLoad {
@@ -72,7 +121,7 @@
             make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
             make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
             make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
-            make.height.equalTo(@258);
+            make.height.equalTo(@(90+56*4));
         }];
     
     [self.view addSubview:self.saveBtn];
@@ -91,6 +140,8 @@
         self.profileTableView.delegate = self;
         self.profileTableView.dataSource = self;
         self.profileTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        self.profileTableView.estimatedRowHeight = 56;
+        self.profileTableView.rowHeight = UITableViewAutomaticDimension;
     }
     return _profileTableView;
 }
@@ -111,7 +162,7 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 4;
+    return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -133,5 +184,26 @@
     if(self.models[row].accessoryType==SettingTableViewCellType_Image)
         return 90;
     return 56;
+}
+
+- (void)identityChangeNetworkWithIdentity:(BOOL)identity{
+    NSDictionary *paramDict =  @{
+        @"identity":[NSNumber numberWithBool:identity]
+    };
+    [BasicInfo POST:[BasicInfo url:@"/oauth/identity/change"] parameters:paramDict wholesuccess:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject){
+        int code = [[responseObject objectForKey:@"code"]intValue];
+        if(code!=0){
+            NSString* msg = [responseObject objectForKey:@"msg"];
+            NSLog(@"error--%@",msg);
+            [BasicInfo showToastWithMsg:msg];
+        }else{
+            UserLoginResponse *resp = [[UserLoginResponse alloc]initWithDictionary:responseObject error:nil];
+            ProfileModel *profile = resp.data;
+            [ELUserInfo setUserInfo:profile];
+            [BasicInfo markUser];
+            
+            [self.navigationController pushViewController:[BasicInfo initNavigationTab] animated:YES];
+        }
+    }];
 }
 @end
