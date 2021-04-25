@@ -11,4 +11,7 @@ target 'EduLoop' do
     pod 'LMJDropdownMenu'
     pod 'DLRadioButton', '~> 1.4'
     pod 'QuickSecurityCode'
+    pod 'SDWebImage'
+    pod 'SGQRCode', '~> 3.0.1'
+    pod 'TZImagePickerController'
 end

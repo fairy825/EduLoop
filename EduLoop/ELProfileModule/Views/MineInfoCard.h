@@ -19,7 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong,readwrite) UILabel *schoolLabel;
 @property(nonatomic,strong,readwrite) UILabel *gradeLabel;
 @property(nonatomic,strong,readwrite) UIImageView *arrowImage;
+
 - (instancetype)initWithFrame:(CGRect)frame Model:(ELUserInfo *)model;
+-(void) reloadData;
 @end
 
 NS_ASSUME_NONNULL_END

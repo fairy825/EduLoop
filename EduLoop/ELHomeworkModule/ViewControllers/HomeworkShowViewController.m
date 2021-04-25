@@ -18,11 +18,11 @@
 #import <MJRefresh.h>
 #import "TeacherTaskSummaryViewController.h"
 #import "TeacherShowDetailTaskResponse.h"
-#import "ELKeys.h"
 #import <LMJDropdownMenu.h>
 #import "GetMyStudentsResponse.h"
 #import "ParentScanAllTaskResponse.h"
 #import "InputTeamCodeViewController.h"
+#import "ELNetworkSessionManager.h"
 @interface HomeworkShowViewController ()<UITableViewDelegate,UITableViewDataSource,HomeworkShowTableViewCellDelegate,LMJDropdownMenuDelegate,LMJDropdownMenuDataSource>
 
 @end
@@ -51,9 +51,7 @@
 }
 
 - (void)getIdentity{
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSNumber *isParent = (NSNumber *)[userDefaults objectForKey:ELKeys.IS_PARENT];
-    _isParent = isParent.boolValue;
+    _isParent = [ELUserInfo sharedUser].identity;
 }
 
 - (void)loadDataNetwork:(BOOL) isRefresh{
@@ -75,12 +73,11 @@
 
 #pragma mark - network
 -(void)deleteTaskNetworkWithTaskId:(NSString *)tid success:(nullable void (^)())success{
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     [BasicInfo DELETE:[BasicInfo url:@"/task" path:tid] success:success];
 }
 
 - (void)getMyStuNetworkWithSuccess:(nullable void (^)())success{
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [ELNetworkSessionManager sharedManager];
     [manager GET:[BasicInfo urlwithDefaultStartAndSize:@"/student/mine"] parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         [_students removeAllObjects];
         
@@ -105,7 +102,7 @@
 }
 
 - (void)loadDataIsRefresh:(BOOL) isRefresh{
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [ELNetworkSessionManager sharedManager];
     int start = 1;
     int size = BasicInfo.pageSize;
     if(isRefresh==NO){
@@ -147,7 +144,7 @@
 }
 
 - (void)teacherLoadDataIsRefresh:(BOOL) isRefresh{
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [ELNetworkSessionManager sharedManager];
     int start = 1;
     int size = BasicInfo.pageSize;
     if(isRefresh==NO){
@@ -187,7 +184,7 @@
 }
 
 -(void) teacherShowDetailTaskNetworkWithTaskId:(NSInteger)taskId{
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [ELNetworkSessionManager sharedManager];
     NSDictionary *paramDict =  @{@"start":[NSString stringWithFormat:@"%d", 1],@"size":[NSString stringWithFormat:@"%d", 10]
     };
     [manager GET:[BasicInfo url:@"/task/teacher" path:[NSString stringWithFormat:@"%ld",(long)taskId]] parameters:paramDict headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -304,7 +301,7 @@
 }
 - (UIImage *)dropdownMenu:(LMJDropdownMenu *)menu iconForOptionAtIndex:(NSUInteger)index{
     if(index==_students.count)
-        return [UIImage imageNamed:@"icon_add_16"];
+        return [UIImage imageNamed:@"icon_add_small-1"];
     return [UIImage imageNamed:@"avatar-4"];
 }
 - (NSString *)dropdownMenu:(LMJDropdownMenu *)menu titleForOptionAtIndex:(NSUInteger)index{
@@ -400,7 +397,7 @@
     UITableViewRowAction *deleteAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
         NSLog(@"点击了删除");
         NSInteger index = [indexPath row];
-        TaskModel *task = [self->_models objectAtIndex:index];
+        TaskModel *task = [self.models objectAtIndex:index];
         [self deleteTaskNetworkWithTaskId:[NSString stringWithFormat:@"%ld",(long)task.id] success:^{
             [self.models removeObjectAtIndex:index];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -410,7 +407,7 @@
     UITableViewRowAction *editAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleNormal title:@"编辑" handler:^(UITableViewRowAction * _Nonnull action, NSIndexPath * _Nonnull indexPath) {
         NSLog(@"点击了编辑");
         NSInteger index = [indexPath row];
-        [self jumpToDetailPageWithData:[self->_models objectAtIndex:index]];
+        [self.navigationController pushViewController:[[BroadcastViewController alloc]initWithHomeworkData:[self.models objectAtIndex:index]] animated:YES];
     }];
     editAction.backgroundColor = [UIColor color5bb2ff];
     return @[deleteAction, editAction];

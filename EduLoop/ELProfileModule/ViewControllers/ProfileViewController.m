@@ -15,7 +15,9 @@
 #import "BasicInfo.h"
 #import "ELUserInfo.h"
 #import "UserLoginResponse.h"
-@interface ProfileViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "ELNetworkSessionManager.h"
+#import <TZImagePickerController.h>
+@interface ProfileViewController ()<UITableViewDelegate,UITableViewDataSource,TZImagePickerControllerDelegate>
 
 @end
 
@@ -29,7 +31,13 @@
         SettingDataModel *model = [SettingDataModel new];
         model.accessoryType = SettingTableViewCellType_Image;
         model.title =@"头像";
-        model.defaultAvatarImage = [UIImage imageNamed:@"avatar_child_2"];
+        model.avatarImageUrl = profile.faceImage;
+        model.defaultAvatarImage = [UIImage imageNamed:@"avatar-4"];
+        __weak typeof(self) wself = self;
+        model.clickBlock = ^{
+            __strong typeof(self) sself = wself;
+            [sself selectImage];
+        };
         model;
     })];
     [_models addObject:({
@@ -49,9 +57,10 @@
     })];
     [_models addObject:({
         SettingDataModel *model = [SettingDataModel new];
+        model.accessoryType = SettingTableViewCellType_InlineTextField;
         model.showArrow = YES;
         model.title =@"联系方式";
-        model.detailText = profile.phone;
+        model.detailText = profile.phone?profile.phone:@"";
         model;
     })];
 
@@ -155,8 +164,52 @@
         [_saveBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_saveBtn.titleLabel setTextAlignment: NSTextAlignmentCenter];
         [_saveBtn.titleLabel setFont:[UIFont fontWithName:@"PingFangSC" size:16]];
+        [_saveBtn addTarget:self action:@selector(putProfileMyselfNetwork) forControlEvents:UIControlEventTouchUpInside];
     }
     return _saveBtn;
+}
+
+- (void)selectImage{
+    TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:self];
+    imagePickerVc.preferredLanguage = @"zh-Hans";
+    imagePickerVc.allowPickingOriginalPhoto = NO;
+    // You can get the photos by block, the same as by delegate.
+    // 你可以通过block或者代理，来得到用户选择的照片.
+    [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
+        [self uploadMyAvatarNetwork:photos[0]];
+    }];
+    [self presentViewController:imagePickerVc animated:YES completion:nil];
+}
+
+- (void)uploadMyAvatarNetwork:(UIImage *)selectedAvatar{
+    NSData *data = UIImagePNGRepresentation(selectedAvatar);
+    NSString * base64 = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    AFHTTPSessionManager *manager = [ELNetworkSessionManager sharedManager];
+    NSDictionary *paramDict =  @{
+        @"profileId":[NSNumber numberWithInteger: [ELUserInfo sharedUser].id],
+        @"faceData":base64
+    };
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+
+    [manager POST:[BasicInfo url:@"/profile/uploadFaceBase64"] parameters:paramDict headers:nil  progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@---%@",[responseObject class],responseObject);
+        int code = [[responseObject objectForKey:@"code"]intValue];
+        if(code!=0){
+            NSString* msg = [responseObject objectForKey:@"msg"];
+            NSLog(@"error--%@",msg);
+            [BasicInfo showToastWithMsg:msg];
+        }else{
+            UserLoginResponse *response = [[UserLoginResponse alloc]initWithDictionary:responseObject error:nil];
+            ProfileModel *profile = response.data;
+            [ELUserInfo setUserInfo: profile];
+            [self loadData];
+            [self.profileTableView reloadData];
+
+        }
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"请求失败--%@",error);
+    }];
 }
 
 #pragma mark - UITableViewDataSource
@@ -178,12 +231,41 @@
     return cell;
 }
 
+
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     NSUInteger row = [indexPath row];
     if(self.models[row].accessoryType==SettingTableViewCellType_Image)
         return 90;
     return 56;
+}
+
+- (void)putProfileMyselfNetwork{
+    NSDictionary *paramDict =  @{
+        @"nickname":_models[1].realContent,
+        @"phone":_models[3].realContent
+    };
+    AFHTTPSessionManager *manager = [ELNetworkSessionManager sharedManager];
+    // 设置请求头
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+
+    [manager PUT:[BasicInfo url:@"/profile/myself"] parameters:paramDict headers:nil  success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            NSLog(@"%@---%@",[responseObject class],responseObject);
+            int code = [[responseObject objectForKey:@"code"]intValue];
+            if(code!=0){
+                NSString* msg = [responseObject objectForKey:@"msg"];
+                NSLog(@"error--%@",msg);
+                [BasicInfo showToastWithMsg:msg];
+            }else{
+                UserLoginResponse *response = [[UserLoginResponse alloc]initWithDictionary:responseObject error:nil];
+                ProfileModel *profile = response.data;
+                [ELUserInfo setUserInfo: profile];
+
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"请求失败--%@",error);
+    }];
 }
 
 - (void)identityChangeNetworkWithIdentity:(BOOL)identity{
@@ -206,4 +288,5 @@
         }
     }];
 }
+
 @end

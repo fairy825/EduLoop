@@ -8,14 +8,48 @@
 #import "ChildProfileViewController.h"
 #import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
-@interface ChildProfileViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import <MJRefresh.h>
+#import <AFNetworking.h>
+#import "BasicInfo.h"
+#import "ChildProfileEditViewController.h"
+#import "InputTeamCodeViewController.h"
+#import "ELCenterOverlay.h"
+#import "ELNetworkSessionManager.h"
+#import "GetMyStudentsResponse.h"
+#import "ScanQRCodeViewController.h"
+@interface ChildProfileViewController ()<UITableViewDelegate,UITableViewDataSource,ELFloatingButtonDelegate,ChildProfileCardDelegate>
 
 @end
 
 @implementation ChildProfileViewController
+- (void)viewWillAppear:(BOOL)animated{
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self getMyStuNetwork];
+}
+
+- (NSArray<NSString *> *)grades{
+    return @[@"一年级",@"二年级",@"三年级",@"四年级",@"五年级",@"六年级",
+       @"初一",@"初二",@"初三",@"高一",@"高二",@"高三"];
+}
+
+- (ChildModel *)fromStudentModel:(StudentModel *)stu{
+    ChildModel *child = [ChildModel new];
+    child.id = stu.id;
+    child.nickname = stu.name;
+    child.sno = stu.sno;
+    child.avatarUrl = stu.faceImage;
+    child.relationship = stu.relationship;
+    child.sex = stu.sex?@"男":@"女";
+    child.grade = [[self grades] objectAtIndex:stu.grade];
+    child.team = stu.teamName;
+    child.teamId = [stu.teamId integerValue];
+    child.qrcode = stu.qrcode;
+    return child;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.page=1;
     [self loadData];
     [self setTitle:@"孩子档案"];
     self.view.backgroundColor = [UIColor f6f6f6];
@@ -24,7 +58,6 @@
     self.profileTableView.dataSource = self;
     self.profileTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.profileTableView.backgroundColor = [UIColor f6f6f6];
-
     [self.view addSubview:self.profileTableView];
     [self.profileTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop).offset(20);
@@ -49,37 +82,44 @@
 //    }];
 }
 
+
 - (void)loadData{
-    _models = @[].mutableCopy;
-    
-    [_models addObject:({
-        ChildModel *model = [ChildModel new];
-        model.grade = @"三年级";
-        model.team =@"三（4）班";
-        model.nickname = @"王二";
-        model.sex = @"女";
-        model.relationship = @"妈妈";
-        model.sno = @"19";
-        model.avatarUrl = @"avatar_child_1";
-        model;
-    })];
-    [_models addObject:({
-        ChildModel *model = [ChildModel new];
-        model.grade = @"六年级";
-        model.team =@"六（3）班";
-        model.nickname = @"李四";
-        model.sex = @"女";
-        model.relationship = @"其他";
-        model.sno = @"3";
-        model.avatarUrl = @"avatar_child_3";
-        model;
-    })];
 }
+
+- (void)getMyStuNetwork{
+    AFHTTPSessionManager *manager = [ELNetworkSessionManager sharedManager];
+
+    [manager GET:[BasicInfo urlwithDefaultStartAndSize:@"/student/mine"] parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"%@---%@",[responseObject class],responseObject);
+        int code = [[responseObject objectForKey:@"code"]intValue];
+        NSString* msg = [responseObject objectForKey:@"msg"];
+        if(code==0){
+            GetMyStudentsResponse *model =[[GetMyStudentsResponse alloc] initWithDictionary:responseObject error: nil];
+            NSArray<StudentModel *> *students = model.data;
+            NSMutableArray<ChildModel *>*children = [[NSMutableArray alloc]init];
+            for(StudentModel *stu in students){
+                [children addObject:({
+                    [self fromStudentModel:stu];
+                })];
+            }
+            self.models = children;
+            [self.profileTableView reloadData];
+            
+        }else{
+            NSLog(@"error--%@",msg);
+            [BasicInfo showToastWithMsg:msg];
+        }
+
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"请求失败--%@",error);
+        }];
+}
+
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 2;
+    return _models.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -89,15 +129,75 @@
     ChildModel *model = self.models[row];
     if (!cell) {
         cell = [[ChildProfileCard alloc]                        initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id data:model];
+        cell.tag = 10+row;
+        UIGestureRecognizer *recog = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(pushUnbindWindow:)];
+        [cell addGestureRecognizer:recog];
+        cell.delegate = self;
     }
-    [cell loadData:model];
+    [cell reload:model];
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSInteger row = [indexPath row];
+    ChildModel *child = [_models objectAtIndex:row];
+    [self.navigationController pushViewController:[[ChildProfileEditViewController alloc]initWithData:child] animated:YES];
+
+    
+}
+
+- (void)ChildProfileCardJumpToInputCode:(ChildProfileCard *)card{
+    [self.navigationController pushViewController:[[InputTeamCodeViewController alloc]initWithStudent:card.model.id] animated:YES];
+}
+
+- (void)pushUnbindWindow:(UILongPressGestureRecognizer *)recog {
+    if(recog.state == UIGestureRecognizerStateBegan){
+        ChildProfileCard *card = (ChildProfileCard *)recog.view;
+        ELCenterOverlayModel *centerOverlayModel = [ELCenterOverlayModel new];
+        centerOverlayModel.title = [NSString stringWithFormat:@"%@%@%@", @"确认与孩子",card.model.nickname,@"解绑？" ];
+        centerOverlayModel.leftChoice = ({
+            ELOverlayItem *sureItem =[ELOverlayItem new];
+            sureItem.title = @"确认";
+            __weak typeof(self) wself = self;
+            sureItem.clickBlock = ^{
+                __strong typeof(self) sself = wself;
+                [sself unbindChildNetwork:card];
+
+            };
+            sureItem;
+        });
+        ELCenterOverlay *deleteAlertView = [[ELCenterOverlay alloc]initWithFrame:self.view.bounds Data:centerOverlayModel
+        ];
+        
+        [deleteAlertView showHighlightView];
+    }
+}
+
+- (void)unbindChildNetwork:(ChildProfileCard *)card{
+    NSInteger studentId = card.model.id;
+    AFHTTPSessionManager *manager = [ELNetworkSessionManager sharedManager];
+    [manager GET:[BasicInfo url:@"/student/unbind/" path:[NSString stringWithFormat:@"%ld", studentId]] parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+            NSLog(@"%@---%@",[responseObject class],responseObject);
+            int code = [[responseObject objectForKey:@"code"]intValue];
+            NSString* msg = [responseObject objectForKey:@"msg"];
+            if(code==0){
+                NSIndexPath *index = [self.profileTableView indexPathForCell:card];
+                [self.models removeObjectAtIndex:[index row]];
+                [self.profileTableView deleteRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }else{
+                NSLog(@"error--%@",msg);
+                [BasicInfo showToastWithMsg:msg];
+            }
+
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"请求失败--%@",error);
+        }];
+}
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 90+56*7;
+    return 90+56*7+40;
 }
 
 - (ELFloatingButton *)addBtn{
@@ -106,5 +206,29 @@
         _addBtn.delegate = self;
     }
     return _addBtn;
+}
+
+#pragma mark - ELFloatingButtonDelegate
+- (void)clickFloatingButton{
+    __weak typeof(self) wself = self;
+    ELBottomOverlay *overlay = [[ELBottomOverlay alloc]initWithFrame:self.view.bounds Data:@[({
+        ELOverlayItem *item = [ELOverlayItem new];
+        item.title =@"创建学生";
+        item.clickBlock = ^{
+            __strong typeof(self) sself = wself;
+            [self.navigationController pushViewController:[[ChildProfileEditViewController alloc]initWithData:nil] animated:YES];
+        };
+        item;
+    }),({
+        ELOverlayItem *item = [ELOverlayItem new];
+        item.title =@"绑定学生";
+        item.clickBlock = ^{
+            __strong typeof(self) sself = wself;
+            [sself.navigationController pushViewController:[[ScanQRCodeViewController alloc]init] animated:YES];
+        };
+        item;
+    })]];
+    [overlay showHighlightView];
+    
 }
 @end

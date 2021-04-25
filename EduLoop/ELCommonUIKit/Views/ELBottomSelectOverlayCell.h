@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ELBottomSelectOverlayCell: UITableViewCell
 
-@property(nonatomic,strong,readwrite) TeamModel *data;
+@property(nonatomic,strong,readwrite) NSString *data;
 @property(nonatomic,strong,readwrite) UILabel *choiceLabel;
 @property(nonatomic,copy,readwrite) dispatch_block_t clickItemBlock;
 -(void)loadData;

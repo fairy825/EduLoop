@@ -16,24 +16,50 @@
 #import <AFNetworking.h>
 #import "BasicInfo.h"
 #import "UserLoginResponse.h"
-@interface MineViewController ()<UITableViewDelegate,UITableViewDataSource,MineToolCardDelegate>
+#import "GetMyStudentsResponse.h"
+#import "StudentModel.h"
+#import "ELNetworkSessionManager.h"
+#import <TZImagePickerController.h>
+#import "ELUserInfo.h"
+#import "TeamListViewController.h"
+@interface MineViewController ()<UITableViewDelegate,UITableViewDataSource,MineToolCardDelegate,UIImagePickerControllerDelegate>
 
 @end
 
 @implementation MineViewController
 - (void)viewWillAppear:(BOOL)animated{
     [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self initItems];
+    [self loadData];
     
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
+
+- (void)initItems{
+    NSString *item;
+    ELUserInfo *userInfo = [ELUserInfo sharedUser];
+    if(userInfo.identity)
+        item = @"孩子档案";
+    else item = @"班级管理";
+    self.miscTitles = @[item,@"推荐给好友",@"意见反馈"];
+    self.miscDetails = @[@"",@"",@""];
+}
+
+- (void)loadData{
+    [self.header reloadData];
+    [self.miscCard.miscTableView reloadData];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.miscTitles = @[@"孩子档案",@"推荐给好友",@"意见反馈"];
-    self.miscDetails = @[@"",@"",@""];
-    
+    [self initItems];
+    [self setupSubviews];
+}
+
+- (void)setupSubviews {
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     scrollView.backgroundColor = [UIColor f6f6f6];
 //    scrollView.contentSize = CGSizeMake(self.view.bounds.size.width*5, self.view.bounds.size.height*3);
@@ -41,10 +67,6 @@
 //    scrollView.pagingEnabled=YES;
     scrollView.delegate = self;
     [self.view addSubview:scrollView];
-    [self setupSubviews];
-}
-
-- (void)setupSubviews {
     self.container = [[UIView alloc]init];
     [self.view addSubview:self.container];
     if (@available(iOS 11,*)) {
@@ -102,8 +124,8 @@
 - (void)jumpToViewController:(UIViewController *)viewController{
     [self.navigationController pushViewController:viewController animated:YES];
 }
-#pragma mark - View
 
+#pragma mark - View
 - (UIButton *)logOutBtn{
     if(!_logOutBtn){
         self.logOutBtn = [[UIButton alloc]init];
@@ -144,9 +166,14 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger row = [indexPath row];
-    if([_miscTitles[row] isEqual:@"孩子档案"]){
-        ChildProfileViewController *viewController = [[ChildProfileViewController alloc]init];
-        [self jumpToViewController:viewController];
+    if(row==0){
+        if([ELUserInfo sharedUser].identity==YES){
+            ChildProfileViewController *viewController = [[ChildProfileViewController alloc]init];
+            [self jumpToViewController:viewController];
+        }else{
+            TeamListViewController *viewController = [[TeamListViewController alloc]init];
+            [self jumpToViewController:viewController];
+        }
     }
 }
 
@@ -169,7 +196,7 @@
 }
 
 -(void)userLogoutNetwork{
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [ELNetworkSessionManager sharedManager];
     [manager GET:[BasicInfo url:@"/oauth/logout"] parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
             NSLog(@"%@---%@",[responseObject class],responseObject);

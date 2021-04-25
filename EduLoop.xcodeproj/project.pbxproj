@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		840ED05326298ACA00109F39 /* ChildProfileEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED05226298ACA00109F39 /* ChildProfileEditViewController.m */; };
+		840ED059262ADBD300109F39 /* ELCenterImgOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED058262ADBD300109F39 /* ELCenterImgOverlay.m */; };
+		840ED083262D6B3000109F39 /* ELNetworkSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED082262D6B3000109F39 /* ELNetworkSessionManager.m */; };
+		840ED0A4263402B700109F39 /* TeamListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED0A3263402B700109F39 /* TeamListViewController.m */; };
+		840ED0AA263403AC00109F39 /* TeamEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED0A9263403AC00109F39 /* TeamEditViewController.m */; };
+		840ED0B0263406E900109F39 /* TeamPagedResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED0AF263406E900109F39 /* TeamPagedResult.m */; };
+		840ED0B6263479EF00109F39 /* GetOneTeamResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED0B5263479EF00109F39 /* GetOneTeamResponse.m */; };
+		840ED0BC26347A7B00109F39 /* StudentPagedResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED0BB26347A7B00109F39 /* StudentPagedResult.m */; };
+		840ED0C226347B6A00109F39 /* TeamDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED0C126347B6A00109F39 /* TeamDetailViewController.m */; };
+		840ED0C8263539AB00109F39 /* StudentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED0C7263539AB00109F39 /* StudentTableViewCell.m */; };
+		840ED0CE263541AB00109F39 /* TeamDetailCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED0CD263541AB00109F39 /* TeamDetailCard.m */; };
+		840ED0E32635553900109F39 /* ScanQRCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED0E22635553900109F39 /* ScanQRCodeViewController.m */; };
+		840ED0E9263559AC00109F39 /* InputRelationshipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED0E8263559AC00109F39 /* InputRelationshipViewController.m */; };
 		8432759A2611BD0000641E60 /* HomeworkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 843275992611BD0000641E60 /* HomeworkModel.m */; };
 		843275A026121C0C00641E60 /* TeacherShowDetailTaskResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8432759F26121C0C00641E60 /* TeacherShowDetailTaskResponse.m */; };
 		843275A92612EF7700641E60 /* TaskDetailCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 843275A82612EF7700641E60 /* TaskDetailCard.m */; };
@@ -18,7 +31,6 @@
 		843275D12615F83C00641E60 /* ELFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 843275D02615F83C00641E60 /* ELFormat.m */; };
 		843275DD2616008200641E60 /* GetOneHomeworkResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 843275DC2616008200641E60 /* GetOneHomeworkResponse.m */; };
 		844512AE26185D490098B67E /* ELUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 844512AD26185D490098B67E /* ELUserInfo.m */; };
-		844512B4261861810098B67E /* ELKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 844512B3261861810098B67E /* ELKeys.m */; };
 		844512BA26186DE70098B67E /* ParentScanAllTaskResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 844512B926186DE70098B67E /* ParentScanAllTaskResponse.m */; };
 		844512D3261996B60098B67E /* ProfileSummaryCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 844512D2261996B60098B67E /* ProfileSummaryCard.m */; };
 		844512D92619A0AE0098B67E /* GetMyStudentsResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 844512D82619A0AE0098B67E /* GetMyStudentsResponse.m */; };
@@ -139,6 +151,32 @@
 /* Begin PBXFileReference section */
 		03A30B8306BBFF24ECE415E9 /* libPods-EduLoop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EduLoop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A9FEE5E2DF57E8D74A2552C /* Pods-EduLoop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EduLoop.release.xcconfig"; path = "Target Support Files/Pods-EduLoop/Pods-EduLoop.release.xcconfig"; sourceTree = "<group>"; };
+		840ED05126298ACA00109F39 /* ChildProfileEditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChildProfileEditViewController.h; sourceTree = "<group>"; };
+		840ED05226298ACA00109F39 /* ChildProfileEditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChildProfileEditViewController.m; sourceTree = "<group>"; };
+		840ED057262ADBD300109F39 /* ELCenterImgOverlay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELCenterImgOverlay.h; sourceTree = "<group>"; };
+		840ED058262ADBD300109F39 /* ELCenterImgOverlay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELCenterImgOverlay.m; sourceTree = "<group>"; };
+		840ED081262D6B3000109F39 /* ELNetworkSessionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELNetworkSessionManager.h; sourceTree = "<group>"; };
+		840ED082262D6B3000109F39 /* ELNetworkSessionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELNetworkSessionManager.m; sourceTree = "<group>"; };
+		840ED0A2263402B700109F39 /* TeamListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeamListViewController.h; sourceTree = "<group>"; };
+		840ED0A3263402B700109F39 /* TeamListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeamListViewController.m; sourceTree = "<group>"; };
+		840ED0A8263403AC00109F39 /* TeamEditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeamEditViewController.h; sourceTree = "<group>"; };
+		840ED0A9263403AC00109F39 /* TeamEditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeamEditViewController.m; sourceTree = "<group>"; };
+		840ED0AE263406E900109F39 /* TeamPagedResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeamPagedResult.h; sourceTree = "<group>"; };
+		840ED0AF263406E900109F39 /* TeamPagedResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeamPagedResult.m; sourceTree = "<group>"; };
+		840ED0B4263479EF00109F39 /* GetOneTeamResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetOneTeamResponse.h; sourceTree = "<group>"; };
+		840ED0B5263479EF00109F39 /* GetOneTeamResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetOneTeamResponse.m; sourceTree = "<group>"; };
+		840ED0BA26347A7B00109F39 /* StudentPagedResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StudentPagedResult.h; sourceTree = "<group>"; };
+		840ED0BB26347A7B00109F39 /* StudentPagedResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StudentPagedResult.m; sourceTree = "<group>"; };
+		840ED0C026347B6A00109F39 /* TeamDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeamDetailViewController.h; sourceTree = "<group>"; };
+		840ED0C126347B6A00109F39 /* TeamDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeamDetailViewController.m; sourceTree = "<group>"; };
+		840ED0C6263539AB00109F39 /* StudentTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StudentTableViewCell.h; sourceTree = "<group>"; };
+		840ED0C7263539AB00109F39 /* StudentTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StudentTableViewCell.m; sourceTree = "<group>"; };
+		840ED0CC263541AB00109F39 /* TeamDetailCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeamDetailCard.h; sourceTree = "<group>"; };
+		840ED0CD263541AB00109F39 /* TeamDetailCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TeamDetailCard.m; sourceTree = "<group>"; };
+		840ED0E12635553900109F39 /* ScanQRCodeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScanQRCodeViewController.h; sourceTree = "<group>"; };
+		840ED0E22635553900109F39 /* ScanQRCodeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScanQRCodeViewController.m; sourceTree = "<group>"; };
+		840ED0E7263559AC00109F39 /* InputRelationshipViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InputRelationshipViewController.h; sourceTree = "<group>"; };
+		840ED0E8263559AC00109F39 /* InputRelationshipViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputRelationshipViewController.m; sourceTree = "<group>"; };
 		843275982611BD0000641E60 /* HomeworkModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeworkModel.h; sourceTree = "<group>"; };
 		843275992611BD0000641E60 /* HomeworkModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeworkModel.m; sourceTree = "<group>"; };
 		8432759E26121C0C00641E60 /* TeacherShowDetailTaskResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TeacherShowDetailTaskResponse.h; sourceTree = "<group>"; };
@@ -161,8 +199,6 @@
 		843275DC2616008200641E60 /* GetOneHomeworkResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetOneHomeworkResponse.m; sourceTree = "<group>"; };
 		844512AC26185D490098B67E /* ELUserInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELUserInfo.h; sourceTree = "<group>"; };
 		844512AD26185D490098B67E /* ELUserInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELUserInfo.m; sourceTree = "<group>"; };
-		844512B2261861810098B67E /* ELKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELKeys.h; sourceTree = "<group>"; };
-		844512B3261861810098B67E /* ELKeys.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELKeys.m; sourceTree = "<group>"; };
 		844512B826186DE70098B67E /* ParentScanAllTaskResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ParentScanAllTaskResponse.h; sourceTree = "<group>"; };
 		844512B926186DE70098B67E /* ParentScanAllTaskResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ParentScanAllTaskResponse.m; sourceTree = "<group>"; };
 		844512D1261996B60098B67E /* ProfileSummaryCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileSummaryCard.h; sourceTree = "<group>"; };
@@ -404,10 +440,10 @@
 				8470FDCE26062E2800B05974 /* BasicInfo.m */,
 				844512AC26185D490098B67E /* ELUserInfo.h */,
 				844512AD26185D490098B67E /* ELUserInfo.m */,
-				844512B2261861810098B67E /* ELKeys.h */,
-				844512B3261861810098B67E /* ELKeys.m */,
 				8445133E26217E150098B67E /* NSString+MD5.h */,
 				8445133F26217E150098B67E /* NSString+MD5.m */,
+				840ED081262D6B3000109F39 /* ELNetworkSessionManager.h */,
+				840ED082262D6B3000109F39 /* ELNetworkSessionManager.m */,
 			);
 			path = ELUtils;
 			sourceTree = "<group>";
@@ -470,6 +506,12 @@
 		8445131A261AF6060098B67E /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				840ED0AE263406E900109F39 /* TeamPagedResult.h */,
+				840ED0AF263406E900109F39 /* TeamPagedResult.m */,
+				840ED0B4263479EF00109F39 /* GetOneTeamResponse.h */,
+				840ED0B5263479EF00109F39 /* GetOneTeamResponse.m */,
+				840ED0BA26347A7B00109F39 /* StudentPagedResult.h */,
+				840ED0BB26347A7B00109F39 /* StudentPagedResult.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -477,6 +519,10 @@
 		8445131B261AF60E0098B67E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				840ED0C6263539AB00109F39 /* StudentTableViewCell.h */,
+				840ED0C7263539AB00109F39 /* StudentTableViewCell.m */,
+				840ED0CC263541AB00109F39 /* TeamDetailCard.h */,
+				840ED0CD263541AB00109F39 /* TeamDetailCard.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -486,6 +532,12 @@
 			children = (
 				84451326261AF6610098B67E /* InputTeamCodeViewController.h */,
 				84451327261AF6610098B67E /* InputTeamCodeViewController.m */,
+				840ED0A2263402B700109F39 /* TeamListViewController.h */,
+				840ED0A3263402B700109F39 /* TeamListViewController.m */,
+				840ED0A8263403AC00109F39 /* TeamEditViewController.h */,
+				840ED0A9263403AC00109F39 /* TeamEditViewController.m */,
+				840ED0C026347B6A00109F39 /* TeamDetailViewController.h */,
+				840ED0C126347B6A00109F39 /* TeamDetailViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -625,6 +677,12 @@
 				8470FBAA257F3B5100B05974 /* ProfileViewController.m */,
 				8470FC122580AA0B00B05974 /* ChildProfileViewController.h */,
 				8470FC132580AA0B00B05974 /* ChildProfileViewController.m */,
+				840ED05126298ACA00109F39 /* ChildProfileEditViewController.h */,
+				840ED05226298ACA00109F39 /* ChildProfileEditViewController.m */,
+				840ED0E12635553900109F39 /* ScanQRCodeViewController.h */,
+				840ED0E22635553900109F39 /* ScanQRCodeViewController.m */,
+				840ED0E7263559AC00109F39 /* InputRelationshipViewController.h */,
+				840ED0E8263559AC00109F39 /* InputRelationshipViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -648,6 +706,8 @@
 				8470FC0D25808B9D00B05974 /* ELOverlayTableViewCell.m */,
 				8470FC8825885C8A00B05974 /* ELCenterOverlay.h */,
 				8470FC8925885C8A00B05974 /* ELCenterOverlay.m */,
+				840ED057262ADBD300109F39 /* ELCenterImgOverlay.h */,
+				840ED058262ADBD300109F39 /* ELCenterImgOverlay.m */,
 				8470FC9425889A5F00B05974 /* ELFloatingButton.h */,
 				8470FC9525889A5F00B05974 /* ELFloatingButton.m */,
 				843275C526141BBC00641E60 /* ELBottomView.h */,
@@ -1095,6 +1155,8 @@
 				"${PODS_ROOT}/Target Support Files/Pods-EduLoop/Pods-EduLoop-resources.sh",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 				"${PODS_ROOT}/PGDatePicker/PGDatePicker/PGDatePicker.bundle",
+				"${PODS_ROOT}/SGQRCode/SGQRCode/SGQRCode.bundle",
+				"${PODS_ROOT}/TZImagePickerController/TZImagePickerController/TZImagePickerController/TZImagePickerController.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
@@ -1102,6 +1164,8 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/PGDatePicker.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SGQRCode.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TZImagePickerController.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1152,10 +1216,12 @@
 				8470FDB425AEC50600B05974 /* MessageBubble.m in Sources */,
 				84451307261A03610098B67E /* IdentityCard.m in Sources */,
 				84451328261AF6610098B67E /* InputTeamCodeViewController.m in Sources */,
+				840ED0B0263406E900109F39 /* TeamPagedResult.m in Sources */,
 				8470FC7325870A5100B05974 /* AvatarCard.m in Sources */,
 				8470FDAE25A4560D00B05974 /* ChatBoard.m in Sources */,
 				8470FCF9258C9BFB00B05974 /* ELVoteCard.m in Sources */,
 				8432759A2611BD0000641E60 /* HomeworkModel.m in Sources */,
+				840ED0BC26347A7B00109F39 /* StudentPagedResult.m in Sources */,
 				8445134F26218EE60098B67E /* UserLoginResponse.m in Sources */,
 				8470FC0E25808B9D00B05974 /* ELOverlayTableViewCell.m in Sources */,
 				8470FB052577B9A300B05974 /* main.m in Sources */,
@@ -1177,6 +1243,8 @@
 				8470FC672587067B00B05974 /* HomeworkShowViewController.m in Sources */,
 				8470FD45259B05EC00B05974 /* ELImageManager.m in Sources */,
 				843275A026121C0C00641E60 /* TeacherShowDetailTaskResponse.m in Sources */,
+				840ED059262ADBD300109F39 /* ELCenterImgOverlay.m in Sources */,
+				840ED0CE263541AB00109F39 /* TeamDetailCard.m in Sources */,
 				843275A92612EF7700641E60 /* TaskDetailCard.m in Sources */,
 				8470FCBA258C763900B05974 /* ELCommunityModule.m in Sources */,
 				8470FC4A2580E3F000B05974 /* BroadcastViewController.m in Sources */,
@@ -1189,8 +1257,11 @@
 				8445135C2621A8030098B67E /* ELTabViewController.m in Sources */,
 				8470FDE226070A8D00B05974 /* TeacherScanAllTaskResponse.m in Sources */,
 				8470FEA82611B1B700B05974 /* TeacherTaskSummaryTableViewCell.m in Sources */,
+				840ED05326298ACA00109F39 /* ChildProfileEditViewController.m in Sources */,
 				8470FBAB257F3B5100B05974 /* ProfileViewController.m in Sources */,
+				840ED0A4263402B700109F39 /* TeamListViewController.m in Sources */,
 				8470FAF72577B9A200B05974 /* SceneDelegate.m in Sources */,
+				840ED0C8263539AB00109F39 /* StudentTableViewCell.m in Sources */,
 				8470FC7A258727A700B05974 /* TaskModel.m in Sources */,
 				8470FD8025A2E00E00B05974 /* ChatAllModel.m in Sources */,
 				8445135526218F180098B67E /* ProfileModel.m in Sources */,
@@ -1198,6 +1269,7 @@
 				8470FD9925A426D900B05974 /* ContactPersonModel.m in Sources */,
 				8470FD6125A1B5C500B05974 /* UgcVotePublishViewController.m in Sources */,
 				8470FC6D2587093800B05974 /* HomeworkShowTableViewCell.m in Sources */,
+				840ED0B6263479EF00109F39 /* GetOneTeamResponse.m in Sources */,
 				8470FD3F259AEB0900B05974 /* UgcVoteModel.m in Sources */,
 				843275B526131EBC00641E60 /* HomeworkCard.m in Sources */,
 				843275D12615F83C00641E60 /* ELFormat.m in Sources */,
@@ -1206,6 +1278,7 @@
 				8470FB9F2579443E00B05974 /* MineMiscCard.m in Sources */,
 				8470FC8A25885C8A00B05974 /* ELCenterOverlay.m in Sources */,
 				8470FBFB2580885800B05974 /* ELOverlay.m in Sources */,
+				840ED0E32635553900109F39 /* ScanQRCodeViewController.m in Sources */,
 				8470FD1E25945E1A00B05974 /* CommentCard.m in Sources */,
 				8470FD6B25A2D7CB00B05974 /* ELChatModule.m in Sources */,
 				8470FB902579310E00B05974 /* MineMiscCardTableViewCell.m in Sources */,
@@ -1216,6 +1289,8 @@
 				8470FCB4258C761500B05974 /* CommunityViewController.m in Sources */,
 				8470FD9325A2FF0200B05974 /* ELCustomLabel.m in Sources */,
 				8470FD9F25A4276400B05974 /* AddressListViewController.m in Sources */,
+				840ED0E9263559AC00109F39 /* InputRelationshipViewController.m in Sources */,
+				840ED0C226347B6A00109F39 /* TeamDetailViewController.m in Sources */,
 				8470FE66260AEE7300B05974 /* GetAllMyTeamResponse.m in Sources */,
 				8470FC9625889A5F00B05974 /* ELFloatingButton.m in Sources */,
 				8470FD51259CB0F200B05974 /* ELPublishImage.m in Sources */,
@@ -1229,8 +1304,8 @@
 				8470FCAC258B778600B05974 /* ELStackCardItem.m in Sources */,
 				8470FD2D2594867500B05974 /* CommentEditView.m in Sources */,
 				8470FD4B259C506600B05974 /* UgcTextImgPublishViewController.m in Sources */,
-				844512B4261861810098B67E /* ELKeys.m in Sources */,
 				8470FDF126070C4D00B05974 /* PagedResult.m in Sources */,
+				840ED083262D6B3000109F39 /* ELNetworkSessionManager.m in Sources */,
 				844512BA26186DE70098B67E /* ParentScanAllTaskResponse.m in Sources */,
 				8470FD39259A36AF00B05974 /* ELCommentManager.m in Sources */,
 				844512D92619A0AE0098B67E /* GetMyStudentsResponse.m in Sources */,
@@ -1240,6 +1315,7 @@
 				844512AE26185D490098B67E /* ELUserInfo.m in Sources */,
 				844512F22619CB090098B67E /* LoginViewController.m in Sources */,
 				8470FCFF2590461100B05974 /* UgcTextImgCard.m in Sources */,
+				840ED0AA263403AC00109F39 /* TeamEditViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

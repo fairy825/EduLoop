@@ -8,5 +8,4 @@
 #import "ChildModel.h"
 
 @implementation ChildModel
-
 @end

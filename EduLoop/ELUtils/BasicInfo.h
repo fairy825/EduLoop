@@ -29,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 +(void *)initUserWithSema:(dispatch_semaphore_t) sema;
 +(void)markUser;
 +(void)deleteUser;
++(void)reloadInfo;
 @end
 
 NS_ASSUME_NONNULL_END

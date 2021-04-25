@@ -13,6 +13,7 @@
 #import "BasicInfo.h"
 #import "ELFormat.h"
 #import "GetOneHomeworkResponse.h"
+#import "ELNetworkSessionManager.h"
 @interface ReviewViewController ()<UIScrollViewDelegate,ReviewCardDelegate,ELBottomViewDelegate>
 
 @end
@@ -309,8 +310,8 @@
 
 #pragma mark - network
 - (void)reload{
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    
+    AFHTTPSessionManager *manager = [ELNetworkSessionManager sharedManager];
+
     [manager GET:[BasicInfo url:@"/homework" path:[NSString stringWithFormat:@"%ld",(long)_homework.id]] parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"%@---%@",[responseObject class],responseObject);
         int code = [[responseObject objectForKey:@"code"]intValue];
@@ -318,8 +319,8 @@
         if(code==0){
             GetOneHomeworkResponse *resp = [[GetOneHomeworkResponse alloc]initWithDictionary:responseObject error:nil];
             
-            self->_homework = resp.data;
-            self->_review = resp.data.reviewVO;
+            self.homework = resp.data;
+            self.review = resp.data.reviewVO;
             [self loadData];
         }else{
             NSLog(@"error--%@",msg);

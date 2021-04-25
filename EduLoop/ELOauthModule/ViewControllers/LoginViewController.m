@@ -15,6 +15,7 @@
 #import "ELUserInfo.h"
 #import "UserLoginResponse.h"
 #import "ProfileModel.h"
+#import "ELNetworkSessionManager.h"
 
 @interface LoginViewController ()
 
@@ -237,7 +238,7 @@
         @"name":name,
         @"password": [NSString md5_32bitWithStr:password Salt:@"123456"]
     };
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [ELNetworkSessionManager sharedManager];
     // 设置请求头
     //申明请求的数据是json类型
     manager.requestSerializer=[AFJSONRequestSerializer serializer];
@@ -258,7 +259,8 @@
             }else{//login
                 UserLoginResponse *resp = [[UserLoginResponse alloc]initWithDictionary:responseObject error:nil];
                 ProfileModel *profile = resp.data;
-                [ELUserInfo setUserInfo:profile];                [BasicInfo markUser];
+                [ELUserInfo setUserInfo:profile];
+                [BasicInfo markUser];
                 
                 [self.navigationController pushViewController:[BasicInfo initNavigationTab] animated:YES];
             }

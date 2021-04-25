@@ -8,5 +8,4 @@
 #import "StudentModel.h"
 
 @implementation StudentModel
-
 @end

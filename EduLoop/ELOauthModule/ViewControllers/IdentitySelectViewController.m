@@ -12,6 +12,7 @@
 #import <AFNetworking.h>
 #import "NSString+MD5.h"
 #import "UserLoginResponse.h"
+#import "ELNetworkSessionManager.h"
 @interface IdentitySelectViewController ()<IdentityCardProtocol>
 
 @end
@@ -76,7 +77,7 @@
         @"identity": @(_type==1)
     };
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [ELNetworkSessionManager sharedManager];
     // 设置请求头
     //申明请求的数据是json类型
     manager.requestSerializer=[AFJSONRequestSerializer serializer];
@@ -93,7 +94,8 @@
             }else{
                 UserLoginResponse *resp = [[UserLoginResponse alloc]initWithDictionary:responseObject error:nil];
                 ProfileModel *profile = resp.data;
-                [ELUserInfo setUserInfo:profile];                [BasicInfo markUser];
+                [ELUserInfo setUserInfo:profile];
+                [BasicInfo markUser];
                 [self.navigationController pushViewController:[BasicInfo initNavigationTab] animated:YES];
 
             }

@@ -16,6 +16,7 @@
 #import <AFNetworking.h>
 #import "BasicInfo.h"
 #import "TeacherShowDetailTaskResponse.h"
+#import "ELNetworkSessionManager.h"
 @interface TeacherTaskSummaryViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
@@ -85,7 +86,8 @@
         }];
         [self.taskDetailCard loadData:_data];
         self.taskDetailCard.avatarImage.image = [UIImage imageNamed:@"icon_teacher_2"];
-        [header layoutIfNeeded];
+//        [header layoutIfNeeded];
+        [self.taskDetailCard layoutIfNeeded];
         CGFloat h=0;
         for (UIView *view in [header subviews]) {
             h+=view.bounds.size.height;
@@ -110,7 +112,7 @@
         })];
     
     MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        [self teacherShowDetailTaskNetworkWithTaskId:self->_data.id];
+        [self teacherShowDetailTaskNetworkWithTaskId:self.data.id];
     }];
     footer.stateLabel.font = [UIFont systemFontOfSize:15];
     //正在刷新
@@ -142,7 +144,7 @@
 
 #pragma mark - network
 -(void) teacherShowDetailTaskNetworkWithTaskId:(NSInteger)taskId{
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [ELNetworkSessionManager sharedManager];
     int start = 1;
     int size = BasicInfo.pageSize;
     start=self.page+1;
@@ -165,7 +167,7 @@
                 self.page=start;
             }
             
-            [self->_models addObjectsFromArray: taskModel.homeworkLists];
+            [self.models addObjectsFromArray: taskModel.homeworkLists];
         }else{
             NSLog(@"error--%@",msg);
             [BasicInfo showToastWithMsg:msg];

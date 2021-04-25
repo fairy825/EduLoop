@@ -127,15 +127,19 @@
         ({
         ELOverlayItem *item = [ELOverlayItem new];
         item.title = @"发送图文";
+        __weak typeof(self) wself = self;
         item.clickBlock = ^{
-            [self.navigationController pushViewController:[[UgcTextImgPublishViewController alloc]init] animated:YES];
+            __strong typeof(self) sself = wself;
+            [sself.navigationController pushViewController:[[UgcTextImgPublishViewController alloc]init] animated:YES];
         };
         item;
     }),({
         ELOverlayItem *item = [ELOverlayItem new];
         item.title = @"发起讨论";
+        __weak typeof(self) wself = self;
         item.clickBlock = ^{
-            [self.navigationController pushViewController:[[UgcVotePublishViewController alloc]init] animated:YES];
+            __strong typeof(self) sself = wself;
+            [sself.navigationController pushViewController:[[UgcVotePublishViewController alloc]init] animated:YES];
         };
         item;
     })]];

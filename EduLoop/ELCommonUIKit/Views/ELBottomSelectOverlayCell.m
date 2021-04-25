@@ -31,7 +31,7 @@
 }
 
 - (void)loadData{
-    _choiceLabel.text = _data.name;
+    _choiceLabel.text = _data;
 }
 
 #pragma mark - View

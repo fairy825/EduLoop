@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <JSONModel.h>
-
+#import "StudentPagedResult.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface TeamModel : JSONModel
@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong,readwrite) NSString<Optional> *name;
 @property(nonatomic,strong,readwrite) NSString<Optional> *code;
 @property(nonatomic,readwrite) NSInteger creatorId;
+@property(nonatomic,strong,readwrite) StudentPagedResult<Optional> *students;
 @end
 
 NS_ASSUME_NONNULL_END

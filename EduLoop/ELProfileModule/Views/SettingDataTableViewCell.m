@@ -8,6 +8,8 @@
 #import "SettingDataTableViewCell.h"
 #import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
+#import <SDWebImage.h>
+
 @implementation SettingDataModel
 
 - (instancetype)init
@@ -71,7 +73,7 @@
 }
 
 #pragma mark - UITextFieldDelegate
-- (void)textFieldDidBeginEditing:(UITextField *)textField{
+- (void)textFieldDidChangeSelection:(UITextField *)textField{
     _data.realContent = textField.text;
 }
 
@@ -87,7 +89,7 @@
     }
     else
         _detailLabel.text= _data.detailText;
-    _avatarView.image = _data.avatarImageUrl?[UIImage imageNamed:_data.avatarImageUrl]: _data.defaultAvatarImage;
+    [_avatarView sd_setImageWithURL:[NSURL URLWithString:_data.avatarImageUrl] placeholderImage:_data.defaultAvatarImage];
     _detailTextViewLengthLabel.text = [NSString stringWithFormat:@"%ld/%d", (unsigned long)_detailTextView.text.length, _data.maxLength];
     _data.realContent = _data.detailText;
 
@@ -103,13 +105,14 @@
             make.centerY.equalTo(self.contentView.mas_centerY);
         else
             make.top.equalTo(self.contentView).offset(20);
+        make.width.equalTo(@100);
     }];
     
     [self.contentView addSubview:self.subtitleLabel];
     [self.subtitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.titleLabel.mas_right).offset(20);
         make.top.equalTo(self.titleLabel);
-        make.width.lessThanOrEqualTo(@50);
+//        make.width.lessThanOrEqualTo(@50);
         make.height.equalTo(@20);
     }];
     
@@ -170,6 +173,7 @@
                     make.right.equalTo(self.contentView).offset(-20);
                 make.centerY.equalTo(self.contentView.mas_centerY);
                 make.left.equalTo(self.subtitleLabel.mas_right);
+//                make.width.mas_greaterThanOrEqualTo(@100);
             }];
         }
     }

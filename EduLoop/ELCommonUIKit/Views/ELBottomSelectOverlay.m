@@ -19,6 +19,11 @@
 @implementation ELBottomSelectOverlay
 - (void)showHighlightView{
     [self showHighlightViewFromPoint:CGPointMake(0,self.coverHeight) ToPoint:CGPointMake(self.coverWidth/2,self.coverHeight-self.container.bounds.size.height/2) Animation:YES];
+    
+    for(NSNumber *i in _selectedIdxs)
+        if(i.integerValue>=0)
+            [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:i.integerValue inSection:0] animated:YES scrollPosition:UITableViewScrollPositionTop];
+
 }
 
 - (void)showHighlightViewFromPoint:(CGPoint) point ToPoint:(CGPoint) point2 Animation:(BOOL)animated{
@@ -43,6 +48,8 @@
         self.coverWidth = screenWidth;
         self.coverHeight = screenHeight;
         _title = title;
+        _selectedIdxs = @[];
+        _isSingle = YES;
 //        _subTitles = subtitles;
         [self setUpSubviews];
     }
@@ -110,7 +117,11 @@
 //    self.tableView.scrollEnabled = NO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.editing = YES;
-    self.tableView.allowsMultipleSelectionDuringEditing = YES;
+    if(_isSingle==YES){
+        [self.tableView setAllowsMultipleSelectionDuringEditing:NO];
+    }else{
+        [self.tableView setAllowsMultipleSelectionDuringEditing:YES];
+    }
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.innerContainer addSubview:self.tableView];
@@ -160,7 +171,7 @@
         cell = [[ELBottomSelectOverlayCell alloc]initWithStyle:UITableViewCellStyleSubtitle  reuseIdentifier:id];
     }
     cell.selectedBackgroundView = [[UIView alloc]init];
-    cell.data = (TeamModel *)[self.subTitles objectAtIndex:idx];
+    cell.data = (NSString *)[self.subTitles objectAtIndex:idx];
 //    cell.checkBox.delegate = self;
     [cell loadData];
     return cell;
@@ -168,14 +179,23 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSUInteger idx = [indexPath row];
-    [self.delegate updateChosedTeams:idx Add:YES];
+    if(_isSingle){
+        [self.delegate ELBottomSelectOverlay:self singleUpdateChosedTeams:idx Add:YES];
+    }else{
+        [self.delegate ELBottomSelectOverlay:self updateChosedTeams:idx Add:YES];
+    }
+    for(NSInteger i=0;i< _subTitles.count;i++)
+    [tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0] animated:NO];
     [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSUInteger idx = [indexPath row];
-    [self.delegate updateChosedTeams:idx Add:NO];
-
+    if(_isSingle){
+        [self.delegate ELBottomSelectOverlay:self singleUpdateChosedTeams:idx Add:NO];
+    }else{
+        [self.delegate ELBottomSelectOverlay:self updateChosedTeams:idx Add:NO];
+    }
 }
 
 #pragma mark - UITableViewDelegate

@@ -8,6 +8,8 @@
 #import "MineInfoCard.h"
 #import <Masonry/Masonry.h>
 #import "UIColor+MyTheme.h"
+#import <SDWebImage/SDWebImage.h>
+
 @implementation MineInfoCard
 - (instancetype)initWithFrame:(CGRect)frame Model:(ELUserInfo *)model
 {
@@ -20,13 +22,17 @@
     return self;
 }
 
+-(void) reloadData{
+    _model = [ELUserInfo sharedUser];
+    [self loadData];
+}
+
 - (void)loadData{
-    _nameLabel.text = _model.name;
+    _nameLabel.text = _model.nickname;
 //    NSString *str =@"123435";
 //    _nameLabel.text = str;
     _identityLabel.text = _model.identity==YES?@"家长":@"教师";
-    _avatarView.image = [UIImage imageNamed:@"avatar_child_2"];
-
+    [_avatarView sd_setImageWithURL: [NSURL URLWithString: _model.faceImage]];
 }
 
 - (void)setupView{
@@ -91,6 +97,7 @@
     }
     return _arrowImage;
 }
+
 
 - (UILabel *)nameLabel{
     if(!_nameLabel){

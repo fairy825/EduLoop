@@ -14,6 +14,8 @@
 #import "CommunityViewController.h"
 #import "MineViewController.h"
 #import "UserLoginResponse.h"
+#import "ELNetworkSessionManager.h"
+#import "ELNetworkSessionManager.h"
 @implementation BasicInfo
 + (int)pageSize{
     return 10;
@@ -46,6 +48,7 @@
     [url appendString:[NSString stringWithFormat:@"%d",size]];
     return url;
 }
+
 +(NSString *)urlwithDefaultStartAndSize:(NSString *)str{
     return [BasicInfo url:str Start:1 AndSize:BasicInfo.pageSize];
 }
@@ -66,7 +69,7 @@
 }
 
 +(void)POST:(NSString *)URLString parameters:(nullable id)parameters wholesuccess:(nullable void (^)(NSURLSessionDataTask *task, id _Nullable responseObject))success {
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [ELNetworkSessionManager sharedManager];
     // 设置请求头
     //申明请求的数据是json类型
     manager.requestSerializer=[AFJSONRequestSerializer serializer];
@@ -85,7 +88,7 @@
 }
 
 +(void)POST:(NSString *)URLString parameters:(nullable id)parameters success:(nullable void (^)())success {
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [ELNetworkSessionManager sharedManager];
     // 设置请求头
     //申明请求的数据是json类型
     manager.requestSerializer=[AFJSONRequestSerializer serializer];
@@ -108,7 +111,7 @@
 }
 
 +(void)PUT:(NSString *)URLString parameters:(nullable id)parameters success:(nullable void (^)())success{
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [ELNetworkSessionManager sharedManager];
     // 设置请求头
     //申明请求的数据是json类型
     manager.requestSerializer=[AFJSONRequestSerializer serializer];
@@ -124,6 +127,7 @@
                 NSLog(@"error--%@",msg);
                 [BasicInfo showToastWithMsg:msg];
             }else{
+                if(success!=nil)
                 success();
             }
         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -132,7 +136,7 @@
 }
 
 +(void)DELETE:(NSString *)URLString success:(nullable void (^)())success{
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [ELNetworkSessionManager sharedManager];
     [manager DELETE:URLString parameters:nil headers:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSLog(@"%@---%@",[responseObject class],responseObject);
         int code = [[responseObject objectForKey:@"code"]intValue];
@@ -160,7 +164,7 @@
     controller4.tabBarItem.title = @"我的";
     
     UITabBarController *tabBarController = [[UITabBarController alloc]init];
-    [tabBarController setViewControllers:@[controller3,controller2,controller1,controller4]];
+    [tabBarController setViewControllers:@[controller4,controller2,controller1,controller3]];
     return tabBarController;
 }
 
@@ -180,6 +184,37 @@
     [userDefaults synchronize];
 }
 
++(void)reloadInfo{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSNumber *myAccountId = [userDefaults objectForKey:@"MY_ACCOUNT_ID"];
+
+    if ( myAccountId != nil ) {
+      NSInteger profileId = [myAccountId integerValue];
+        if(profileId!=0){
+            AFHTTPSessionManager *manager = [ELNetworkSessionManager sharedManager];
+            [manager GET:[BasicInfo urlwithDefaultStartAndSize:@"/profile/myself"] parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+
+                    NSLog(@"%@---%@",[responseObject class],responseObject);
+                    int code = [[responseObject objectForKey:@"code"]intValue];
+                    NSString* msg = [responseObject objectForKey:@"msg"];
+                    if(code==0){
+                        UserLoginResponse *response = [[UserLoginResponse alloc]initWithDictionary:responseObject error:nil];
+                        ProfileModel *profile = response.data;
+                        [ELUserInfo setUserInfo: profile];
+
+                    }else{
+                        NSLog(@"error--%@",msg);
+                        [BasicInfo showToastWithMsg:msg];
+                    }
+
+                } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                    NSLog(@"请求失败--%@",error);
+
+                }];
+        }
+    }
+}
+
 +(void)initUserWithSema:(dispatch_semaphore_t) sema{
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSNumber *myAccountId = [userDefaults objectForKey:@"MY_ACCOUNT_ID"];
@@ -187,9 +222,9 @@
     if ( myAccountId != nil ) {
       NSInteger profileId = [myAccountId integerValue];
         if(profileId!=0){
-            AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+            AFHTTPSessionManager *manager = [ELNetworkSessionManager sharedManager];
             [manager GET:[BasicInfo urlwithDefaultStartAndSize:@"/profile/myself"] parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                
+
                     NSLog(@"%@---%@",[responseObject class],responseObject);
                     int code = [[responseObject objectForKey:@"code"]intValue];
                     NSString* msg = [responseObject objectForKey:@"msg"];
@@ -214,4 +249,6 @@
         }
     }
 }
+
+
 @end

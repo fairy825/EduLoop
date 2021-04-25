@@ -7,9 +7,8 @@
 
 #import <Foundation/Foundation.h>
 #import <JSONModel.h>
-
+#import "ChildModel.h"
 NS_ASSUME_NONNULL_BEGIN
-
 @interface StudentModel : JSONModel
 
 @property(nonatomic,readwrite) NSInteger id;
@@ -20,6 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong,readwrite) NSString<Optional> *qrcode;
 @property(nonatomic,readwrite) BOOL sex;
 @property(nonatomic,readwrite) NSInteger grade;
+
+@property(nonatomic,readwrite) NSNumber <Optional> *teamId;
+@property(nonatomic,strong,readwrite) NSString<Optional> *teamName;
 @end
 
 NS_ASSUME_NONNULL_END

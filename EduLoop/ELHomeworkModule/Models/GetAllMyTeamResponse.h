@@ -7,14 +7,13 @@
 
 #import <Foundation/Foundation.h>
 #import <JSONModel.h>
+#import "TeamPagedResult.h"
 NS_ASSUME_NONNULL_BEGIN
-@protocol TeamModel
 
-@end
 @interface GetAllMyTeamResponse : JSONModel
 @property (nonatomic, assign) NSInteger code;
 @property (nonatomic, copy) NSString<Optional> *msg;
-@property (nonatomic, strong) NSArray<TeamModel>  *data;
+@property (nonatomic, strong) TeamPagedResult  *data;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -15,7 +15,8 @@
 #import <AFNetworking.h>
 #import "BasicInfo.h"
 #import "GetAllMyTeamResponse.h"
-@interface BroadcastViewController ()<UITableViewDelegate,UITableViewDataSource,PGDatePickerDelegate>
+#import "ELNetworkSessionManager.h"
+@interface BroadcastViewController ()<UITableViewDelegate,UITableViewDataSource,PGDatePickerDelegate,ELBottomSelectOverlayDelegate>
 
 @end
 
@@ -90,15 +91,18 @@
         SettingDataModel *model = [SettingDataModel new];
         model.title =@"班级";
         _overlay = [[ELBottomSelectOverlay alloc]initWithFrame:self.view.bounds Title:model.title];
+        _overlay.isSingle = NO;
         _overlay.delegate = self;
-        model.clickBlock=^{
-            [_overlay showHighlightView];
+        __weak typeof(self) wself = self;
+        model.clickBlock = ^{
+            __strong typeof(self) sself = wself;
+            [sself.overlay showHighlightView];
         };
         model;
     })];
 }
 
--(void)updateChosedTeams:(int)idx Add:(BOOL)isAdd{
+-(void)ELBottomSelectOverlay:(ELBottomSelectOverlay *)overlay  updateChosedTeams:(int)idx Add:(BOOL)isAdd{
     NSInteger teamId = [_teams objectAtIndex:idx].id;
     NSNumber *number = [NSNumber numberWithInteger:teamId];
     if(isAdd==YES){
@@ -205,7 +209,7 @@
 
 #pragma mark - network
 -(void) getAllMyTeamsNetwork{
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [ELNetworkSessionManager sharedManager];
     [manager GET:[BasicInfo urlwithDefaultStartAndSize:@"/team"] parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
             NSLog(@"%@---%@",[responseObject class],responseObject);
@@ -213,12 +217,16 @@
             NSString* msg = [responseObject objectForKey:@"msg"];
             if(code==0){
                 GetAllMyTeamResponse *response = [[GetAllMyTeamResponse alloc]initWithDictionary:responseObject error:nil];
-                NSArray<TeamModel> *teams = response.data;
+                NSArray<TeamModel *> *teams = response.data.rows;
                 if(teams==nil||teams.count==0){
                     [BasicInfo showToastWithMsg:@"不管理任何班级"];
                 }else{
                     _teams = teams;
-                    _overlay.subTitles = _teams;
+                    NSMutableArray<NSString *> *subs = [[NSMutableArray alloc]init];
+                    for(TeamModel *team in _teams){
+                        [subs addObject:team.name];
+                    }
+                    _overlay.subTitles = subs;
                     [_overlay reload];
                 }
                 
@@ -244,7 +252,7 @@
 
 
 -(void)updateTaskNetworkWithSuccess:(nullable void (^)())success{
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    AFHTTPSessionManager *manager = [ELNetworkSessionManager sharedManager];
     // 设置请求头
     //申明请求的数据是json类型
     manager.requestSerializer=[AFJSONRequestSerializer serializer];
