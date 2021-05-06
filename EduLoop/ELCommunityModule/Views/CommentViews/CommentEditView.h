@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 +(CommentEditView *)sharedManager;
 - (void)resumeInputArea;
 - (void)expandInputArea;
+- (void)toggleState:(BOOL)canPush;
+
 @end
 
 NS_ASSUME_NONNULL_END

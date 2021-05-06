@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong,readwrite) UIView *innerContainer;
 @property(nonatomic,strong,readwrite) UITableView *tableView;
 @property(nonatomic,strong,readwrite) UILabel *titleLabel;
-@property(nonatomic,strong,readwrite) NSArray<NSNumber *> *selectedIdxs;
+@property(nonatomic,strong,readwrite) NSMutableArray<NSNumber *> *selectedIdxs;
 
 @property(nonatomic,weak,readwrite) id<ELBottomSelectOverlayDelegate> delegate;
 - (instancetype)initWithFrame:(CGRect)frame Title:(NSString *)title;

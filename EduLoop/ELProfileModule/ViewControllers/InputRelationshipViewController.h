@@ -8,9 +8,10 @@
 #import <UIKit/UIKit.h>
 #import "ELBottomSelectOverlay.h"
 #import "SettingDataTableViewCell.h"
+#import "ELBaseViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface InputRelationshipViewController : UIViewController
+@interface InputRelationshipViewController : ELBaseViewController
 @property(nonatomic,readwrite) NSInteger studentId;
 @property(nonatomic,readwrite) NSInteger relationshipIndex;
 @property(nonatomic,strong,readwrite) ELBottomSelectOverlay *overlay;

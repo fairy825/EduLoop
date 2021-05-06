@@ -6,7 +6,6 @@
 //
 
 #import "UgcCard.h"
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface UgcTextImgCard : UgcCard
@@ -15,6 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong,readwrite) UIButton *commentButton;
 @property(nonatomic,strong,readwrite) UILabel *detailLabel;
 @property(nonatomic,strong,readwrite) UIStackView *imgStackView;
+//@property(nonatomic,strong,readwrite) HZPhotoGroup *photoGroup;
+
+-(void)toggleThumb;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -14,19 +14,33 @@
 #import "ELFormat.h"
 #import "GetOneHomeworkResponse.h"
 #import "ELNetworkSessionManager.h"
+#import "HomeworkPublishViewController.h"
 @interface ReviewViewController ()<UIScrollViewDelegate,ReviewCardDelegate,ELBottomViewDelegate>
 
 @end
 
 @implementation ReviewViewController
-- (instancetype)initWithHomeworkModel:(HomeworkModel *)model
+- (instancetype)initWithHomeworkModel:(HomeworkModel *)model TaskModel:(TaskModel *)task
 {
     self = [super init];
     if (self) {
+        _task = task;
         _homework = model;
         _review = model.reviewVO;
     }
     return self;
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    if(_homework.id!=0)
+        [self reload];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)viewDidLoad {
@@ -48,10 +62,32 @@
 
 
 -(void)setNavagationBar{
-    [self setTitle:@"教师点评"];
+    self.navigationController.navigationBar.barTintColor = [UIColor color5bb2ff];
+    if([ELUserInfo sharedUser].identity==YES)
+       [self setTitle:@"作业详情"];
+    else [self setTitle:@"教师点评"];
+}
+- (UIView *)bgView{
+    if(!_bgView){
+        self.bgView = [[UIView alloc]init];
+    }
+    return _bgView;
 }
 
 -(void)setupSubviews{
+    [self.header addSubview:self.bgView];
+    [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.edges.equalTo(self.header);
+    }];
+    [self.header addSubview:self.taskDetailCard];
+    [self.taskDetailCard mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.header).offset(20);
+        make.left.equalTo(self.header).offset(20);
+        make.right.equalTo(self.header).offset(-20);
+        make.bottom.equalTo(self.header).offset(-20);
+    }];
+    [self.taskDetailCard loadData:(TeacherTaskModel *)self.task];
+   
     self.scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     self.scrollView.backgroundColor = [UIColor whiteColor];
     self.scrollView.showsVerticalScrollIndicator=YES;
@@ -60,11 +96,18 @@
     self.scrollView.userInteractionEnabled = YES;
     [self.view addSubview:self.scrollView];
 
-    [self.scrollView addSubview:self.homeworkCard];
-    [self.homeworkCard mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.scrollView addSubview:self.header];
+    [self.header mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.scrollView.mas_safeAreaLayoutGuideTop);
         make.left.equalTo(self.scrollView.mas_safeAreaLayoutGuideLeft);
         make.right.equalTo(self.scrollView.mas_safeAreaLayoutGuideRight);
+    }];
+    
+    [self.scrollView addSubview:self.homeworkCard];
+    [self.homeworkCard mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.header.mas_bottom).offset(10);
+        make.left.equalTo(self.header);
+        make.right.equalTo(self.header);
     }];
     
     [self.scrollView addSubview:self.separateView];
@@ -84,27 +127,41 @@
     [self.reviewBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@50);
         make.bottom.equalTo(self.scrollView.mas_safeAreaLayoutGuideBottom).offset(-10);
-        make.left.equalTo(self.homeworkCard).offset(20);
-        make.right.equalTo(self.homeworkCard).offset(-20);
+        make.left.equalTo(self.header).offset(20);
+        make.right.equalTo(self.header).offset(-20);
     }];
-    
 }
 
 -(void)loadData{
-    [self.homeworkCard loadData:_homework];
-    if(_review==nil){
-        self.reviewCard.alpha=0;
-        self.reviewBtn.alpha=1;
+    if(_homework!=nil){
+        self.homeworkCard.data = _homework;
+        [self.homeworkCard reload];
     }else{
-        self.reviewBtn.alpha=0;
-        self.reviewCard.alpha=1;
-        [self.reviewCard loadData:_review];
+        self.homeworkCard.alpha = 0;
+//        [self.homeworkCard mas_updateConstraints:^(MASConstraintMaker *make) {
+//            make.height.mas_equalTo(@0);
+//        }];
+        [self.homeworkCard removeFromSuperview];
+        [self.separateView removeFromSuperview];
+        [self.reviewCard removeFromSuperview];
     }
-    CGFloat hi = 0;
-    for(UIView *sub in [_scrollView subviews]){
-        hi+=sub.frame.size.height;
-    }
+    
     [self.scrollView layoutIfNeeded];
+    
+    UIBezierPath *maskPath = [UIBezierPath bezierPath];
+    [maskPath moveToPoint:CGPointMake(self.header.frame.origin.x, self.header.frame.origin.y)];
+    [maskPath addLineToPoint:CGPointMake(self.header.frame.origin.x, self.header.frame.origin.y+self.header.frame.size.height/2)];
+    [maskPath addQuadCurveToPoint:CGPointMake(self.header.frame.origin.x+self.header.frame.size.width, self.header.frame.origin.y+self.header.frame.size.height/2) controlPoint:CGPointMake(self.header.frame.origin.x+self.header.frame.size.width/2, self.header.frame.origin.y+self.header.frame.size.height*2/3)];
+    [maskPath addLineToPoint:CGPointMake(self.header.frame.origin.x+self.header.frame.size.width, self.header.frame.origin.y+self.header.frame.size.height/2)];
+    [maskPath addLineToPoint:CGPointMake(self.header.frame.origin.x+self.header.frame.size.width, self.header.frame.origin.y)];
+    [maskPath closePath];
+
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc]init];
+    maskLayer.frame = self.header.bounds;
+    maskLayer.path = maskPath.CGPath;
+    self.bgView.layer.mask = maskLayer;
+    self.bgView.backgroundColor = [UIColor color5bb2ff];
+     
     CGFloat h = 0;
     for(UIView *sub in [_scrollView subviews]){
         h+=sub.frame.size.height;
@@ -112,20 +169,62 @@
     self.scrollView.contentSize =  CGSizeMake(self.view.bounds.size.width,h);
 //
 //    [self showReviewEditViewWithScore:[NSNumber numberWithInteger: reviewCard.data.score] Detail:reviewCard.data.detail];
-    if(_review){
-        NSLog(@"1");
-    }else{
-        NSLog(@"2");
-    }
     self.scoreField.text = [ELFormat stringFromNSNumber:_review?[NSNumber numberWithInteger: _review.score]:nil];
     self.detailTextView.text = [ELFormat safeString:_review?_review.detail:nil];
+    NSString *str;
+    SEL action;
+    NSInteger alpha;
+    if([ELUserInfo sharedUser].identity == YES){
+        NSString *isFinish = self.task.finish;
+        if([isFinish isEqual:@"DELAY_CANNOT_FINISH"]
+           ||[isFinish isEqual:@"FINISHED_AND_REVIEWED"]){
+            _reviewBtn.alpha=0;
+        }else if([isFinish isEqual:@"FINISHED_NOT_REVIEWED"]){
+            //查看作业
+            str = @"重新提交";
+        }else{
+            //提交作业
+            str = @"提交作业";
+        }
+        if(_review==nil){
+            [self.reviewCard removeFromSuperview];
+        }else{
+            [self.reviewCard loadData:_review];
+        }
+        action= @selector(jumpToPublishView);
+        alpha = 0;
+    }else{
+        if(_review==nil){
+            [self.reviewCard removeFromSuperview];
+            self.reviewBtn.alpha=1;
+        }else{
+            self.reviewBtn.alpha=0;
+            [self.scrollView addSubview:self.reviewCard];
+            [self.reviewCard mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self.separateView.mas_bottom);
+                make.left.equalTo(self.homeworkCard);
+                make.right.equalTo(self.homeworkCard);
+            }];
+    //        self.reviewCard.alpha=1;
+            [self.reviewCard loadData:_review];
+        }
+        str = @"点评";
+        action= @selector(showReviewEditView);
+        alpha = 1;
+    }
+    [_reviewBtn setTitle:str forState:UIControlStateNormal];
+    [_reviewBtn addTarget:self action:action forControlEvents:UIControlEventTouchUpInside];
+    _reviewCard.updateButton.alpha = alpha;
+}
+
+- (void)jumpToPublishView{
+    [self.navigationController pushViewController:[[HomeworkPublishViewController alloc]initWithTaskId:self.homework.taskId Student:self.homework.student] animated:YES];
 }
 
 - (UIButton *)reviewBtn{
     if(!_reviewBtn){
         _reviewBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 20)];
         _reviewBtn.backgroundColor = [UIColor color5bb2ff];
-        [_reviewBtn setTitle:@"点评" forState:UIControlStateNormal];
         [_reviewBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_reviewBtn.titleLabel setFont:[UIFont fontWithName:@"PingFangSC-Medium" size:20]];
         _reviewBtn.layer.cornerRadius = 20;
@@ -135,9 +234,27 @@
         _reviewBtn.layer.shadowOpacity = 0.7;
         _reviewBtn.layer.shadowRadius = 10;
         
-        [_reviewBtn addTarget:self action:@selector(showReviewEditView) forControlEvents:UIControlEventTouchUpInside];
     }
     return _reviewBtn;
+}
+
+- (UIView *)header{
+    if(!_header){
+        _header = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+    }
+    return _header;
+}
+
+- (TaskDetailCard *)taskDetailCard{
+    if(!_taskDetailCard){
+        _taskDetailCard = [[TaskDetailCard alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 250)];
+        _taskDetailCard.layer.masksToBounds = NO;
+        _taskDetailCard.layer.shadowColor = [UIColor grayColor].CGColor;
+        _taskDetailCard.layer.shadowOffset = CGSizeMake(0,10);
+        _taskDetailCard.layer.shadowOpacity = 0.7;
+        _taskDetailCard.layer.shadowRadius = 10;
+    }
+    return _taskDetailCard;
 }
 
 - (HomeworkCard *)homeworkCard{
@@ -201,11 +318,13 @@
     CGRect rect = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     CGFloat keyboardHeight = rect.size.height;
     CGFloat duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    CGFloat height = self.editView.frame.size.height;
+    CGFloat height = self.editView.highLightView.frame.size.height;
     CGFloat offset = keyboardHeight+height;
+    CGFloat hh = HOME_BUTTON_HEIGHT;
+    CGFloat k = self.view.bounds.size.height-HOME_BUTTON_HEIGHT-offset;
 
     [UIView animateWithDuration:duration animations:^{
-        self.editView.frame = CGRectMake(0.0f, self.view.bounds.size.height-offset-HOME_BUTTON_HEIGHT, self.editView.frame.size.width, height);
+        self.editView.highLightView.frame = CGRectMake(0.0f, self.view.bounds.size.height-offset, self.editView.highLightView.frame.size.width, height);
 
     } completion:nil];
 }
@@ -217,9 +336,9 @@
     NSDictionary *userInfo = [notification userInfo];
 
     CGFloat duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
-    CGFloat height = self.editView.frame.size.height;
+    CGFloat height = self.editView.highLightView.frame.size.height;
     [UIView animateWithDuration:duration animations:^{
-        self.editView.frame = CGRectMake(0.0f, self.view.bounds.size.height-HOME_BUTTON_HEIGHT-height, self.editView.frame.size.width, height);
+        self.editView.highLightView.frame = CGRectMake(0.0f, self.view.bounds.size.height-height, self.editView.highLightView.frame.size.width, height);
     } completion:nil];
 }
 

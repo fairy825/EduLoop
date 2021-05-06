@@ -22,20 +22,21 @@
 #import <TZImagePickerController.h>
 #import "ELUserInfo.h"
 #import "TeamListViewController.h"
-@interface MineViewController ()<UITableViewDelegate,UITableViewDataSource,MineToolCardDelegate,UIImagePickerControllerDelegate>
+#import "ELSocketManager.h"
+@interface MineViewController ()<UITableViewDelegate,UITableViewDataSource,UIImagePickerControllerDelegate>
 
 @end
 
 @implementation MineViewController
 - (void)viewWillAppear:(BOOL)animated{
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
     [self initItems];
     [self loadData];
     
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+//    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)initItems{
@@ -44,8 +45,8 @@
     if(userInfo.identity)
         item = @"孩子档案";
     else item = @"班级管理";
-    self.miscTitles = @[item,@"推荐给好友",@"意见反馈"];
-    self.miscDetails = @[@"",@"",@""];
+    self.miscTitles = @[@"我的动态",item,@"推荐给好友",@"意见反馈"];
+    self.miscDetails = @[@"",@"",@"",@""];
 }
 
 - (void)loadData{
@@ -87,15 +88,15 @@
     [self.header addGestureRecognizer:recognizer];
     [self.container addSubview:self.header];
     
-    self.toolCard = [[MineToolCard alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 110)];
-    self.toolCard.delegate = self;
-    [self.container addSubview:self.toolCard];
-    [self.toolCard mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.view);
-        make.right.equalTo(self.view);
-        make.top.equalTo(self.header.mas_bottom);
-        make.height.equalTo(@82);
-    }];
+//    self.toolCard = [[MineToolCard alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 110)];
+//    self.toolCard.delegate = self;
+//    [self.container addSubview:self.toolCard];
+//    [self.toolCard mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.view);
+//        make.right.equalTo(self.view);
+//        make.top.equalTo(self.header.mas_bottom);
+//        make.height.equalTo(@82);
+//    }];
     
     self.miscCard = [[MineMiscCard alloc]init];
     self.miscCard.miscTableView.delegate = self;
@@ -104,8 +105,8 @@
     [self.miscCard mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.view);
         make.right.equalTo(self.view);
-        make.top.equalTo(self.toolCard.mas_bottom).offset(20);
-        make.height.equalTo(@188);
+        make.top.equalTo(self.header.mas_bottom);
+        make.height.equalTo(@244);
     }];
     
     [self.container addSubview:self.logOutBtn];
@@ -143,7 +144,7 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 3;
+    return self.miscTitles.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -167,6 +168,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSInteger row = [indexPath row];
     if(row==0){
+        CommunityViewController *viewController = [[CommunityViewController alloc]initWithMode:YES];
+        [self jumpToViewController:viewController];
+    }
+    else if(row==1){
         if([ELUserInfo sharedUser].identity==YES){
             ChildProfileViewController *viewController = [[ChildProfileViewController alloc]init];
             [self jumpToViewController:viewController];
@@ -177,18 +182,6 @@
     }
 }
 
-#pragma mark - MineToolCardDelegate
-- (void)jumpToNewPage:(int)idx{
-    switch (idx) {
-        case 0:
-            [self.navigationController pushViewController:[[CommunityViewController alloc]init] animated:YES];
-
-            break;
-            
-        default:
-            break;
-    }
-}
 
 #pragma mark - action
 -(void)logout{
@@ -203,6 +196,9 @@
             int code = [[responseObject objectForKey:@"code"]intValue];
             NSString* msg = [responseObject objectForKey:@"msg"];
             if(code==0){
+                DataContent *dataContent = [DataContent new];
+                dataContent.action = LOGOUT;
+                [[ELSocketManager sharedManager] chat:dataContent];
                 [ELUserInfo dealloc];
                 [BasicInfo deleteUser];
                 [self.navigationController pushViewController:[[LoginViewController alloc]init] animated:YES];

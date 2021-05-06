@@ -8,12 +8,13 @@
 #import "ChatBoard.h"
 #import "UIColor+MyTheme.h"
 #import "ELScreen.h"
-
+#import "BasicInfo.h"
 @implementation ChatBoard
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
+        _commentMode = NO;
         [self setupView];
     }
     return self;
@@ -87,9 +88,21 @@
 }
 
 - (void)editFinish{
+    [BasicInfo getCurrentNetworkInfo];
+    if(self.textView.text.length==0)
+        return;
     if(self.delegate&&[self.delegate respondsToSelector:@selector(textView:finalText:)]){
         [self.delegate textView:self.textView finalText:self.textView.text];
     }
 }
 
+-(void)toggleState:(BOOL)canPublish{
+    if(canPublish==YES){
+        [self.finishBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        self.finishBtn.backgroundColor = [UIColor color5bb2ff];
+    }else{
+        [self.finishBtn setTitleColor:[UIColor color999999] forState:UIControlStateNormal];
+        self.finishBtn.backgroundColor = [UIColor clearColor];
+    }
+}
 @end

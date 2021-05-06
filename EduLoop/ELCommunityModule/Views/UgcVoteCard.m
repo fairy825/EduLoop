@@ -8,6 +8,7 @@
 #import "UgcVoteCard.h"
 #import <Masonry/Masonry.h>
 #import "UIColor+MyTheme.h"
+#import "ELUserInfo.h"
 @implementation UgcVoteCard
 - (ELVoteCard *)voteView{
     if(!_voteView){
@@ -18,9 +19,9 @@
 
 - (void)loadData{
     self.avatarCard.avatarImage.image = [UIImage imageNamed:self.data.avatar];
-    self.avatarCard.nameLabel.text = self.data.authorName;
-    self.avatarCard.publishTimeLabel.text = self.data.dateStr;
-    self.descriptionLabel.text = self.data.desc;
+    self.avatarCard.nameLabel.text = self.data.authorNickname;
+    self.avatarCard.publishTimeLabel.text = self.data.timeDesc;
+    self.descriptionLabel.text = self.data.detail;
 }
 
 - (void)setupView{
@@ -63,7 +64,7 @@
     
     
     UIView *btnsView = [UIView new];
-    if(self.data.isMine&&self.hasTrash){
+    if(self.data.profileId==[ELUserInfo sharedUser].id&&self.hasTrash){
         [btnsView addSubview:self.trashButton];
         [self.trashButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(btnsView);

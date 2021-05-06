@@ -14,4 +14,7 @@ target 'EduLoop' do
     pod 'SDWebImage'
     pod 'SGQRCode', '~> 3.0.1'
     pod 'TZImagePickerController'
+    pod 'SocketRocket'
+    pod 'GKPhotoBrowser'
+    pod 'RTRootNavigationController'
 end

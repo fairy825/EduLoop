@@ -6,6 +6,7 @@
 //
 
 #import "ELImageManager.h"
+#import <SDWebImage.h>
 @implementation ELImageManager
 
 +(ELImageManager *)sharedManager{
@@ -41,11 +42,15 @@
 
 }
 
-- (void)showImageView:(UIImage *)photo{
-    [_imgView setImage:photo];
+- (void)showImageView:(NSString *)url{
+    [_imgView sd_setImageWithURL:[NSURL URLWithString:url]];
     [[UIApplication sharedApplication].keyWindow addSubview:_backgroundView];
 }
-
+- (void)showImageBase:(NSString *)url{
+    NSData * showData = [[NSData alloc]initWithBase64EncodedString:url options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    self.imgView.image = [UIImage imageWithData:showData];
+    [[UIApplication sharedApplication].keyWindow addSubview:_backgroundView];
+}
 - (void)_tapBg{
     [_backgroundView removeFromSuperview];
 }

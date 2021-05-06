@@ -18,8 +18,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong,readwrite) UITextView *textView;
 @property(nonatomic,strong,readwrite) UIButton *finishBtn;
 @property(nonatomic,weak,readwrite) id<ChatBoardDelegate> delegate;
+@property(nonatomic,readwrite) BOOL commentMode;
 +(ChatBoard *)sharedManager:(CGRect)frame;
 -(void)resize;
+- (void)toggleState:(BOOL)canPush;
 @end
 
 NS_ASSUME_NONNULL_END

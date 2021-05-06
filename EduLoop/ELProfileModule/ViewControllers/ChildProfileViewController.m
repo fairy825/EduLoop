@@ -23,7 +23,8 @@
 
 @implementation ChildProfileViewController
 - (void)viewWillAppear:(BOOL)animated{
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
     [self getMyStuNetwork];
 }
 
@@ -184,7 +185,7 @@
             if(code==0){
                 NSIndexPath *index = [self.profileTableView indexPathForCell:card];
                 [self.models removeObjectAtIndex:[index row]];
-                [self.profileTableView deleteRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationAutomatic];
+                [self.profileTableView deleteRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationNone];
             }else{
                 NSLog(@"error--%@",msg);
                 [BasicInfo showToastWithMsg:msg];

@@ -11,8 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MessageModel : NSObject
 
-@property(nonatomic,strong,readwrite) NSString *fromName;
-@property(nonatomic,strong,readwrite) NSString *toName;
+@property(nonatomic,readwrite) NSInteger fromId;
+@property(nonatomic,readwrite) NSInteger toId;
 @property(nonatomic,strong,readwrite) NSString *avatar;
 @property(nonatomic,strong,readwrite) NSString *messageStr;
 @property(nonatomic,strong,readwrite) NSString *dateStr;

@@ -9,9 +9,10 @@
 #import "TeacherTaskModel.h"
 #import "HomeworkModel.h"
 #import "TaskDetailCard.h"
+#import "ELBaseViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TeacherTaskSummaryViewController : UIViewController
+@interface TeacherTaskSummaryViewController : ELBaseViewController
 @property(nonatomic,readwrite) int page;
 @property(nonatomic,strong,readwrite) UITableView *tableView;
 @property(nonatomic,strong,readwrite) TaskDetailCard *taskDetailCard;

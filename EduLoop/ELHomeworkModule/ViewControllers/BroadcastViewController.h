@@ -7,13 +7,14 @@
 
 #import <UIKit/UIKit.h>
 #import "SettingDataTableViewCell.h"
-#import "TaskModel.h"
+#import "TeacherTaskModel.h"
 #import "TeamModel.h"
 #import <PGDatePicker.h>
 #import "ELBottomSelectOverlay.h"
+#import "ELBaseViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BroadcastViewController : UIViewController
+@interface BroadcastViewController : ELBaseViewController
 
 @property(nonatomic,strong,readwrite) UITableView *tableView;
 @property(nonatomic,strong,readwrite) ELBottomSelectOverlay *overlay;
@@ -21,10 +22,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong,readwrite) NSMutableArray<TeamModel*>* teams;
 @property(nonatomic,strong,readwrite) NSMutableArray<NSNumber *>* chosedTeamIndexs;
 
-@property(nonatomic,strong,readwrite) TaskModel *task;
+@property(nonatomic,strong,readwrite) TeacherTaskModel *task;
 @property(nonatomic,strong,readwrite) NSDate *endDate;
 @property(nonatomic,readwrite) BOOL editMode;
-- (instancetype)initWithHomeworkData:(TaskModel *)data;
+- (instancetype)initWithHomeworkData:(TeacherTaskModel *)data;
 @end
 
 NS_ASSUME_NONNULL_END

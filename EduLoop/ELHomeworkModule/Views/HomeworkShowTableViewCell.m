@@ -9,6 +9,7 @@
 #import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
 #import "ELOverlay.h"
+#import <SDWebImage.h>
 
 @implementation HomeworkShowTableViewCell
 
@@ -44,23 +45,19 @@
         _detailLabel.text = data.content;
         _avatarCard.nameLabel.text=data.creatorName;
         _avatarCard.publishTimeLabel.text=data.timeDesc;
-        if([data.creatorName isEqual:@"陈老师"])
-            _avatarCard.avatarImage.image=[UIImage imageNamed:@"icon_teacher"];
-        else
-            _avatarCard.avatarImage.image=[UIImage imageNamed:@"icon_teacher_2"];
+        [_avatarCard.avatarImage sd_setImageWithURL:[NSURL URLWithString:data.creatorAvatar] placeholderImage:[UIImage imageNamed:@"icon_teacher"]];
         hintStr=[NSString stringWithFormat:@"%@%ld/%ld",@"已提交",(long)data.realHomeworkNumber,(long)data.shouldHomeworkNumber];
        hintStrColor =[UIColor color555555];
        _otherButton.alpha = 0;
+        _submitBtn.alpha=0;
     }else if([_data isKindOfClass: TaskModel.class]){
         TaskModel *data = (TaskModel *)_data;
         _titleLabel.text = data.title;
         _detailLabel.text = data.content;
         _avatarCard.nameLabel.text=data.creatorName;
         _avatarCard.publishTimeLabel.text=data.timeDesc;
-        if([data.creatorName isEqual:@"陈老师"])
-            _avatarCard.avatarImage.image=[UIImage imageNamed:@"icon_teacher"];
-        else
-            _avatarCard.avatarImage.image=[UIImage imageNamed:@"icon_teacher_2"];
+        [_avatarCard.avatarImage sd_setImageWithURL:[NSURL URLWithString:data.creatorAvatar] placeholderImage:[UIImage imageNamed:@"icon_teacher"]];
+
          NSString *isFinish = data.finish;
         NSString *rightButtonTitle;
         UIColor *rightButtonColor;
@@ -73,22 +70,41 @@
             rightButtonColor = [UIColor elColorWithHex:Color_finished];
             hintStr = @"点击查看作业详情";
             hintStrColor = [UIColor color999999];
-           _arrowImage.alpha=1;
+//           [_submitBtn removeFromSuperview];
+           _submitBtn.alpha=0;
+           [self.submitBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+               make.width.mas_equalTo(@0);
+           }];
         }else{
             hintStr = [NSString stringWithFormat:@"%@%@",@"作业提交截止时间为",data.endTime];
             hintStrColor = [UIColor elColorWithHex:Color_Red];
+//            [_arrowImage removeFromSuperview];
             _arrowImage.alpha=0;
+
             if([isFinish isEqual:@"NOT_FINISH"]){
                 rightButtonTitle=@"未完成";
                 rightButtonColor = [UIColor elColorWithHex:Color_not_finished];
+                _submitBtn.alpha = 1;
+                [self.submitBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+                    make.width.mas_equalTo(@80);
+                }];
             }
             else if([isFinish isEqual:@"DELAY_CAN_FINISH"]){
                 rightButtonTitle=@"超时可提交";
                 rightButtonColor = [UIColor elColorWithHex:Color_delay_can_finish];
+                _submitBtn.alpha = 1;
+                [self.submitBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+                    make.width.mas_equalTo(@80);
+                }];
             }
             else if([isFinish isEqual:@"DELAY_CANNOT_FINISH"]){
                 rightButtonTitle=@"超时不可提交";
                 rightButtonColor = [UIColor elColorWithHex:Color_delay_cannot_finish];
+//                [_submitBtn removeFromSuperview];
+                _submitBtn.alpha = 0;
+                [self.submitBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+                    make.width.mas_equalTo(@0);
+                }];
             }
             if(data.delayAllowed){
                 hintStr = [NSString stringWithFormat:@"%@%@",hintStr,@",允许延迟提交"];
@@ -167,20 +183,28 @@
     if(!_hintView){
         _hintView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 200)];
         _hintView.backgroundColor = [UIColor whiteColor];
-        [self.hintView addSubview:self.hintLabel];
-        [self.hintLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.hintView);
-            make.bottom.equalTo(self.hintView);
-            make.left.equalTo(self.hintView);
-            make.width.equalTo(self.hintView);
-
-        }];
         [self.hintView addSubview:self.arrowImage];
         [self.arrowImage mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self.hintView.mas_centerY);
             make.right.equalTo(self.hintView);
             make.size.mas_equalTo(CGSizeMake(20, 20));
         }];
+        
+        [self.hintView addSubview:self.submitBtn];
+        [self.submitBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerY.equalTo(self.hintView.mas_centerY);
+            make.right.equalTo(self.hintView);
+            make.size.mas_equalTo(CGSizeMake(80, 20));
+        }];
+        
+        [self.hintView addSubview:self.hintLabel];
+        [self.hintLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.hintView);
+            make.bottom.equalTo(self.hintView);
+            make.left.equalTo(self.hintView);
+            make.right.equalTo(self.submitBtn.mas_left).offset(-10);
+        }];
+       
     }
     return _hintView;
 }
@@ -257,10 +281,28 @@
         _detailLabel.textColor = [UIColor grayColor];
         _detailLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         _detailLabel.textAlignment = NSTextAlignmentLeft;
-        _detailLabel.numberOfLines = 0;
+        _detailLabel.numberOfLines = 2;
         [_detailLabel sizeToFit];
     }
     return _detailLabel;
+}
+
+- (UIButton *)submitBtn{
+    if(!_submitBtn){
+        _submitBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 120, 20)];
+        [_submitBtn setTitleColor:[UIColor color5bb2ff] forState:UIControlStateNormal];
+        [_submitBtn.titleLabel setFont:[UIFont fontWithName:@"PingFangSC" size:16]];
+        [_submitBtn setTitle:@"提交作业" forState:UIControlStateNormal];
+        [_submitBtn addTarget:self action:@selector(clickSubmitBtn) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _submitBtn;
+}
+
+
+-(void)clickSubmitBtn{
+    if(self.delegate&&[self.delegate respondsToSelector:@selector(clickSubmitButtonTableViewCell:)]){
+        [self.delegate clickSubmitButtonTableViewCell:self];
+    }
 }
 
 -(void)clickHomeworkMenu{

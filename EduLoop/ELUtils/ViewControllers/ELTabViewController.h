@@ -6,10 +6,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <RTRootNavigationController.h>
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ELTabViewController : UIViewController
+@interface ELTabViewController : RTRootNavigationController
 
 @end
 

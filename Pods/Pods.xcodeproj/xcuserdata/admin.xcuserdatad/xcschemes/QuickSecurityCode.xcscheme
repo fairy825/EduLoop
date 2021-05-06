@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5CAB2E3C99FAD9CF8E6625A7DAA52465"
+               BlueprintIdentifier = "DA5F901D83CC944FD39D86E0D4AD36F5"
                BuildableName = "libQuickSecurityCode.a"
                BlueprintName = "QuickSecurityCode"
                ReferencedContainer = "container:Pods.xcodeproj">

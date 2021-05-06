@@ -10,8 +10,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ContactPersonModel : NSObject
+@property (nonatomic,strong, readwrite) NSNumber *id;
 @property(nonatomic,strong,readwrite) NSString *name;
-@property(nonatomic,strong,readwrite) NSString *identity;
+@property(nonatomic,strong,readwrite) NSString *nickname;
+@property(nonatomic,strong,readwrite)  NSNumber *identity;
 @property(nonatomic,strong,readwrite) NSString *symbol;
 @property(nonatomic,strong,readwrite) NSString *avatar;
 

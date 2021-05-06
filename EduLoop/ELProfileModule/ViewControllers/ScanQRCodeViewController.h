@@ -7,9 +7,10 @@
 
 #import <UIKit/UIKit.h>
 #import <SGQRCode/SGQRCode.h>
+#import "ELBaseViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ScanQRCodeViewController : UIViewController
+@interface ScanQRCodeViewController : ELBaseViewController
 
 @property (nonatomic, strong) SGQRCodeScanView *scanView;
 @property (nonatomic, strong) UILabel *promptLabel;

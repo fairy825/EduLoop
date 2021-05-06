@@ -31,6 +31,11 @@
     [self setupSubviews];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+}
+
 - (instancetype)initWithTeacherTaskModel:(TeacherTaskModel *)data
 {
     self = [super init];
@@ -85,7 +90,6 @@
             make.right.equalTo(header).offset(-20);
         }];
         [self.taskDetailCard loadData:_data];
-        self.taskDetailCard.avatarImage.image = [UIImage imageNamed:@"icon_teacher_2"];
 //        [header layoutIfNeeded];
         [self.taskDetailCard layoutIfNeeded];
         CGFloat h=0;
@@ -207,7 +211,7 @@
 }
 
 - (void)jumpToDetailPageWithData:(HomeworkModel *)model{
-    [self.navigationController pushViewController: [[ReviewViewController alloc]initWithHomeworkModel:model] animated:YES];
+    [self.navigationController pushViewController: [[ReviewViewController alloc]initWithHomeworkModel:model TaskModel:(TaskModel *)self.data] animated:YES];
 
 }
 

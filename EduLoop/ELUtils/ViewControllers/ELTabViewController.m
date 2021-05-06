@@ -21,6 +21,16 @@
         self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
 }
+- (UIBarButtonItem *)rt_customBackItemWithTarget:(id)target action:(SEL)action
+{
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+    [button sizeToFit];
+    [button addTarget:target
+               action:action
+     forControlEvents:UIControlEventTouchUpInside];
+    return [[UIBarButtonItem alloc] initWithCustomView:button];
+}
 
 - (void)viewWillDisappear:(BOOL)animated
 {

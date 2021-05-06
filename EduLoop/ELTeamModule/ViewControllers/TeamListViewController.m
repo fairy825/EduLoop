@@ -25,7 +25,8 @@
 @implementation TeamListViewController
 
 - (void)viewWillAppear:(BOOL)animated{
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
     [self scanTeamNetwork:YES];
 }
 
@@ -214,7 +215,7 @@
             [self pushHint:@"确认解散班级？" Cancel:^{
                 [self deleteTeamNetworkWithId:[NSString stringWithFormat:@"%ld",(long)team.id] success:^{
                     [self.teams removeObjectAtIndex:index];
-                    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
                 }];
             }];
         }];
@@ -224,7 +225,7 @@
                 [self pushHint:@"确认退出班级？" Cancel:^{
                 [self quitTeamNetworkWithId:[NSString stringWithFormat:@"%ld",(long)team.id] success:^{
                 [self.teams removeObjectAtIndex:index];
-                [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+                [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
                         }];
                 }];
         }];

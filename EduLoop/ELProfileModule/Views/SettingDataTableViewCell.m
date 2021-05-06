@@ -269,8 +269,13 @@
     if(!_aSwitch){
         _aSwitch = [[UISwitch alloc]initWithFrame:CGRectMake(0, 0, 50, 20)];
         _aSwitch.on =_data.switchOpen;
+        [_aSwitch addTarget:self action:@selector(switchChange) forControlEvents:UIControlEventValueChanged];
     }
     return _aSwitch;
+}
+
+-(void)switchChange{
+    _data.switchOpen = _aSwitch.on;
 }
 
 - (UIImageView *)avatarView{

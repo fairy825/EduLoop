@@ -30,7 +30,8 @@
     return self;
 }
 - (void)viewWillAppear:(BOOL)animated{
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
     [self getTeamDetailNetwork:YES];
 }
 

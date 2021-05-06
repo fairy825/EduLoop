@@ -32,4 +32,5 @@ static AFHTTPSessionManager *manager;
     });
     return manager;
 }
+
 @end

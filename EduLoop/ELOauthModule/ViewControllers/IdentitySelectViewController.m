@@ -36,6 +36,11 @@
     [self setupSubviews];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+}
+
 - (void)setNavigationBar{
     [self setTitle:@"选择身份"];
 

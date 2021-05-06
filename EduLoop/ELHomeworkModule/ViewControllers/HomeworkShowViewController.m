@@ -23,6 +23,8 @@
 #import "ParentScanAllTaskResponse.h"
 #import "InputTeamCodeViewController.h"
 #import "ELNetworkSessionManager.h"
+#import "HomeworkPublishViewController.h"
+#import "ReviewViewController.h"
 @interface HomeworkShowViewController ()<UITableViewDelegate,UITableViewDataSource,HomeworkShowTableViewCellDelegate,LMJDropdownMenuDelegate,LMJDropdownMenuDataSource>
 
 @end
@@ -30,14 +32,14 @@
 @implementation HomeworkShowViewController
 
 - (void)viewWillAppear:(BOOL)animated{
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
     [self loadDataNetwork:YES];
 //    [self teacherLoadDataIsRefresh:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+//    [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
 - (void)viewDidLoad {
@@ -195,7 +197,7 @@
             if(code==0){
                 TeacherShowDetailTaskResponse *response = [[TeacherShowDetailTaskResponse alloc]initWithDictionary:responseObject error:nil];
                 TeacherTaskModel *taskModel = response.data;
-                [self.navigationController pushViewController: [[TeacherTaskSummaryViewController alloc]initWithTeacherTaskModel:taskModel] animated:YES];
+                [self.rt_navigationController pushViewController: [[TeacherTaskSummaryViewController alloc]initWithTeacherTaskModel:taskModel] animated:YES];
 
             }else{
                 NSLog(@"error--%@",msg);
@@ -400,7 +402,7 @@
         TaskModel *task = [self.models objectAtIndex:index];
         [self deleteTaskNetworkWithTaskId:[NSString stringWithFormat:@"%ld",(long)task.id] success:^{
             [self.models removeObjectAtIndex:index];
-            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         
         }];
     }];
@@ -420,14 +422,23 @@
 }
 
 #pragma mark - action
-- (void)jumpToDetailPageWithData:(TeacherTaskModel *)model{
-    if(_isParent)
-        return;
-    else
+- (void)jumpToDetailPageWithData:(id)data{
+    if(_isParent){
+        TaskModel *model = (TaskModel *)data;
+        [self.navigationController pushViewController:[[ReviewViewController alloc]initWithHomeworkModel:model.homeworkVO TaskModel:(TaskModel *)data] animated:YES];
+    }
+    else{
+        TeacherTaskModel *model = (TeacherTaskModel *)data;
         [self teacherShowDetailTaskNetworkWithTaskId:model.id];
+    }
 }
 
 #pragma mark - HomeworkShowTableViewCellDelegate
+- (void)clickSubmitButtonTableViewCell:(UITableView *)tableViewCell{
+    HomeworkShowTableViewCell *cell = (HomeworkShowTableViewCell *)tableViewCell;
+    TaskModel *model =(TaskModel *)cell.data;
+    [self.navigationController pushViewController:[[HomeworkPublishViewController alloc]initWithTaskId:model.id Student:self.students[self.selectedStuIndex]] animated:YES];
+}
 //- (void)clickOtherButtonTableViewCell:(UITableViewCell *)tableViewCell {
 //    HomeworkShowTableViewCell *cell = (HomeworkShowTableViewCell *)tableViewCell;
 //    ELBottomOverlay *overlay = [[ELBottomOverlay alloc]initWithFrame:self.view.bounds Data:@[

@@ -9,11 +9,11 @@
 #import "MineInfoCard.h"
 #import "MineToolCard.h"
 #import "MineMiscCard.h"
-#import "ELTabViewController.h"
-@interface MineViewController : ELTabViewController
+#import "ELBaseViewController.h"
+@interface MineViewController : ELBaseViewController
 @property(nonatomic,strong,readwrite) UIView *container;
 @property(nonatomic,strong,readwrite) MineInfoCard *header;
-@property(nonatomic,strong,readwrite) MineToolCard *toolCard;
+//@property(nonatomic,strong,readwrite) MineToolCard *toolCard;
 @property(nonatomic,strong,readwrite) MineMiscCard *miscCard;
 @property(nonatomic,strong,readwrite) UIButton *logOutBtn;
 @property(nonatomic,strong,readwrite) NSArray<NSString*> *miscTitles;

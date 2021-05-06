@@ -7,15 +7,17 @@
 
 #import "ELPublishImage.h"
 #import "UIColor+MyTheme.h"
+#import <SDWebImage.h>
 @implementation ELPublishImage
 
-- (instancetype)initWithFrame:(CGRect)frame Img:(UIImage *)img
+- (instancetype)initWithFrame:(CGRect)frame Img:(NSString *)url
 {
     self = [super initWithFrame:frame];
     if (self) {
-        _image = img;
+        _imageUrl = url;
         self.imgView = [[UIImageView alloc]initWithFrame:frame];
-        self.imgView.image = _image;
+        NSData * showData = [[NSData alloc]initWithBase64EncodedString:_imageUrl options:NSDataBase64DecodingIgnoreUnknownCharacters];
+        self.imgView.image = [UIImage imageWithData:showData];
         self.imgView.contentMode = UIViewContentModeScaleAspectFill;
         self.imgView.clipsToBounds = YES;
 //        self.imgView.tag=1000+i;

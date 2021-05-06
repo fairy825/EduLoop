@@ -7,9 +7,10 @@
 
 #import <UIKit/UIKit.h>
 #import "IdentityCard.h"
+#import "ELBaseViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface IdentitySelectViewController : UIViewController
+@interface IdentitySelectViewController : ELBaseViewController
 @property(nonatomic,strong,readwrite) IdentityCard *parentCard;
 @property(nonatomic,strong,readwrite) IdentityCard *teacherCard;
 @property(nonatomic,readwrite) NSInteger type;

@@ -8,6 +8,7 @@
 #import "TeacherTaskSummaryTableViewCell.h"
 #import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
+#import <SDWebImage.h>
 @implementation TeacherTaskSummaryTableViewCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
 
@@ -65,10 +66,8 @@
 
 - (void)loadData{
     _parentLabel.text = [NSString stringWithFormat:@"%@%@",@"家长：",_data.authorName];
-    _studentLabel.text = _data.studentName;
-    if([_data.studentName isEqual:@"王二"])
-        _avatarImage.image = [UIImage imageNamed:@"avatar_child_1"];
-    else _avatarImage.image = [UIImage imageNamed:@"avatar_child_4"];
+    _studentLabel.text = _data.student.name;
+    [_avatarImage sd_setImageWithURL:[NSURL URLWithString:_data.student.faceImage] placeholderImage:[UIImage imageNamed:@"avatar-4"]];
     if(_data.hasViewed==YES){
         _hintLabel.text = @"已点评";
     }else{

@@ -8,9 +8,10 @@
 #import <UIKit/UIKit.h>
 #import "TeamModel.h"
 #import "ELFloatingButton.h"
+#import "ELBaseViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TeamListViewController : UIViewController
+@interface TeamListViewController : ELBaseViewController
 @property(nonatomic,readwrite) int page;
 @property(nonatomic,strong,readwrite) UITableView *tableView;
 @property(nonatomic,strong,readwrite) NSMutableArray<TeamModel *>* teams;

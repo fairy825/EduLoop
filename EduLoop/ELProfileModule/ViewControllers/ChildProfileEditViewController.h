@@ -9,9 +9,10 @@
 #import "SettingDataTableViewCell.h"
 #import "ChildModel.h"
 #import "ELBottomSelectOverlay.h"
+#import "ELBaseViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ChildProfileEditViewController : UIViewController
+@interface ChildProfileEditViewController : ELBaseViewController
 
 @property(nonatomic,strong,readwrite) UITableView *tableView;
 @property(nonatomic,strong,readwrite) NSMutableArray<SettingDataModel*>* models;

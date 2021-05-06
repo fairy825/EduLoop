@@ -7,6 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UgcCard.h"
+#import "MomentsModel.h"
 NS_ASSUME_NONNULL_BEGIN
 //@protocol UgcCardTableViewCellDelegate<NSObject>
 //-(void)clickTrashButtonTableViewCell:(UITableViewCell *)tableViewCell;
@@ -18,7 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong,readwrite) UgcCard *ugcCard;
 //@property(nonatomic,weak,readwrite) id<UgcCardTableViewCellDelegate> delegate;
 
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier data:(UgcModel *)model;
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier data:(MomentsModel *)model;
+- (void)loadData:(MomentsModel *)model;
 @end
 
 NS_ASSUME_NONNULL_END

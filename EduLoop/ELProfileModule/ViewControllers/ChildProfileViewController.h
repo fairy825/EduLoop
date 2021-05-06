@@ -9,9 +9,10 @@
 #import "ChildProfileCard.h"
 #import "ELFloatingButton.h"
 #import "StudentModel.h"
+#import "ELBaseViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ChildProfileViewController : UIViewController
+@interface ChildProfileViewController : ELBaseViewController
 @property(nonatomic,strong,readwrite) ChildProfileCard *childProfileCard;
 @property(nonatomic,readwrite) NSInteger page;
 @property(nonatomic,strong,readwrite) ELFloatingButton *addBtn;

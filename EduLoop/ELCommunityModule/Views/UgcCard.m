@@ -12,13 +12,13 @@
 #import "UgcVoteModel.h"
 @implementation UgcCard
 
-- (instancetype)initWithFrame:(CGRect)frame Data:(UgcModel *)model
+- (instancetype)initWithFrame:(CGRect)frame Data:(MomentsModel *)model
 {
     self = [super initWithFrame:frame];
     if (self) {
         _data = model;
         [self setupView];
-        [self loadData];
+//        [self loadData];
     }
     return self;
 }

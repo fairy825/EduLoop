@@ -13,25 +13,31 @@
 #import "ELCenterOverlayModel.h"
 #import "ELCenterOverlay.h"
 #import "ELScreen.h"
-@interface UgcTextImgPublishViewController ()<UITextViewDelegate,ELPublishImageDelegate>
+#import "ELNetworkSessionManager.h"
+#import "GetMyTPTeamsResponse.h"
+#import "BasicInfo.h"
+#import "MomentsModel.h"
+#import <TZImagePickerController.h>
+#import <UIViewController+RTRootNavigationController.h>
+@interface UgcTextImgPublishViewController ()<UITextViewDelegate,ELPublishImageDelegate,ELBottomSelectOverlayDelegate,TZImagePickerControllerDelegate>
 
 @end
 
 @implementation UgcTextImgPublishViewController
 - (void)viewWillAppear:(BOOL)animated{
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 - (void)viewWillDisappear:(BOOL)animated{
     [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
+
 - (void)viewDidAppear:(BOOL)animated{
     [self.textView becomeFirstResponder];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UgcPublishTextImgModel *model = [UgcPublishTextImgModel new];
-    model.imgs = @[[UIImage imageNamed:@"sample-1"],[UIImage imageNamed:@"sample-2"]].mutableCopy;
-    self.data = model;
+    self.imgs = @[].mutableCopy;
     self.view.backgroundColor = [UIColor f6f6f6];
     [self setNavagationBar];
     [self setupSubviews];
@@ -49,7 +55,7 @@
 - (void)setNavagationBar{
     [self setTitle:@"发送图文"];
 
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"下一步" style:UIBarButtonItemStyleDone target:self action:@selector(publishUgc)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(publishUgc)];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStyleDone target:self action:@selector(clickCancel)];
 }
 
@@ -69,8 +75,8 @@
     bottomView.backgroundColor = [UIColor f6f6f6];
     [bottomView addSubview:self.addImgBtn];
     self.addImgBtn.frame = CGRectMake(20,10,30,30);
-    [bottomView addSubview:self.publicRangeBtn];
-    self.publicRangeBtn.frame = CGRectMake(80,10,110,30);
+//    [bottomView addSubview:self.publicRangeBtn];
+//    self.publicRangeBtn.frame = CGRectMake(80,10,110,30);
     [self.btnView addSubview:bottomView];
     [self.view addSubview:self.btnView];
 
@@ -78,25 +84,25 @@
 
 - (UIStackView *)imgStackView{
     if(!_imgStackView){
-        if([self.data.imgs count]>0){
+//        if([self.imgs count]>0){
             CGFloat imgWidth = (self.bgView.bounds.size.width-40-15*2)/3;
 
             _imgStackView = [[UIStackView alloc]initWithFrame:CGRectMake(20,self.bgView.bounds.size.height-imgWidth-10, self.bgView.frame.size.width-40, imgWidth)];
             _imgStackView.spacing = 15;
             _imgStackView.distribution = UIStackViewDistributionFillEqually;
             _imgStackView.backgroundColor = [UIColor whiteColor];
-            int i=0;
-            for(UIImage *img in self.data.imgs){
-                ELPublishImage *photo = [[ELPublishImage alloc]initWithFrame:CGRectMake(0, 0, imgWidth, imgWidth) Img:img];
-                [_imgStackView addArrangedSubview:photo];
-                photo.delegate = self;
-                i++;
-            }
-            while(i<3){
-                [_imgStackView addArrangedSubview:[ELPublishImage emptyItem:CGRectMake(0, 0, imgWidth, imgWidth)]];
-                i++;
-            }
-        }
+//            int i=0;
+//            for(NSString *img in self.imgs){
+//                ELPublishImage *photo = [[ELPublishImage alloc]initWithFrame:CGRectMake(0, 0, imgWidth, imgWidth) Img:img];
+//                [_imgStackView addArrangedSubview:photo];
+//                photo.delegate = self;
+//                i++;
+//            }
+//            while(i<3){
+//                [_imgStackView addArrangedSubview:[ELPublishImage emptyItem:CGRectMake(0, 0, imgWidth, imgWidth)]];
+//                i++;
+//            }
+//        }
     }
     return _imgStackView;
 }
@@ -161,27 +167,101 @@
     return _addImgBtn;
 }
 
-- (UIButton *)publicRangeBtn{
-    if(!_publicRangeBtn){
-        _publicRangeBtn = [[UIButton alloc]init];
-        [_publicRangeBtn setTitleColor:[UIColor color999999] forState:UIControlStateNormal];
-        [_publicRangeBtn setTitle:@"可见范围" forState:UIControlStateNormal];
-        _publicRangeBtn.titleLabel.font = [UIFont systemFontOfSize: 14.0];
-        [_publicRangeBtn setImage: [UIImage imageNamed:@"icon_eye-4"] forState:UIControlStateNormal];
-        [_publicRangeBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 8, 0, 0)];
+//- (UIButton *)publicRangeBtn{
+//    if(!_publicRangeBtn){
+//        _publicRangeBtn = [[UIButton alloc]init];
+//        [_publicRangeBtn setTitleColor:[UIColor color999999] forState:UIControlStateNormal];
+//        [_publicRangeBtn setTitle:@"可见范围" forState:UIControlStateNormal];
+//        _publicRangeBtn.titleLabel.font = [UIFont systemFontOfSize: 14.0];
+//        [_publicRangeBtn setImage: [UIImage imageNamed:@"icon_eye-4"] forState:UIControlStateNormal];
+//        [_publicRangeBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 8, 0, 0)];
+//
+//        _publicRangeBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+//        _publicRangeBtn.layer.cornerRadius = 15;
+//        _publicRangeBtn.layer.borderColor = [UIColor color999999].CGColor;
+//        _publicRangeBtn.layer.borderWidth = 1;
+//        [_publicRangeBtn setContentEdgeInsets:UIEdgeInsetsMake(5,8,5,8)];
+//        [_publicRangeBtn addTarget:self action:@selector(clickRangeBtn) forControlEvents:UIControlEventTouchUpInside];
+//    }
+//    return _publicRangeBtn;
+//}
 
-        _publicRangeBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-        _publicRangeBtn.layer.cornerRadius = 15;
-        _publicRangeBtn.layer.borderColor = [UIColor color999999].CGColor;
-        _publicRangeBtn.layer.borderWidth = 1;
-        [_publicRangeBtn setContentEdgeInsets:UIEdgeInsetsMake(5,8,5,8)];
-//        [_publicRangeBtn addTarget:self action:@selector(toggleThumb) forControlEvents:UIControlEventTouchUpInside];
+//- (ELBottomSelectOverlay *)overlay{
+//    if(!_overlay){
+//        _overlay = [[ELBottomSelectOverlay alloc]initWithFrame:self.view.bounds Title:@"可见范围"];
+//        _overlay.isSingle = NO;
+//        _overlay.delegate = self;
+//    }
+//    return _overlay;
+//}
+
+//- (void)clickRangeBtn{
+//    [self.overlay showHighlightView];
+//}
+- (TZImagePickerController *)imagePickerVc{
+    if(!_imagePickerVc){
+        CGFloat imgWidth = (self.view.bounds.size.width-40-15*2)/3;
+
+        _imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:9 delegate:self];
+        _imagePickerVc.preferredLanguage = @"zh-Hans";
+        _imagePickerVc.allowPickingOriginalPhoto = NO;
+        _imagePickerVc.showSelectedIndex = YES;
+        // You can get the photos by block, the same as by delegate.
+        // 你可以通过block或者代理，来得到用户选择的照片.
+        [_imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
+            [_imgs removeAllObjects];
+            for(UIView *view in [self.imgStackView arrangedSubviews])
+                [self.imgStackView removeArrangedSubview:view];
+            for(UIImage *img in photos){
+                NSData *data = UIImagePNGRepresentation(img);
+                NSString * base64 = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+                [self.imgs addObject:base64];
+                ELPublishImage *photo = [[ELPublishImage alloc]initWithFrame:CGRectMake(0, 0, imgWidth, imgWidth) Img:base64];
+                [self.imgStackView addArrangedSubview:photo];
+                photo.delegate = self;
+
+    //            for(NSString *img in self.imgs){
+    //                ELPublishImage *photo = [[ELPublishImage alloc]initWithFrame:CGRectMake(0, 0, imgWidth, imgWidth) Img:img];
+    //                [_imgStackView addArrangedSubview:photo];
+    //                photo.delegate = self;
+    //                i++;
+    //            }
+                
+            }
+            NSInteger i=[photos count];
+            while(i<3){
+                [_imgStackView addArrangedSubview:[ELPublishImage emptyItem:CGRectMake(0, 0, imgWidth, imgWidth)]];
+                i++;
+            }
+        }];
     }
-    return _publicRangeBtn;
+    return _imagePickerVc;
 }
 
+- (void)selectImage{
+    
+    [self presentViewController:self.imagePickerVc animated:YES completion:nil];
+}
+
+- (void)postMomentsNetworkWithSuccess:(nullable void (^)())success{
+    AFHTTPSessionManager *manager = [ELNetworkSessionManager sharedManager];
+    NSDictionary *paramDict =  @{
+        @"detail":self.textView.text,
+        @"imgs":self.imgs
+    };
+    [BasicInfo POST:[BasicInfo url:@"/moments"] parameters:paramDict success:success];
+}
+
+
 - (void)publishUgc{
-    [self.navigationController popViewControllerAnimated:YES];
+    if(self.textView.text.length==0&&self.imgs.count==0){
+        [BasicInfo showToastWithMsg:@"请输入要发布的图文"];
+        return ;
+    }
+    [self postMomentsNetworkWithSuccess:^{
+        [BasicInfo showToastWithMsg:@"发布成功"];
+        [self.navigationController popViewControllerAnimated:YES];
+    }];
 }
 
 - (void)clickCancel{
@@ -207,26 +287,27 @@
 
 - (void)choosePic{
     [self.textView resignFirstResponder];
+    [self selectImage];
 }
 
 #pragma mark - ELPublishImageDelegate
 - (void)clickImageELPublishImage:(UIView *)elPublishImage{
     ELPublishImage *photo =(ELPublishImage *)elPublishImage;
     [self.textView resignFirstResponder];
-    [[ELImageManager sharedManager]showImageView:photo.image];
+    [[ELImageManager sharedManager]showImageBase:photo.imageUrl];
 }
 
 - (void)deleteImageELPublishImage:(UIView *)elPublishImage{
     ELPublishImage *photo =(ELPublishImage *)elPublishImage;
-    [_data.imgs removeObject:photo.image];
+    [_imgs removeObject:photo.imageUrl];
     [_imgStackView removeArrangedSubview:photo];
     [photo removeFromSuperview];
     [_imgStackView addArrangedSubview:[ELPublishImage emptyItem:photo.frame]];
-    if([self.data.imgs count]==0){
+    if([self.imgs count]==0){
         [UIView animateWithDuration:0.25 animations:^{
             self.bgView.frame = CGRectMake(0, (STATUS_BAR_HEIGHT+NAVIGATION_HEIGHT), self.view.bounds.size.width, self.view.bounds.size.height-(STATUS_BAR_HEIGHT+NAVIGATION_HEIGHT)-HOME_BUTTON_HEIGHT-50-2);
             self.textView.frame = [self.view convertRect:CGRectInset(self.bgView.frame, 20, 20) toView:self.bgView];
-            [self.imgStackView setHidden:YES];
+//            [self.imgStackView setHidden:YES];
 
         } completion:nil];
         
@@ -267,7 +348,7 @@
         CGFloat imgWidth = (self.view.bounds.size.width-40-15*2)/3;
         CGFloat bgHeight = self.btnView.frame.origin.y-(STATUS_BAR_HEIGHT+NAVIGATION_HEIGHT);
         CGFloat offset = bgHeight;
-        if([self.data.imgs count]>0){
+        if([self.imgs count]>0){
             offset=bgHeight-(imgWidth+10);
         }
         
@@ -290,5 +371,4 @@
 {
     [self dismissKeyboard];
 }
-
 @end

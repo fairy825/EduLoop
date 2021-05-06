@@ -6,10 +6,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ELBaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LoginViewController : UIViewController
+@interface LoginViewController : ELBaseViewController
 @property(nonatomic,strong,readwrite) UIImageView *logo;
 @property(nonatomic,strong,readwrite) UILabel *userNameLabel;
 @property(nonatomic,strong,readwrite) UILabel *passwordLabel;

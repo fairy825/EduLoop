@@ -143,4 +143,16 @@
         [self.delegate textView:self finalText:self.detailTextView.text];
     }
 }
+
+-(void)toggleState:(BOOL)canPublish{
+    if(canPublish==YES){
+        [self.finishBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        self.finishBtn.backgroundColor = [UIColor color5bb2ff];
+    }else{
+        [self.finishBtn setTitleColor:[UIColor color999999] forState:UIControlStateNormal];
+        self.finishBtn.backgroundColor = [UIColor clearColor];
+    }
+}
+
+
 @end

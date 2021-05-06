@@ -22,7 +22,7 @@
 
 @implementation BroadcastViewController
 
-- (instancetype)initWithHomeworkData:(TaskModel *)data
+- (instancetype)initWithHomeworkData:(TeacherTaskModel *)data
 {
     self = [super init];
     if (self) {
@@ -37,7 +37,7 @@
     return self;
 }
 
-- (void)loadData:(TaskModel *)data{
+- (void)loadData:(TeacherTaskModel *)data{
     _chosedTeamIndexs = @[].mutableCopy;
     _models = @[].mutableCopy;
     [_models addObject:({
@@ -134,6 +134,11 @@
     [self setupSubviews];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+}
+
 - (void)setNavagationBar{
     [self setTitle:@"任务"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"下一步" style:UIBarButtonItemStyleDone target:self action:@selector(publishHomework)];
@@ -143,7 +148,7 @@
     self.tableView = [[UITableView alloc]init];
     self.tableView.backgroundColor = [UIColor f6f6f6];
     self.tableView.showsVerticalScrollIndicator=NO;
-    self.tableView.scrollEnabled = NO;
+//    self.tableView.scrollEnabled = NfO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
     [self.tableView addGestureRecognizer:tapGesture];    self.tableView.delegate = self;
@@ -221,13 +226,30 @@
                 if(teams==nil||teams.count==0){
                     [BasicInfo showToastWithMsg:@"不管理任何班级"];
                 }else{
-                    _teams = teams;
+                    self.teams = teams.mutableCopy;
                     NSMutableArray<NSString *> *subs = [[NSMutableArray alloc]init];
-                    for(TeamModel *team in _teams){
+                    for(TeamModel *team in self.teams){
                         [subs addObject:team.name];
                     }
-                    _overlay.subTitles = subs;
-                    [_overlay reload];
+                    self.overlay.subTitles = subs;
+                    if(self.editMode== YES){
+                        NSMutableArray<NSNumber *> *arr = [[NSMutableArray alloc]init];
+                        NSArray<TeamModel*> *chosedTeams =  self.task.teamList;
+                        for(TeamModel *currentTeam in chosedTeams){
+                            int i=0;
+                            for(TeamModel *t in self.teams){
+                                if(t.id==currentTeam.id){
+                                    [arr addObject:[NSNumber numberWithInt:i]];
+                                    break;
+                                }
+                                i++;
+                            }
+                            [self.chosedTeamIndexs addObject:[NSNumber numberWithInteger:currentTeam.id]];
+
+                        }
+                        self.overlay.selectedIdxs = arr;
+                    }
+                    [self.overlay reload];
                 }
                 
             }else{
@@ -268,8 +290,8 @@
         @"endTime":[self getUtcDate],
         @"teamIds":_chosedTeamIndexs
     };
-    int tid = _task.id;
-    [BasicInfo PUT:[BasicInfo url:@"/task" path:[NSString stringWithFormat:@"%d",tid]] parameters:paramDict success:success];
+    NSInteger tid = _task.id;
+    [BasicInfo PUT:[BasicInfo url:@"/task" path:[NSString stringWithFormat:@"%ld",(long)tid]] parameters:paramDict success:success];
 }
 
 #pragma mark - keyboard
@@ -337,9 +359,12 @@
 #pragma mark - PGDatePickerDelegate
 - (void)datePicker:(PGDatePicker *)datePicker didSelectDate:(NSDateComponents *)dateComponents {
     NSLog(@"dateComponents = %@", dateComponents);
-    self.endDate = dateComponents;
-    [_models objectAtIndex:3].detailText = [self date2Str:[NSDate dateFromComponents:dateComponents]];
-    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:1]] withRowAnimation:UITableViewRowAnimationNone];
+    self.endDate = [NSDate dateFromComponents: dateComponents];
+    [_models objectAtIndex:2].detailText = [self date2Str:[NSDate dateFromComponents:dateComponents]];
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:0 inSection:1]] withRowAnimation:UITableViewRowAnimationNone];
+}
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self dismissKeyboard];
 }
 
 @end

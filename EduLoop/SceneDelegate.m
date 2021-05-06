@@ -12,8 +12,8 @@
 #import "ELChatModule/ELChatModule.h"
 #import "ELOauthModule/ELOauthModule.h"
 #import "ELTeamModule/ELTeamModule.h"
-#import "TestViewController.h"
 #import "BasicInfo.h"
+#import <RTRootNavigationController.h>
 @interface SceneDelegate ()
 
 @end
@@ -35,16 +35,19 @@
     });
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         ELUserInfo *userInfo = [ELUserInfo sharedUser];
-        UINavigationController *navigationController;
+//        UINavigationController *navigationController;
+        UIViewController *navigationController;
         if(userInfo!=nil&&userInfo.id!=0){
-            navigationController = [[UINavigationController alloc]initWithRootViewController:[BasicInfo initNavigationTab]];//每个navigationController都需要rootNavigationController 代表栈底元素 即初始显示的controller
+            navigationController = [BasicInfo initNavigationTab];
+//            navigationController = [[UINavigationController alloc]initWithRootViewController:[BasicInfo initNavigationTab]];//每个navigationController都需要rootNavigationController 代表栈底元素 即初始显示的controller
         }else{
             LoginViewController *loginVC = [[LoginViewController alloc]init];
-            navigationController = [[UINavigationController alloc]initWithRootViewController:loginVC];//每个navigationController都需要rootNavigationController 代表栈底元素 即初始显示的controller
+            navigationController = loginVC;
+//            navigationController = [[UINavigationController alloc]initWithRootViewController:loginVC];//每个navigationController都需要rootNavigationController 代表栈底元素 即初始显示的controller
         }
-        [navigationController setNavigationBarHidden:YES];
+//        [navigationController setNavigationBarHidden:YES];
         self.window = [[UIWindow alloc] initWithWindowScene:(UIWindowScene*)scene];
-        self.window.rootViewController = navigationController;
+        self.window.rootViewController = [[RTRootNavigationController alloc] initWithRootViewController:navigationController];
         [self.window makeKeyAndVisible];
         
     });

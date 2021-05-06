@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BasicInfo : NSObject
 @property(class) int pageSize;
 @property(class) NSString *appendix;
+@property(class) NSString *wsAppendix;
 +(NSString *)url:(NSString *)str;
 + (NSString *)url:(NSString *)str path:(NSString *)path;
 +(NSString *)url:(NSString *)str Start:(int)start AndSize:(int)size;
@@ -30,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 +(void)markUser;
 +(void)deleteUser;
 +(void)reloadInfo;
++(void)getCurrentNetworkInfo;
 @end
 
 NS_ASSUME_NONNULL_END

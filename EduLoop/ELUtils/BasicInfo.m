@@ -15,13 +15,23 @@
 #import "MineViewController.h"
 #import "UserLoginResponse.h"
 #import "ELNetworkSessionManager.h"
-#import "ELNetworkSessionManager.h"
+#import "ELCenterOverlayModel.h"
+#import "ELCenterOverlay.h"
+#import "ELScreen.h"
+#import <RTRootNavigationController.h>
 @implementation BasicInfo
+static NSString *server=@"127.0.0.1";
+static NSString *httpPort=@"8080";
+static NSString *socketPort=@"8088";
 + (int)pageSize{
     return 10;
 }
 + (NSString *)appendix{
-    return @"http://localhost:8080";
+    return [NSString stringWithFormat:@"%@%@%@%@", @"http://",server,@":",httpPort];
+}
++ (NSString *)wsAppendix{
+    return [NSString stringWithFormat:@"%@%@%@%@%@", @"ws://",server,@":",socketPort,@"/ws"];
+
 }
 
 + (NSString *)url:(NSString *)str{
@@ -154,18 +164,31 @@
 }
 
 +(UITabBarController *)initNavigationTab{
+//    RTRootNavigationController *controller3 = [[RTRootNavigationController alloc]initWithRootViewController:[[ChatAllViewController alloc]init]];
     ChatAllViewController *controller3 = [[ChatAllViewController alloc]init];
     controller3.tabBarItem.title = @"消息";
-    CommunityViewController *controller1 = [[CommunityViewController alloc]init];
+    controller3.tabBarItem.image = [UIImage imageNamed:@"icon_msg"];
+    CommunityViewController *controller1 = [[CommunityViewController alloc]initWithMode:NO];
+//    RTRootNavigationController *controller1 = [[RTRootNavigationController alloc]initWithRootViewController:[[CommunityViewController alloc]initWithMode:NO]];
     controller1.tabBarItem.title = @"班级";
+    controller1.tabBarItem.image = [UIImage imageNamed:@"icon_discovery"];
+
     HomeworkShowViewController *controller2 = [[HomeworkShowViewController alloc]init];
+//    RTRootNavigationController *controller2 = [[RTRootNavigationController alloc]initWithRootViewController:[[HomeworkShowViewController alloc]init]];
     controller2.tabBarItem.title = @"广播站";
+    controller2.tabBarItem.image = [UIImage imageNamed:@"icon_homework"];
+
     MineViewController *controller4 = [[MineViewController alloc] init];
+//    RTRootNavigationController *controller4 = [[RTRootNavigationController alloc]initWithRootViewController:[[MineViewController alloc]init]];
     controller4.tabBarItem.title = @"我的";
-    
-    UITabBarController *tabBarController = [[UITabBarController alloc]init];
-    [tabBarController setViewControllers:@[controller4,controller2,controller1,controller3]];
-    return tabBarController;
+    controller4.tabBarItem.image = [UIImage imageNamed:@"icon_mine"];
+
+
+    UITabBarController *tc = [[UITabBarController alloc]init];
+    [tc setViewControllers:@[controller2,controller3,controller1,controller4]];
+    RTRootNavigationController *tabBarController = [[RTRootNavigationController alloc]initWithRootViewController:tc];
+
+    return tc;
 }
 
 +(void)markUser{
@@ -247,8 +270,29 @@
         }else{
             dispatch_semaphore_signal(sema);
         }
+    }else{
+        dispatch_semaphore_signal(sema);
     }
 }
 
++(void)getCurrentNetworkInfo{
+    AFNetworkReachabilityManager *reach =[AFNetworkReachabilityManager sharedManager];
+    [reach setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+            if(status !=AFNetworkReachabilityStatusReachableViaWWAN && status != AFNetworkReachabilityStatusReachableViaWiFi){
+                ELCenterOverlayModel *centerOverlayModel = [ELCenterOverlayModel new];
+                centerOverlayModel.title = @"请打开网络连接";
+                centerOverlayModel.leftChoice = ({
+                    ELOverlayItem *sureItem =[ELOverlayItem new];
+                    sureItem.title = @"确认";
+                    sureItem;
+                });
+                ELCenterOverlay *deleteAlertView = [[ELCenterOverlay alloc]initWithFrame:[UIScreen mainScreen].bounds Data:centerOverlayModel
+                ];
+        
+                [deleteAlertView showHighlightView];
+            }
+    }];
+    [reach startMonitoring];
+}
 
 @end

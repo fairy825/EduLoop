@@ -8,7 +8,7 @@
 #import "MessageSummaryCardTableViewCell.h"
 #import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
-
+#import <SDWebImage.h>
 @implementation MessageSummaryCardTableViewCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier data:(ChatAllModel *)model
 {
@@ -22,11 +22,11 @@
 }
 
 - (void)loadData{
-    self.oppositeNameLabel.text = self.data.personModel.name;
-    self.publishTimeLabel.text = self.data.dateStr;
+    self.oppositeNameLabel.text = self.data.personModel.nickname;
+    self.publishTimeLabel.text = [self.data.dateStr substringToIndex:self.data.dateStr.length-3];
     self.messageLabel.text = self.data.messageStr;
-    self.unreadTag.text = self.data.unreadNum>0?[NSString stringWithFormat:@"%d", self.data.unreadNum]:@"";
-    self.avatarImage.image = [UIImage imageNamed:self.data.personModel.avatar];
+    self.unreadTag.text = self.data.unreadNum>0?[NSString stringWithFormat:@"%ld", (long)self.data.unreadNum]:@"";
+    [self.avatarImage sd_setImageWithURL:[NSURL URLWithString:self.data.personModel.avatar] placeholderImage:[UIImage imageNamed:@"avatar"]];
 //    self.avatarImage.backgroundColor = [UIColor blackColor];
 }
 
@@ -90,8 +90,8 @@
     if(!_avatarImage){
         _avatarImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 50, 50)];
         _avatarImage.contentMode = UIViewContentModeScaleToFill;
-        _avatarImage.layer.cornerRadius = 25;
-        _avatarImage.layer.masksToBounds = YES;
+//        _avatarImage.layer.cornerRadius = 25;
+//        _avatarImage.layer.masksToBounds = YES;
         
     }
     return _avatarImage;

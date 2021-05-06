@@ -56,7 +56,7 @@
             [path addLineToPoint:CGPointMake(triWidth,triTop)];
             [path addLineToPoint:CGPointMake(triWidth,rectRadius)];
             [path addArcWithCenter:CGPointMake(triWidth + rectRadius, rectRadius) radius:rectRadius startAngle:-M_PI endAngle:-M_PI_2 clockwise:YES];//左上
-            layer.fillColor = [UIColor grayColor].CGColor;
+            layer.fillColor = [UIColor elColorWithHex:Color_CellHighlightedColor].CGColor;
         }else{
             [path moveToPoint:CGPointMake(rectRadius,0)];
             [path addLineToPoint:CGPointMake(rectWidth - rectRadius,0)];

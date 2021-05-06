@@ -8,6 +8,7 @@
 #import "TaskDetailCard.h"
 #import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
+#import <SDWebImage.h>
 
 @implementation TaskDetailCard
 - (instancetype)init
@@ -87,7 +88,8 @@
     _detailLabel.text = _data.content;
     _timeLabel.text = _data.publishTime;
     _teacherLabel.text = _data.creatorName;
-    _avatarImage.image = [UIImage imageNamed:@"avatar-4"];
+    [_avatarImage sd_setImageWithURL:[NSURL URLWithString:data.creatorAvatar] placeholderImage:[UIImage imageNamed:@"icon_teacher"]];
+
 }
 
 #pragma mark - View
@@ -166,7 +168,7 @@
         _detailLabel.font = [UIFont systemFontOfSize:16.f];
         _detailLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         _detailLabel.textAlignment = NSTextAlignmentLeft;
-        _detailLabel.numberOfLines = 3;
+        _detailLabel.numberOfLines = 0;
         [_detailLabel sizeToFit];
     }
     return _detailLabel;

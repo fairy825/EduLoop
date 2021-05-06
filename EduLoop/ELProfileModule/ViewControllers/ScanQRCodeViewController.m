@@ -17,7 +17,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+
     if (_stop) {
         [obtain startRunningWithBefore:nil completion:nil];
     }
@@ -75,7 +76,7 @@
             if([result hasPrefix:@"student_qrcode:"]){
                 stuId = [result substringFromIndex:15];
             }
-            [weakSelf.navigationController pushViewController:[[InputRelationshipViewController alloc]initWithStudent:stuId] animated:YES];
+            [weakSelf.navigationController pushViewController:[[InputRelationshipViewController alloc]initWithStudent:[stuId intValue] ] animated:YES];
         }
     }];
 }

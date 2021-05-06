@@ -8,9 +8,10 @@
 #import <UIKit/UIKit.h>
 #import "TeamModel.h"
 #import "SettingDataTableViewCell.h"
+#import "ELBaseViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TeamEditViewController : UIViewController
+@interface TeamEditViewController : ELBaseViewController
 
 @property(nonatomic,strong,readwrite) UITableView *tableView;
 @property(nonatomic,strong,readwrite) NSMutableArray<SettingDataModel*>* models;

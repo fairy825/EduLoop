@@ -7,10 +7,11 @@
 
 #import <UIKit/UIKit.h>
 #import "ChatAllModel.h"
-#import "ELTabViewController.h"
+#import "ChatMsgModel.h"
+#import "ELBaseViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ChatAllViewController : ELTabViewController
+@interface ChatAllViewController : ELBaseViewController
 
 @property(nonatomic,strong,readwrite) UIView *defaultView;
 @property(nonatomic,strong,readwrite) UITableView *tableView;

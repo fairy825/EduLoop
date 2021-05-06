@@ -16,7 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong,readwrite) UIView *backgroundView;
 
 +(ELImageManager *)sharedManager;
-- (void)showImageView:(UIImage *)photo;
+- (void)showImageView:(NSString *)url;
+- (void)showImageBase:(NSString *)url;
 @end
 
 NS_ASSUME_NONNULL_END

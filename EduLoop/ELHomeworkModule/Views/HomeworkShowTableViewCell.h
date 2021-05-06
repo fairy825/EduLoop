@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol HomeworkShowTableViewCellDelegate<NSObject>
 -(void)clickOtherButtonTableViewCell:(UITableView *)tableViewCell ;
+-(void)clickSubmitButtonTableViewCell:(UITableView *)tableViewCell ;
 @end
 
 @interface HomeworkShowTableViewCell : UITableViewCell
@@ -24,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong,readwrite) UIView *bgView;
 @property(nonatomic,strong,readwrite) UIView *hintView;
 @property(nonatomic,strong,readwrite) UILabel *hintLabel;
+@property(nonatomic,strong,readwrite) UIButton *submitBtn;
 @property(nonatomic,strong,readwrite) UIImageView *arrowImage;
 @property(nonatomic,strong,readwrite) ELCustomLabel *otherButton;
 @property(nonatomic,strong,readwrite) UILabel *titleLabel;

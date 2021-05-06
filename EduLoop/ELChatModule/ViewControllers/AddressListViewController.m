@@ -12,13 +12,18 @@
 #import "ELCenterOverlay.h"
 #import "ChatDetailViewController.h"
 #import "AddressListTableViewCell.h"
+#import "ELNetworkSessionManager.h"
+#import "BasicInfo.h"
+#import <MJRefresh.h>
+#import "GetContactsResponse.h"
 @interface AddressListViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
 
 @implementation AddressListViewController
 - (void)viewWillAppear:(BOOL)animated{
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -29,157 +34,113 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor f6f6f6];
     [self setNavagationBar];
-    [self loadData];
     [self setupSubviews];
+    [self loadData];
 }
 
 - (void)setNavagationBar{
     [self setTitle:@"通讯录"];
-
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_add_small"] style:UIBarButtonItemStylePlain target:self action:@selector(addContact)];
 }
 
 - (void)loadData{
     self.dataSource = [NSMutableArray array];
     self.titleArray = [NSMutableArray array];
-
-    NSArray<ContactPersonModel *> *arr = [[NSArray alloc] initWithObjects:
-                                          ({
-        ContactPersonModel *model = [[ContactPersonModel alloc] init];
-        model.name = @"王达";
-        model.identity = @"老师";
-        model.avatar = @"avatar";
-        model;
-    }),    ({
-        ContactPersonModel *model = [[ContactPersonModel alloc] init];
-        model.name = @"王三";
-        model.identity = @"老师";
-        model.avatar = @"avatar";
-        model;
-    }), ({
-        ContactPersonModel *model = [[ContactPersonModel alloc] init];
-        model.name = @"李明";
-        model.identity = @"老师";
-        model.avatar = @"avatar";
-        model;
-    }),({
-        ContactPersonModel *model = [[ContactPersonModel alloc] init];
-        model.name = @"李三";
-        model.identity = @"老师";
-        model.avatar = @"avatar";
-        model;
-    }), ({
-        ContactPersonModel *model = [[ContactPersonModel alloc] init];
-        model.name = @"李八";
-        model.identity = @"老师";
-        model.avatar = @"avatar";
-        model;
-    }), ({
-        ContactPersonModel *model = [[ContactPersonModel alloc] init];
-        model.name = @"安美";
-        model.identity = @"老师";
-        model.avatar = @"avatar";
-        model;
-    }), ({
-        ContactPersonModel *model = [[ContactPersonModel alloc] init];
-        model.name = @"啊Q";
-        model.identity = @"家长";
-        model.avatar = @"avatar";
-        model;
-    }),
-nil];
     
-    NSMutableArray *modelArray = [NSMutableArray array];
-    for (int i = 0; i< arr.count; i++) {
-        NSMutableString *mutableString = [[NSMutableString stringWithString:arr[i].name] mutableCopy];
-        CFStringTransform((CFMutableStringRef)mutableString, NULL, kCFStringTransformToLatin, false);
-        CFStringTransform((CFMutableStringRef)mutableString, NULL, kCFStringTransformStripDiacritics, false);
-        arr[i].symbol = mutableString;
-        [modelArray addObject:arr[i]];
-    }
-    //NSSortDescriptor 指定用于对象数组排序的对象的属性
-    NSArray *sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"symbol" ascending:YES]];
-    //对person进行排序
-    [modelArray sortUsingDescriptors:sortDescriptors];
-
-    for (int i = 0; i < modelArray.count; i++) {
-        ContactPersonModel *model = modelArray[i];
-        NSString *str = [model.symbol substringToIndex:1] ;
-        if (![self.titleArray containsObject:str]) {
-            [self.titleArray addObject:str];
-        }
-    }
-
-    for (int i = 0; i< self.titleArray.count; i++) {
-        NSString *str = self.titleArray[i];
-        NSMutableArray *sortArray = [NSMutableArray array];
-        BOOL flag = NO;
-        for (ContactPersonModel *model in modelArray) {
-            BOOL hasPre = [model.symbol hasPrefix:str];
-            if(hasPre){
-                [sortArray addObject:model];
-                flag = YES;
+    dispatch_group_t group = dispatch_group_create();
+        
+    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+        [self getContactsNetworkWithSuccess:^{
+            for (int i = 0; i< self.contacts.count; i++) {
+                NSMutableString *mutableString = [[NSMutableString stringWithString:self.contacts[i].nickname] mutableCopy];
+                CFStringTransform((CFMutableStringRef)mutableString, NULL, kCFStringTransformToLatin, false);
+                CFStringTransform((CFMutableStringRef)mutableString, NULL, kCFStringTransformStripDiacritics, false);
+                self.contacts[i].symbol = mutableString;
             }
-            else if (!hasPre&&flag) {
-                break;
-            }
-        }
-        [self.dataSource addObject:sortArray];
-    }
-}
+            //NSSortDescriptor 指定用于对象数组排序的对象的属性
+            NSArray *sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"symbol" ascending:YES]];
+            //对person进行排序
+            [self.contacts sortUsingDescriptors:sortDescriptors];
 
-- (void)showDefaultView{
-    if(self.dataSource.count==0){
-        [self.view addSubview:self.defaultView];
-        [self.defaultView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.center.equalTo(self.view);
-            make.size.mas_equalTo(CGSizeMake(200, 230));
+            for (int i = 0; i < self.contacts.count; i++) {
+                ContactPersonModel *model = self.contacts[i];
+                NSString *str = [model.symbol substringToIndex:1] ;
+                if (![self.titleArray containsObject:str]) {
+                    [self.titleArray addObject:str];
+                }
+            }
+
+            for (int i = 0; i< self.titleArray.count; i++) {
+                NSString *str = self.titleArray[i];
+                NSMutableArray *sortArray = [NSMutableArray array];
+                BOOL flag = NO;
+                for (ContactPersonModel *model in self.contacts) {
+                    BOOL hasPre = [model.symbol hasPrefix:str];
+                    if(hasPre){
+                        [sortArray addObject:model];
+                        flag = YES;
+                    }
+                    else if (!hasPre&&flag) {
+                        break;
+                    }
+                }
+                [self.dataSource addObject:sortArray];
+            }
+            dispatch_semaphore_signal(sema);
         }];
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+    });
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        
         [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.searchBar.mas_bottom).offset(10);
+            make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
             make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
             make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
-           make.height.equalTo(@0);
-        }];
+            make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
 
+        }];
+        [self reloadDefaultView];
+        [self.tableView reloadData];
+    });
+}
+
+- (void)reloadDefaultView{
+    if(self.dataSource.count==0){
+        self.defaultView.alpha=1;
+    }else{
+        self.defaultView.alpha=0;
     }
 }
 
 - (void)setupSubviews{
-    [self.view addSubview:self.searchBar];
-    [self.searchBar mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop).offset(10);
-        make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft).offset(10);
-        make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight).offset(-10);
-        make.height.equalTo(@60);
-    }];
-    
     self.tableView = [[UITableView alloc]init];
     self.tableView.backgroundColor = [UIColor f6f6f6];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.sectionIndexColor = [UIColor color999999];
+    self.tableView.estimatedRowHeight = 50;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.searchBar.mas_bottom).offset(10);
+        make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
         make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
         make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
         make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
        
     }];
-    [self showDefaultView];
-}
-
-- (void)jumpToAddressList{
-    [self.navigationController pushViewController:[[AddressListViewController alloc]init] animated:YES];
+    [self.view addSubview:self.defaultView];
+    [self.defaultView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.view);
+        make.size.mas_equalTo(CGSizeMake(50, 80));
+    }];
 }
 
 - (UIView *)defaultView{
     if(!_defaultView){
         _defaultView = [UIView new];
         UIImageView *imgView = [[UIImageView alloc]init];
-        imgView.image = [UIImage imageNamed:@"sample-1"];
+        imgView.image = [UIImage imageNamed:@"icon_empty"];
         imgView.contentMode = UIViewContentModeScaleToFill;
         imgView.clipsToBounds = YES;
         UILabel *label = [UILabel new];
@@ -192,7 +153,7 @@ nil];
         [imgView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(_defaultView);
             make.centerX.equalTo(_defaultView);
-            make.size.mas_equalTo(CGSizeMake(200, 200));
+            make.size.mas_equalTo(CGSizeMake(50, 50));
         }];
         [_defaultView addSubview:label];
         [label mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -202,14 +163,14 @@ nil];
     }
     return _defaultView;
 }
-
-- (ELSearchBar *)searchBar{
-    if(!_searchBar){
-        _searchBar = [[ELSearchBar alloc]initWithFrame:CGRectMake(10, 10, self.view.bounds.size.width-10*2,60)];
-        _searchBar.textField.returnKeyType = UIReturnKeySearch;
-    }
-    return _searchBar;
-}
+//
+//- (ELSearchBar *)searchBar{
+//    if(!_searchBar){
+//        _searchBar = [[ELSearchBar alloc]initWithFrame:CGRectMake(10, 10, self.view.bounds.size.width-10*2,60)];
+//        _searchBar.textField.returnKeyType = UIReturnKeySearch;
+//    }
+//    return _searchBar;
+//}
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -217,7 +178,8 @@ nil];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.dataSource[section].count;
+    NSInteger c =  self.dataSource[section].count;
+    return c;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -242,9 +204,9 @@ nil];
 
 #pragma mark - UITableViewDelegate
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 70;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    return 70;
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 1;
@@ -273,8 +235,48 @@ nil];
     [self.navigationController pushViewController:[[ChatDetailViewController alloc]initWithModel:data] animated:YES];
 }
 
-- (void)addContact{
-//    [self.navigationController pushViewController:[[ChatDetailViewController alloc]initWithModel:data] animated:YES];
-
+- (ContactPersonModel *)fromProfileModel:(ProfileModel *)profile{
+    ContactPersonModel *contacts = [ContactPersonModel new];
+    contacts.id = [NSNumber numberWithInteger:profile.id];
+    contacts.name =  profile.name;
+    contacts.nickname = profile.nickname;
+    contacts.identity = [NSNumber numberWithInteger:profile.identity];
+    contacts.avatar = profile.faceImage;
+    return contacts;
 }
+
+#pragma mark - network
+- (void)getContactsNetworkWithSuccess:(nullable void (^)())success{
+    AFHTTPSessionManager *manager = [ELNetworkSessionManager sharedManager];
+    [manager GET: [BasicInfo url:@"/addressBook/"] parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSLog(@"%@---%@",[responseObject class],responseObject);
+        int code = [[responseObject objectForKey:@"code"]intValue];
+        NSString* msg = [responseObject objectForKey:@"msg"];
+        if(code==0){
+            GetContactsResponse *model =[[GetContactsResponse alloc] initWithDictionary:responseObject error: nil];
+            NSArray<ProfileModel *> *profiles = model.data;
+
+            NSMutableArray<ContactPersonModel *>*contacts = [[NSMutableArray alloc]init];
+            for(ProfileModel *pro in profiles){
+                [contacts addObject:({
+                    [self fromProfileModel:pro];
+                })];
+            }
+            self.contacts = contacts;
+            if(success!=nil) success();
+            NSString *key = [NSString stringWithFormat:@"%@%ld",@"contacts-",[ELUserInfo sharedUser].id];
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            NSData *jsonData = [NSKeyedArchiver archivedDataWithRootObject:[contacts mutableCopy]];
+            [userDefaults setObject:jsonData forKey:key];
+            [userDefaults synchronize];
+        }else{
+            NSLog(@"error--%@",msg);
+            [BasicInfo showToastWithMsg:msg];
+        }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"请求失败--%@",error);
+        }];
+}
+
 @end

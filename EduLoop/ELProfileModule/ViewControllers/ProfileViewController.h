@@ -7,9 +7,10 @@
 
 #import <UIKit/UIKit.h>
 #import "SettingDataTableViewCell.h"
+#import "ELBaseViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ProfileViewController : UIViewController
+@interface ProfileViewController : ELBaseViewController
 @property(nonatomic,strong,readwrite) UITableView *profileTableView;
 @property(nonatomic,strong,readwrite) UIButton *saveBtn;
 @property(nonatomic,strong,readwrite) NSMutableArray<SettingDataModel*>* models;

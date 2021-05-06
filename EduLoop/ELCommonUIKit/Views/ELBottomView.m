@@ -116,7 +116,7 @@
 
 - (void)showHighlightView{
     [self reload];
-    [self showHighlightViewFromPoint:CGPointMake((self.coverWidth-self.contentView.bounds.size.width)/2,self.coverHeight) ToPoint:CGPointMake(self.coverWidth/2,self.coverHeight-self.contentView.bounds.size.height/2) Animation:YES];
+    [self showHighlightViewFromPoint:CGPointMake((self.coverWidth-self.highLightView.bounds.size.width)/2,self.coverHeight) ToPoint:CGPointMake(self.coverWidth/2,self.coverHeight-self.highLightView.bounds.size.height/2) Animation:YES];
 }
 
 - (void)finishEditing{

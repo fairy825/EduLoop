@@ -19,7 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong,readwrite) ELCustomLabel *finishTag;
 @property(nonatomic,strong,readwrite) UILabel *studentLabel;
 @property(nonatomic,strong,readwrite) UILabel *parentLabel;
-- (void)loadData:(HomeworkModel *)data;
+@property(nonatomic,strong,readwrite) UIStackView *imgStackView;
+-(void)reload;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -14,8 +14,13 @@
 #import "MessageSummaryCardTableViewCell.h"
 #import "ChatDetailViewController.h"
 #import "AddressListViewController.h"
+#import "ELSocketManager.h"
+#import "ELUserInfo.h"
+#import "ELNetworkSessionManager.h"
+#import "BasicInfo.h"
+#import "GetUnreadMsgResponse.h"
 
-@interface ChatAllViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface ChatAllViewController ()<UITableViewDelegate,UITableViewDataSource,ELSocketManagerDelegate>
 
 @end
 
@@ -36,15 +41,18 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [super viewWillAppear: animated];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
     [self loadData];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor f6f6f6];
+    ELSocketManager *wsmanager = [ELSocketManager sharedManager];
+    wsmanager.delegate = self;
+    [wsmanager initSocket];
     [self setNavagationBar];
-    [self loadData];
     [self setupSubviews];
 }
 
@@ -56,46 +64,14 @@
 
 - (void)loadData{
     _models = @[].mutableCopy;
-    
-    [_models addObject:({
-        ChatAllModel *model = [ChatAllModel new];
-        ContactPersonModel *personModel = [ContactPersonModel new];
-        personModel.name = @"陈老师";
-        personModel.avatar = @"icon_teacher";
-        model.personModel = personModel;
-        model.dateStr = @"刚刚";
-        model.unreadNum = 1;
-        model.messageStr = @"你好，孩子最近成绩下降了，方便聊一下吗？";
-        model;
-    })];
-    [_models addObject:({
-        ChatAllModel *model = [ChatAllModel new];
-        ContactPersonModel *personModel = [ContactPersonModel new];
-        personModel.name = @"王老师";
-        personModel.avatar = @"avatar-4";
-        model.personModel = personModel;
-        model.dateStr = @"3天前";
-        model.unreadNum = 0;
-        model.messageStr = @"孩子最近表现不错，家长可以适当表扬鼓励一下哦";
-        model;
-    })];
-    
+    [self initChatSnapshot];
 }
 
-- (void)showDefaultView{
+- (void)reloadDefaultView{
     if(self.models.count==0){
-        [self.view addSubview:self.defaultView];
-        [self.defaultView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.center.equalTo(self.view);
-            make.size.mas_equalTo(CGSizeMake(200, 230));
-        }];
-        [self.tableView mas_remakeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
-            make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
-            make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
-           make.height.equalTo(@0);
-        }];
-
+        self.defaultView.alpha=1;
+    }else{
+        self.defaultView.alpha=0;
     }
 }
 
@@ -112,9 +88,12 @@
         make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
         make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
         make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
-       
     }];
-    [self showDefaultView];
+    [self.view addSubview:self.defaultView];
+    [self.defaultView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.view);
+        make.size.mas_equalTo(CGSizeMake(50, 80));
+    }];
 }
 
 - (void)jumpToAddressList{
@@ -125,7 +104,7 @@
     if(!_defaultView){
         _defaultView = [UIView new];
         UIImageView *imgView = [[UIImageView alloc]init];
-        imgView.image = [UIImage imageNamed:@"sample-1"];
+        imgView.image = [UIImage imageNamed:@"icon_chat_blue"];
         imgView.contentMode = UIViewContentModeScaleToFill;
         imgView.clipsToBounds = YES;
         UILabel *label = [UILabel new];
@@ -138,7 +117,7 @@
         [imgView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(_defaultView);
             make.centerX.equalTo(_defaultView);
-            make.size.mas_equalTo(CGSizeMake(200, 200));
+            make.size.mas_equalTo(CGSizeMake(50, 50));
         }];
         [_defaultView addSubview:label];
         [label mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -180,9 +159,12 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         NSInteger index = [indexPath row];
+        ChatAllModel *model = self.models[index];
+        [[ELSocketManager sharedManager]deleteChatHistoryWithMyId:[ELUserInfo sharedUser].id FriendId:model.personModel.id.integerValue];
+        [[ELSocketManager sharedManager]deleteChatSnapshotWithMyId:[ELUserInfo sharedUser].id FriendId:model.personModel.id.integerValue];
         [self.models removeObjectAtIndex:index];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [self showDefaultView];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        [self reloadDefaultView];
     }
 }
 
@@ -206,8 +188,111 @@
 
 - (void)pushToDetailPageWithData:(ChatAllModel *)data{
     [self.navigationController pushViewController:[[ChatDetailViewController alloc]initWithModel:data.personModel] animated:YES];
+    [[ELSocketManager sharedManager]readChatSnapshotWithMyId:[ELUserInfo sharedUser].id FriendId:data.personModel.id.integerValue];
 }
 
+-(void)getUnreadMessageNetwork{
+    AFHTTPSessionManager *manager = [ELNetworkSessionManager sharedManager];
+    [manager GET:
+        [NSString stringWithFormat:@"%@%ld",[BasicInfo url:@"/getUnReadMsgList?acceptUserId="],[ELUserInfo sharedUser].id]
+        parameters:nil headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+            NSLog(@"%@---%@",[responseObject class],responseObject);
+            int code = [[responseObject objectForKey:@"code"]intValue];
+            NSString* msg = [responseObject objectForKey:@"msg"];
+            if(code==0){
+                GetUnreadMsgResponse *resp = [[GetUnreadMsgResponse alloc]initWithDictionary:responseObject error:nil];
+                NSArray <ChatMsgModel *>* msgs = resp.data;
+                for(ChatMsgModel *model in msgs){
+                    ChatMsg *chatMsg = [ChatMsg new];
+                    chatMsg.createTime = model.createTime;
+                    chatMsg.msg = model.msg;
+                    chatMsg.msgId = model.id;
+                    chatMsg.senderId = model.sendUserId;
+                    chatMsg.receiverId = model.acceptUserId;
+                    
+                    [[ELSocketManager sharedManager] saveChatHistory:chatMsg MyId:[ELUserInfo sharedUser].id FriendId:model.sendUserId FromMe:NO];
+//                    [[ELSocketManager sharedManager] saveChatSnapshot:msg MyId:model.acceptUserId FriendId:model.sendUserId isRead:NO createTime:model.createTime];
+                    
+                    [[ELSocketManager sharedManager]saveChatSnapshot:chatMsg MyId:chatMsg.receiverId FriendId:chatMsg.senderId isRead:NO];
+                }
+                [[ELSocketManager sharedManager] signMsgList:msgs];
+                [self initChatSnapshot];
+            }else{
+                NSLog(@"error--%@",msg);
+                [BasicInfo showToastWithMsg:msg];
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"请求失败--%@",error);
+        }];
+}
+    
+-(void)wsdidOpen:(SRWebSocket *)webSocket {
+    [self getUnreadMessageNetwork];
+}
+
+- (void)ws:(SRWebSocket *)webSocket didReceive:(id)msg{
+    
+    NSArray< UIViewController *>*vcs = self.navigationController.viewControllers;
+    UIViewController *vc = vcs[vcs.count-1];
+    DataContent *dataContent = [[DataContent alloc]initWithString:msg error:nil];
+
+    if([vc isKindOfClass:[ChatDetailViewController class]]){
+//        [[ELSocketManager sharedManager] saveChatSnapshot:dataContent.chatMsg.msg MyId:[ELUserInfo sharedUser].id FriendId:dataContent.chatMsg.senderId isRead:YES createTime:dataContent.chatMsg.createTime];
+        [[ELSocketManager sharedManager] saveChatSnapshot:dataContent.chatMsg MyId:[ELUserInfo sharedUser].id FriendId:dataContent.chatMsg.senderId isRead:YES];
+
+        ChatDetailViewController *cvc = (ChatDetailViewController *)vc;
+        [cvc receiveMsg:msg];
+    }else{
+//        [[ELSocketManager sharedManager] saveChatSnapshot:dataContent.chatMsg.msg MyId:[ELUserInfo sharedUser].id FriendId:dataContent.chatMsg.senderId isRead:NO createTime:dataContent.chatMsg.createTime];
+        [[ELSocketManager sharedManager] saveChatSnapshot:dataContent.chatMsg MyId:[ELUserInfo sharedUser].id FriendId:dataContent.chatMsg.senderId isRead:NO];
+
+        [self initChatSnapshot];
+    }
+}
+    
+- (void)initChatSnapshot{
+    ELSocketManager *manager = [ELSocketManager sharedManager];
+    NSMutableArray<ChatSnapshot *>*list = [manager getChatSnapshotWithMyId:[ELUserInfo sharedUser].id];
+    NSMutableArray<ChatAllModel *>*models = [[NSMutableArray alloc]init];
+    for(ChatSnapshot *cs in list){
+        [models addObject:({
+            [self fromChatSnapshot:cs];
+        })];
+    }
+    self.models = models;
+    [self.tableView reloadData];
+    [self reloadDefaultView];
+}
+
+-(ChatAllModel *)fromChatSnapshot:(ChatSnapshot *)snapshot{
+    ChatAllModel *model = [ChatAllModel new];
+    if(snapshot.isRead.boolValue==YES)
+        model.unreadNum=0;
+    else model.unreadNum = snapshot.unreadNum.integerValue;
+    model.messageStr=snapshot.chatMsg.msg;
+    model.personModel = [self getFriendFromContacts: snapshot.friendId.integerValue];
+    model.dateStr = snapshot.chatMsg.createTime;
+    return model;
+}
+
+    
+-(ContactPersonModel *)getFriendFromContacts:(NSInteger)fid{
+    NSString *key = [NSString stringWithFormat:@"%@%ld",@"contacts-",[ELUserInfo sharedUser].id];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSData *contactsListStr = [userDefaults objectForKey:key];
+    NSMutableArray <ContactPersonModel *>*contacts;
+    if(contactsListStr.length!=0){
+        NSArray * appArray =  [NSKeyedUnarchiver unarchiveObjectWithData:contactsListStr];
+        contacts = [NSMutableArray arrayWithArray:appArray];
+        for(ContactPersonModel *p in contacts){
+            if(p.id.integerValue==fid){
+                return p;
+            }
+        }
+    }
+    return nil;
+}
 #pragma mark - MessageSummaryCardTableViewCellDelegate
 //-(void)clickCommentButtonTableViewCell:(UITableViewCell *)tableViewCell{
 //    NSInteger idx = [[self.tableView indexPathForCell:tableViewCell]row];

@@ -9,6 +9,8 @@
 #import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
 #import "CommentEditView.h"
+#import <SDWebImage.h>
+#import "ChatBoard.h"
 @implementation CommentCard
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier data:(CommentModel *)model{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -21,21 +23,26 @@
 }
 
 - (void)loadData{
-    self.detailLabel.text = self.data.detail;
-    self.publishTimeLabel.text = self.data.dateStr;
-    self.nameLabel.text = self.data.authorName;
-    
-    UIColor *bgColor = [UIColor elColorWithHex:self.data.chooseFirst?Color_Red:Color_Blue];
-    self.choiceTag.backgroundColor = bgColor;
-    self.choiceTag.layer.borderColor = bgColor.CGColor;
+    NSString *str = self.data.content;
+    if(self.data.commenteeId!=0)
+        str = [NSString stringWithFormat:@"%@%@%@%@",@"回复 @",self.data.commenteeNickname,@" : ",str];
+    self.detailLabel.text = str;
+    self.publishTimeLabel.text = self.data.timeDesc;
+    self.nameLabel.text = self.data.authorNickame;
+    [self.avatarImage sd_setImageWithURL:[NSURL URLWithString:self.data.avatar] placeholderImage:[UIImage imageNamed:@"avatar-4"]];
+//    UIColor *bgColor = [UIColor elColorWithHex:self.data.chooseFirst?Color_Red:Color_Blue];
+//    self.choiceTag.backgroundColor = bgColor;
+//    self.choiceTag.layer.borderColor = bgColor.CGColor;
     
     [_thumbButton setTitle:[NSString stringWithFormat:@"%ld", (long)self.data.thumbNum] forState:UIControlStateNormal];
-    
-    [_thumbButton setImage:[UIImage imageNamed:self.data.hasClickedThumb?@"icon_thumb_red":@"icon_thumb"] forState:UIControlStateNormal];
+    [_thumbButton setImage:[UIImage imageNamed:self.data.myThumb?@"icon_thumb_red":@"icon_thumb"] forState:UIControlStateNormal];
+    [_commentButton setTitle:[NSString stringWithFormat:@"%ld", (long)self.data.commentNum] forState:UIControlStateNormal];
 }
 
 - (void)setupView{
     self.backgroundColor = [UIColor whiteColor];
+    UITapGestureRecognizer *recog = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickCard)];
+    [self addGestureRecognizer:recog];
     [self.contentView addSubview:self.bgView];
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.contentView).mas_offset(UIEdgeInsetsMake(20, 20, 20, 20));
@@ -58,17 +65,18 @@
         make.height.equalTo(@20);
     }];
     
-    [self.bgView addSubview:self.choiceTag];
-    [self.choiceTag mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.equalTo(self.nameLabel);
-        make.left.equalTo(self.nameLabel.mas_right).offset(10);
-        make.right.lessThanOrEqualTo(self.bgView);
-    }];
+//    [self.bgView addSubview:self.choiceTag];
+//    [self.choiceTag mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.equalTo(self.nameLabel);
+//        make.left.equalTo(self.nameLabel.mas_right).offset(10);
+//        make.right.lessThanOrEqualTo(self.bgView);
+//    }];
     
     [self.bgView addSubview:self.detailLabel];
     [self.detailLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.nameLabel.mas_bottom).offset(10);
         make.left.equalTo(self.nameLabel);
+        make.right.equalTo(self.bgView);
     }];
     
     [self.bgView addSubview:self.publishTimeLabel];
@@ -87,25 +95,35 @@
     }];
     
     UIView *btnsView = [UIView new];
-    [btnsView addSubview:self.commentButton];
-    [self.commentButton mas_makeConstraints:^(MASConstraintMaker *make) {
+    int i=0;
+    UIButton *preBtn = [[UIButton alloc]initWithFrame:CGRectZero];
+    [btnsView addSubview:preBtn];
+    [preBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(btnsView);
         make.top.equalTo(btnsView);
-        make.size.mas_equalTo(CGSizeMake(20, 20));
+        make.size.mas_equalTo(CGSizeMake(0, 0));
     }];
-    [btnsView addSubview:self.thumbButton];
-    [self.thumbButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.commentButton.mas_right).offset(20);
-        make.top.equalTo(btnsView);
-        make.size.mas_equalTo(CGSizeMake(40, 20));
-    }];
-    
+    CGFloat totalWidth = 0;
+    NSArray<UIButton *>*btns = @[self.thumbButton,self.commentButton];
+    for(UIButton *btn in btns){
+        CGFloat width = 40;
+        totalWidth+=width+10;
+        [btnsView addSubview:btn];
+        [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(preBtn.mas_right).offset(10);
+            make.top.equalTo(btnsView);
+            make.size.mas_equalTo(CGSizeMake(width, 20));
+        }];
+        preBtn = btn;
+        i++;
+    }
     [self.bgView addSubview:btnsView];
     [btnsView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.bgView);
+        make.right.equalTo(self.bgView.mas_right);
         make.bottom.equalTo(self.publishTimeLabel);
-        make.size.mas_equalTo(CGSizeMake(80, 20));
+        make.size.mas_equalTo(CGSizeMake(totalWidth, 20));
     }];
+    
 }
 
 #pragma mark - Views
@@ -125,28 +143,27 @@
     return _seperateView;
 }
 
-- (UIView *)choiceTag{
-    if(!_choiceTag){
-        UILabel * choiceLabel= [[UILabel alloc]initWithFrame:CGRectMake(0, 0,50,20)];
-        choiceLabel.font = [UIFont systemFontOfSize:12.f];
-        choiceLabel.textColor = [UIColor whiteColor];
-        choiceLabel.text = self.data.choiceStr;
-        [choiceLabel sizeToFit];
-        _choiceTag = [[UIView alloc]initWithFrame:CGRectMake(0, 0,70,20)];
-        _choiceTag.layer.cornerRadius = 5;
-        _choiceTag.layer.borderWidth = 2;
-        [_choiceTag addSubview:choiceLabel];
-           [choiceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-               make.edges.equalTo(_choiceTag).mas_offset(UIEdgeInsetsMake(3, 3, 3, 3));
-           }];
-    }
-    return _choiceTag;
-}
+//- (UIView *)choiceTag{
+//    if(!_choiceTag){
+//        UILabel * choiceLabel= [[UILabel alloc]initWithFrame:CGRectMake(0, 0,50,20)];
+//        choiceLabel.font = [UIFont systemFontOfSize:12.f];
+//        choiceLabel.textColor = [UIColor whiteColor];
+//        choiceLabel.text = self.data.choiceStr;
+//        [choiceLabel sizeToFit];
+//        _choiceTag = [[UIView alloc]initWithFrame:CGRectMake(0, 0,70,20)];
+//        _choiceTag.layer.cornerRadius = 5;
+//        _choiceTag.layer.borderWidth = 2;
+//        [_choiceTag addSubview:choiceLabel];
+//           [choiceLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//               make.edges.equalTo(_choiceTag).mas_offset(UIEdgeInsetsMake(3, 3, 3, 3));
+//           }];
+//    }
+//    return _choiceTag;
+//}
 
 - (UIImageView *)avatarImage{
     if(!_avatarImage){
         _avatarImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
-        _avatarImage.image = [UIImage imageNamed:@"avatar-4"];
         _avatarImage.contentMode = UIViewContentModeScaleToFill;
     }
     return _avatarImage;
@@ -155,8 +172,6 @@
 - (UILabel *)nameLabel{
     if(!_nameLabel){
         _nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0,0,50,20)];
-        _nameLabel.text = [[NSString alloc] initWithFormat:@"%@%@",  @"何同学", @"妈妈"];
-    
         _nameLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:20.f];
         [_nameLabel sizeToFit];
     }
@@ -166,7 +181,6 @@
 - (UILabel *)publishTimeLabel{
     if(!_publishTimeLabel){
         _publishTimeLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0,50,20)];
-        _publishTimeLabel.text = @"刚刚";
         _publishTimeLabel.font = [UIFont systemFontOfSize:14.f];
         _publishTimeLabel.textColor = [UIColor grayColor];
         [_publishTimeLabel sizeToFit];
@@ -178,9 +192,10 @@
     if(!_commentButton){
         _commentButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 20)];
         _commentButton.backgroundColor = [UIColor clearColor];
-        [_commentButton setBackgroundImage:[UIImage imageNamed:@"icon_comment-2"] forState:UIControlStateNormal];
+        [_commentButton setTitleColor:[UIColor color999999] forState:UIControlStateNormal];
+        [_commentButton.titleLabel setFont:[UIFont fontWithName:@"PingFangSC" size:20]];
+        [_commentButton setImage:[UIImage imageNamed:@"icon_comment-2"] forState:UIControlStateNormal];
         [_commentButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 20)];
-        [_commentButton addTarget:self action:@selector(clickCommentIcon) forControlEvents:UIControlEventTouchUpInside];
     }
     return _commentButton;
 }
@@ -192,7 +207,7 @@
         [_thumbButton setTitleColor:[UIColor color999999] forState:UIControlStateNormal];
         [_thumbButton.titleLabel setFont:[UIFont fontWithName:@"PingFangSC" size:20]];
         [_thumbButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 20)];
-        [_thumbButton addTarget:self action:@selector(toggleThumb) forControlEvents:UIControlEventTouchUpInside];
+        [_thumbButton addTarget:self action:@selector(clickThumb) forControlEvents:UIControlEventTouchUpInside];
     }
     return _thumbButton;
 }
@@ -210,20 +225,28 @@
     return _detailLabel;
 }
 
+- (void)clickThumb{
+    if(self.delegate&&[self.delegate respondsToSelector:@selector(clickThumbCommentCard:)]){
+        [self.delegate clickThumbCommentCard:self];
+    }
+}
+
 -(void)toggleThumb{
     NSString *imgStr = @"icon_thumb";
-    if(!self.data.hasClickedThumb){
+    if(!self.data.myThumb){
         imgStr = [NSString stringWithFormat:@"%@%@",imgStr,@"_red"];
         self.data.thumbNum++;
     }else{
         self.data.thumbNum--;
     }
-    self.data.hasClickedThumb = !self.data.hasClickedThumb;
+    self.data.myThumb = !self.data.myThumb;
     [_thumbButton setImage:[UIImage imageNamed:imgStr] forState:UIControlStateNormal];
     [_thumbButton setTitle:[NSString stringWithFormat:@"%ld", (long)self.data.thumbNum] forState:UIControlStateNormal];
 }
 
-- (void)clickCommentIcon{
-    [[CommentEditView sharedManager].detailTextView becomeFirstResponder];
+- (void)clickCard{
+    if(self.delegate&&[self.delegate respondsToSelector:@selector(clickCommentCard:)]){
+        [self.delegate clickCommentCard:self ];
+    }
 }
 @end

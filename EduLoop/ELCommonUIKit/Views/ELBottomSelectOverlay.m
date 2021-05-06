@@ -181,11 +181,11 @@
     NSUInteger idx = [indexPath row];
     if(_isSingle){
         [self.delegate ELBottomSelectOverlay:self singleUpdateChosedTeams:idx Add:YES];
+        for(NSInteger i=0;i< _subTitles.count;i++)
+            [tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0] animated:NO];
     }else{
         [self.delegate ELBottomSelectOverlay:self updateChosedTeams:idx Add:YES];
     }
-    for(NSInteger i=0;i< _subTitles.count;i++)
-    [tableView deselectRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0] animated:NO];
     [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
 }
 

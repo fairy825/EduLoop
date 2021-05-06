@@ -8,6 +8,8 @@
 #import "AddressListTableViewCell.h"
 #import <Masonry/Masonry.h>
 #import "UIColor+MyTheme.h"
+#import <SDWebImage.h>
+
 @implementation AddressListTableViewCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier data:(ContactPersonModel *)model
 {
@@ -21,9 +23,9 @@
 }
 
 - (void)loadData{
-    self.nameLabel.text = self.data.name;
-    self.identityLabel.text = self.data.identity;
-    self.avatarImage.image = [UIImage imageNamed:self.data.avatar];
+    self.nameLabel.text = self.data.nickname;
+    self.identityLabel.text = self.data.identity==YES?@"家长":@"教师";
+    [self.avatarImage sd_setImageWithURL:[NSURL URLWithString:self.data.avatar] placeholderImage: [UIImage imageNamed:@"avatar-4"]];
 //    self.avatarImage.backgroundColor = [UIColor blackColor];
 }
 

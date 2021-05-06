@@ -8,6 +8,10 @@
 #import "HomeworkCard.h"
 #import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
+#import <SDWebImage.h>
+#import "ELScreen.h"
+#import "ELPublishImage.h"
+#import "ELImageManager.h"
 @implementation HomeworkCard
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -18,17 +22,53 @@
     return self;
 }
 
-- (void)loadData:(HomeworkModel *)data{
-    _data = data;
+-(void)reload{
+    [self loadData];
+    [self setupSubviews];
+}
+
+- (void)loadData{
     _detailLabel.text = _data.detail;
     _timeLabel.text = _data.publishTime;
     _parentLabel.text = [NSString stringWithFormat:@"%@%@",@"家长：",_data.authorName];
-    _studentLabel.text = _data.studentName;
+    _studentLabel.text = _data.student.name;
     _finishTag.text = _data.delay?@"按时完成":@"未按时完成";
-    _avatarImage.image = [UIImage imageNamed:@"avatar-4"];
+    [_avatarImage sd_setImageWithURL:[NSURL URLWithString: _data.student.faceImage] placeholderImage:[UIImage imageNamed:@"avatar-4"]];
+    int i=0;
+    CGFloat imgWidth = (SCREEN_WIDTH-40-15*2)/3;
 
-    if(_data.hasViewed==YES){
+    for(UIView *view in [self.imgStackView arrangedSubviews]){
+//        [self.imgStackView removeArrangedSubview:view];
+        [view removeFromSuperview];
     }
+    for(NSString *str in self.data.imgs){
+        UIImageView *photo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 80, 80)];
+        [photo sd_setImageWithURL:[NSURL URLWithString:str]];
+        photo.contentMode = UIViewContentModeScaleAspectFill;
+        photo.clipsToBounds = YES;
+        photo.tag=5000+i;
+        //允许用户交互
+        photo.userInteractionEnabled = YES;
+        //添加点击手势
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(_tapPhoto:)];
+        [photo addGestureRecognizer:tapGesture];
+        [self.imgStackView addArrangedSubview:photo];
+        [photo mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.size.mas_equalTo(CGSizeMake(imgWidth,imgWidth));
+        }];
+        i++;
+    }
+    if(self.data.imgs.count>0){
+        while(i<3){
+            [self.imgStackView addArrangedSubview:[ELPublishImage emptyItem:CGRectMake(0, 0, imgWidth, imgWidth)]];
+            i++;
+        }
+    }
+
+}
+
+- (void)_tapPhoto:(UITapGestureRecognizer *)tapGesture{
+    [[ELImageManager sharedManager]showImageView:[self.data.imgs objectAtIndex:tapGesture.view.tag-5000]];
 
 }
 - (void)setupSubviews{
@@ -64,16 +104,35 @@
         make.right.equalTo(self.bgView);
     }];
     
+    [self.bgView addSubview:self.imgStackView];
+    CGFloat imgWidth = (SCREEN_WIDTH-40-15*2)/3;
+    CGFloat height = 0;
+    CGFloat offset=0;
+    if(self.data.imgs.count!=0){
+        offset = 10;
+        self.imgStackView.alpha=1;
+        height = imgWidth;
+    }else{
+        self.imgStackView.alpha=0;
+        height=0;
+    }
+    [self.imgStackView mas_remakeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.bgView);
+        make.right.equalTo(self.bgView);
+        make.top.equalTo(self.detailLabel.mas_bottom).offset(offset);
+        make.height.mas_equalTo(height);
+    }];
+    
     [self.bgView addSubview:self.timeLabel];
     [self.timeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.detailLabel.mas_bottom).offset(10);
+        make.top.equalTo(self.imgStackView.mas_bottom).offset(10);
         make.bottom.equalTo(self.bgView);
-        make.left.equalTo(self.detailLabel);
+        make.left.equalTo(self.bgView);
     }];
     
     [self.bgView addSubview:self.finishTag];
     [self.finishTag mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.bgView);
+        make.bottom.equalTo(self.timeLabel);
         make.left.equalTo(self.timeLabel.mas_right).offset(5);
     }];
     
@@ -85,6 +144,18 @@
         _bgView.backgroundColor = [UIColor whiteColor];
     }
     return _bgView;
+}
+
+- (UIStackView *)imgStackView{
+    if(!_imgStackView){
+        CGFloat imgWidth = (self.bgView.bounds.size.width-40-15*2)/3;
+
+        _imgStackView = [[UIStackView alloc]initWithFrame:CGRectMake(20,self.bgView.bounds.size.height-imgWidth-10, self.bgView.frame.size.width-40, imgWidth)];
+        _imgStackView.spacing = 15;
+        _imgStackView.distribution = UIStackViewDistributionFillEqually;
+        _imgStackView.backgroundColor = [UIColor whiteColor];
+    }
+    return _imgStackView;
 }
 
 - (UIImageView *)avatarImage{

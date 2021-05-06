@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UgcPublishTextImgModel : NSObject
 @property(nonatomic,strong,readwrite) NSString *detail;
-@property(nonatomic,strong,readwrite) NSMutableArray<UIImage *> *imgs;
+@property(nonatomic,strong,readwrite) NSMutableArray<NSString *> *imgs;
 
 @end
 
