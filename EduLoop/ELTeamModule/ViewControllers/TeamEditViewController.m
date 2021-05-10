@@ -23,9 +23,6 @@
     [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
-- (void)viewWillDisappear:(BOOL)animated{
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-}
 
 - (instancetype)initWithData:(TeamModel *)team
 {
@@ -102,6 +99,8 @@
     SettingDataModel *model = self.models[idx];
     if (!cell) {
         cell = [[SettingDataTableViewCell alloc]                        initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id data:model];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     }
     cell.data = model;
     [cell loadData];
@@ -110,8 +109,10 @@
 
 #pragma mark - network
 -(void)postTeamNetworkWithSuccess:(nullable void (^)())success{
-    
-    [BasicInfo POST:[NSString stringWithFormat:@"%@%@%@", [BasicInfo url:@"/team/teacher"],@"?name=",[_models objectAtIndex:0].realContent] parameters:nil success:success];
+    NSDictionary *params = @{
+        @"name":[_models objectAtIndex:0].realContent
+    };
+    [BasicInfo POST: [BasicInfo url:@"/team/teacher"] parameters:params success:success];
 }
 
 -(void)updateStudentNetworkWithSuccess:(nullable void (^)())success{

@@ -35,10 +35,6 @@
     [self getTeamDetailNetwork:YES];
 }
 
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -159,6 +155,8 @@
     if (!cell) {
 //        cell = [[UITableViewCell alloc]                        initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id data:model];
         cell = [[StudentTableViewCell alloc]                        initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     }
     cell.data = model;
     [cell loadData];

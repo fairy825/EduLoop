@@ -24,9 +24,6 @@
     [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
-- (void)viewWillDisappear:(BOOL)animated{
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-}
 
 - (instancetype)initWithData:(ChildModel *)data
 {
@@ -164,12 +161,14 @@
     [self setTitle:@"孩子档案"];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStyleDone target:self action:@selector(finishPublish)];
 }
-
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self dismissKeyboard];
+}
 - (void)setupSubviews{
     self.tableView = [[UITableView alloc]init];
     self.tableView.backgroundColor = [UIColor f6f6f6];
     self.tableView.showsVerticalScrollIndicator=NO;
-    self.tableView.scrollEnabled = NO;
+    self.tableView.scrollEnabled = YES;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(dismissKeyboard)];
     [self.tableView addGestureRecognizer:tapGesture];    self.tableView.delegate = self;
@@ -254,6 +253,8 @@
     SettingDataModel *model = self.models[idx];
     if (!cell) {
         cell = [[SettingDataTableViewCell alloc]                        initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id data:model];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     }
     cell.data = model;
     [cell loadData];

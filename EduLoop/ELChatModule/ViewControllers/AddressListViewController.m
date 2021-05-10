@@ -26,9 +26,6 @@
     [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
-- (void)viewWillDisappear:(BOOL)animated{
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -188,6 +185,8 @@
     AddressListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id];
     if (!cell) {
         cell = [[AddressListTableViewCell alloc]                        initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id data:data];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     }
     cell.data = data;
     [cell loadData];

@@ -2,14 +2,14 @@
 //  ELTabViewController.h
 //  EduLoop
 //
-//  Created by mijika on 2021/4/10.
+//  Created by mijika on 2021/5/9.
 //
 
 #import <UIKit/UIKit.h>
-#import <RTRootNavigationController.h>
+#import "ELBaseViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ELTabViewController : RTRootNavigationController
+@interface ELTabViewController : UIViewController
 
 @end
 

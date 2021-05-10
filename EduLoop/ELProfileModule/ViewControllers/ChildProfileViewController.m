@@ -134,6 +134,8 @@
         UIGestureRecognizer *recog = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(pushUnbindWindow:)];
         [cell addGestureRecognizer:recog];
         cell.delegate = self;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     }
     [cell reload:model];
     return cell;

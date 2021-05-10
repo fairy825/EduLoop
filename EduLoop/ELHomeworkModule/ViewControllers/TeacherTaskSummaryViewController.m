@@ -199,6 +199,8 @@
     HomeworkModel *model = self.models[idx];
     if (!cell) {
         cell = [[TeacherTaskSummaryTableViewCell alloc]                        initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     }
     cell.data = model;
     [cell loadData];
@@ -211,7 +213,7 @@
 }
 
 - (void)jumpToDetailPageWithData:(HomeworkModel *)model{
-    [self.navigationController pushViewController: [[ReviewViewController alloc]initWithHomeworkModel:model TaskModel:(TaskModel *)self.data] animated:YES];
+    [self.navigationController pushViewController: [[ReviewViewController alloc]initWithHomeworkModel:model TaskModel:(TaskModel *)self.data Student:nil] animated:YES];
 
 }
 

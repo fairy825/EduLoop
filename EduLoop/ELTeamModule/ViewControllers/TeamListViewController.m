@@ -30,10 +30,6 @@
     [self scanTeamNetwork:YES];
 }
 
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -184,6 +180,8 @@
     if (!cell) {
 //        cell = [[UITableViewCell alloc]                        initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id data:model];
         cell = [[UITableViewCell alloc]                        initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     }
     cell.textLabel.text = model.name;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@%@",@"邀请码", model.code ];

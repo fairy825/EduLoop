@@ -20,13 +20,14 @@
 @end
 
 @implementation ReviewViewController
-- (instancetype)initWithHomeworkModel:(HomeworkModel *)model TaskModel:(TaskModel *)task
+- (instancetype)initWithHomeworkModel:(HomeworkModel *)model TaskModel:(TaskModel *)task Student:(StudentModel *)stu
 {
     self = [super init];
     if (self) {
         _task = task;
         _homework = model;
         _review = model.reviewVO;
+        _student = stu;
     }
     return self;
 }
@@ -38,10 +39,6 @@
         [self reload];
 }
 
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -218,7 +215,7 @@
 }
 
 - (void)jumpToPublishView{
-    [self.navigationController pushViewController:[[HomeworkPublishViewController alloc]initWithTaskId:self.homework.taskId Student:self.homework.student] animated:YES];
+    [self.navigationController pushViewController:[[HomeworkPublishViewController alloc]initWithTaskId:self.task.id Student:self.student] animated:YES];
 }
 
 - (UIButton *)reviewBtn{

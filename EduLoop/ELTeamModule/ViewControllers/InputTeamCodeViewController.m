@@ -48,9 +48,6 @@
     [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
-- (void)viewWillDisappear:(BOOL)animated{
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-}
 
 - (void)viewDidAppear:(BOOL)animated{
     [self.codeField becomeFirstResponder];

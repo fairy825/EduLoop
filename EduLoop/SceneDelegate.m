@@ -48,6 +48,8 @@
 //        [navigationController setNavigationBarHidden:YES];
         self.window = [[UIWindow alloc] initWithWindowScene:(UIWindowScene*)scene];
         self.window.rootViewController = [[RTRootNavigationController alloc] initWithRootViewController:navigationController];
+        self.window.rootViewController.rt_disableInteractivePop = YES;
+
         [self.window makeKeyAndVisible];
         
     });

@@ -14,12 +14,13 @@
 #import "TaskDetailCard.h"
 #import "TaskModel.h"
 #import "ELBaseViewController.h"
-
+#import "StudentModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ReviewViewController : ELBaseViewController
 @property(nonatomic,strong,readwrite) HomeworkModel *homework;
 @property(nonatomic,strong,readwrite) TaskModel *task;
+@property(nonatomic,strong,readwrite) StudentModel *student;
 @property(nonatomic,strong,readwrite) UIView *header;
 @property(nonatomic,strong,readwrite) UIView *bgView;
 @property(nonatomic,strong,readwrite) TaskDetailCard *taskDetailCard;
@@ -34,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong,readwrite) ELBottomView *editView;
 //@property(nonatomic,strong,readwrite) UIButton *reviewBtn;
 
-- (instancetype)initWithHomeworkModel:(HomeworkModel *)model TaskModel:(TaskModel *)task;
+- (instancetype)initWithHomeworkModel:(HomeworkModel *)model TaskModel:(TaskModel *)task Student:(StudentModel *)stu;
 @end
 
 NS_ASSUME_NONNULL_END

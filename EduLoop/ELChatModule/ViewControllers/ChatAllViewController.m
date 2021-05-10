@@ -25,20 +25,6 @@
 @end
 
 @implementation ChatAllViewController
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    // 禁用返回手势
-    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
-        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
-    }
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-}
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear: animated];
@@ -58,6 +44,8 @@
 
 - (void)setNavagationBar{
     self.tabBarController.navigationItem.title = @"消息";
+    
+    self.tabBarController.navigationItem.backButtonTitle = @"";
     self.tabBarController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_address_list"] style:UIBarButtonItemStylePlain target:self action:@selector(jumpToAddressList)];
 //    self.navigationController.navigationBar.barTintColor = [UIColor redColor];
 }
@@ -142,6 +130,8 @@
     MessageSummaryCardTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id];
     if (!cell) {
         cell = [[MessageSummaryCardTableViewCell alloc]                        initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id data:data];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     }
     cell.data = data;
     [cell loadData];

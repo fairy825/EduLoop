@@ -169,6 +169,8 @@
     NSUInteger idx = [indexPath row];
     if (!cell) {
         cell = [[ELBottomSelectOverlayCell alloc]initWithStyle:UITableViewCellStyleSubtitle  reuseIdentifier:id];
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     }
     cell.selectedBackgroundView = [[UIView alloc]init];
     cell.data = (NSString *)[self.subTitles objectAtIndex:idx];

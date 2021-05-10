@@ -19,7 +19,8 @@
 #import "ELOverlay.h"
 #import "ELCenterOverlay.h"
 #import "PublishCommentResponse.h"
-@interface UgcDetailPageViewController ()<UITableViewDelegate,UITableViewDataSource,ChatBoardDelegate,CommentCardDelegate,UITextViewDelegate>
+#import "ELImageManager.h"
+@interface UgcDetailPageViewController ()<UITableViewDelegate,UITableViewDataSource,ChatBoardDelegate,CommentCardDelegate,UITextViewDelegate,UgcCardDelegate>
 
 @end
 
@@ -30,9 +31,6 @@
     [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
 
-- (void)viewWillDisappear:(BOOL)animated{
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-}
 
 - (instancetype)initWithModel:(MomentsModel *)model
 {
@@ -145,6 +143,9 @@
         }];
         [header layoutIfNeeded];
         UgcTextImgCard *card = (UgcTextImgCard *)self.summaryUgcCard;
+        card.detailLabel.numberOfLines = 0;
+        [card.detailLabel sizeToFit];
+        card.delegate = self;
         [card layoutIfNeeded];
         CGFloat a = card.imgStackView.frame.size.height;
         CGFloat b = card.detailLabel.frame.size.height;
@@ -161,8 +162,8 @@
         
             header;
         })];
-    UgcTextImgCard *card = (UgcTextImgCard *)self.summaryUgcCard;
-    card.detailLabel.numberOfLines = 0;
+//    UgcTextImgCard *card = (UgcTextImgCard *)self.summaryUgcCard;
+//    card.detailLabel.numberOfLines = 0;
     CGFloat height = [self.commentTableView.tableHeaderView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
 
     CGRect headerFrame = self.commentTableView.tableHeaderView.frame;
@@ -199,6 +200,12 @@
 //        make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
 //    }];
 }
+
+- (void)clickPhoto:(NSString *)url TableViewCell:(UITableViewCell *)tableViewCell{
+    [[ELImageManager sharedManager]showImageView:url];
+}
+
+
 - (UILabel *)commentNumLabel{
     if(!_commentNumLabel){
         _commentNumLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 0, 40, 40)];
@@ -285,6 +292,8 @@
     CommentCard *cell = [tableView dequeueReusableCellWithIdentifier:id];
     if (!cell) {
         cell = [[CommentCard alloc]                    initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id data:data];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     }
     cell.data = data;
     cell.delegate = self;

@@ -25,6 +25,7 @@
 #import "ELNetworkSessionManager.h"
 #import "HomeworkPublishViewController.h"
 #import "ReviewViewController.h"
+#import <SDWebImage.h>
 @interface HomeworkShowViewController ()<UITableViewDelegate,UITableViewDataSource,HomeworkShowTableViewCellDelegate,LMJDropdownMenuDelegate,LMJDropdownMenuDataSource>
 
 @end
@@ -37,10 +38,6 @@
 //    [self teacherLoadDataIsRefresh:YES];
 }
 
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-//    [self.navigationController setNavigationBarHidden:NO animated:YES];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -50,6 +47,16 @@
     _students = @[].mutableCopy;
     self.page=1;
     [self setupSubviews];
+}
+
+- (void)loadStudentsAvatar{
+    _studentAvatars = @[].mutableCopy;
+    for(StudentModel *stu in self.students){
+        if(stu.faceImage.length>0){
+            NSData * data = [[NSData alloc]initWithContentsOfURL:[NSURL URLWithString:stu.faceImage]];
+            [self.studentAvatars addObject:[[UIImage alloc]initWithData:data]];
+        }else [self.studentAvatars addObject:[UIImage imageNamed:@"avatar-4"]];
+    }
 }
 
 - (void)getIdentity{
@@ -236,16 +243,19 @@
     [header setTitle:@"拼命加载中..." forState:MJRefreshStateRefreshing];
     //文字慢慢的显现
     header.automaticallyChangeAlpha = YES;
+    //正在刷新
+    [header setTitle:@"" forState:MJRefreshStateIdle];
+    self.tableView.mj_header = header;
     
     MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         [self loadDataNetwork:NO];
 //        [self teacherLoadDataIsRefresh:NO];
     }];
     footer.stateLabel.font = [UIFont systemFontOfSize:15];
-    //正在刷新
-    [header setTitle:@"" forState:MJRefreshStateIdle];
-    [footer setTitle:@"拼命加载中..." forState:MJRefreshStateRefreshing];    self.tableView.mj_header = header;
-    [footer setTitle:@"没有更多数据" forState:MJRefreshStateNoMoreData];
+    
+    [footer setTitle:@"拼命加载中..." forState:MJRefreshStateRefreshing];
+    [footer setTitle:@"" forState:MJRefreshStateIdle];
+    [footer setTitle:@"" forState:MJRefreshStateNoMoreData];
     self.tableView.mj_footer = footer;
 
     [self.view addSubview:self.tableView];
@@ -298,13 +308,24 @@
         [self loadDataIsRefresh:YES];
     }
 }
+
 - (CGFloat)dropdownMenu:(LMJDropdownMenu *)menu heightForOptionAtIndex:(NSUInteger)index{
     return 60;
 }
+
 - (UIImage *)dropdownMenu:(LMJDropdownMenu *)menu iconForOptionAtIndex:(NSUInteger)index{
     if(index==_students.count)
         return [UIImage imageNamed:@"icon_add_small-1"];
-    return [UIImage imageNamed:@"avatar-4"];
+    /**UIImage *image;
+    NSString *avatar = _students[index].faceImage;
+    if(avatar.length==0)
+        image = [UIImage imageNamed:@"avatar-4"];
+    else{
+        UIImageView *imgView = [[UIImageView alloc]init];
+        [imgView sd_setImageWithURL:[NSURL URLWithString:avatar]];
+        image = imgView.image;
+    }*/
+    return nil;
 }
 - (NSString *)dropdownMenu:(LMJDropdownMenu *)menu titleForOptionAtIndex:(NSUInteger)index{
     if(index==_students.count)
@@ -331,6 +352,8 @@
         model = (TeacherTaskModel *)self.models[idx];
     if (!cell) {
         cell = [[HomeworkShowTableViewCell alloc]                        initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id data:model];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
     }
     cell.data = model;
     cell.delegate = self;
@@ -425,7 +448,7 @@
 - (void)jumpToDetailPageWithData:(id)data{
     if(_isParent){
         TaskModel *model = (TaskModel *)data;
-        [self.navigationController pushViewController:[[ReviewViewController alloc]initWithHomeworkModel:model.homeworkVO TaskModel:(TaskModel *)data] animated:YES];
+        [self.navigationController pushViewController:[[ReviewViewController alloc]initWithHomeworkModel:model.homeworkVO TaskModel:(TaskModel *)data Student:self.students[self.selectedStuIndex]] animated:YES];
     }
     else{
         TeacherTaskModel *model = (TeacherTaskModel *)data;

@@ -20,7 +20,7 @@
 #import "ELScreen.h"
 #import <RTRootNavigationController.h>
 @implementation BasicInfo
-static NSString *server=@"127.0.0.1";
+static NSString *server=@"192.168.3.9";
 static NSString *httpPort=@"8080";
 static NSString *socketPort=@"8088";
 + (int)pageSize{
@@ -186,8 +186,7 @@ static NSString *socketPort=@"8088";
 
     UITabBarController *tc = [[UITabBarController alloc]init];
     [tc setViewControllers:@[controller2,controller3,controller1,controller4]];
-    RTRootNavigationController *tabBarController = [[RTRootNavigationController alloc]initWithRootViewController:tc];
-
+//    RTRootNavigationController *tabBarController = [[RTRootNavigationController alloc]initWithRootViewController:tc];
     return tc;
 }
 

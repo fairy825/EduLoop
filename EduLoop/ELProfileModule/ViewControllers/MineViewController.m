@@ -34,11 +34,6 @@
     [self loadData];
     
 }
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-//    [self.navigationController setNavigationBarHidden:NO animated:YES];
-}
-
 - (void)initItems{
     NSString *item;
     ELUserInfo *userInfo = [ELUserInfo sharedUser];
@@ -152,6 +147,8 @@
     MineMiscCardTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id];
     if (!cell) {
         cell = [[MineMiscCardTableViewCell alloc] initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     }
     NSUInteger row = [indexPath row];
     cell.index = row;

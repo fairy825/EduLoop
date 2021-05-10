@@ -115,6 +115,8 @@
         ELOverlayItem *item =[_choices objectAtIndex:[indexPath row]];
         cell.choiceLabel.text =item.title;
         cell.clickItemBlock = item.clickBlock;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     }
     return cell;
 }

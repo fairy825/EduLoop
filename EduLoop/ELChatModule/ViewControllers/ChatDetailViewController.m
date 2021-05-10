@@ -40,9 +40,6 @@ static NSInteger interval = 300;
     [self scrollToDown];
 }
 
-- (void)viewWillDisappear:(BOOL)animated{
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -409,6 +406,8 @@ static NSInteger interval = 300;
     MessageRecordTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id];
     if(!cell){
         cell = [[MessageRecordTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:id frame:self.view.bounds data:messageModel];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     }else{
         while ([cell.contentView.subviews lastObject] != nil) {
             [[cell.contentView.subviews lastObject] performSelector:@selector(removeFromSuperview)];

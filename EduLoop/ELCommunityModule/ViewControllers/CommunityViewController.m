@@ -46,14 +46,6 @@
     [self loadData];
 }
 
-- (void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-//    BOOL flag;
-//    if(self.isMine)
-//        flag = YES;
-//    else flag = NO;
-//    [self.navigationController setNavigationBarHidden:flag animated:YES];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -273,6 +265,8 @@
     UgcCardTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:id];
     if (!cell) {
         cell = [[UgcCardTableViewCell alloc]                        initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id data:data];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     }
     
     cell.ugcCard.delegate = self;

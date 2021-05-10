@@ -24,7 +24,7 @@
 
 - (void)loadData{
     self.nameLabel.text = self.data.nickname;
-    self.identityLabel.text = self.data.identity==YES?@"家长":@"教师";
+    self.identityLabel.text = self.data.identity.boolValue==YES?@"家长":@"教师";
     [self.avatarImage sd_setImageWithURL:[NSURL URLWithString:self.data.avatar] placeholderImage: [UIImage imageNamed:@"avatar-4"]];
 //    self.avatarImage.backgroundColor = [UIColor blackColor];
 }

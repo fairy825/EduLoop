@@ -184,6 +184,8 @@
     SettingDataModel *model = self.models[idx];
     if (!cell) {
         cell = [[SettingDataTableViewCell alloc]                        initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id data:model];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     }
     cell.data = model;
     [cell loadData];

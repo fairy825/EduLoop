@@ -28,9 +28,6 @@
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
 }
-- (void)viewWillDisappear:(BOOL)animated{
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
-}
 
 - (void)viewDidAppear:(BOOL)animated{
     [self.textView becomeFirstResponder];
@@ -38,7 +35,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.imgs = @[].mutableCopy;
-    self.view.backgroundColor = [UIColor f6f6f6];
+    self.view.backgroundColor = [UIColor whiteColor];
     [self setNavagationBar];
     [self setupSubviews];
     //键盘弹出监听
@@ -70,7 +67,6 @@
     self.textView.contentSize = CGSizeMake(self.textView.frame.size.width,self.textView.frame.size.height+1);
 
     [self.bgView addSubview:self.imgStackView];
-    
     UIView *bottomView = [[UIView alloc]initWithFrame:CGRectMake(0,2,self.view.bounds.size.width, 50)];
     bottomView.backgroundColor = [UIColor f6f6f6];
     [bottomView addSubview:self.addImgBtn];
@@ -86,11 +82,13 @@
     if(!_imgStackView){
 //        if([self.imgs count]>0){
             CGFloat imgWidth = (self.bgView.bounds.size.width-40-15*2)/3;
-
-            _imgStackView = [[UIStackView alloc]initWithFrame:CGRectMake(20,self.bgView.bounds.size.height-imgWidth-10, self.bgView.frame.size.width-40, imgWidth)];
+        
+//        _imgStackView = [[UIStackView alloc]initWithFrame:CGRectMake(20,self.bgView.bounds.size.height-imgWidth-10, self.bgView.frame.size.width-40, imgWidth)];
+        _imgStackView = [[UIStackView alloc]initWithFrame:CGRectMake(20,self.bgView.bounds.size.height-imgWidth-10, self.bgView.frame.size.width-40, imgWidth)];
             _imgStackView.spacing = 15;
             _imgStackView.distribution = UIStackViewDistributionFillEqually;
             _imgStackView.backgroundColor = [UIColor whiteColor];
+        _imgStackView.alpha = 0;
 //            int i=0;
 //            for(NSString *img in self.imgs){
 //                ELPublishImage *photo = [[ELPublishImage alloc]initWithFrame:CGRectMake(0, 0, imgWidth, imgWidth) Img:img];
@@ -233,7 +231,12 @@
                 [_imgStackView addArrangedSubview:[ELPublishImage emptyItem:CGRectMake(0, 0, imgWidth, imgWidth)]];
                 i++;
             }
-        }];
+            if(self.imgs.count>0){
+                self.imgStackView.alpha=1;
+                self.bgView.frame = CGRectMake(0, (STATUS_BAR_HEIGHT+NAVIGATION_HEIGHT), self.view.bounds.size.width, self.view.bounds.size.height-(STATUS_BAR_HEIGHT+NAVIGATION_HEIGHT)-HOME_BUTTON_HEIGHT-50-2-self.imgStackView.frame.size.height);
+                self.textView.frame = [self.view convertRect:CGRectInset(self.bgView.frame, 20, 20) toView:self.bgView];
+            }
+            }];
     }
     return _imagePickerVc;
 }
@@ -305,12 +308,13 @@
     [_imgStackView addArrangedSubview:[ELPublishImage emptyItem:photo.frame]];
     if([self.imgs count]==0){
         [UIView animateWithDuration:0.25 animations:^{
+            self.imgStackView.alpha = 0;
             self.bgView.frame = CGRectMake(0, (STATUS_BAR_HEIGHT+NAVIGATION_HEIGHT), self.view.bounds.size.width, self.view.bounds.size.height-(STATUS_BAR_HEIGHT+NAVIGATION_HEIGHT)-HOME_BUTTON_HEIGHT-50-2);
             self.textView.frame = [self.view convertRect:CGRectInset(self.bgView.frame, 20, 20) toView:self.bgView];
 //            [self.imgStackView setHidden:YES];
 
         } completion:nil];
-        
+//        self.imgStackView.alpha=0;
     }
 }
 

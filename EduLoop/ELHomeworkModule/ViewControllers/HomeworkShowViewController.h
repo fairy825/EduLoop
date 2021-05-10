@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong,readwrite) UITableView *tableView;
 @property(nonatomic,strong,readwrite) NSMutableArray* models;
 @property(nonatomic,strong,readwrite) NSMutableArray<StudentModel *>* students;
+@property(nonatomic,strong,readwrite) NSMutableArray<UIImage *>* studentAvatars;
 @property(nonatomic,strong,readwrite) ELFloatingButton *addBtn;
 - (void)jumpToDetailPageWithData:(TaskModel *)model;
 @end

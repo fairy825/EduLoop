@@ -218,7 +218,14 @@
 }
 
 #pragma mark - UITableViewDataSource
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self dismissKeyboard];
+}
 
+-(void)dismissKeyboard{
+    [self.view endEditing:YES];
+//    [self.textView resignFirstResponder];
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 5;
 }
@@ -230,6 +237,8 @@
     SettingDataModel *model = self.models[row];
     if (!cell) {
         cell = [[SettingDataTableViewCell alloc]                        initWithStyle: UITableViewCellStyleSubtitle reuseIdentifier:id data:model];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     }
     cell.data = model;
     [cell loadData];
