@@ -6,7 +6,7 @@
 //
 
 #import "TeacherTaskSummaryViewController.h"
-#import "UIColor+MyTheme.h"
+#import "UIColor+ELColor.h"
 #import <Masonry/Masonry.h>
 #import "TeacherTaskSummaryTableViewCell.h"
 #import "HomeworkModel.h"
@@ -51,11 +51,11 @@
 
 - (void)setNavagationBar{
     [self setTitle:@"任务详情"];
-    self.navigationController.navigationBar.barTintColor = [UIColor color5bb2ff];
+    self.navigationController.navigationBar.barTintColor = [UIColor themeBlue];
     self.navigationController.navigationBar.tintColor = [UIColor blackColor];
 //    self.navigationController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"icon_return"] style:UIBarButtonItemStylePlain target:self action:@selector(popout)];
 //    UIView *nav = [[UIView alloc]initWithFrame: CGRectMake(50, 0, 200, 50)];
-//    nav.backgroundColor = [UIColor color5bb2ff];
+//    nav.backgroundColor = [UIColor themeBlue];
 //    UILabel *label = [[UILabel alloc]init];
 //    label.font = [UIFont fontWithName:@"PingFangSC" size:14.f];
 //    label.textColor = [UIColor redColor];
@@ -111,7 +111,7 @@
         maskLayer.path = maskPath.CGPath;
 //        maskLayer.fillColor = [UIColor redColor].CGColor;
         bgView.layer.mask = maskLayer;
-        bgView.backgroundColor = [UIColor color5bb2ff];
+        bgView.backgroundColor = [UIColor themeBlue];
         header;
         })];
     

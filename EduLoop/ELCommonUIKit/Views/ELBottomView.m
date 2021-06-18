@@ -6,7 +6,7 @@
 //
 
 #import "ELBottomView.h"
-#import "UIColor+MyTheme.h"
+#import "UIColor+ELColor.h"
 @implementation ELBottomView
 
 - (instancetype)init
@@ -98,7 +98,7 @@
 - (UIButton *)rightButton{
     if(!_rightButton){
         _rightButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 20, 20)];
-        [_rightButton setTitleColor:[UIColor color5bb2ff] forState:UIControlStateNormal];
+        [_rightButton setTitleColor:[UIColor themeBlue] forState:UIControlStateNormal];
         [_rightButton addTarget:self action:@selector(finishEditing) forControlEvents:UIControlEventTouchUpInside];
     }
     return _rightButton;

@@ -6,7 +6,7 @@
 //
 
 #import "CommentEditView.h"
-#import "UIColor+MyTheme.h"
+#import "UIColor+ELColor.h"
 #import <Masonry/Masonry.h>
 #import "ELScreen.h"
 @implementation CommentEditView
@@ -29,7 +29,7 @@
 
 - (void)setupView{
     self.backgroundColor = [UIColor whiteColor];
-    self.layer.borderColor = [UIColor f6f6f6].CGColor;
+    self.layer.borderColor = [UIColor elBackgroundColor].CGColor;
     self.layer.borderWidth = 5;
     [self addSubview:self.bgView];
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -94,7 +94,7 @@
         _finishBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 20)];
         _finishBtn.backgroundColor = [UIColor clearColor];
         [_finishBtn setTitle:@"发送" forState:UIControlStateNormal];
-        [_finishBtn setTitleColor:[UIColor color999999] forState:UIControlStateNormal];
+        [_finishBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         [_finishBtn.titleLabel setFont:[UIFont fontWithName:@"PingFangSC" size:16]];
         [_finishBtn addTarget:self action:@selector(editFinish) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -110,27 +110,13 @@
     return _avatarImage;
 }
 
-//- (UITextField *)detailTextfield{
-//    if(!_detailTextfield){
-//        self.detailTextfield = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, 100, 40)];
-//            self.detailTextfield.autocorrectionType = UITextAutocorrectionTypeNo;
-//            self.detailTextfield.autocapitalizationType = UITextAutocapitalizationTypeNone;
-//            self.detailTextfield.textAlignment = NSTextAlignmentLeft;
-//        self.detailTextfield.backgroundColor = [UIColor eh_colorWithHex:EHThemeColor_CellHighlightedColor andAlpha:0.5];
-//        self.detailTextfield.textColor = [UIColor color999999];
-//        self.detailTextfield.font = [UIFont eh_regularWithSize:16];
-//        self.detailTextfield.placeholder = @"点击发表我的观点";
-//        self.detailTextfield.borderStyle = UITextBorderStyleRoundedRect;
-//    }
-//    return _detailTextfield;
-//}
 
 -(UITextView *)detailTextView{
     if(!_detailTextView){
         _detailTextView = [[UITextView alloc]initWithFrame:CGRectMake(0, 0, 100, 20)];
         _detailTextView.layer.cornerRadius =15;
-        _detailTextView.backgroundColor = [UIColor elColorWithHex:Color_CellHighlightedColor andAlpha:0.5];
-        _detailTextView.textColor = [UIColor color999999];
+        _detailTextView.backgroundColor = [UIColor colorWithRGB:0xDDDDDD alpha:0.5];
+        _detailTextView.textColor = [UIColor lightGrayColor];
         _detailTextView.textAlignment = NSTextAlignmentLeft;
         _detailTextView.font = [UIFont systemFontOfSize:16];
 
@@ -147,9 +133,9 @@
 -(void)toggleState:(BOOL)canPublish{
     if(canPublish==YES){
         [self.finishBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        self.finishBtn.backgroundColor = [UIColor color5bb2ff];
+        self.finishBtn.backgroundColor = [UIColor themeBlue];
     }else{
-        [self.finishBtn setTitleColor:[UIColor color999999] forState:UIControlStateNormal];
+        [self.finishBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         self.finishBtn.backgroundColor = [UIColor clearColor];
     }
 }

@@ -6,7 +6,6 @@
 //
 
 #import "AvatarCard.h"
-#import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
 @implementation AvatarCard
 

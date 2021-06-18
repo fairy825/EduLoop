@@ -6,7 +6,7 @@
 //
 
 #import "LoginViewController.h"
-#import "UIColor+MyTheme.h"
+#import "UIColor+ELColor.h"
 #import <Masonry/Masonry.h>
 #import "IdentitySelectViewController.h"
 #import "BasicInfo.h"
@@ -31,7 +31,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor f6f6f6];
+    self.view.backgroundColor = [UIColor elBackgroundColor];
 //    [self loadData];
     [self setupSubviews];
 }
@@ -77,7 +77,7 @@
     }];
     
     UIView * underLine = [[UIView alloc]init];
-    underLine.backgroundColor = [UIColor color999999];
+    underLine.backgroundColor = [UIColor lightGrayColor];
     [self.inputView addSubview:underLine];
     [underLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.userNameTextField.mas_bottom);
@@ -101,7 +101,7 @@
     }];
     
     UIView * underLine2 = [[UIView alloc]init];
-    underLine2.backgroundColor = [UIColor color999999];
+    underLine2.backgroundColor = [UIColor lightGrayColor];
     [self.inputView addSubview:underLine2];
     [underLine2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.passwordTextField.mas_bottom);
@@ -136,7 +136,7 @@
 - (UIView *)inputView{
     if(!_inputView){
         _inputView = [[UIView alloc]init];
-        _inputView.backgroundColor = [UIColor f6f6f6];
+        _inputView.backgroundColor = [UIColor elBackgroundColor];
     }
     return _inputView;
 }
@@ -144,7 +144,7 @@
 - (UIButton *)loginBtn{
     if(!_loginBtn){
         _loginBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 20)];
-        _loginBtn.backgroundColor = [UIColor color5bb2ff];
+        _loginBtn.backgroundColor = [UIColor themeBlue];
         [_loginBtn setTitle:@"登录/注册" forState:UIControlStateNormal];
         [_loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_loginBtn.titleLabel setFont:[UIFont fontWithName:@"PingFangSC-Medium" size:16]];
@@ -185,10 +185,11 @@
     if(!_userNameTextField){
         _userNameTextField = [[UITextField alloc]initWithFrame:CGRectMake(0,0, 60, 30)];
         _userNameTextField.keyboardType = UIKeyboardTypeNumberPad;
-
+        _userNameTextField.returnKeyType = UIReturnKeyDefault;
+        _userNameTextField.secureTextEntry = NO;
         _userNameTextField.textAlignment = NSTextAlignmentLeft;
         _userNameTextField.backgroundColor = [UIColor clearColor];
-        _userNameTextField.textColor = [UIColor color999999];
+        _userNameTextField.textColor = [UIColor lightGrayColor];
         _userNameTextField.font = [UIFont systemFontOfSize:18];
         _userNameTextField.borderStyle = UITextBorderStyleNone;
         _userNameTextField.placeholder = @"请输入手机号";
@@ -202,7 +203,7 @@
         _passwordTextField = [[UITextField alloc]initWithFrame:CGRectMake(0,0, 60, 30)];
         _passwordTextField.textAlignment = NSTextAlignmentLeft;
         _passwordTextField.backgroundColor = [UIColor clearColor];
-        _passwordTextField.textColor = [UIColor color999999];
+        _passwordTextField.textColor = [UIColor lightGrayColor];
         _passwordTextField.font = [UIFont systemFontOfSize:18];
         _passwordTextField.borderStyle = UITextBorderStyleNone;
         _passwordTextField.placeholder = @"请输入密码";

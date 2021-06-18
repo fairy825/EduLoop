@@ -6,12 +6,13 @@
 //
 
 #import "InputTeamCodeViewController.h"
-#import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
 #import "BasicInfo.h"
 #import <AFNetworking.h>
 #import "ELNetworkSessionManager.h"
 #import "ChildProfileEditViewController.h"
+#import "UIColor+ELColor.h"
+
 @interface InputTeamCodeViewController ()
 
 @end
@@ -55,7 +56,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor f6f6f6];
+    self.view.backgroundColor = [UIColor elBackgroundColor];
     [self setNavagationBar];
 //    [self loadData];
     [self setupSubviews];

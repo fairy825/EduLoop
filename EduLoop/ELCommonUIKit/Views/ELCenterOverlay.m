@@ -7,7 +7,8 @@
 
 #import "ELCenterOverlay.h"
 #import <Masonry/Masonry.h>
-#import "UIColor+MyTheme.h"
+#import "UIColor+ELColor.h"
+
 @implementation ELCenterOverlay
 - (instancetype)initWithFrame:(CGRect)frame Data:(ELCenterOverlayModel *)model
 {
@@ -154,7 +155,7 @@
     if(!_leftButton){
         _leftButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 20)];
  
-        [_leftButton setTitleColor:[UIColor color666666] forState:UIControlStateNormal];
+        [_leftButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
         [_leftButton.titleLabel setFont:[UIFont fontWithName:@"PingFangSC-Medium" size:20]];
         [_leftButton addTarget:self action:@selector(clickLeftButton) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -165,7 +166,7 @@
     if(!_rightButton){
         _rightButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 20)];
 
-        [_rightButton setTitleColor:[UIColor color5bb2ff] forState:UIControlStateNormal];
+        [_rightButton setTitleColor:[UIColor themeBlue] forState:UIControlStateNormal];
         [_rightButton.titleLabel setFont:[UIFont fontWithName:@"PingFangSC-Medium" size:20]];
         [_rightButton addTarget:self action:@selector(dismissOverlay) forControlEvents:UIControlEventTouchUpInside];
     }

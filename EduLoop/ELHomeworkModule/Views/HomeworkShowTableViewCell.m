@@ -6,7 +6,7 @@
 //
 
 #import "HomeworkShowTableViewCell.h"
-#import "UIColor+MyTheme.h"
+#import "UIColor+ELColor.h"
 #import <Masonry/Masonry.h>
 #import "ELOverlay.h"
 #import <SDWebImage.h>
@@ -47,7 +47,7 @@
         _avatarCard.publishTimeLabel.text=data.timeDesc;
         [_avatarCard.avatarImage sd_setImageWithURL:[NSURL URLWithString:data.creatorAvatar] placeholderImage:[UIImage imageNamed:@"icon_teacher"]];
         hintStr=[NSString stringWithFormat:@"%@%ld/%ld",@"已提交",(long)data.realHomeworkNumber,(long)data.shouldHomeworkNumber];
-       hintStrColor =[UIColor color555555];
+       hintStrColor =[UIColor grayColor];
        _otherButton.alpha = 0;
         _submitBtn.alpha=0;
     }else if([_data isKindOfClass: TaskModel.class]){
@@ -67,9 +67,9 @@
                 rightButtonTitle=@"已批改";
             else if([isFinish isEqual:@"FINISHED_NOT_REVIEWED"])
                     rightButtonTitle=@"已完成未批改";
-            rightButtonColor = [UIColor elColorWithHex:Color_finished];
+           rightButtonColor = [UIColor colorWithRGB:Color_finished alpha:1];
             hintStr = @"点击查看作业详情";
-            hintStrColor = [UIColor color999999];
+            hintStrColor = [UIColor lightGrayColor];
 //           [_submitBtn removeFromSuperview];
            _submitBtn.alpha=0;
            [self.submitBtn mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -77,13 +77,12 @@
            }];
         }else{
             hintStr = [NSString stringWithFormat:@"%@%@",@"作业提交截止时间为",data.endTime];
-            hintStrColor = [UIColor elColorWithHex:Color_Red];
-//            [_arrowImage removeFromSuperview];
+            hintStrColor = [UIColor redColor];
             _arrowImage.alpha=0;
 
             if([isFinish isEqual:@"NOT_FINISH"]){
                 rightButtonTitle=@"未完成";
-                rightButtonColor = [UIColor elColorWithHex:Color_not_finished];
+                rightButtonColor = [UIColor colorWithRGB:Color_not_finished alpha:1];
                 _submitBtn.alpha = 1;
                 [self.submitBtn mas_updateConstraints:^(MASConstraintMaker *make) {
                     make.width.mas_equalTo(@80);
@@ -91,7 +90,7 @@
             }
             else if([isFinish isEqual:@"DELAY_CAN_FINISH"]){
                 rightButtonTitle=@"超时可提交";
-                rightButtonColor = [UIColor elColorWithHex:Color_delay_can_finish];
+                rightButtonColor = [UIColor colorWithRGB:Color_delay_can_finish alpha:1];
                 _submitBtn.alpha = 1;
                 [self.submitBtn mas_updateConstraints:^(MASConstraintMaker *make) {
                     make.width.mas_equalTo(@80);
@@ -99,7 +98,7 @@
             }
             else if([isFinish isEqual:@"DELAY_CANNOT_FINISH"]){
                 rightButtonTitle=@"超时不可提交";
-                rightButtonColor = [UIColor elColorWithHex:Color_delay_cannot_finish];
+                rightButtonColor = [UIColor colorWithRGB:Color_delay_cannot_finish alpha:1];
 //                [_submitBtn removeFromSuperview];
                 _submitBtn.alpha = 0;
                 [self.submitBtn mas_updateConstraints:^(MASConstraintMaker *make) {
@@ -212,7 +211,7 @@
 - (UIView *)seperateView{
     if(!_seperateView){
         _seperateView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 10)];
-        _seperateView.backgroundColor = [UIColor f6f6f6];
+        _seperateView.backgroundColor = [UIColor elBackgroundColor];
     }
     return _seperateView;
 }
@@ -290,7 +289,7 @@
 - (UIButton *)submitBtn{
     if(!_submitBtn){
         _submitBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 120, 20)];
-        [_submitBtn setTitleColor:[UIColor color5bb2ff] forState:UIControlStateNormal];
+        [_submitBtn setTitleColor:[UIColor themeBlue] forState:UIControlStateNormal];
         [_submitBtn.titleLabel setFont:[UIFont fontWithName:@"PingFangSC" size:16]];
         [_submitBtn setTitle:@"提交作业" forState:UIControlStateNormal];
         [_submitBtn addTarget:self action:@selector(clickSubmitBtn) forControlEvents:UIControlEventTouchUpInside];

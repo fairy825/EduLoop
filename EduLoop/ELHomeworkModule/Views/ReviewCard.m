@@ -6,7 +6,6 @@
 //
 
 #import "ReviewCard.h"
-#import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
 @implementation ReviewCard
 
@@ -100,11 +99,11 @@
         _updateButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 20)];
         _updateButton.backgroundColor = [UIColor clearColor];
         _updateButton.layer.borderWidth = 2;
-        _updateButton.layer.borderColor = [UIColor color555555].CGColor;
+        _updateButton.layer.borderColor = [UIColor grayColor].CGColor;
         _updateButton.layer.cornerRadius = 5;
         _updateButton.layer.masksToBounds = YES;
         [_updateButton setTitle:@"修改" forState:UIControlStateNormal];
-        [_updateButton setTitleColor:[UIColor color333333] forState:UIControlStateNormal];
+        [_updateButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [_updateButton.titleLabel setFont:[UIFont fontWithName:@"PingFangSC" size:16]];
         [_updateButton addTarget:self action:@selector(clickUpdateButton) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -115,7 +114,7 @@
     if(!_teacherLabel){
         _teacherLabel = [[UILabel alloc]initWithFrame:CGRectMake(0,0,100,20)];
         _teacherLabel.font = [UIFont fontWithName:@"PingFangSC" size:16.f];
-        _teacherLabel.textColor = [UIColor color555555];
+        _teacherLabel.textColor = [UIColor grayColor];
         [_teacherLabel sizeToFit];
     }
     return _teacherLabel;

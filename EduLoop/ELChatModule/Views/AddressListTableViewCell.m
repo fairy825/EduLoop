@@ -7,7 +7,7 @@
 
 #import "AddressListTableViewCell.h"
 #import <Masonry/Masonry.h>
-#import "UIColor+MyTheme.h"
+#import "UIColor+ELColor.h"
 #import <SDWebImage.h>
 
 @implementation AddressListTableViewCell
@@ -97,7 +97,7 @@
     if(!_identityLabel){
         _identityLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0,50,20)];
         _identityLabel.font = [UIFont systemFontOfSize:16.f];
-        _identityLabel.textColor = [UIColor color999999];
+        _identityLabel.textColor = [UIColor lightGrayColor];
         _identityLabel.numberOfLines = 1;
         _identityLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         _identityLabel.textAlignment = NSTextAlignmentLeft;
@@ -117,7 +117,7 @@
 - (UIView *)seperateView{
     if(!_seperateView){
         _seperateView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 3)];
-        _seperateView.backgroundColor = [UIColor f6f6f6];
+        _seperateView.backgroundColor = [UIColor elBackgroundColor];
     }
     return _seperateView;
 }

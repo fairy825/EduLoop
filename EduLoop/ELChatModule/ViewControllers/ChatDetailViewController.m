@@ -5,7 +5,6 @@
 //  Created by mijika on 2021/1/4.
 //
 #import "ChatDetailViewController.h"
-#import "UIColor+MyTheme.h"
 #import "MessageBubble.h"
 #import "MessageRecordTableViewCell.h"
 #import "ELScreen.h"
@@ -14,6 +13,7 @@
 #import "BasicInfo.h"
 #import "ELSocketManager.h"
 #import "ELFormat.h"
+#import <WebKit/WebKit.h>
 @interface ChatDetailViewController ()<ChatBoardDelegate,UITextViewDelegate,UITableViewDelegate,
 UITableViewDataSource>
 @property(nonatomic,strong) SRWebSocket *webSocket;
@@ -95,8 +95,13 @@ static NSInteger interval = 300;
 }
 
 -(NSDate *)dateFromString:(NSString *)dateStr{
+    
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    if(dateStr.length>18)
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    else
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm"];
+    
     NSDate *date = [dateFormatter dateFromString:dateStr];
     return date;
 }
@@ -240,6 +245,7 @@ static NSInteger interval = 300;
         CGPoint offset = CGPointMake(0, self.tableView.contentSize.height -self.tableView.frame.size.height);
         [self.tableView setContentOffset:offset animated:YES];
     }
+    
 }
 
 #pragma mark - Keyboard
@@ -376,7 +382,7 @@ static NSInteger interval = 300;
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UILabel *timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20)];
     timeLabel.font = [UIFont fontWithName:@"PingFangSC" size:12.f];
-    timeLabel.textColor = [UIColor color999999];
+    timeLabel.textColor = [UIColor lightGrayColor];
     NSString *str = [self stringFromDate: self.timeTitles[section]];
     timeLabel.text = [self getTimeDesc:str];
     timeLabel.textAlignment = NSTextAlignmentCenter;

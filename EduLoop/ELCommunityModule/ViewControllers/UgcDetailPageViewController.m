@@ -6,7 +6,6 @@
 //
 
 #import "UgcDetailPageViewController.h"
-#import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
 #import "UgcVoteCard.h"
 #import "UgcTextImgCard.h"
@@ -124,7 +123,7 @@
 //        make.height.equalTo(@250);
 //    }];
     self.commentTableView = [[UITableView alloc]init];
-//    self.commentTableView.backgroundColor = [UIColor f6f6f6];
+//    self.commentTableView.backgroundColor = [UIColor elBackgroundColor];
     self.commentTableView.delegate = self;
     self.commentTableView.dataSource = self;
     [self.commentTableView setTableHeaderView:
@@ -241,7 +240,7 @@
 //        else
             _summaryUgcCard = [[UgcTextImgCard alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 250) Data:self.ugcModel];
         [_summaryUgcCard reload];
-        [_summaryUgcCard hideBtns];
+//        [_summaryUgcCard hideBtns];
     }
     //确定size
     return _summaryUgcCard;

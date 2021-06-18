@@ -6,7 +6,7 @@
 //
 
 #import "SettingDataTableViewCell.h"
-#import "UIColor+MyTheme.h"
+#import "UIColor+ELColor.h"
 #import <Masonry/Masonry.h>
 #import <SDWebImage.h>
 
@@ -257,7 +257,7 @@
         _detailTextViewLengthLabel = [UILabel new];
         _detailTextViewLengthLabel.backgroundColor = [UIColor clearColor];
         _detailTextViewLengthLabel.numberOfLines = 0;
-        _detailTextViewLengthLabel.textColor = [UIColor color999999];
+        _detailTextViewLengthLabel.textColor = [UIColor lightGrayColor];
         _detailTextViewLengthLabel.font = [UIFont systemFontOfSize:14];
         _detailTextViewLengthLabel.textAlignment = NSTextAlignmentRight;
         [_detailTextViewLengthLabel sizeToFit];
@@ -282,7 +282,7 @@
     if(!_avatarView){
         _avatarView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 70, 70)];
         _avatarView.contentMode = UIViewContentModeScaleToFill;
-        _avatarView.backgroundColor = [UIColor e1e1e1];
+        _avatarView.backgroundColor = [UIColor elSeperatorColor];
         _avatarView.layer.cornerRadius = 35;
         _avatarView.layer.masksToBounds = YES;
         
@@ -296,7 +296,7 @@
         _titleLabel = [UILabel new];
         _titleLabel.backgroundColor = [UIColor clearColor];
         _titleLabel.numberOfLines = 1;
-        _titleLabel.textColor = [UIColor color333333];
+        _titleLabel.textColor = [UIColor blackColor];
         _titleLabel.font = [UIFont systemFontOfSize:18];
         _titleLabel.textAlignment = NSTextAlignmentLeft;
         _titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
@@ -311,7 +311,7 @@
         _subtitleLabel = [UILabel new];
         _subtitleLabel.backgroundColor = [UIColor clearColor];
         _subtitleLabel.numberOfLines = 1;
-        _subtitleLabel.textColor = [UIColor color999999];
+        _subtitleLabel.textColor = [UIColor lightGrayColor];
         _subtitleLabel.font = [UIFont systemFontOfSize:15];
         _subtitleLabel.textAlignment = NSTextAlignmentLeft;
         _subtitleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
@@ -324,7 +324,7 @@
     if (!_detailLabel) {
         _detailLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 20)];
         _detailLabel.backgroundColor = [UIColor clearColor];
-        _detailLabel.textColor = [UIColor color999999];
+        _detailLabel.textColor = [UIColor lightGrayColor];
         _detailLabel.font = [UIFont systemFontOfSize:16];
         _detailLabel.textAlignment = NSTextAlignmentRight;
         _detailLabel.lineBreakMode = NSLineBreakByTruncatingTail;
@@ -340,7 +340,7 @@
             self.detailTextfield.autocapitalizationType = UITextAutocapitalizationTypeNone;
             self.detailTextfield.textAlignment = NSTextAlignmentRight;
         self.detailTextfield.delegate = self;
-        self.detailTextfield.textColor = [UIColor color999999];
+        self.detailTextfield.textColor = [UIColor lightGrayColor];
         self.detailTextfield.font = [UIFont systemFontOfSize:16];
     }
     return _detailTextfield;
@@ -350,9 +350,9 @@
     if(!_detailTextView){
         _detailTextView = [[UITextView alloc]initWithFrame:CGRectMake(0, 0, 100, 20)];
         _detailTextView.layer.cornerRadius =15;
-        _detailTextView.backgroundColor = [UIColor f6f6f6];
+        _detailTextView.backgroundColor = [UIColor elBackgroundColor];
         _detailTextView.textAlignment = NSTextAlignmentLeft;
-        _detailTextView.textColor = [UIColor color999999];
+        _detailTextView.textColor = [UIColor lightGrayColor];
         _detailTextView.font = [UIFont systemFontOfSize:16];
         _detailTextView.delegate = self;
         // _placeholderLabel
@@ -360,7 +360,7 @@
         placeHolderLabel.text = _data.detailDefaultText;
 
         placeHolderLabel.numberOfLines = 0;
-        placeHolderLabel.textColor = [UIColor color999999];
+        placeHolderLabel.textColor = [UIColor lightGrayColor];
         [placeHolderLabel sizeToFit];
         [_detailTextView addSubview:placeHolderLabel];
         // same font
@@ -383,9 +383,9 @@
     if(!_aTextField){
         _aTextField = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, 100, 20)];
         _aTextField.font = [UIFont systemFontOfSize:18.f];
-        _aTextField.textColor = [UIColor color999999];
+        _aTextField.textColor = [UIColor lightGrayColor];
 //        _aTextField.layer.cornerRadius =15;
-//        _aTextField.backgroundColor = [UIColor eh_f6f6f6];
+//        _aTextField.backgroundColor = [UIColor elBackgroundColor];
       
         _aTextField.autocorrectionType = UITextAutocorrectionTypeNo;
         _aTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
@@ -399,9 +399,9 @@
     if(!_bTextField){
         _bTextField = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, 100, 20)];
         _bTextField.font = [UIFont systemFontOfSize:18.f];
-        _bTextField.textColor = [UIColor color999999];
+        _bTextField.textColor = [UIColor lightGrayColor];
 //        _bTextField.layer.cornerRadius =15;
-//        _bTextField.backgroundColor = [UIColor eh_f6f6f6];
+//        _bTextField.backgroundColor = [UIColor elBackgroundColor];
         _bTextField.autocorrectionType = UITextAutocorrectionTypeNo;
         _bTextField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         _aTextField.textAlignment = NSTextAlignmentLeft;

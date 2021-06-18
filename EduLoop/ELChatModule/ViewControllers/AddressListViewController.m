@@ -6,7 +6,7 @@
 //
 
 #import "AddressListViewController.h"
-#import "UIColor+MyTheme.h"
+#import "UIColor+ELColor.h"
 #import <Masonry/Masonry.h>
 #import "ELCenterOverlayModel.h"
 #import "ELCenterOverlay.h"
@@ -29,7 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor f6f6f6];
+    self.view.backgroundColor = [UIColor elBackgroundColor];
     [self setNavagationBar];
     [self setupSubviews];
     [self loadData];
@@ -111,11 +111,11 @@
 
 - (void)setupSubviews{
     self.tableView = [[UITableView alloc]init];
-    self.tableView.backgroundColor = [UIColor f6f6f6];
+    self.tableView.backgroundColor = [UIColor elBackgroundColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.sectionIndexColor = [UIColor color999999];
+    self.tableView.sectionIndexColor = [UIColor lightGrayColor];
     self.tableView.estimatedRowHeight = 50;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     [self.view addSubview:self.tableView];

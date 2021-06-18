@@ -6,7 +6,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "ELNotification.h"
 @interface AppDelegate ()
 
 @end
@@ -16,6 +16,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [[ELNotification notificationManager]checkNotificationAuthorization];
     return YES;
 }
 
@@ -36,5 +37,14 @@
     // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
 }
 
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options{
+  return YES;
+}
 
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
+    
+}
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error{
+    
+}
 @end

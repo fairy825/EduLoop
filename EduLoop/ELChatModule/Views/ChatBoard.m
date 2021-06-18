@@ -6,7 +6,7 @@
 //
 
 #import "ChatBoard.h"
-#import "UIColor+MyTheme.h"
+#import "UIColor+ELColor.h"
 #import "ELScreen.h"
 #import "BasicInfo.h"
 @implementation ChatBoard
@@ -23,7 +23,7 @@
 //    self.chatBoard.frame = CGRectMake(0, self.view.bounds.size.height-HOME_BUTTON_HEIGHT-60, self.view.bounds.size.width, 60);
 
     self.backgroundColor = [UIColor whiteColor];
-    self.layer.borderColor = [UIColor f6f6f6].CGColor;
+    self.layer.borderColor = [UIColor elBackgroundColor].CGColor;
     self.layer.borderWidth = 5;
     CGSize board = self.frame.size;
     [self addSubview:self.bgView];
@@ -59,7 +59,7 @@
         _finishBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 20)];
         _finishBtn.backgroundColor = [UIColor clearColor];
         [_finishBtn setTitle:@"发送" forState:UIControlStateNormal];
-        [_finishBtn setTitleColor:[UIColor color999999] forState:UIControlStateNormal];
+        [_finishBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         [_finishBtn.titleLabel setFont:[UIFont fontWithName:@"PingFangSC" size:16]];
         [_finishBtn addTarget:self action:@selector(editFinish) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -69,9 +69,9 @@
 - (UITextView *)textView{
     if(!_textView){
         _textView = [[UITextView alloc]init];
-        _textView.backgroundColor = [UIColor elColorWithHex:Color_CellHighlightedColor andAlpha:0.5];
+        _textView.backgroundColor = [UIColor colorWithRGB:0xDDDDDD alpha:0.5];
         _textView.textAlignment = NSTextAlignmentLeft;
-        _textView.textColor = [UIColor color999999];
+        _textView.textColor = [UIColor lightGrayColor];
         _textView.layer.cornerRadius =15;
         _textView.font = [UIFont systemFontOfSize:20];
     }
@@ -99,9 +99,9 @@
 -(void)toggleState:(BOOL)canPublish{
     if(canPublish==YES){
         [self.finishBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        self.finishBtn.backgroundColor = [UIColor color5bb2ff];
+        self.finishBtn.backgroundColor = [UIColor themeBlue];
     }else{
-        [self.finishBtn setTitleColor:[UIColor color999999] forState:UIControlStateNormal];
+        [self.finishBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         self.finishBtn.backgroundColor = [UIColor clearColor];
     }
 }

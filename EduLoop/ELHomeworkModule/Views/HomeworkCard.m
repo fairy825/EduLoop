@@ -6,7 +6,6 @@
 //
 
 #import "HomeworkCard.h"
-#import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
 #import <SDWebImage.h>
 #import "ELScreen.h"
@@ -75,7 +74,7 @@
     self.backgroundColor = [UIColor whiteColor];
     [self addSubview:self.bgView];
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self).mas_offset(UIEdgeInsetsMake(20, 20, 20, 20));
+        make.edges.equalTo(self).mas_offset(UIEdgeInsetsMake(10, 20, 20, 10));
     }];
     
     [self.bgView addSubview:self.avatarImage];
@@ -174,7 +173,7 @@
         _studentLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0,50,20)];
         _studentLabel.text = @"dd";
         _studentLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:16.f];
-        _studentLabel.textColor = [UIColor color333333];
+        _studentLabel.textColor = [UIColor blackColor];
         [_studentLabel sizeToFit];
     }
     return _studentLabel;
@@ -185,7 +184,7 @@
         _parentLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0,50,20)];
         _parentLabel.text = [NSString stringWithFormat:@"%@%@",@"家长：",@"abc"];
         _parentLabel.font = [UIFont fontWithName:@"PingFangSC" size:16.f];
-        _parentLabel.textColor = [UIColor color555555];
+        _parentLabel.textColor = [UIColor grayColor];
         [_parentLabel sizeToFit];
     }
     return _parentLabel;
@@ -195,7 +194,7 @@
     if(!_timeLabel){
         _timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(0,0,100,20)];
         _timeLabel.font = [UIFont fontWithName:@"PingFangSC" size:14.f];
-        _timeLabel.textColor = [UIColor color555555];
+        _timeLabel.textColor = [UIColor grayColor];
         [_timeLabel sizeToFit];
     }
     return _timeLabel;

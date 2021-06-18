@@ -7,7 +7,7 @@
 
 #import "CommunityViewController.h"
 #import "UgcCard.h"
-#import "UIColor+MyTheme.h"
+#import "UIColor+ELColor.h"
 #import <Masonry/Masonry.h>
 #import "ELCenterOverlayModel.h"
 #import "ELCenterOverlay.h"
@@ -49,7 +49,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor f6f6f6];
+    self.view.backgroundColor = [UIColor elBackgroundColor];
     self.page=1;
     UIEdgeInsets insets = self.view.safeAreaInsets;
     [self setNavigation];
@@ -121,7 +121,7 @@
 
 - (void)setupSubviews{
     self.tableView = [[UITableView alloc]init];
-    self.tableView.backgroundColor = [UIColor f6f6f6];
+    self.tableView.backgroundColor = [UIColor elBackgroundColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
@@ -133,8 +133,8 @@
      }];
      header.lastUpdatedTimeLabel.hidden = YES;
      //文字颜色
-     header.stateLabel.textColor = [UIColor color999999];
-     header.lastUpdatedTimeLabel.textColor = [UIColor color999999];
+     header.stateLabel.textColor = [UIColor lightGrayColor];
+     header.lastUpdatedTimeLabel.textColor = [UIColor lightGrayColor];
      //字体
      header.stateLabel.font = [UIFont systemFontOfSize:15];
      header.lastUpdatedTimeLabel.font = [UIFont systemFontOfSize:14];

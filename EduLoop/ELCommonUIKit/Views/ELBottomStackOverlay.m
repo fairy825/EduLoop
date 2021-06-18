@@ -7,7 +7,6 @@
 
 #import "ELBottomStackOverlay.h"
 #import <Masonry/Masonry.h>
-#import "UIColor+MyTheme.h"
 #import "ELStackCardItem.h"
 @interface ELBottomStackOverlay()<UICollectionViewDelegate,UICollectionViewDataSource>
 

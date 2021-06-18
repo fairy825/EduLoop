@@ -6,7 +6,7 @@
 //
 
 #import "CommentCard.h"
-#import "UIColor+MyTheme.h"
+#import "UIColor+ELColor.h"
 #import <Masonry/Masonry.h>
 #import "CommentEditView.h"
 #import <SDWebImage.h>
@@ -30,10 +30,7 @@
     self.publishTimeLabel.text = self.data.timeDesc;
     self.nameLabel.text = self.data.authorNickame;
     [self.avatarImage sd_setImageWithURL:[NSURL URLWithString:self.data.avatar] placeholderImage:[UIImage imageNamed:@"avatar-4"]];
-//    UIColor *bgColor = [UIColor elColorWithHex:self.data.chooseFirst?Color_Red:Color_Blue];
-//    self.choiceTag.backgroundColor = bgColor;
-//    self.choiceTag.layer.borderColor = bgColor.CGColor;
-    
+   
     [_thumbButton setTitle:[NSString stringWithFormat:@"%ld", (long)self.data.thumbNum] forState:UIControlStateNormal];
     [_thumbButton setImage:[UIImage imageNamed:self.data.myThumb?@"icon_thumb_red":@"icon_thumb"] forState:UIControlStateNormal];
     [_commentButton setTitle:[NSString stringWithFormat:@"%ld", (long)self.data.commentNum] forState:UIControlStateNormal];
@@ -138,7 +135,7 @@
 - (UIView *)seperateView{
     if(!_seperateView){
         _seperateView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 3)];
-        _seperateView.backgroundColor = [UIColor f6f6f6];
+        _seperateView.backgroundColor = [UIColor elBackgroundColor];
     }
     return _seperateView;
 }
@@ -192,7 +189,7 @@
     if(!_commentButton){
         _commentButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 20)];
         _commentButton.backgroundColor = [UIColor clearColor];
-        [_commentButton setTitleColor:[UIColor color999999] forState:UIControlStateNormal];
+        [_commentButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         [_commentButton.titleLabel setFont:[UIFont fontWithName:@"PingFangSC" size:20]];
         [_commentButton setImage:[UIImage imageNamed:@"icon_comment-2"] forState:UIControlStateNormal];
         [_commentButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 20)];
@@ -204,7 +201,7 @@
     if(!_thumbButton){
         _thumbButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 20)];
         _thumbButton.backgroundColor = [UIColor clearColor];
-        [_thumbButton setTitleColor:[UIColor color999999] forState:UIControlStateNormal];
+        [_thumbButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         [_thumbButton.titleLabel setFont:[UIFont fontWithName:@"PingFangSC" size:20]];
         [_thumbButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 20)];
         [_thumbButton addTarget:self action:@selector(clickThumb) forControlEvents:UIControlEventTouchUpInside];
@@ -216,7 +213,7 @@
     if(!_detailLabel){
         _detailLabel = [[UILabel alloc]initWithFrame:self.bounds];
         _detailLabel.font = [UIFont systemFontOfSize:18.f];
-        _detailLabel.textColor = [UIColor color333333];
+        _detailLabel.textColor = [UIColor blackColor];
         _detailLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         _detailLabel.textAlignment = NSTextAlignmentLeft;
         _detailLabel.numberOfLines = 0;

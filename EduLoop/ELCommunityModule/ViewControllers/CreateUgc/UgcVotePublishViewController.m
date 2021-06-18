@@ -6,7 +6,7 @@
 //
 
 #import "UgcVotePublishViewController.h"
-#import "UIColor+MyTheme.h"
+#import "UIColor+ELColor.h"
 #import <Masonry/Masonry.h>
 #import "ELCenterOverlayModel.h"
 #import "ELCenterOverlay.h"
@@ -61,7 +61,7 @@
 
 - (void)viewDidLoad{
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor f6f6f6];
+    self.view.backgroundColor = [UIColor elBackgroundColor];
     [self setNavagationBar];
     [self setupSubviews];
     [self loadData];
@@ -77,7 +77,7 @@
 
 - (void)setupSubviews{
     self.tableView = [[UITableView alloc]init];
-    self.tableView.backgroundColor = [UIColor f6f6f6];
+    self.tableView.backgroundColor = [UIColor elBackgroundColor];
     self.tableView.showsVerticalScrollIndicator=NO;
     self.tableView.scrollEnabled = NO;
     self.tableView.delegate = self;
@@ -125,7 +125,7 @@
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
         UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 20)];
-        view.backgroundColor = [UIColor f6f6f6];
+        view.backgroundColor = [UIColor elBackgroundColor];
         return view;
 }
 

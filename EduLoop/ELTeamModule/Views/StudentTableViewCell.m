@@ -7,7 +7,6 @@
 
 #import "StudentTableViewCell.h"
 
-#import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
 #import <SDWebImage.h>
 
@@ -81,7 +80,7 @@
 - (UILabel *)snoLabel{
     if(!_snoLabel){
         _snoLabel = [[UILabel alloc]initWithFrame:CGRectMake(0,0,50,20)];
-        _snoLabel.textColor = [UIColor color555555];
+        _snoLabel.textColor = [UIColor grayColor];
         _snoLabel.font = [UIFont fontWithName:@"PingFangSC" size:16.f];
         [_snoLabel sizeToFit];
     }
@@ -92,7 +91,7 @@
     if(!_nameLabel){
         _nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0,50,20)];
         _nameLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:20.f];
-        _nameLabel.textColor = [UIColor color333333];
+        _nameLabel.textColor = [UIColor blackColor];
         [_nameLabel sizeToFit];
     }
     return _nameLabel;

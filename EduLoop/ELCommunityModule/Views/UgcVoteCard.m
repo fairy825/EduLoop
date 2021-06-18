@@ -7,7 +7,6 @@
 
 #import "UgcVoteCard.h"
 #import <Masonry/Masonry.h>
-#import "UIColor+MyTheme.h"
 #import "ELUserInfo.h"
 @implementation UgcVoteCard
 - (ELVoteCard *)voteView{
@@ -88,7 +87,7 @@
     if(!_descriptionLabel){
         _descriptionLabel = [[UILabel alloc]init];
         _descriptionLabel.font = [UIFont fontWithName:@"PingFangSC" size:18];
-        _descriptionLabel.textColor = [UIColor color999999];
+        _descriptionLabel.textColor = [UIColor lightGrayColor];
         _descriptionLabel.textAlignment = NSTextAlignmentLeft;
         _descriptionLabel.numberOfLines = 0;
         [_descriptionLabel sizeToFit];

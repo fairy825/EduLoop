@@ -6,7 +6,6 @@
 //
 
 #import "TeacherTaskSummaryTableViewCell.h"
-#import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
 #import <SDWebImage.h>
 @implementation TeacherTaskSummaryTableViewCell
@@ -107,7 +106,7 @@
     if(!_hintLabel){
         _hintLabel = [[UILabel alloc]initWithFrame:CGRectMake(0,0,50,20)];
         _hintLabel.text = @"去点评";
-        _hintLabel.textColor = [UIColor color555555];
+        _hintLabel.textColor = [UIColor grayColor];
         _hintLabel.font = [UIFont fontWithName:@"PingFangSC" size:16.f];
         [_hintLabel sizeToFit];
     }
@@ -119,7 +118,7 @@
         _studentLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0,50,20)];
         _studentLabel.text = @"dd";
         _studentLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:20.f];
-        _studentLabel.textColor = [UIColor color333333];
+        _studentLabel.textColor = [UIColor blackColor];
         [_studentLabel sizeToFit];
     }
     return _studentLabel;
@@ -130,7 +129,7 @@
         _parentLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0,50,20)];
         _parentLabel.text = [NSString stringWithFormat:@"%@%@",@"家长：",@"abc"];
         _parentLabel.font = [UIFont fontWithName:@"PingFangSC" size:16.f];
-        _parentLabel.textColor = [UIColor color555555];
+        _parentLabel.textColor = [UIColor grayColor];
         [_parentLabel sizeToFit];
     }
     return _parentLabel;

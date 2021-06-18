@@ -42,7 +42,6 @@
         make.left.equalTo(self.bgView).offset(30);
         make.size.mas_equalTo(CGSizeMake(50, 50));
     }];
-    
     [self.bgView addSubview:self.titleLabel];
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.bgView);
@@ -66,7 +65,6 @@
     _codeLabel.text = _data.code;
     _avatarImage.image = [UIImage imageNamed:@"icon_team"];
 }
-
 #pragma mark - View
 - (UIView *)bgView{
     if(!_bgView){

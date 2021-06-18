@@ -6,7 +6,6 @@
 //
 
 #import "MineToolCardItem.h"
-#import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
 #import "CommunityViewController.h"
 @implementation MineToolCardItem
@@ -24,7 +23,7 @@
         self.title.numberOfLines = 1;
         self.title.lineBreakMode = NSLineBreakByTruncatingTail;
         self.title.text = title;
-        self.title.textColor = [UIColor color555555];
+        self.title.textColor = [UIColor grayColor];
         self.title.font = [UIFont fontWithName:@"PingFangSC-Regular" size:13];
 
         UIStackView * stack = [UIStackView new];

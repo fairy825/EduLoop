@@ -6,8 +6,7 @@
 //
 
 #import "ChatAllViewController.h"
-
-#import "UIColor+MyTheme.h"
+#import "UIColor+ELColor.h"
 #import <Masonry/Masonry.h>
 #import "ELCenterOverlayModel.h"
 #import "ELCenterOverlay.h"
@@ -34,7 +33,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor f6f6f6];
+    self.view.backgroundColor = [UIColor elBackgroundColor];
     ELSocketManager *wsmanager = [ELSocketManager sharedManager];
     wsmanager.delegate = self;
     [wsmanager initSocket];
@@ -45,7 +44,7 @@
 - (void)setNavagationBar{
     self.tabBarController.navigationItem.title = @"消息";
     
-    self.tabBarController.navigationItem.backButtonTitle = @"";
+    self.tabBarController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]init];
     self.tabBarController.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_address_list"] style:UIBarButtonItemStylePlain target:self action:@selector(jumpToAddressList)];
 //    self.navigationController.navigationBar.barTintColor = [UIColor redColor];
 }
@@ -65,7 +64,7 @@
 
 - (void)setupSubviews{
     self.tableView = [[UITableView alloc]init];
-    self.tableView.backgroundColor = [UIColor f6f6f6];
+    self.tableView.backgroundColor = [UIColor elBackgroundColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

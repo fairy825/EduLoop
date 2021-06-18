@@ -6,7 +6,7 @@
 //
 
 #import "IdentitySelectViewController.h"
-#import "UIColor+MyTheme.h"
+#import "UIColor+ELColor.h"
 #import <Masonry/Masonry.h>
 #import "BasicInfo.h"
 #import <AFNetworking.h>
@@ -30,7 +30,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor f6f6f6];
+    self.view.backgroundColor = [UIColor elBackgroundColor];
     self.type = 0;
     [self setNavigationBar];
     [self setupSubviews];

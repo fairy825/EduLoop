@@ -6,7 +6,7 @@
 //
 
 #import "TeamListViewController.h"
-#import "UIColor+MyTheme.h"
+#import "UIColor+ELColor.h"
 #import <Masonry/Masonry.h>
 #import "ELOverlay.h"
 #import "ELCenterOverlay.h"
@@ -33,7 +33,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor f6f6f6];
+    self.view.backgroundColor = [UIColor elBackgroundColor];
     _teams = @[].mutableCopy;
     self.page=1;
     [self setNavagationBar];
@@ -106,7 +106,7 @@
 
 - (void)setupSubviews{
     self.tableView = [[UITableView alloc]init];
-    self.tableView.backgroundColor = [UIColor f6f6f6];
+    self.tableView.backgroundColor = [UIColor elBackgroundColor];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.estimatedRowHeight = 80.0;
@@ -118,8 +118,8 @@
     }];
     header.lastUpdatedTimeLabel.hidden = YES;
     //文字颜色
-    header.stateLabel.textColor = [UIColor color999999];
-    header.lastUpdatedTimeLabel.textColor = [UIColor color999999];
+    header.stateLabel.textColor = [UIColor lightGrayColor];
+    header.lastUpdatedTimeLabel.textColor = [UIColor lightGrayColor];
     //字体
     header.stateLabel.font = [UIFont systemFontOfSize:15];
     header.lastUpdatedTimeLabel.font = [UIFont systemFontOfSize:14];
@@ -234,7 +234,7 @@
         NSInteger index = [indexPath row];
         [self.navigationController pushViewController:[[TeamEditViewController alloc]initWithData:[self.teams objectAtIndex:index]] animated:YES];
     }];
-    editAction.backgroundColor = [UIColor color5bb2ff];
+    editAction.backgroundColor = [UIColor themeBlue];
     [array addObject:editAction];
     return array;
 }

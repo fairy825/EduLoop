@@ -6,7 +6,7 @@
 //
 
 #import "MineViewController.h"
-#import "UIColor+MyTheme.h"
+#import "UIColor+ELColor.h"
 #import <Masonry/Masonry.h>
 #import "MineMiscCardTableViewCell.h"
 #import "ProfileViewController.h"
@@ -57,7 +57,7 @@
 
 - (void)setupSubviews {
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
-    scrollView.backgroundColor = [UIColor f6f6f6];
+    scrollView.backgroundColor = [UIColor elBackgroundColor];
 //    scrollView.contentSize = CGSizeMake(self.view.bounds.size.width*5, self.view.bounds.size.height*3);
     scrollView.showsVerticalScrollIndicator=NO;
 //    scrollView.pagingEnabled=YES;
@@ -128,7 +128,7 @@
         self.logOutBtn.backgroundColor = [UIColor whiteColor];
         self.logOutBtn.layer.cornerRadius = 12;
         [self.logOutBtn setTitle:@"退出登录" forState:UIControlStateNormal];
-        [self.logOutBtn setTitleColor:[UIColor color999999] forState:UIControlStateNormal];
+        [self.logOutBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         [self.logOutBtn.titleLabel setTextAlignment: NSTextAlignmentCenter];
         [self.logOutBtn.titleLabel setFont:[UIFont fontWithName:@"PingFangSC-Bold" size:16]];
         [self.logOutBtn addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];

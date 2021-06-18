@@ -6,7 +6,6 @@
 //
 
 #import "ProfileSummaryCard.h"
-#import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
 @implementation ProfileSummaryCard
 

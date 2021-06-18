@@ -14,6 +14,7 @@
 #import "ELTeamModule/ELTeamModule.h"
 #import "BasicInfo.h"
 #import <RTRootNavigationController.h>
+#import "ELSplashView.h"
 @interface SceneDelegate ()
 
 @end
@@ -51,7 +52,10 @@
         self.window.rootViewController.rt_disableInteractivePop = YES;
 
         [self.window makeKeyAndVisible];
-        
+        [self.window addSubview:({
+            ELSplashView *splashView = [[ELSplashView alloc] initWithFrame:self.window.bounds];
+            splashView;
+        })];
     });
     
 }

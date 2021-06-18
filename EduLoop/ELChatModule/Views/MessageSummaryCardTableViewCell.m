@@ -6,7 +6,7 @@
 //
 
 #import "MessageSummaryCardTableViewCell.h"
-#import "UIColor+MyTheme.h"
+#import "UIColor+ELColor.h"
 #import <Masonry/Masonry.h>
 #import <SDWebImage.h>
 @implementation MessageSummaryCardTableViewCell
@@ -126,7 +126,7 @@
     if(!_messageLabel){
         _messageLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0,50,20)];
         _messageLabel.font = [UIFont systemFontOfSize:16.f];
-        _messageLabel.textColor = [UIColor color999999];
+        _messageLabel.textColor = [UIColor lightGrayColor];
         _messageLabel.numberOfLines = 1;
         _messageLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         _messageLabel.textAlignment = NSTextAlignmentLeft;
@@ -145,7 +145,7 @@
 - (UIView *)seperateView{
     if(!_seperateView){
         _seperateView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 3)];
-        _seperateView.backgroundColor = [UIColor f6f6f6];
+        _seperateView.backgroundColor = [UIColor elBackgroundColor];
     }
     return _seperateView;
 }

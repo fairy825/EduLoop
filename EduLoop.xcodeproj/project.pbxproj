@@ -60,6 +60,9 @@
 		8445134026217E150098B67E /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 8445133F26217E150098B67E /* NSString+MD5.m */; };
 		8445134F26218EE60098B67E /* UserLoginResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 8445134E26218EE60098B67E /* UserLoginResponse.m */; };
 		8445135526218F180098B67E /* ProfileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8445135426218F180098B67E /* ProfileModel.m */; };
+		84604B0E265D466B00D84A4B /* ELSplashView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84604B0D265D466B00D84A4B /* ELSplashView.m */; };
+		84604B1D265F7C0F00D84A4B /* ELNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 84604B1C265F7C0F00D84A4B /* ELNotification.m */; };
+		84604B9E267CCD1000D84A4B /* UIColor+ELColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 84604B9D267CCD1000D84A4B /* UIColor+ELColor.m */; };
 		8460EBCB26404DF900482381 /* libDLRadioButton.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8460EBCA26404DF900482381 /* libDLRadioButton.a */; };
 		8460EBCD26404DF900482381 /* libGKPhotoBrowser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8460EBCC26404DF900482381 /* libGKPhotoBrowser.a */; };
 		8460EBCF26404DF900482381 /* libJSONModel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8460EBCE26404DF900482381 /* libJSONModel.a */; };
@@ -86,8 +89,6 @@
 		8470FB0F2577B9A300B05974 /* EduLoopTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FB0E2577B9A300B05974 /* EduLoopTests.m */; };
 		8470FB1A2577B9A300B05974 /* EduLoopUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FB192577B9A300B05974 /* EduLoopUITests.m */; };
 		8470FB2F2577BEF700B05974 /* MineInfoCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FB2E2577BEF700B05974 /* MineInfoCard.m */; };
-		8470FB602577EE0800B05974 /* UIColor+MyGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FB5F2577EE0800B05974 /* UIColor+MyGenerator.m */; };
-		8470FB6D2577EE1500B05974 /* UIColor+MyTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FB652577EE1500B05974 /* UIColor+MyTheme.m */; };
 		8470FB752578CD9500B05974 /* MineToolCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FB742578CD9500B05974 /* MineToolCard.m */; };
 		8470FB7B2578D02B00B05974 /* MineToolCardItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FB7A2578D02B00B05974 /* MineToolCardItem.m */; };
 		8470FB902579310E00B05974 /* MineMiscCardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FB8F2579310E00B05974 /* MineMiscCardTableViewCell.m */; };
@@ -288,6 +289,12 @@
 		8445134E26218EE60098B67E /* UserLoginResponse.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserLoginResponse.m; sourceTree = "<group>"; };
 		8445135326218F180098B67E /* ProfileModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileModel.h; sourceTree = "<group>"; };
 		8445135426218F180098B67E /* ProfileModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileModel.m; sourceTree = "<group>"; };
+		84604B0C265D466B00D84A4B /* ELSplashView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELSplashView.h; sourceTree = "<group>"; };
+		84604B0D265D466B00D84A4B /* ELSplashView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELSplashView.m; sourceTree = "<group>"; };
+		84604B1B265F7C0F00D84A4B /* ELNotification.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELNotification.h; sourceTree = "<group>"; };
+		84604B1C265F7C0F00D84A4B /* ELNotification.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELNotification.m; sourceTree = "<group>"; };
+		84604B9C267CCD1000D84A4B /* UIColor+ELColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+ELColor.h"; sourceTree = "<group>"; };
+		84604B9D267CCD1000D84A4B /* UIColor+ELColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ELColor.m"; sourceTree = "<group>"; };
 		8460EBC826404DF900482381 /* libAFNetworking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAFNetworking.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8460EBCA26404DF900482381 /* libDLRadioButton.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libDLRadioButton.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8460EBCC26404DF900482381 /* libGKPhotoBrowser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGKPhotoBrowser.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -763,10 +770,6 @@
 		8470FB1B2577B9A300B05974 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8470FB2D2577BEF700B05974 /* MineInfoCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineInfoCard.h; sourceTree = "<group>"; };
 		8470FB2E2577BEF700B05974 /* MineInfoCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineInfoCard.m; sourceTree = "<group>"; };
-		8470FB5E2577EE0800B05974 /* UIColor+MyGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+MyGenerator.h"; sourceTree = "<group>"; };
-		8470FB5F2577EE0800B05974 /* UIColor+MyGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+MyGenerator.m"; sourceTree = "<group>"; };
-		8470FB652577EE1500B05974 /* UIColor+MyTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+MyTheme.m"; sourceTree = "<group>"; };
-		8470FB682577EE1500B05974 /* UIColor+MyTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+MyTheme.h"; sourceTree = "<group>"; };
 		8470FB732578CD9500B05974 /* MineToolCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineToolCard.h; sourceTree = "<group>"; };
 		8470FB742578CD9500B05974 /* MineToolCard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineToolCard.m; sourceTree = "<group>"; };
 		8470FB792578D02B00B05974 /* MineToolCardItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineToolCardItem.h; sourceTree = "<group>"; };
@@ -1433,6 +1436,10 @@
 				8445133F26217E150098B67E /* NSString+MD5.m */,
 				840ED081262D6B3000109F39 /* ELNetworkSessionManager.h */,
 				840ED082262D6B3000109F39 /* ELNetworkSessionManager.m */,
+				84604B0C265D466B00D84A4B /* ELSplashView.h */,
+				84604B0D265D466B00D84A4B /* ELSplashView.m */,
+				84604B1B265F7C0F00D84A4B /* ELNotification.h */,
+				84604B1C265F7C0F00D84A4B /* ELNotification.m */,
 			);
 			path = ELUtils;
 			sourceTree = "<group>";
@@ -1592,8 +1599,7 @@
 				8470FC452580E12200B05974 /* ELHomeworkModule */,
 				8470FBB8257F5F0000B05974 /* ELProfileModule */,
 				8470FBF72580880600B05974 /* ELCommonUIKit */,
-				8470FB642577EE1500B05974 /* MyUIFont */,
-				8470FB5D2577EE0800B05974 /* MyUIKit */,
+				8470FB5D2577EE0800B05974 /* ELUIKit */,
 				8470FAF32577B9A200B05974 /* AppDelegate.m */,
 				8470FAF22577B9A200B05974 /* AppDelegate.h */,
 				8470FAF52577B9A200B05974 /* SceneDelegate.h */,
@@ -1625,22 +1631,13 @@
 			path = EduLoopUITests;
 			sourceTree = "<group>";
 		};
-		8470FB5D2577EE0800B05974 /* MyUIKit */ = {
+		8470FB5D2577EE0800B05974 /* ELUIKit */ = {
 			isa = PBXGroup;
 			children = (
-				8470FB5E2577EE0800B05974 /* UIColor+MyGenerator.h */,
-				8470FB5F2577EE0800B05974 /* UIColor+MyGenerator.m */,
+				84604B9C267CCD1000D84A4B /* UIColor+ELColor.h */,
+				84604B9D267CCD1000D84A4B /* UIColor+ELColor.m */,
 			);
-			path = MyUIKit;
-			sourceTree = "<group>";
-		};
-		8470FB642577EE1500B05974 /* MyUIFont */ = {
-			isa = PBXGroup;
-			children = (
-				8470FB682577EE1500B05974 /* UIColor+MyTheme.h */,
-				8470FB652577EE1500B05974 /* UIColor+MyTheme.m */,
-			);
-			path = MyUIFont;
+			path = ELUIKit;
 			sourceTree = "<group>";
 		};
 		8470FBB8257F5F0000B05974 /* ELProfileModule */ = {
@@ -2279,6 +2276,7 @@
 				8470FD45259B05EC00B05974 /* ELImageManager.m in Sources */,
 				843275A026121C0C00641E60 /* TeacherShowDetailTaskResponse.m in Sources */,
 				840ED059262ADBD300109F39 /* ELCenterImgOverlay.m in Sources */,
+				84604B0E265D466B00D84A4B /* ELSplashView.m in Sources */,
 				840ED0CE263541AB00109F39 /* TeamDetailCard.m in Sources */,
 				843275A92612EF7700641E60 /* TaskDetailCard.m in Sources */,
 				8470FCBA258C763900B05974 /* ELCommunityModule.m in Sources */,
@@ -2287,6 +2285,7 @@
 				8470FD1725945D7300B05974 /* CommentModel.m in Sources */,
 				8470FC142580AA0B00B05974 /* ChildProfileViewController.m in Sources */,
 				8470FDA525A42CA900B05974 /* AddressListTableViewCell.m in Sources */,
+				84604B1D265F7C0F00D84A4B /* ELNotification.m in Sources */,
 				84EE687726442A530072A790 /* ELBaseViewController.m in Sources */,
 				843AC0D12639B8B8003BE32E /* ELSocketManager.m in Sources */,
 				8470FCA6258B4CBB00B05974 /* ELBottomStackOverlay.m in Sources */,
@@ -2311,7 +2310,6 @@
 				8470FD3F259AEB0900B05974 /* UgcVoteModel.m in Sources */,
 				843275B526131EBC00641E60 /* HomeworkCard.m in Sources */,
 				843275D12615F83C00641E60 /* ELFormat.m in Sources */,
-				8470FB602577EE0800B05974 /* UIColor+MyGenerator.m in Sources */,
 				843275AF26131D0B00641E60 /* ReviewViewController.m in Sources */,
 				8470FB9F2579443E00B05974 /* MineMiscCard.m in Sources */,
 				8470FC8A25885C8A00B05974 /* ELCenterOverlay.m in Sources */,
@@ -2328,6 +2326,7 @@
 				843AC133263DA83F003BE32E /* GetMyTPTeamsResponse.m in Sources */,
 				843AC10C263BCC73003BE32E /* GetUnreadMsgResponse.m in Sources */,
 				8470FCC1258C771900B05974 /* UgcModel.m in Sources */,
+				84604B9E267CCD1000D84A4B /* UIColor+ELColor.m in Sources */,
 				844512D3261996B60098B67E /* ProfileSummaryCard.m in Sources */,
 				843AC0D8263A5913003BE32E /* ChatMsg.m in Sources */,
 				8470FCB4258C761500B05974 /* CommunityViewController.m in Sources */,
@@ -2340,7 +2339,6 @@
 				8470FC9625889A5F00B05974 /* ELFloatingButton.m in Sources */,
 				8470FD51259CB0F200B05974 /* ELPublishImage.m in Sources */,
 				8470FCE2258C994B00B05974 /* UgcNormalContent.m in Sources */,
-				8470FB6D2577EE1500B05974 /* UIColor+MyTheme.m in Sources */,
 				8470FB752578CD9500B05974 /* MineToolCard.m in Sources */,
 				8470FE9026116ABE00B05974 /* TeacherTaskModel.m in Sources */,
 				8470FB7B2578D02B00B05974 /* MineToolCardItem.m in Sources */,

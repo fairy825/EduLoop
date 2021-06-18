@@ -6,7 +6,7 @@
 //
 
 #import "MessageBubble.h"
-#import "UIColor+MyTheme.h"
+#import "UIColor+ELColor.h"
 #import "ELScreen.h"
 #define triWidth 10.0
 #define rectRadius 10.0
@@ -56,7 +56,7 @@
             [path addLineToPoint:CGPointMake(triWidth,triTop)];
             [path addLineToPoint:CGPointMake(triWidth,rectRadius)];
             [path addArcWithCenter:CGPointMake(triWidth + rectRadius, rectRadius) radius:rectRadius startAngle:-M_PI endAngle:-M_PI_2 clockwise:YES];//左上
-            layer.fillColor = [UIColor elColorWithHex:Color_CellHighlightedColor].CGColor;
+            layer.fillColor = [UIColor colorWithRGB:0xDDDDDD alpha:1].CGColor;
         }else{
             [path moveToPoint:CGPointMake(rectRadius,0)];
             [path addLineToPoint:CGPointMake(rectWidth - rectRadius,0)];
@@ -86,7 +86,7 @@
     if(!_messageLabel){
         _messageLabel = [[UILabel alloc]init];
         _messageLabel.font = [UIFont systemFontOfSize:18.f];
-        _messageLabel.textColor = [UIColor color333333];
+        _messageLabel.textColor = [UIColor blackColor];
         _messageLabel.textAlignment = NSTextAlignmentLeft;
         _messageLabel.numberOfLines = 0;
         _messageLabel.text = self.messageStr;

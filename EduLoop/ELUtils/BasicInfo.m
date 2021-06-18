@@ -20,7 +20,8 @@
 #import "ELScreen.h"
 #import <RTRootNavigationController.h>
 @implementation BasicInfo
-static NSString *server=@"192.168.3.9";
+//static NSString *server=@"192.168.3.9";
+static NSString *server=@"127.0.0.1";
 static NSString *httpPort=@"8080";
 static NSString *socketPort=@"8088";
 + (int)pageSize{
@@ -69,6 +70,7 @@ static NSString *socketPort=@"8088";
     hud.bezelView.color = [UIColor colorWithWhite:0.f alpha:0.4f];
     [hud hideAnimated:YES afterDelay:1];
 }
+
 +(PGDatePickManager *)sharedManager{
     static PGDatePickManager* manager;
     static dispatch_once_t token;

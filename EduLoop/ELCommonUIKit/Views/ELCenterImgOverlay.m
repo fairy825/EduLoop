@@ -7,7 +7,6 @@
 
 #import "ELCenterImgOverlay.h"
 #import <Masonry/Masonry.h>
-#import "UIColor+MyTheme.h"
 #import <SDWebImage/SDWebImage.h>
 @implementation ELCenterImgOverlay
 

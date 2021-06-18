@@ -6,7 +6,7 @@
 //
 
 #import "ELPublishImage.h"
-#import "UIColor+MyTheme.h"
+#import "UIColor+ELColor.h"
 #import <SDWebImage.h>
 @implementation ELPublishImage
 
@@ -52,7 +52,7 @@
 - (UIImageView *)closeIcon{
     if(!_closeIcon){
         _closeIcon = [[UIImageView alloc]init];
-        _closeIcon.backgroundColor = [UIColor e1e1e1];
+        _closeIcon.backgroundColor = [UIColor elSeperatorColor];
         _closeIcon.image = [UIImage imageNamed:@"icon_close"];
         _closeIcon.contentMode = UIViewContentModeScaleToFill;
         _closeIcon.userInteractionEnabled = YES;

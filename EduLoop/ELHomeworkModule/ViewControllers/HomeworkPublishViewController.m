@@ -6,7 +6,7 @@
 //
 
 #import "HomeworkPublishViewController.h"
-#import "UIColor+MyTheme.h"
+#import "UIColor+ELColor.h"
 #import <Masonry/Masonry.h>
 #import "ELPublishImage.h"
 #import "ELImageManager.h"
@@ -78,7 +78,7 @@
     [self.bgView addSubview:self.imgStackView];
     
     UIView *bottomView = [[UIView alloc]initWithFrame:CGRectMake(0,2,self.view.bounds.size.width, 50)];
-    bottomView.backgroundColor = [UIColor f6f6f6];
+    bottomView.backgroundColor = [UIColor elBackgroundColor];
     [bottomView addSubview:self.addImgBtn];
     self.addImgBtn.frame = CGRectMake(20,10,30,30);
 //    [bottomView addSubview:self.publicRangeBtn];
@@ -123,7 +123,7 @@
 
     [_btnView addSubview:({
         UIView *seperatoriew = [[UIView alloc]initWithFrame:CGRectMake(0,0,self.view.bounds.size.width, 2)];
-        seperatoriew.backgroundColor = [UIColor eeeeee];
+        seperatoriew.backgroundColor = [UIColor elSeperatorColor];
         seperatoriew;
     })];
     }
@@ -150,7 +150,7 @@
         UILabel *placeHolderLabel = [[UILabel alloc] init];
         placeHolderLabel.text = @"请按老师要求完成作业";
         placeHolderLabel.numberOfLines = 0;
-        placeHolderLabel.textColor = [UIColor color999999];
+        placeHolderLabel.textColor = [UIColor lightGrayColor];
         [placeHolderLabel sizeToFit];
         [_textView addSubview:placeHolderLabel];
 
@@ -241,7 +241,7 @@
     }
     [self postHomeworkNetworkWithSuccess:^{
         [BasicInfo showToastWithMsg:@"发布成功"];
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }];
 }
 

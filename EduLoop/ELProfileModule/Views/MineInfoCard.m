@@ -7,7 +7,7 @@
 
 #import "MineInfoCard.h"
 #import <Masonry/Masonry.h>
-#import "UIColor+MyTheme.h"
+#import "UIColor+ELColor.h"
 #import <SDWebImage/SDWebImage.h>
 
 @implementation MineInfoCard
@@ -38,7 +38,7 @@
 - (void)setupView{
     self.backgroundColor = [UIColor clearColor];
    
-    self.avatarView.backgroundColor = [UIColor e1e1e1];
+    self.avatarView.backgroundColor = [UIColor elSeperatorColor];
     [self addSubview:self.avatarView];
     [self.avatarView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self).offset(20);
@@ -142,7 +142,7 @@
     if(!_identityLabel){
         _identityLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0,50,20)];
         _identityLabel.font = [UIFont systemFontOfSize:12.f];
-        _identityLabel.textColor = [UIColor color5bb2ff];
+        _identityLabel.textColor = [UIColor themeBlue];
         [_identityLabel sizeToFit];
     }
     return _identityLabel;
@@ -154,7 +154,7 @@
         _identityTag = [[UIView alloc]initWithFrame:CGRectMake(0, 0,70,20)];
         _identityTag.layer.cornerRadius = 5;
         _identityTag.layer.borderWidth = 2;
-        _identityTag.layer.borderColor = [UIColor color5bb2ff].CGColor;
+        _identityTag.layer.borderColor = [UIColor themeBlue].CGColor;
         [_identityTag addSubview:self.identityLabel];
            [self.identityLabel mas_makeConstraints:^(MASConstraintMaker *make) {
                make.edges.equalTo(_identityTag).mas_offset(UIEdgeInsetsMake(3, 3, 3, 3));

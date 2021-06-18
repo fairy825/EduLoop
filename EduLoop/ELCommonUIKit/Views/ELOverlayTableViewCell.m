@@ -6,7 +6,6 @@
 //
 
 #import "ELOverlayTableViewCell.h"
-#import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
 @implementation ELOverlayTableViewCell
 
@@ -39,7 +38,7 @@
         _choiceLabel.backgroundColor = [UIColor whiteColor];
         _choiceLabel.text = @"";
         _choiceLabel.numberOfLines = 1;
-        _choiceLabel.textColor = [UIColor color333333];
+        _choiceLabel.textColor = [UIColor blackColor];
         _choiceLabel.font = [UIFont systemFontOfSize:16];
         _choiceLabel.textAlignment = NSTextAlignmentCenter;
         _choiceLabel.lineBreakMode = NSLineBreakByTruncatingTail;

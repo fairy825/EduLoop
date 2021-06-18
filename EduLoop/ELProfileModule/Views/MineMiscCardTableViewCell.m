@@ -7,7 +7,6 @@
 
 #import "MineMiscCardTableViewCell.h"
 #import <Masonry/Masonry.h>
-#import "UIColor+MyTheme.h"
 
 @implementation MineMiscCardTableViewCell
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
@@ -47,7 +46,7 @@
         self.title = [UILabel new];
         self.title.numberOfLines = 1;
         self.title.lineBreakMode = NSLineBreakByTruncatingTail;
-        self.title.textColor = [UIColor color333333];
+        self.title.textColor = [UIColor blackColor];
         self.title.font = [UIFont fontWithName:@"PingFangSC-Regular" size:16];
     }
     return _title;
@@ -58,7 +57,7 @@
         self.detail = [UILabel new];
         self.detail.numberOfLines = 1;
         self.detail.lineBreakMode = NSLineBreakByTruncatingTail;
-        self.detail.textColor = [UIColor color999999];
+        self.detail.textColor = [UIColor lightGrayColor];
         self.detail.font = [UIFont fontWithName:@"PingFangSC-Regular" size:15];
     }
     return _detail;

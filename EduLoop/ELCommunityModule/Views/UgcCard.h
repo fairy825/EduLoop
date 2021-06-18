@@ -29,8 +29,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,weak,readwrite) id<UgcCardDelegate> delegate;
 
 - (instancetype)initWithFrame:(CGRect)frame Data:(MomentsModel *)model;
-- (void)hideBtns;
 - (void)reload;
+-(void)hideBtns;
+
 @end
 
 NS_ASSUME_NONNULL_END

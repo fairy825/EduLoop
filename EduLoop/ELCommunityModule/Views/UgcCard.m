@@ -6,7 +6,7 @@
 //
 
 #import "UgcCard.h"
-#import "UIColor+MyTheme.h"
+#import "UIColor+ELColor.h"
 #import <Masonry/Masonry.h>
 #import "ELCenterOverlay.h"
 #import "UgcVoteModel.h"
@@ -112,9 +112,8 @@
 //    }];
     
 }
-
-- (void)hideBtns{
-    [self.btnsView removeFromSuperview];
+-(void)hideBtns{
+    
 }
 
 #pragma mark - View
@@ -129,7 +128,7 @@
 - (UIView *)seperateView{
     if(!_seperateView){
         _seperateView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 3)];
-        _seperateView.backgroundColor = [UIColor f6f6f6];
+        _seperateView.backgroundColor = [UIColor elBackgroundColor];
     }
     return _seperateView;
 }

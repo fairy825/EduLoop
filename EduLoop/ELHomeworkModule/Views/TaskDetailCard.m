@@ -6,7 +6,7 @@
 //
 
 #import "TaskDetailCard.h"
-#import "UIColor+MyTheme.h"
+#import "UIColor+ELColor.h"
 #import <Masonry/Masonry.h>
 #import <SDWebImage.h>
 
@@ -115,7 +115,7 @@
 - (UIView *)seperateLine{
     if(!_seperateLine){
         _seperateLine = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 10)];
-        _seperateLine.backgroundColor = [UIColor f6f6f6];
+        _seperateLine.backgroundColor = [UIColor elBackgroundColor];
     }
     return _seperateLine;
 }
@@ -136,7 +136,7 @@
     if(!_teacherLabel){
         _teacherLabel = [[UILabel alloc]initWithFrame:CGRectMake(0,0,100,20)];
         _teacherLabel.font = [UIFont fontWithName:@"PingFangSC" size:16.f];
-        _teacherLabel.textColor = [UIColor color555555];
+        _teacherLabel.textColor = [UIColor grayColor];
         [_teacherLabel sizeToFit];
     }
     return _teacherLabel;
@@ -146,7 +146,7 @@
     if(!_timeLabel){
         _timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(0,0,100,20)];
         _timeLabel.font = [UIFont fontWithName:@"PingFangSC" size:16.f];
-        _timeLabel.textColor = [UIColor color555555];
+        _timeLabel.textColor = [UIColor grayColor];
         [_timeLabel sizeToFit];
     }
     return _timeLabel;

@@ -6,7 +6,7 @@
 //
 
 #import "ELVoteCard.h"
-#import "UIColor+MyTheme.h"
+#import "UIColor+ELColor.h"
 #import <Masonry/Masonry.h>
 #import "ELScreen.h"
 @implementation ELVoteCard
@@ -32,7 +32,7 @@
     }
 
 - (void)setupView{
-    self.backgroundColor = [UIColor eeeeee];
+    self.backgroundColor = [UIColor elSeperatorColor];
 
     [self addSubview:self.bgView];
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -101,7 +101,7 @@
 - (UIView *)bgView{
     if(!_bgView){
         _bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 200)];
-        _bgView.backgroundColor = [UIColor eeeeee];
+        _bgView.backgroundColor = [UIColor elSeperatorColor];
     }
     return _bgView;
 }
@@ -110,7 +110,7 @@
     if(!_leftButton){
         _leftButton =
         [[UIButton alloc]initWithFrame:CGRectMake(0, 0, self.bounds.size.width/2+5, 40)];
-        _leftButton.backgroundColor = [UIColor elColorWithHex:Color_Red];
+        _leftButton.backgroundColor = [UIColor redColor];
         [_leftButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_leftButton.titleLabel setFont:[UIFont fontWithName:@"PingFangSC" size:20]];
         
@@ -132,7 +132,7 @@
 - (UIButton *)rightButton{
     if(!_rightButton){
         _rightButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, self.bounds.size.width/2+5, 40)];
-        _rightButton.backgroundColor = [UIColor elColorWithHex:Color_Blue];
+        _rightButton.backgroundColor = [UIColor blueColor];
         [_rightButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_rightButton.titleLabel setFont:[UIFont fontWithName:@"PingFangSC" size:20]];
         CGSize size = _rightButton.bounds.size;
@@ -167,7 +167,7 @@
     if(!_leftLabel){
         _leftLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, 100, 20)];
         _leftLabel.font = [UIFont systemFontOfSize:14.f];
-        _leftLabel.textColor = [UIColor elColorWithHex:Color_Red];
+        _leftLabel.textColor = [UIColor redColor];
         [_leftLabel sizeToFit];
     }
     return _leftLabel;
@@ -177,7 +177,7 @@
     if(!_rightLabel){
         _rightLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, 100, 20)];
         _rightLabel.font = [UIFont systemFontOfSize:14.f];
-        _rightLabel.textColor = [UIColor elColorWithHex:Color_Blue];
+        _rightLabel.textColor = [UIColor blueColor];
         _rightLabel.textAlignment = NSTextAlignmentRight;
         [_rightLabel sizeToFit];
     }
@@ -189,7 +189,7 @@
         CGFloat width = self.bounds.size.width/2+5;
         _leftProgress =
         [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 10)];
-        _leftProgress.backgroundColor = [UIColor elColorWithHex:Color_Red];
+        _leftProgress.backgroundColor = [UIColor redColor];
     }
     return _leftProgress;
 }
@@ -199,7 +199,7 @@
         CGFloat width = self.bounds.size.width/2+5;
         _rightProgress =
         [[UIView alloc]initWithFrame:CGRectMake(0, 0, width, 10)];
-        _rightProgress.backgroundColor = [UIColor elColorWithHex:Color_Blue];
+        _rightProgress.backgroundColor = [UIColor blueColor];
     }
     return _rightProgress;
 }

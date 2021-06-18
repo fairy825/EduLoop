@@ -6,7 +6,6 @@
 //
 
 #import "UgcTextImgCard.h"
-#import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
 #import "ELImageManager.h"
 #import "ELScreen.h"
@@ -21,36 +20,7 @@
     self.avatarCard.publishTimeLabel.text = self.data.timeDesc;
     self.detailLabel.text = self.data.detail;
 //    self.photoGroup.urlArray = self.data.imgs;
-    int i=0;
-    CGFloat imgWidth = (SCREEN_WIDTH-40-15*2)/3;
-
-    for(UIView *view in [self.imgStackView arrangedSubviews]){
-//        [self.imgStackView removeArrangedSubview:view];
-        [view removeFromSuperview];
-    }
-    for(NSString *str in self.data.imgs){
-        UIImageView *photo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 80, 80)];
-        [photo sd_setImageWithURL:[NSURL URLWithString:str]];
-        photo.contentMode = UIViewContentModeScaleAspectFill;
-        photo.clipsToBounds = YES;
-        photo.tag=1000+i;
-        //允许用户交互
-        photo.userInteractionEnabled = YES;
-        //添加点击手势
-        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(_tapPhoto:)];
-        [photo addGestureRecognizer:tapGesture];
-        [self.imgStackView addArrangedSubview:photo];
-        [photo mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.size.mas_equalTo(CGSizeMake(imgWidth,imgWidth));
-        }];
-        i++;
-    }
-    if(self.data.imgs.count>0){
-        while(i<3){
-            [self.imgStackView addArrangedSubview:[ELPublishImage emptyItem:CGRectMake(0, 0, imgWidth, imgWidth)]];
-            i++;
-        }
-    }
+    
     [self.commentButton setTitle:[NSString stringWithFormat:@"%ld", (long)self.data.commentNum] forState:UIControlStateNormal];
     [self.thumbButton setTitle:[NSString stringWithFormat:@"%ld", (long)self.data.thumbNum] forState:UIControlStateNormal];
     
@@ -59,6 +29,7 @@
 
 - (void)setupView{
     self.backgroundColor = [UIColor whiteColor];
+    
     
     [self addSubview:self.bgView];
     [self.bgView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -89,8 +60,46 @@
 //        make.height.lessThanOrEqualTo(@70);//todo
     }];
 
+ int m=0;
+ CGFloat imgWidth = (SCREEN_WIDTH-40-15*2)/3;
+// CGFloat height = 0;
+// if(self.data.imgs.count>0){
+//     height = imgWidth;
+// }
     [self.bgView addSubview:self.imgStackView];
-    CGFloat imgWidth = (SCREEN_WIDTH-40-15*2)/3;
+    [self.imgStackView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(imgWidth);
+    }];
+ for(UIView *view in [self.imgStackView arrangedSubviews]){
+//        [self.imgStackView removeArrangedSubview:view];
+     [view removeFromSuperview];
+ }
+ for(NSString *str in self.data.imgs){
+     UIImageView *photo = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, imgWidth, imgWidth)];
+     [photo sd_setImageWithURL:[NSURL URLWithString:str]];
+     photo.contentMode = UIViewContentModeScaleAspectFill;
+     photo.clipsToBounds = YES;
+     photo.tag=1000+m;
+     //允许用户交互
+     photo.userInteractionEnabled = YES;
+     //添加点击手势
+     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(_tapPhoto:)];
+     [photo addGestureRecognizer:tapGesture];
+     [self.imgStackView addArrangedSubview:photo];
+     [photo mas_makeConstraints:^(MASConstraintMaker *make) {
+         make.size.mas_equalTo(CGSizeMake(imgWidth,imgWidth));
+     }];
+     m++;
+ }
+ if(self.data.imgs.count>0){
+     while(m<3){
+         [self.imgStackView addArrangedSubview:[ELPublishImage emptyItem:CGRectMake(0, 0, imgWidth, imgWidth)]];
+         m++;
+     }
+ }
+ 
+//    [self.bgView addSubview:self.imgStackView];
+//    CGFloat imgWidth = (SCREEN_WIDTH-40-15*2)/3;
     CGFloat height = 0;
     CGFloat offset=0;
     if(self.data.imgs.count!=0){
@@ -101,12 +110,13 @@
         self.imgStackView.alpha=0;
         height=0;
     }
-    [self.imgStackView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.imgStackView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.bgView);
         make.right.equalTo(self.bgView);
         make.top.equalTo(self.detailLabel.mas_bottom).offset(offset);
         make.height.mas_equalTo(height);
     }];
+    [self.btnsView removeFromSuperview];
     NSMutableArray<UIButton *>* btns = @[self.thumbButton,self.commentButton].mutableCopy;
     if(self.data.profileId==[ELUserInfo sharedUser].id&&self.hasTrash)
        [btns addObject:self.trashButton];
@@ -150,9 +160,19 @@
 //    return _groupView;
 //}
 
+- (void)hideBtns{
+    [self.btnsView removeFromSuperview];
+    self.btnsView.alpha =0;
+    [self.imgStackView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.bgView);
+    }];
+}
+
 - (UIStackView *)imgStackView{
     if(!_imgStackView){
-        _imgStackView = [UIStackView new];
+        CGFloat imgWidth = (SCREEN_WIDTH-40-15*2)/3;
+
+        _imgStackView = [[UIStackView alloc]initWithFrame:CGRectMake(0, 0, self.bounds.size.width, imgWidth)];
         _imgStackView.axis = UILayoutConstraintAxisHorizontal;
         _imgStackView.spacing = 15;
         _imgStackView.distribution = UIStackViewDistributionFillEqually;
@@ -164,7 +184,7 @@
     if(!_commentButton){
         _commentButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 20)];
         _commentButton.backgroundColor = [UIColor clearColor];
-        [_commentButton setTitleColor:[UIColor color999999] forState:UIControlStateNormal];
+        [_commentButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         [_commentButton.titleLabel setFont:[UIFont fontWithName:@"PingFangSC" size:20]];
         [_commentButton setImage:[UIImage imageNamed:@"icon_comment-2"] forState:UIControlStateNormal];
         [_commentButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 20)];
@@ -179,7 +199,7 @@
     if(!_thumbButton){
         _thumbButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 20)];
         _thumbButton.backgroundColor = [UIColor clearColor];
-        [_thumbButton setTitleColor:[UIColor color999999] forState:UIControlStateNormal];
+        [_thumbButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
         [_thumbButton.titleLabel setFont:[UIFont fontWithName:@"PingFangSC" size:20]];
         [_thumbButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 20)];
         [_thumbButton addTarget:self action:@selector(clickThumb) forControlEvents:UIControlEventTouchUpInside];
@@ -191,7 +211,7 @@
     if(!_detailLabel){
         _detailLabel = [[UILabel alloc]initWithFrame:self.bounds];
         _detailLabel.font = [UIFont systemFontOfSize:18.f];
-        _detailLabel.textColor = [UIColor color333333];
+        _detailLabel.textColor = [UIColor blackColor];
         _detailLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         _detailLabel.textAlignment = NSTextAlignmentLeft;
         _detailLabel.numberOfLines = 3;

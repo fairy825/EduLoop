@@ -7,7 +7,6 @@
 
 #import "ELBottomSelectOverlay.h"
 #import <Masonry/Masonry.h>
-#import "UIColor+MyTheme.h"
 #import "ELStackCardItem.h"
 #import "ELScreen.h"
 #import "TeamModel.h"

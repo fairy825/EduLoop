@@ -6,8 +6,8 @@
 //
 
 #import "IdentityCard.h"
+#import "UIColor+ELColor.h"
 #import <Masonry/Masonry.h>
-#import "UIColor+MyTheme.h"
 @implementation IdentityCard
 - (instancetype)initWithFrame:(CGRect)frame Type:(UserIdentityType) identity
 {
@@ -37,7 +37,7 @@
 }
 
 - (void)setupViews{
-    self.backgroundColor = [UIColor elColorWithHex:0xFFCC99 andAlpha:0.5];
+    self.backgroundColor = [UIColor colorWithRGB:0xFFCC99 alpha:0.5];
     self.layer.cornerRadius = 10;
     self.layer.borderWidth = 1;
     self.layer.borderColor = [UIColor yellowColor].CGColor;

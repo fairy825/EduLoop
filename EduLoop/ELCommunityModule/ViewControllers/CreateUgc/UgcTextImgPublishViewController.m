@@ -6,8 +6,8 @@
 //
 
 #import "UgcTextImgPublishViewController.h"
-#import "UIColor+MyTheme.h"
 #import <Masonry/Masonry.h>
+#import "UIColor+ELColor.h"
 #import "ELPublishImage.h"
 #import "ELImageManager.h"
 #import "ELCenterOverlayModel.h"
@@ -68,7 +68,7 @@
 
     [self.bgView addSubview:self.imgStackView];
     UIView *bottomView = [[UIView alloc]initWithFrame:CGRectMake(0,2,self.view.bounds.size.width, 50)];
-    bottomView.backgroundColor = [UIColor f6f6f6];
+    bottomView.backgroundColor = [UIColor elBackgroundColor];
     [bottomView addSubview:self.addImgBtn];
     self.addImgBtn.frame = CGRectMake(20,10,30,30);
 //    [bottomView addSubview:self.publicRangeBtn];
@@ -113,7 +113,7 @@
 
     [_btnView addSubview:({
         UIView *seperatoriew = [[UIView alloc]initWithFrame:CGRectMake(0,0,self.view.bounds.size.width, 2)];
-        seperatoriew.backgroundColor = [UIColor eeeeee];
+        seperatoriew.backgroundColor = [UIColor elSeperatorColor];
         seperatoriew;
     })];
     }
@@ -140,7 +140,7 @@
         UILabel *placeHolderLabel = [[UILabel alloc] init];
         placeHolderLabel.text = @"请输入内容...";
         placeHolderLabel.numberOfLines = 0;
-        placeHolderLabel.textColor = [UIColor color999999];
+        placeHolderLabel.textColor = [UIColor lightGrayColor];
         [placeHolderLabel sizeToFit];
         [_textView addSubview:placeHolderLabel];
 
@@ -168,7 +168,7 @@
 //- (UIButton *)publicRangeBtn{
 //    if(!_publicRangeBtn){
 //        _publicRangeBtn = [[UIButton alloc]init];
-//        [_publicRangeBtn setTitleColor:[UIColor color999999] forState:UIControlStateNormal];
+//        [_publicRangeBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
 //        [_publicRangeBtn setTitle:@"可见范围" forState:UIControlStateNormal];
 //        _publicRangeBtn.titleLabel.font = [UIFont systemFontOfSize: 14.0];
 //        [_publicRangeBtn setImage: [UIImage imageNamed:@"icon_eye-4"] forState:UIControlStateNormal];
@@ -176,7 +176,7 @@
 //
 //        _publicRangeBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
 //        _publicRangeBtn.layer.cornerRadius = 15;
-//        _publicRangeBtn.layer.borderColor = [UIColor color999999].CGColor;
+//        _publicRangeBtn.layer.borderColor = [UIColor lightGrayColor].CGColor;
 //        _publicRangeBtn.layer.borderWidth = 1;
 //        [_publicRangeBtn setContentEdgeInsets:UIEdgeInsetsMake(5,8,5,8)];
 //        [_publicRangeBtn addTarget:self action:@selector(clickRangeBtn) forControlEvents:UIControlEventTouchUpInside];

@@ -6,7 +6,7 @@
 //
 
 #import "ChildProfileViewController.h"
-#import "UIColor+MyTheme.h"
+#import "UIColor+ELColor.h"
 #import <Masonry/Masonry.h>
 #import <MJRefresh.h>
 #import <AFNetworking.h>
@@ -53,12 +53,12 @@
     self.page=1;
     [self loadData];
     [self setTitle:@"孩子档案"];
-    self.view.backgroundColor = [UIColor f6f6f6];
+    self.view.backgroundColor = [UIColor elBackgroundColor];
     self.profileTableView = [[UITableView alloc]initWithFrame:self.view.bounds];
     self.profileTableView.delegate = self;
     self.profileTableView.dataSource = self;
     self.profileTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.profileTableView.backgroundColor = [UIColor f6f6f6];
+    self.profileTableView.backgroundColor = [UIColor elBackgroundColor];
     [self.view addSubview:self.profileTableView];
     [self.profileTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop).offset(20);

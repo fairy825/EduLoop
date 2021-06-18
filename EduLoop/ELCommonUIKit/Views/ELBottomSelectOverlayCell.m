@@ -7,7 +7,6 @@
 
 #import "ELBottomSelectOverlayCell.h"
 #import <Masonry/Masonry.h>
-#import "UIColor+MyTheme.h"
 
 @implementation ELBottomSelectOverlayCell
 
@@ -40,7 +39,7 @@
         _choiceLabel = [UILabel new];
         _choiceLabel.text = @"";
         _choiceLabel.numberOfLines = 1;
-        _choiceLabel.textColor = [UIColor color333333];
+        _choiceLabel.textColor = [UIColor blackColor];
         _choiceLabel.font = [UIFont systemFontOfSize:18];
         _choiceLabel.textAlignment = NSTextAlignmentLeft;
         _choiceLabel.lineBreakMode = NSLineBreakByTruncatingTail;

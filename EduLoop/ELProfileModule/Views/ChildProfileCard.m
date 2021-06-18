@@ -9,7 +9,7 @@
 #import "SettingDataTableViewCell.h"
 #import "ChildModel.h"
 #import <Masonry/Masonry.h>
-#import "UIColor+MyTheme.h"
+#import "UIColor+ELColor.h"
 #import "ELOverlay.h"
 #import "ELCenterOverlay.h"
 #import "BasicInfo.h"
@@ -172,7 +172,7 @@
     })];
 }
 - (void)setupView{
-    self.backgroundColor = [UIColor f6f6f6];
+    self.backgroundColor = [UIColor elBackgroundColor];
     [self.contentView addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self).mas_offset(UIEdgeInsetsMake(20, 20, 20, 20));;

@@ -7,7 +7,7 @@
 
 #import "ReviewViewController.h"
 #import <Masonry/Masonry.h>
-#import "UIColor+MyTheme.h"
+#import "UIColor+ELColor.h"
 #import "ELScreen.h"
 #import <AFNetworking.h>
 #import "BasicInfo.h"
@@ -59,7 +59,7 @@
 
 
 -(void)setNavagationBar{
-    self.navigationController.navigationBar.barTintColor = [UIColor color5bb2ff];
+    self.navigationController.navigationBar.barTintColor = [UIColor themeBlue];
     if([ELUserInfo sharedUser].identity==YES)
        [self setTitle:@"作业详情"];
     else [self setTitle:@"教师点评"];
@@ -157,7 +157,7 @@
     maskLayer.frame = self.header.bounds;
     maskLayer.path = maskPath.CGPath;
     self.bgView.layer.mask = maskLayer;
-    self.bgView.backgroundColor = [UIColor color5bb2ff];
+    self.bgView.backgroundColor = [UIColor themeBlue];
      
     CGFloat h = 0;
     for(UIView *sub in [_scrollView subviews]){
@@ -221,7 +221,7 @@
 - (UIButton *)reviewBtn{
     if(!_reviewBtn){
         _reviewBtn = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 20)];
-        _reviewBtn.backgroundColor = [UIColor color5bb2ff];
+        _reviewBtn.backgroundColor = [UIColor themeBlue];
         [_reviewBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_reviewBtn.titleLabel setFont:[UIFont fontWithName:@"PingFangSC-Medium" size:20]];
         _reviewBtn.layer.cornerRadius = 20;
@@ -264,7 +264,7 @@
 - (UIView *)separateView{
     if(!_separateView){
         _separateView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 3)];
-        _separateView.backgroundColor = [UIColor f6f6f6];
+        _separateView.backgroundColor = [UIColor elBackgroundColor];
     }
     return _separateView;
 }
@@ -283,11 +283,11 @@
         _scoreField.keyboardType = UIKeyboardTypeNumberPad;
         _scoreField.textAlignment = NSTextAlignmentRight;
         _scoreField.backgroundColor = [UIColor clearColor];
-        _scoreField.textColor = [UIColor color999999];
+        _scoreField.textColor = [UIColor lightGrayColor];
         _scoreField.font = [UIFont systemFontOfSize:18];
         _scoreField.borderStyle = UITextBorderStyleRoundedRect;
         _scoreField.layer.borderWidth = 0.5;
-        _scoreField.layer.borderColor = [UIColor color999999].CGColor;
+        _scoreField.layer.borderColor = [UIColor lightGrayColor].CGColor;
     }
     return _scoreField;
 }
@@ -296,11 +296,11 @@
     if(!_detailTextView){
         _detailTextView = [[UITextView alloc]initWithFrame:CGRectMake(20, 90, self.view.bounds.size.width-40, 100)];
         _detailTextView.textAlignment = NSTextAlignmentLeft;
-        _detailTextView.textColor = [UIColor color333333];
+        _detailTextView.textColor = [UIColor blackColor];
         _detailTextView.font = [UIFont systemFontOfSize:18];
         _detailTextView.layer.cornerRadius = 5;
         _detailTextView.layer.borderWidth = 0.5;
-        _detailTextView.layer.borderColor = [UIColor color999999].CGColor;
+        _detailTextView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     }
     return _detailTextView;
 }
@@ -354,7 +354,7 @@
         UILabel *scoreLabel = [[UILabel alloc]init];
         scoreLabel.text = @"分数";
         scoreLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:18.f];
-        scoreLabel.textColor = [UIColor color333333];
+        scoreLabel.textColor = [UIColor blackColor];
         [scoreLabel sizeToFit];
         scoreLabel.frame = CGRectMake(20, 20, 60, 20);
         [contentView addSubview:scoreLabel];
@@ -362,7 +362,7 @@
         UILabel *contentLabel = [[UILabel alloc]init];
         contentLabel.text = @"评语";
         contentLabel.font = [UIFont fontWithName:@"PingFangSC-Medium" size:18.f];
-        contentLabel.textColor = [UIColor color333333];
+        contentLabel.textColor = [UIColor blackColor];
         [contentLabel sizeToFit];
         contentLabel.frame = CGRectMake(20, 60, 60, 20);
         [contentView addSubview:contentLabel];
@@ -404,7 +404,7 @@
     NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
     f.numberStyle = NSNumberFormatterDecimalStyle;
     if(_review==nil){
-        NSDictionary *paramDict =  @{
+        NSDictionary *paramDict = @{
             @"homeworkId":[NSNumber numberWithInteger:_homework.id],
             @"score": [f numberFromString:_scoreField.text],
             @"detail": _detailTextView.text

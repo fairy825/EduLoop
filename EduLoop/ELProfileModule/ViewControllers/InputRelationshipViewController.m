@@ -7,7 +7,7 @@
 
 #import "InputRelationshipViewController.h"
 #import "BasicInfo.h"
-#import "UIColor+MyTheme.h"
+#import "UIColor+ELColor.h"
 #import <Masonry/Masonry.h>
 #import <AFNetworking.h>
 #import "ELOverlay.h"
@@ -66,7 +66,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor f6f6f6];
+    self.view.backgroundColor = [UIColor elBackgroundColor];
     [self setNavagationBar];
     [self setupSubviews];
     [self loadData];
@@ -79,7 +79,7 @@
 
 - (void)setupSubviews{
     self.tableView = [[UITableView alloc]init];
-    self.tableView.backgroundColor = [UIColor f6f6f6];
+    self.tableView.backgroundColor = [UIColor elBackgroundColor];
     self.tableView.showsVerticalScrollIndicator=NO;
     self.tableView.scrollEnabled = NO;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
