@@ -26,6 +26,7 @@
 #import "HomeworkPublishViewController.h"
 #import "ReviewViewController.h"
 #import <SDWebImage.h>
+#import "GTListLoader.h"
 @interface HomeworkShowViewController ()<UITableViewDelegate,UITableViewDataSource,HomeworkShowTableViewCellDelegate,LMJDropdownMenuDelegate,LMJDropdownMenuDataSource>
 
 @end
@@ -161,6 +162,15 @@
     }
     NSDictionary *paramDict =  @{@"start":[NSString stringWithFormat:@"%d", start],@"size":[NSString stringWithFormat:@"%d", size]
     };
+    /*GTListLoader *listLoader = [[GTListLoader alloc] init];
+    
+    __weak typeof(self)wself = self;
+    [listLoader loadListDataWithFinishBlock:^(BOOL success, NSArray<GTListItem *> * _Nonnull dataArray) {
+        __strong typeof(wself) strongSelf = wself;
+        strongSelf.models = dataArray;
+        [strongSelf.tableView reloadData];
+    }];*/
+    
     [manager GET:[BasicInfo url:@"/task/teacher"] parameters:paramDict headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if(isRefresh){
             self.page=1;

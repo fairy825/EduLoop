@@ -63,6 +63,9 @@
 		84604B0E265D466B00D84A4B /* ELSplashView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84604B0D265D466B00D84A4B /* ELSplashView.m */; };
 		84604B1D265F7C0F00D84A4B /* ELNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 84604B1C265F7C0F00D84A4B /* ELNotification.m */; };
 		84604B9E267CCD1000D84A4B /* UIColor+ELColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 84604B9D267CCD1000D84A4B /* UIColor+ELColor.m */; };
+		84604BE42681C80900D84A4B /* ELKeyChain.m in Sources */ = {isa = PBXBuildFile; fileRef = 84604BE32681C80900D84A4B /* ELKeyChain.m */; };
+		84604BEA268226E300D84A4B /* ELWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84604BE9268226E300D84A4B /* ELWebViewController.m */; };
+		84604BF926822E7800D84A4B /* ELNotificationCenterDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84604BF826822E7800D84A4B /* ELNotificationCenterDelegate.m */; };
 		8460EBCB26404DF900482381 /* libDLRadioButton.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8460EBCA26404DF900482381 /* libDLRadioButton.a */; };
 		8460EBCD26404DF900482381 /* libGKPhotoBrowser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8460EBCC26404DF900482381 /* libGKPhotoBrowser.a */; };
 		8460EBCF26404DF900482381 /* libJSONModel.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8460EBCE26404DF900482381 /* libJSONModel.a */; };
@@ -160,6 +163,11 @@
 		8470FEA82611B1B700B05974 /* TeacherTaskSummaryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8470FEA72611B1B700B05974 /* TeacherTaskSummaryTableViewCell.m */; };
 		84EE687726442A530072A790 /* ELBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EE687626442A530072A790 /* ELBaseViewController.m */; };
 		84EE68832647ABC90072A790 /* ELTabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EE68822647ABC90072A790 /* ELTabViewController.m */; };
+		84F3BBEB26834A7500524ACA /* HomeKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8460ECA026404E0700482381 /* HomeKit.framework */; };
+		84F3BBFA26834E4400524ACA /* GTListLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3BBF926834E4400524ACA /* GTListLoader.m */; };
+		84F3BC062683546E00524ACA /* GTLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3BC052683546E00524ACA /* GTLocation.m */; };
+		84F3BC242683612000524ACA /* ELCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F3BC232683612000524ACA /* ELCoreData.m */; };
+		84F3BC2D2683646000524ACA /* ELModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84F3BC2B2683646000524ACA /* ELModel.xcdatamodeld */; };
 		84F851A226428657000B2348 /* HomeworkPublishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F851A126428657000B2348 /* HomeworkPublishViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -295,6 +303,12 @@
 		84604B1C265F7C0F00D84A4B /* ELNotification.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELNotification.m; sourceTree = "<group>"; };
 		84604B9C267CCD1000D84A4B /* UIColor+ELColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+ELColor.h"; sourceTree = "<group>"; };
 		84604B9D267CCD1000D84A4B /* UIColor+ELColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ELColor.m"; sourceTree = "<group>"; };
+		84604BE22681C80900D84A4B /* ELKeyChain.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELKeyChain.h; sourceTree = "<group>"; };
+		84604BE32681C80900D84A4B /* ELKeyChain.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELKeyChain.m; sourceTree = "<group>"; };
+		84604BE8268226E300D84A4B /* ELWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELWebViewController.h; sourceTree = "<group>"; };
+		84604BE9268226E300D84A4B /* ELWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELWebViewController.m; sourceTree = "<group>"; };
+		84604BF726822E7800D84A4B /* ELNotificationCenterDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELNotificationCenterDelegate.h; sourceTree = "<group>"; };
+		84604BF826822E7800D84A4B /* ELNotificationCenterDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELNotificationCenterDelegate.m; sourceTree = "<group>"; };
 		8460EBC826404DF900482381 /* libAFNetworking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAFNetworking.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8460EBCA26404DF900482381 /* libDLRadioButton.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libDLRadioButton.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8460EBCC26404DF900482381 /* libGKPhotoBrowser.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libGKPhotoBrowser.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -912,6 +926,14 @@
 		84EE687626442A530072A790 /* ELBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELBaseViewController.m; sourceTree = "<group>"; };
 		84EE68812647ABC90072A790 /* ELTabViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELTabViewController.h; sourceTree = "<group>"; };
 		84EE68822647ABC90072A790 /* ELTabViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELTabViewController.m; sourceTree = "<group>"; };
+		84F3BBE726834A6600524ACA /* EduLoop.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EduLoop.entitlements; sourceTree = "<group>"; };
+		84F3BBF826834E4400524ACA /* GTListLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTListLoader.h; sourceTree = "<group>"; };
+		84F3BBF926834E4400524ACA /* GTListLoader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTListLoader.m; sourceTree = "<group>"; };
+		84F3BC042683546E00524ACA /* GTLocation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GTLocation.h; sourceTree = "<group>"; };
+		84F3BC052683546E00524ACA /* GTLocation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GTLocation.m; sourceTree = "<group>"; };
+		84F3BC222683612000524ACA /* ELCoreData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELCoreData.h; sourceTree = "<group>"; };
+		84F3BC232683612000524ACA /* ELCoreData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELCoreData.m; sourceTree = "<group>"; };
+		84F3BC2C2683646000524ACA /* ELModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ELModel.xcdatamodel; sourceTree = "<group>"; };
 		84F851A026428657000B2348 /* HomeworkPublishViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeworkPublishViewController.h; sourceTree = "<group>"; };
 		84F851A126428657000B2348 /* HomeworkPublishViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeworkPublishViewController.m; sourceTree = "<group>"; };
 		F87AF0CFB6BB37AC984C83F1 /* Pods-EduLoop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EduLoop.debug.xcconfig"; path = "Target Support Files/Pods-EduLoop/Pods-EduLoop.debug.xcconfig"; sourceTree = "<group>"; };
@@ -938,6 +960,7 @@
 				8460EBE326404DF900482381 /* libSGQRCode.a in Frameworks */,
 				8460EBE526404DF900482381 /* libSocketRocket.a in Frameworks */,
 				8460EBE726404DF900482381 /* libTZImagePickerController.a in Frameworks */,
+				84F3BBEB26834A7500524ACA /* HomeKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1440,6 +1463,18 @@
 				84604B0D265D466B00D84A4B /* ELSplashView.m */,
 				84604B1B265F7C0F00D84A4B /* ELNotification.h */,
 				84604B1C265F7C0F00D84A4B /* ELNotification.m */,
+				84604BE22681C80900D84A4B /* ELKeyChain.h */,
+				84604BE32681C80900D84A4B /* ELKeyChain.m */,
+				84604BE8268226E300D84A4B /* ELWebViewController.h */,
+				84604BE9268226E300D84A4B /* ELWebViewController.m */,
+				84604BF726822E7800D84A4B /* ELNotificationCenterDelegate.h */,
+				84604BF826822E7800D84A4B /* ELNotificationCenterDelegate.m */,
+				84F3BBF826834E4400524ACA /* GTListLoader.h */,
+				84F3BBF926834E4400524ACA /* GTListLoader.m */,
+				84F3BC042683546E00524ACA /* GTLocation.h */,
+				84F3BC052683546E00524ACA /* GTLocation.m */,
+				84F3BC222683612000524ACA /* ELCoreData.h */,
+				84F3BC232683612000524ACA /* ELCoreData.m */,
 			);
 			path = ELUtils;
 			sourceTree = "<group>";
@@ -1591,6 +1626,7 @@
 		8470FAF12577B9A200B05974 /* EduLoop */ = {
 			isa = PBXGroup;
 			children = (
+				84F3BBE726834A6600524ACA /* EduLoop.entitlements */,
 				843275CE2615F80A00641E60 /* ELUtils */,
 				84451319261AF5FC0098B67E /* ELTeamModule */,
 				8470FD6525A2D79500B05974 /* ELChatModule */,
@@ -1600,8 +1636,8 @@
 				8470FBB8257F5F0000B05974 /* ELProfileModule */,
 				8470FBF72580880600B05974 /* ELCommonUIKit */,
 				8470FB5D2577EE0800B05974 /* ELUIKit */,
-				8470FAF32577B9A200B05974 /* AppDelegate.m */,
 				8470FAF22577B9A200B05974 /* AppDelegate.h */,
+				8470FAF32577B9A200B05974 /* AppDelegate.m */,
 				8470FAF52577B9A200B05974 /* SceneDelegate.h */,
 				8470FAF62577B9A200B05974 /* SceneDelegate.m */,
 				8470FAFB2577B9A200B05974 /* Main.storyboard */,
@@ -1609,6 +1645,7 @@
 				8470FB002577B9A300B05974 /* LaunchScreen.storyboard */,
 				8470FB032577B9A300B05974 /* Info.plist */,
 				8470FB042577B9A300B05974 /* main.m */,
+				84F3BC2B2683646000524ACA /* ELModel.xcdatamodeld */,
 			);
 			path = EduLoop;
 			sourceTree = "<group>";
@@ -2253,6 +2290,7 @@
 				8470FC0E25808B9D00B05974 /* ELOverlayTableViewCell.m in Sources */,
 				8470FB052577B9A300B05974 /* main.m in Sources */,
 				8470FDC025B6D62F00B05974 /* ELScreen.m in Sources */,
+				84F3BC242683612000524ACA /* ELCoreData.m in Sources */,
 				8470FD7425A2DCC000B05974 /* ChatAllViewController.m in Sources */,
 				8470FCE8258C9AC700B05974 /* UgcVoteCard.m in Sources */,
 				843AC118263D3489003BE32E /* MomentsPagedResult.m in Sources */,
@@ -2280,8 +2318,10 @@
 				840ED0CE263541AB00109F39 /* TeamDetailCard.m in Sources */,
 				843275A92612EF7700641E60 /* TaskDetailCard.m in Sources */,
 				8470FCBA258C763900B05974 /* ELCommunityModule.m in Sources */,
+				84604BEA268226E300D84A4B /* ELWebViewController.m in Sources */,
 				8470FC4A2580E3F000B05974 /* BroadcastViewController.m in Sources */,
 				8470FD0825907E9E00B05974 /* UgcDetailPageViewController.m in Sources */,
+				84F3BBFA26834E4400524ACA /* GTListLoader.m in Sources */,
 				8470FD1725945D7300B05974 /* CommentModel.m in Sources */,
 				8470FC142580AA0B00B05974 /* ChildProfileViewController.m in Sources */,
 				8470FDA525A42CA900B05974 /* AddressListTableViewCell.m in Sources */,
@@ -2296,10 +2336,12 @@
 				8470FDE226070A8D00B05974 /* TeacherScanAllTaskResponse.m in Sources */,
 				8470FEA82611B1B700B05974 /* TeacherTaskSummaryTableViewCell.m in Sources */,
 				840ED05326298ACA00109F39 /* ChildProfileEditViewController.m in Sources */,
+				84F3BC062683546E00524ACA /* GTLocation.m in Sources */,
 				8470FBAB257F3B5100B05974 /* ProfileViewController.m in Sources */,
 				840ED0A4263402B700109F39 /* TeamListViewController.m in Sources */,
 				8470FAF72577B9A200B05974 /* SceneDelegate.m in Sources */,
 				840ED0C8263539AB00109F39 /* StudentTableViewCell.m in Sources */,
+				84604BE42681C80900D84A4B /* ELKeyChain.m in Sources */,
 				8470FC7A258727A700B05974 /* TaskModel.m in Sources */,
 				8470FD8025A2E00E00B05974 /* ChatAllModel.m in Sources */,
 				8445135526218F180098B67E /* ProfileModel.m in Sources */,
@@ -2325,6 +2367,7 @@
 				843275DD2616008200641E60 /* GetOneHomeworkResponse.m in Sources */,
 				843AC133263DA83F003BE32E /* GetMyTPTeamsResponse.m in Sources */,
 				843AC10C263BCC73003BE32E /* GetUnreadMsgResponse.m in Sources */,
+				84F3BC2D2683646000524ACA /* ELModel.xcdatamodeld in Sources */,
 				8470FCC1258C771900B05974 /* UgcModel.m in Sources */,
 				84604B9E267CCD1000D84A4B /* UIColor+ELColor.m in Sources */,
 				844512D3261996B60098B67E /* ProfileSummaryCard.m in Sources */,
@@ -2358,6 +2401,7 @@
 				8470FB2F2577BEF700B05974 /* MineInfoCard.m in Sources */,
 				844512AE26185D490098B67E /* ELUserInfo.m in Sources */,
 				844512F22619CB090098B67E /* LoginViewController.m in Sources */,
+				84604BF926822E7800D84A4B /* ELNotificationCenterDelegate.m in Sources */,
 				8470FCFF2590461100B05974 /* UgcTextImgCard.m in Sources */,
 				840ED0AA263403AC00109F39 /* TeamEditViewController.m in Sources */,
 			);
@@ -2534,6 +2578,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = EduLoop/EduLoop.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AVD7X64U7F;
 				INFOPLIST_FILE = EduLoop/Info.plist;
@@ -2542,8 +2588,9 @@
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = mijika.EduLoop;
+				PRODUCT_BUNDLE_IDENTIFIER = mijika.EduLoop2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2556,6 +2603,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = EduLoop/EduLoop.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = AVD7X64U7F;
 				INFOPLIST_FILE = EduLoop/Info.plist;
@@ -2564,8 +2613,9 @@
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = mijika.EduLoop;
+				PRODUCT_BUNDLE_IDENTIFIER = mijika.EduLoop2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -2682,6 +2732,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		84F3BC2B2683646000524ACA /* ELModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				84F3BC2C2683646000524ACA /* ELModel.xcdatamodel */,
+			);
+			currentVersion = 84F3BC2C2683646000524ACA /* ELModel.xcdatamodel */;
+			path = ELModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 8470FAE72577B9A200B05974 /* Project object */;
 }

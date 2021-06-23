@@ -16,8 +16,8 @@
 #import "UserLoginResponse.h"
 #import "ProfileModel.h"
 #import "ELNetworkSessionManager.h"
-
-@interface LoginViewController ()
+#import "ELKeyChain.h"
+@interface LoginViewController ()<UITextFieldDelegate>
 
 @end
 
@@ -193,6 +193,7 @@
         _userNameTextField.font = [UIFont systemFontOfSize:18];
         _userNameTextField.borderStyle = UITextBorderStyleNone;
         _userNameTextField.placeholder = @"请输入手机号";
+        _userNameTextField.delegate = self;
         _userNameTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     }
     return _userNameTextField;
@@ -207,6 +208,7 @@
         _passwordTextField.font = [UIFont systemFontOfSize:18];
         _passwordTextField.borderStyle = UITextBorderStyleNone;
         _passwordTextField.placeholder = @"请输入密码";
+        _passwordTextField.delegate = self;
         _passwordTextField.secureTextEntry = YES;
         _passwordTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     }
@@ -220,9 +222,26 @@
 - (void)dismissKeyboard{
     [self.view endEditing:YES];
 }
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    NSString *name = _userNameTextField.text;
 
+    if(textField==self.passwordTextField){
+        NSString *pass = [ELKeyChain keychainGetDataWithAccountIdentifier:name andServiceIdentifier:@"com.el.keychain"];
+        _passwordTextField.text = pass;
+    }
+    return;
+}
 #pragma mark - action
 -(void)registerAndLogin{
+    NSString *name = _userNameTextField.text;
+    NSString *password = _passwordTextField.text;
+    if(name.length==0)
+        [BasicInfo showToastWithMsg:@"手机号不能为空"];
+    else if(password.length==0)
+        [BasicInfo showToastWithMsg:@"密码不能为空"];
+    //保存密码
+    [ELKeyChain keychainSaveData:password withAccountIdentifier:name andServiceIdentifier:@"com.el.keychain"];
+    //登录注册请求
     [self userLoginNetwork];
 }
 

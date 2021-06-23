@@ -188,6 +188,7 @@
 //    cell.data = model;
 //    cell.delegate = self;
 //    [cell loadData];
+    
     return cell;
 }
 

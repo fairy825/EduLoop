@@ -7,6 +7,8 @@
 
 #import "AppDelegate.h"
 #import "ELNotification.h"
+#import "GTLocation.h"
+#import "ELCoreData.h"
 @interface AppDelegate ()
 
 @end
@@ -17,6 +19,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [[ELNotification notificationManager]checkNotificationAuthorization];
+    [[GTLocation locationManager]checkLocationAuthorization];
+    ELCoreData * cd = [[ELCoreData alloc]init];
+    [cd insertClicked];
+    [cd deleteClicked];
     return YES;
 }
 

@@ -15,6 +15,8 @@
 #import "BasicInfo.h"
 #import <RTRootNavigationController.h>
 #import "ELSplashView.h"
+#import "ELNotification.h"
+#import "ELNotificationCenterDelegate.h"
 @interface SceneDelegate ()
 
 @end
@@ -56,6 +58,7 @@
             ELSplashView *splashView = [[ELSplashView alloc] initWithFrame:self.window.bounds];
             splashView;
         })];
+        
     });
     
 }
