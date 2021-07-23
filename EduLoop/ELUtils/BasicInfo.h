@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 +(void)showToastWithMsg:(NSString *)str;
 +(PGDatePickManager *)sharedManager;
 +(UITabBarController *)initNavigationTab;
-+(void *)initUserWithSema:(dispatch_semaphore_t) sema;
++(void *)initUserWithBlock:(nullable void (^)())block;
 +(void)markUser;
 +(void)deleteUser;
 +(void)reloadInfo;

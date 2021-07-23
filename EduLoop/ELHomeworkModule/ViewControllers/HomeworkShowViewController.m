@@ -67,6 +67,12 @@
 - (void)loadDataNetwork:(BOOL) isRefresh{
     if(_isParent){
         [self getMyStuNetworkWithSuccess:^{
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                NSLog(@"1---%@",[NSThread currentThread]);      // 打印当前线程
+                [self loadStudentsAvatar];
+
+            });
+//            [self loadStudentsAvatar];
             [self loadDataIsRefresh:isRefresh];
         }];
     }else{
@@ -326,16 +332,14 @@
 - (UIImage *)dropdownMenu:(LMJDropdownMenu *)menu iconForOptionAtIndex:(NSUInteger)index{
     if(index==_students.count)
         return [UIImage imageNamed:@"icon_add_small-1"];
-    /**UIImage *image;
+    UIImage *image;
     NSString *avatar = _students[index].faceImage;
     if(avatar.length==0)
         image = [UIImage imageNamed:@"avatar-4"];
     else{
-        UIImageView *imgView = [[UIImageView alloc]init];
-        [imgView sd_setImageWithURL:[NSURL URLWithString:avatar]];
-        image = imgView.image;
-    }*/
-    return nil;
+        image = self.studentAvatars[index];
+    }
+    return image;
 }
 - (NSString *)dropdownMenu:(LMJDropdownMenu *)menu titleForOptionAtIndex:(NSUInteger)index{
     if(index==_students.count)

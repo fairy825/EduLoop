@@ -19,6 +19,7 @@
 #import "MomentsModel.h"
 #import <TZImagePickerController.h>
 #import <UIViewController+RTRootNavigationController.h>
+#import "NELCenterYNOverlay.h"
 @interface UgcTextImgPublishViewController ()<UITextViewDelegate,ELPublishImageDelegate,ELBottomSelectOverlayDelegate,TZImagePickerControllerDelegate>
 
 @end
@@ -282,9 +283,9 @@
         };
         sureItem;
     });
-    ELCenterOverlay *deleteAlertView = [[ELCenterOverlay alloc]initWithFrame:self.view.bounds Data:centerOverlayModel
-    ];
-    
+//    ELCenterOverlay *deleteAlertView = [[ELCenterOverlay alloc]initWithFrame:self.view.bounds Data:centerOverlayModel
+//    ];
+    NELCenterYNOverlay *deleteAlertView = [[NELCenterYNOverlay alloc]initWithData:centerOverlayModel];
     [deleteAlertView showHighlightView];
 }
 

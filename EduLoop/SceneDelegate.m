@@ -28,15 +28,13 @@
     // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
     // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-    
-    dispatch_group_t group = dispatch_group_create();
-        
-    dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            dispatch_semaphore_t sema = dispatch_semaphore_create(0);
-        [BasicInfo initUserWithSema:(dispatch_semaphore_t) sema];
-            dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-    });
-    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+    /**
+     获取了userinfo之后再判断出现的第一个vc
+     */
+   
+        [BasicInfo initUserWithBlock:^{
+            
+   
         ELUserInfo *userInfo = [ELUserInfo sharedUser];
 //        UINavigationController *navigationController;
         UIViewController *navigationController;
@@ -59,8 +57,8 @@
             splashView;
         })];
         
-    });
-    
+        }];
+
 }
 
 

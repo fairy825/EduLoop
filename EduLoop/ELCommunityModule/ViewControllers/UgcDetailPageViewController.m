@@ -115,15 +115,8 @@
 }
 
 - (void)setupSubviews{
-//    [self.view addSubview:self.summaryUgcCard];
-//    [self.summaryUgcCard mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
-//        make.left.equalTo(self.view.mas_safeAreaLayoutGuideLeft);
-//        make.right.equalTo(self.view.mas_safeAreaLayoutGuideRight);
-//        make.height.equalTo(@250);
-//    }];
+
     self.commentTableView = [[UITableView alloc]init];
-//    self.commentTableView.backgroundColor = [UIColor elBackgroundColor];
     self.commentTableView.delegate = self;
     self.commentTableView.dataSource = self;
     [self.commentTableView setTableHeaderView:
@@ -140,34 +133,22 @@
             make.left.equalTo(header).offset(20);
             make.height.equalTo(@30);
         }];
-        [header layoutIfNeeded];
+//        [header layoutIfNeeded];
         UgcTextImgCard *card = (UgcTextImgCard *)self.summaryUgcCard;
         card.detailLabel.numberOfLines = 0;
         [card.detailLabel sizeToFit];
         card.delegate = self;
-        [card layoutIfNeeded];
-        CGFloat a = card.imgStackView.frame.size.height;
-        CGFloat b = card.detailLabel.frame.size.height;
-        
-        CGFloat h=180+a+b;
-        if(self.ugcModel.imgs.count>0) h+=10;
-        header.frame = CGRectMake(0, 0, SCREEN_WIDTH, h);
-        /**self.summaryUgcCard.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.summaryUgcCard.frame.size.height);
-            
-        [header addSubview:self.commentNumLabel];
-        self.commentNumLabel.frame = CGRectMake(20, self.summaryUgcCard.frame.origin.y+self.summaryUgcCard.frame.size.height+20, 100, 30);
-
-        header.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.summaryUgcCard.frame.size.height+50);*/
-        
+//        [card layoutIfNeeded];
             header;
         })];
-//    UgcTextImgCard *card = (UgcTextImgCard *)self.summaryUgcCard;
-//    card.detailLabel.numberOfLines = 0;
+    //TODO: 下面这段删掉的话header.frame == 0,0,0,0
+/*
     CGFloat height = [self.commentTableView.tableHeaderView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
 
     CGRect headerFrame = self.commentTableView.tableHeaderView.frame;
     headerFrame.size.height= height;
     self.commentTableView.tableHeaderView.frame= headerFrame;
+ */
     [self.commentTableView reloadData];
     self.commentTableView.rowHeight = UITableViewAutomaticDimension;
     self.commentTableView.estimatedRowHeight = 100.0;

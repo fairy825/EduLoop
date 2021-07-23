@@ -3,10 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B809F3F26A948EF0058F7CD /* NELOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B809F3E26A948EF0058F7CD /* NELOverlay.m */; };
+		2B809F4226A94C3E0058F7CD /* NELBottomOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B809F4126A94C3E0058F7CD /* NELBottomOverlay.m */; };
+		2B809F4526A94DD90058F7CD /* NELCenterOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B809F4426A94DD90058F7CD /* NELCenterOverlay.m */; };
+		2B809F4926A94FFB0058F7CD /* NELCenterYNOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B809F4826A94FFB0058F7CD /* NELCenterYNOverlay.m */; };
+		2B809F4C26A95B290058F7CD /* NELCenterCustomOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B809F4B26A95B290058F7CD /* NELCenterCustomOverlay.m */; };
 		840ED05326298ACA00109F39 /* ChildProfileEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED05226298ACA00109F39 /* ChildProfileEditViewController.m */; };
 		840ED059262ADBD300109F39 /* ELCenterImgOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED058262ADBD300109F39 /* ELCenterImgOverlay.m */; };
 		840ED083262D6B3000109F39 /* ELNetworkSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 840ED082262D6B3000109F39 /* ELNetworkSessionManager.m */; };
@@ -190,6 +195,16 @@
 
 /* Begin PBXFileReference section */
 		03A30B8306BBFF24ECE415E9 /* libPods-EduLoop.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EduLoop.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B809F3D26A948EF0058F7CD /* NELOverlay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NELOverlay.h; sourceTree = "<group>"; };
+		2B809F3E26A948EF0058F7CD /* NELOverlay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NELOverlay.m; sourceTree = "<group>"; };
+		2B809F4026A94C3E0058F7CD /* NELBottomOverlay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NELBottomOverlay.h; sourceTree = "<group>"; };
+		2B809F4126A94C3E0058F7CD /* NELBottomOverlay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NELBottomOverlay.m; sourceTree = "<group>"; };
+		2B809F4326A94DD90058F7CD /* NELCenterOverlay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NELCenterOverlay.h; sourceTree = "<group>"; };
+		2B809F4426A94DD90058F7CD /* NELCenterOverlay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NELCenterOverlay.m; sourceTree = "<group>"; };
+		2B809F4726A94FFB0058F7CD /* NELCenterYNOverlay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NELCenterYNOverlay.h; sourceTree = "<group>"; };
+		2B809F4826A94FFB0058F7CD /* NELCenterYNOverlay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NELCenterYNOverlay.m; sourceTree = "<group>"; };
+		2B809F4A26A95B290058F7CD /* NELCenterCustomOverlay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NELCenterCustomOverlay.h; sourceTree = "<group>"; };
+		2B809F4B26A95B290058F7CD /* NELCenterCustomOverlay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NELCenterCustomOverlay.m; sourceTree = "<group>"; };
 		4A9FEE5E2DF57E8D74A2552C /* Pods-EduLoop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EduLoop.release.xcconfig"; path = "Target Support Files/Pods-EduLoop/Pods-EduLoop.release.xcconfig"; sourceTree = "<group>"; };
 		840ED05126298ACA00109F39 /* ChildProfileEditViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChildProfileEditViewController.h; sourceTree = "<group>"; };
 		840ED05226298ACA00109F39 /* ChildProfileEditViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChildProfileEditViewController.m; sourceTree = "<group>"; };
@@ -1444,6 +1459,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2B809F4626A94E060058F7CD /* NewViews */ = {
+			isa = PBXGroup;
+			children = (
+				2B809F3D26A948EF0058F7CD /* NELOverlay.h */,
+				2B809F3E26A948EF0058F7CD /* NELOverlay.m */,
+				2B809F4026A94C3E0058F7CD /* NELBottomOverlay.h */,
+				2B809F4126A94C3E0058F7CD /* NELBottomOverlay.m */,
+				2B809F4326A94DD90058F7CD /* NELCenterOverlay.h */,
+				2B809F4426A94DD90058F7CD /* NELCenterOverlay.m */,
+				2B809F4726A94FFB0058F7CD /* NELCenterYNOverlay.h */,
+				2B809F4826A94FFB0058F7CD /* NELCenterYNOverlay.m */,
+				2B809F4A26A95B290058F7CD /* NELCenterCustomOverlay.h */,
+				2B809F4B26A95B290058F7CD /* NELCenterCustomOverlay.m */,
+			);
+			path = NewViews;
+			sourceTree = "<group>";
+		};
 		843275CE2615F80A00641E60 /* ELUtils */ = {
 			isa = PBXGroup;
 			children = (
@@ -1732,6 +1764,7 @@
 		8470FBF72580880600B05974 /* ELCommonUIKit */ = {
 			isa = PBXGroup;
 			children = (
+				2B809F4626A94E060058F7CD /* NewViews */,
 				8470FC7E2587533E00B05974 /* Models */,
 				8470FC0225808ACE00B05974 /* ViewControllers */,
 				8470FBF82580881E00B05974 /* Views */,
@@ -2212,24 +2245,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EduLoop/Pods-EduLoop-resources.sh",
-				"${PODS_ROOT}/GKPhotoBrowser/GKPhotoBrowser/GKPhotoBrowser.bundle",
-				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
-				"${PODS_ROOT}/PGDatePicker/PGDatePicker/PGDatePicker.bundle",
-				"${PODS_ROOT}/SGQRCode/SGQRCode/SGQRCode.bundle",
-				"${PODS_ROOT}/TZImagePickerController/TZImagePickerController/TZImagePickerController/TZImagePickerController.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-EduLoop/Pods-EduLoop-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GKPhotoBrowser.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/PGDatePicker.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SGQRCode.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TZImagePickerController.bundle",
+				"${PODS_ROOT}/Target Support Files/Pods-EduLoop/Pods-EduLoop-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2242,16 +2262,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EduLoop/Pods-EduLoop-frameworks.sh",
-				"${PODS_ROOT}/LookinServer/LookinServer.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-EduLoop/Pods-EduLoop-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LookinServer.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-EduLoop/Pods-EduLoop-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2274,12 +2289,14 @@
 				8470FAFA2577B9A200B05974 /* MineViewController.m in Sources */,
 				8470FD8C25A2E29900B05974 /* ChatDetailViewController.m in Sources */,
 				8470FDBA25AEC99700B05974 /* MessageRecordTableViewCell.m in Sources */,
+				2B809F4926A94FFB0058F7CD /* NELCenterYNOverlay.m in Sources */,
 				8470FBB1257F3FCA00B05974 /* SettingDataTableViewCell.m in Sources */,
 				8470FAF42577B9A200B05974 /* AppDelegate.m in Sources */,
 				8470FC542580E4C800B05974 /* ELHomeworkModule.m in Sources */,
 				8470FDB425AEC50600B05974 /* MessageBubble.m in Sources */,
 				84451307261A03610098B67E /* IdentityCard.m in Sources */,
 				84451328261AF6610098B67E /* InputTeamCodeViewController.m in Sources */,
+				2B809F4C26A95B290058F7CD /* NELCenterCustomOverlay.m in Sources */,
 				840ED0B0263406E900109F39 /* TeamPagedResult.m in Sources */,
 				8470FC7325870A5100B05974 /* AvatarCard.m in Sources */,
 				8470FDAE25A4560D00B05974 /* ChatBoard.m in Sources */,
@@ -2328,6 +2345,7 @@
 				84604B1D265F7C0F00D84A4B /* ELNotification.m in Sources */,
 				84EE687726442A530072A790 /* ELBaseViewController.m in Sources */,
 				843AC0D12639B8B8003BE32E /* ELSocketManager.m in Sources */,
+				2B809F4526A94DD90058F7CD /* NELCenterOverlay.m in Sources */,
 				8470FCA6258B4CBB00B05974 /* ELBottomStackOverlay.m in Sources */,
 				84EE68832647ABC90072A790 /* ELTabViewController.m in Sources */,
 				8470FC412580C4DA00B05974 /* ChildModel.m in Sources */,
@@ -2345,6 +2363,7 @@
 				8470FC7A258727A700B05974 /* TaskModel.m in Sources */,
 				8470FD8025A2E00E00B05974 /* ChatAllModel.m in Sources */,
 				8445135526218F180098B67E /* ProfileModel.m in Sources */,
+				2B809F4226A94C3E0058F7CD /* NELBottomOverlay.m in Sources */,
 				8470FD9925A426D900B05974 /* ContactPersonModel.m in Sources */,
 				8470FD6125A1B5C500B05974 /* UgcVotePublishViewController.m in Sources */,
 				8470FC6D2587093800B05974 /* HomeworkShowTableViewCell.m in Sources */,
@@ -2365,6 +2384,7 @@
 				8470FB902579310E00B05974 /* MineMiscCardTableViewCell.m in Sources */,
 				8445131F261AF6360098B67E /* ELTeamModule.m in Sources */,
 				843275DD2616008200641E60 /* GetOneHomeworkResponse.m in Sources */,
+				2B809F3F26A948EF0058F7CD /* NELOverlay.m in Sources */,
 				843AC133263DA83F003BE32E /* GetMyTPTeamsResponse.m in Sources */,
 				843AC10C263BCC73003BE32E /* GetUnreadMsgResponse.m in Sources */,
 				84F3BC2D2683646000524ACA /* ELModel.xcdatamodeld in Sources */,

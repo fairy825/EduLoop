@@ -15,6 +15,7 @@
 #import "BasicInfo.h"
 #import "ELCenterImgOverlay.h"
 #import <AFNetworking/AFNetworking.h>
+#import "NELCenterCustomOverlay.h"
 @interface ChildProfileCard()<UITableViewDelegate,UITableViewDataSource,ELOverlayDelegate>
 @property(nonatomic,strong,readwrite) NSMutableArray<SettingDataModel*>* models;
 @end
@@ -165,7 +166,8 @@
         model.clickBlock = ^{
             __strong typeof(self) sself = wself;
             
-            ELCenterImgOverlay *overlay = [[ELCenterImgOverlay alloc]initWithImageFrame:CGRectMake(0, 0, 250, 250) Title:sself.model.nickname SubTitle:[NSString stringWithFormat:@"%@%@%@",@"扫一扫，和学生",sself.model.nickname, @"绑定"] ImageUrl:sself.model.qrcode];
+//            ELCenterImgOverlay *overlay = [[ELCenterImgOverlay alloc]initWithImageFrame:CGRectMake(0, 0, 250, 250) Title:sself.model.nickname SubTitle:[NSString stringWithFormat:@"%@%@%@",@"扫一扫，和学生",sself.model.nickname, @"绑定"] ImageUrl:sself.model.qrcode];
+            NELCenterCustomOverlay *overlay = [[NELCenterCustomOverlay alloc]initWithImageFrame:CGRectMake(0, 0, 250, 250) Title:sself.model.nickname SubTitle:[NSString stringWithFormat:@"%@%@%@",@"扫一扫，和学生",sself.model.nickname, @"绑定"] ImageUrl:sself.model.qrcode];
             [overlay showHighlightView];
         };
         model;
@@ -231,6 +233,13 @@
     return 56;
 }
 
+//TODO: 小的tableview用didSelect还是不行
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    SettingDataTableViewCell *cell = (SettingDataTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    dispatch_block_t cb = cell.data.clickBlock;
+    if(cb)
+        cb();
+}
 
 - (void) getChosenTitle:(NSString *)title{
     [_models objectAtIndex:4].detailText = title;
@@ -247,7 +256,7 @@
       _model.id] success:success];
 }
 
-- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
+/**- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
     UIView *view = [super hitTest:point withEvent:event];
        if ([view isKindOfClass:[self.contentView class]]) {
            if ([[view superview] isKindOfClass:[SettingDataTableViewCell class]]){
@@ -257,5 +266,5 @@
            }
        }
        return [super hitTest:point withEvent:event];
-}
+}*/
 @end

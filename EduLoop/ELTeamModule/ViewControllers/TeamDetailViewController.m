@@ -181,7 +181,7 @@
     [bgView mas_makeConstraints:^(MASConstraintMaker *make){
         make.edges.equalTo(header);
     }];
-    [header layoutIfNeeded];
+//    [header layoutIfNeeded];
     return header;
 }
 @end

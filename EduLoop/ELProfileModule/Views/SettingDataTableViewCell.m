@@ -34,10 +34,10 @@
         _data = model;
         [self setupView];
         [self loadData];
-        [self addGestureRecognizer:({
-            UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickCell)];
-            recognizer;
-        })];
+//        [self addGestureRecognizer:({
+//            UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clickCell)];
+//            recognizer;
+//        })];
     }
     return self;
 }

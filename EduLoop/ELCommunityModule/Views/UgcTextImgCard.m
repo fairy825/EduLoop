@@ -48,6 +48,7 @@
     [self.avatarCard mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.bgView);
         make.height.equalTo(@60);
+        make.left.equalTo(self.bgView);
         make.width.equalTo(self.bgView);
     }];
 
@@ -57,7 +58,7 @@
         make.left.equalTo(self.bgView);
         make.right.equalTo(self.bgView);
         make.width.equalTo(self.bgView);
-//        make.height.lessThanOrEqualTo(@70);//todo
+//        make.height.lessThanOrEqualTo(@70);
     }];
 
  int m=0;

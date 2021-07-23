@@ -91,7 +91,7 @@
         }];
         [self.taskDetailCard loadData:_data];
 //        [header layoutIfNeeded];
-        [self.taskDetailCard layoutIfNeeded];
+//        [self.taskDetailCard layoutIfNeeded];
         CGFloat h=0;
         for (UIView *view in [header subviews]) {
             h+=view.bounds.size.height;

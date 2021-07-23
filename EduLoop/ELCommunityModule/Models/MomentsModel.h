@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MomentsModel : JSONModel
 @property (nonatomic, readwrite) NSInteger id;
 @property (nonatomic, readwrite) NSInteger profileId;
-@property(nonatomic,strong,readwrite) NSString *avatar;
+@property(nonatomic,strong,readwrite) NSString<Optional> *avatar;
 @property(nonatomic,strong,readwrite) NSString *authorNickname;
 @property (nonatomic, readwrite) NSInteger commentNum;
 @property (nonatomic, readwrite) NSInteger thumbNum;

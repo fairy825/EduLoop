@@ -239,7 +239,7 @@ static NSString *socketPort=@"8088";
     }
 }
 
-+(void)initUserWithSema:(dispatch_semaphore_t) sema{
++(void)initUserWithBlock:(nullable void (^)())block{
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSNumber *myAccountId = [userDefaults objectForKey:@"MY_ACCOUNT_ID"];
 
@@ -256,24 +256,29 @@ static NSString *socketPort=@"8088";
                         UserLoginResponse *response = [[UserLoginResponse alloc]initWithDictionary:responseObject error:nil];
                         ProfileModel *profile = response.data;
                         [ELUserInfo setUserInfo: profile];
-
+                        if(block){
+                            block();
+                            return;
+                        }
                     }else{
                         NSLog(@"error--%@",msg);
                         [BasicInfo showToastWithMsg:msg];
+                        if(block){
+                            block();
+                            return;
+                        }
                     }
-                dispatch_semaphore_signal(sema);
 
                 } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                     NSLog(@"请求失败--%@",error);
-                    dispatch_semaphore_signal(sema);
-
+                    if(block){
+                        block();
+                        return;
+                    }
                 }];
-        }else{
-            dispatch_semaphore_signal(sema);
         }
-    }else{
-        dispatch_semaphore_signal(sema);
-    }
+    }else if(block)
+        block();
 }
 
 +(void)getCurrentNetworkInfo{
